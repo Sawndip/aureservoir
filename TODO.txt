@@ -1,0 +1,81 @@
+
+Initialization für bandpass machen, ohne dass man const value
+setzen muss !
+
+reverse methode machen, die das ganze reservoir umkehrt !
+(inputs werden zu outputs und umgekehrt)
+-> kann vielleicht die entzerrung leichter machen !?
+
+Problem bei esn_predict lösen -> siehe protokoll dort
+
+Tests:
+- TrainLS und TrainLSSquare haben manchmal Fehler bei float32
+  -> wahrscheinlich Problem von Präzesion on gels(s) bei floats
+  -> schauen obs das überhaupt noch gibt !?
+- gscheite automatische Auswahl von float32,64 noch machen !
+  (vielleicht kann man das irgendwie der testklassen übergeben)
+- alle Algorithmen-Tests in Python machen (schneller !)
+  -> nur die die auf interne parameter zugreifen direkt in C++ machen
+  -> von NumpyTest irgendwie ableiten, siehe
+     http://projects.scipy.org/scipy/numpy/wiki/DistutilsDoc#the-tests-directory
+- tests für setParameter vom ESN noch schreiben
+- test für copy und assignement constructor machen
+- und für:
+  int getReservoirSize()
+  int getInputs()
+  int getOutputs()
+- noise vector funktion
+
+DOCSTRING:
+  - python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
+  - sed s/aureservoir:://g tmp.i > ESN.i && rm tmp.i
+  - dann ins scons dazu, damits automatisch geht
+    -> schaue scons doku für bsp von cmd line args zu erkennen
+
+SCONS:
+- bei einem andern Programm mal nachschauen wie man das generell gscheit macht !
+
+SWIG:
+- noch (python?) code dazu, dass er den shape automatisch ändert, wenns
+  nur eindimensional ist (data.shape = 1,-1)
+  -> könnte bei float version auch gleich automatisch daten von double umwandeln
+     wenn nötig
+- wenn man bei train z.B. in integer array reinschickt geht es nicht
+  (dann is erstes array alles 0)
+
+---------------------
+
+- scons build dependency check machen
+- scons installationsroutinen richtig machen (alle header, python, ...)
+- scons python lib installationspfad zum gscheit eingeben
+
+- Algorithmen/Activation Namen besser abspeichern, am besten in einer map
+  oder string konstante, wo die fix zugeordnet sind
+
+- DENORMALS:
+  -> set_denormal_flags(): irgendwie anders setzen, nicht direkt in der Klasse !
+
+- schauen ob man in doxygen richtige Referenzen machen kann, weil ich doch
+  auf einige papers verweise
+  -> zumindest nicht nur die links zu papers angeben, sondern eher Titel+Autor
+     (sonst wenn link sich mal änder -> alles sinnlos)
+
+-----------------------
+
+Doxygen Regionen:
+        //! @name Beschreibung der Region
+        //@{
+              ...
+        //@}
+weitere Doxygen tags:
+\warning
+\attention
+\note
+\sa url : Referenz zu Klassen, Methoden, ... URLs
+\example example_test.cpp -> filename wird als example in doxygen doku dazugetan
+(muss EXAMPLE_PATH im doxyfile richtig setzen !)
+
+-----------------------
+
+
+see "\todo" tags in the doxygen documentation

@@ -1,0 +1,105 @@
+#####################################################################
+#
+#  ::::_aureservoir_::::
+#  C++ library for analog reservoir computing neural networks
+#
+#  Scons build system for aureservoir unit tests
+#
+#  Georg Holzmann, 2007
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU Lesser General Public
+#  License as published by the Free Software Foundation; either
+#  version 2.1 of the License, or (at your option) any later version.
+#
+#####################################################################
+
+import os, glob, sys, os.path
+
+#####################################################################
+#  build files
+#####################################################################
+
+progname = "test_aureservoir"
+sources = glob.glob("*.cpp")   # compile all *.cpp files
+
+#####################################################################
+#  build system help
+#####################################################################
+
+Help("\nType: 'scons' to build aureservoir unit tests.")
+Help("\n      'scons -c' to clean objects and program.\n")
+
+#####################################################################
+#  general build options
+#####################################################################
+
+env = Environment(ENV = {'PATH' : os.environ['PATH'],
+                         'TERM' : os.environ['TERM'],
+                         'HOME' : os.environ['HOME']})
+env.Append( CPPPATH=['.', '../'] )
+env.Append(CCFLAGS="-O2 -fPIC -Wall -ffast-math -mfpmath=sse -msse -msse2")
+env.Append( LIBS=['gsl', 'newmat'] )
+
+#####################################################################
+#  command line options
+#####################################################################
+
+opt = Options('options.cache')
+opt.AddOptions(
+  PathOption('flens_path', 'include path for FLENS', None),
+  PathOption('cppunit_path', 'include path for CppUnit', None),
+  ('arch', 'optimize for specific architecture (e.g. pentium4)', None)
+)
+opt.Update(env)
+opt.Save('options.cache',env)
+Help(opt.GenerateHelpText(env))
+
+if env.has_key('flens_path'):
+	env.Append(CPPPATH=[env['flens_path']])
+if env.has_key('cppunit_path'):
+	env.Append(CPPPATH=[env['cppunit_path']])
+if env.has_key('arch'):
+	env.Append(CCFLAGS="-march=" + env['arch'])
+
+#####################################################################
+#  check dependencies
+#####################################################################
+
+# don't check in help or clean mode
+checking = 1
+if "-h" in sys.argv:
+	checking = 0
+if env.GetOption('clean'):
+	checking = 0
+
+# do the checks
+conf = Configure(env)
+if checking:
+	if not conf.CheckLib('flens', language="C++"):
+		print 'Did not find FLENS library !'
+		Exit(1)
+	if not conf.CheckCXXHeader('flens/flens.h'):
+		print 'Did not find FLENS header (flens/flens.h) !'
+		Exit(1)
+	if not conf.CheckLib('cppunit', language="C++"):
+		print 'Did not find CppUnit library !'
+		Exit(1)
+	if not conf.CheckCXXHeader('cppunit/extensions/HelperMacros.h'):
+		print 'Did not find CppUnit headers !'
+		Exit(1)
+#GSL auch noch checken !!! -> Achtung, braucht 1.10 Version !
+#newmat auch !!!
+env = conf.Finish()
+
+#####################################################################
+#  build library
+#####################################################################
+
+tests = env.Program(progname, sources)
+#aureservoir = env.Program(libname, sources)
+env.Default(tests)
+
+#####################################################################
+#  EOF
+#####################################################################
