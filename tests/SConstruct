@@ -39,7 +39,7 @@ env = Environment(ENV = {'PATH' : os.environ['PATH'],
                          'HOME' : os.environ['HOME']})
 env.Append( CPPPATH=['.', '../'] )
 env.Append(CCFLAGS="-O2 -fPIC -Wall -ffast-math -mfpmath=sse -msse -msse2")
-env.Append( LIBS=['gsl', 'newmat'] )
+env.Append( LIBS=['gsl', ] )
 
 #####################################################################
 #  command line options

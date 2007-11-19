@@ -25,6 +25,8 @@ using namespace aureservoir;
 
 #include "test_utils.h"
 
+/// \todo move the init tests to python
+
 template <typename T>
 class InitTest : public CppUnit::TestFixture
 {
@@ -88,7 +90,7 @@ void InitTest<T>::sizeTest(void)
     out = (int) Rand<float>::uniform(1,10);
 
     net_->setInitAlgorithm(INIT_STD);
-    net_->setReservoirSize(n);
+    net_->setSize(n);
     net_->setInputs(in);
     net_->setOutputs(out);
     net_->setInitParam(CONNECTIVITY, 0.9);
@@ -123,7 +125,7 @@ void InitTest<T>::connectivityTest(void)
       conn = Rand<T>::uniform(0.2,0.98);
 
       net_->setInitAlgorithm(INIT_STD);
-      net_->setReservoirSize(n);
+      net_->setSize(n);
       net_->setInputs(in);
       net_->setOutputs(out);
       net_->setInitParam(CONNECTIVITY, conn);
@@ -172,7 +174,7 @@ void InitTest<T>::rangeTest(void)
     fb_shift = Rand<T>::uniform(-5,5);
 
     net_->setInitAlgorithm(INIT_STD);
-    net_->setReservoirSize(10);
+    net_->setSize(10);
     net_->setInitParam(CONNECTIVITY, 0.9);
     net_->setInitParam(IN_CONNECTIVITY, 1);
     net_->setInitParam(FB_CONNECTIVITY, 1);
@@ -213,7 +215,7 @@ void InitTest<T>::reservoirTest(void)
     alpha = Rand<T>::uniform(0.1,0.98);
 
     net_->setInitAlgorithm(INIT_STD);
-    net_->setReservoirSize(n);
+    net_->setSize(n);
     net_->setInitParam(CONNECTIVITY, conn);
     net_->setInitParam(ALPHA, alpha);
 

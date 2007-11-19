@@ -22,14 +22,8 @@
 
 #include "aureservoir/utilities.h"
 
-// newmat to test algorithms
-#define WANT_STREAM
-#include "newmat/newmatap.h"
-#include "newmat/newmatio.h"
-#include "newmat/myexcept.h"
-
 // use GNU scientific library
-/// \todo remove dependency from gsl ? (now only for eigenvalues)
+/// \todo remove dependency from gsl -> move init test to python
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_complex_math.h>
@@ -134,43 +128,6 @@ inline double calc_largest_eigenvalue(const T &mtx)
   gsl_matrix_complex_free(evec);
 
   return gsl_complex_abs(ew);
-}
-
-/*!
- * converts flens to newmat matrix
- * @param flens matrix
- * @return newmat matrix
- */
-template <typename T>
-inline NEWMAT::Matrix convert_to_newmat(const T &flens)
-{
-  NEWMAT::Matrix M( flens.numRows(), flens.numCols() );
-
-  for(int i=1; i<=flens.numRows(); ++i)
-  {
-    for(int j=1; j<=flens.numCols(); ++j)
-    {
-      M(i,j) = flens(i,j);
-    }
-  }
-
-  return M;
-}
-
-/*!
- * converts flens to newmat vector
- * @param flens vector
- * @return newmat column vector
- */
-template <typename T>
-inline NEWMAT::ColumnVector convert_vector_to_newmat(const T &flens)
-{
-  NEWMAT::ColumnVector v( flens.length() );
-
-  for(int i=1; i<=flens.length(); ++i)
-    v(i) = flens(i);
-
-  return v;
 }
 
 #endif // TEST_UTILS_H__

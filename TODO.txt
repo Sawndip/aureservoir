@@ -1,16 +1,4 @@
 
-- Test mit nicht konstanten f1, f2 machen ! --> ERLEDIGT
-
-- setter für W, Win, Wback, ... machen, damit man leichter von python
-  aus was programmiern kann
-
-
-
-- schauen dass post wieder überall (allen algs) funktioniert
-
-
-
-
 reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)
 -> kann vielleicht die entzerrung leichter machen !?
@@ -23,17 +11,8 @@ Tests:
   -> schauen obs das überhaupt noch gibt !?
 - gscheite automatische Auswahl von float32,64 noch machen !
   (vielleicht kann man das irgendwie der testklassen übergeben)
-- alle Algorithmen-Tests in Python machen (schneller !)
-  -> nur die die auf interne parameter zugreifen direkt in C++ machen
-  -> von NumpyTest irgendwie ableiten, siehe
-     http://projects.scipy.org/scipy/numpy/wiki/DistutilsDoc#the-tests-directory
-- tests für setParameter vom ESN noch schreiben
-- test für copy und assignement constructor machen
-- und für:
-  int getReservoirSize()
-  int getInputs()
-  int getOutputs()
 - noise vector funktion
+- init_test.cpp in python machen
 
 DOCSTRING:
  - docstring der einzelnen train/test sachen noch dazutun irgendwie
@@ -52,6 +31,9 @@ SWIG:
      wenn nötig
 - wenn man bei train z.B. in integer array reinschickt geht es nicht
   (dann is erstes array alles 0)
+
+NUMPY STYLE GUID (tests und etc.):
+- http://projects.scipy.org/scipy/numpy/wiki/DistutilsDoc#the-tests-directory
 
 ---------------------
 

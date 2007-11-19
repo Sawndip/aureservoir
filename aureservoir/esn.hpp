@@ -660,6 +660,9 @@ string ESN<T>::getInitString(int alg)
     case INIT_STD:
       return "INIT_STD";
 
+    case INIT_BP_CONST:
+      return "INIT_BP_CONST";
+
     default:
       throw AUExcept("ESN::getInitString: unknown init algorithm");
   }
@@ -678,6 +681,9 @@ string ESN<T>::getSimString(int alg)
 
     case SIM_LI:
       return "SIM_LI";
+
+    case SIM_BP:
+      return "SIM_BP";
 
     default:
       throw AUExcept("ESN::getSimString: unknown simulation algorithm");
