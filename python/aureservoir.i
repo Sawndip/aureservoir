@@ -75,14 +75,12 @@ ARRAY2_IN( float, float, FLOAT )
 %apply (float *array, int rows, int cols)
 {  (float *inmtx, int inrows, int incols),
    (float *outmtx, int outrows, int outcols),
-   (float *wout, int rows, int cols),
    (float *wmtx, int wrows, int wcols)  };
 
 ARRAY2_IN( double, double, DOUBLE )
 %apply (double *array, int rows, int cols)
 {  (double *inmtx, int inrows, int incols),
    (double *outmtx, int outrows, int outcols),
-   (double *wout, int rows, int cols),
    (double *wmtx, int wrows, int wcols)  };
 
 ARRAY1_IN( float, float, FLOAT )
@@ -179,7 +177,12 @@ class ESN
   void setInitParam(InitParameter key, T value);
   void setReservoirAct(ActivationFunction f=ACT_TANH);
   void setOutputAct(ActivationFunction f=ACT_LINEAR);
-  void setWout(T *wout, int rows, int cols);
+
+  void setWin(T *inmtx, int inrows, int incols);
+  void setW(T *inmtx, int inrows, int incols);
+  void setWback(T *inmtx, int inrows, int incols);
+  void setWout(T *inmtx, int inrows, int incols);
+  void setX(T *invec, int insize);
 };
 
 %template(DoubleESN) ESN<double>;

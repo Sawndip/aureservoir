@@ -467,9 +467,21 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_setOutputAct(*args)
 
+    def setWin(*args):
+        """setWin(self, double inmtx)"""
+        return _aureservoir.DoubleESN_setWin(*args)
+
+    def setW(*args):
+        """setW(self, double inmtx)"""
+        return _aureservoir.DoubleESN_setW(*args)
+
+    def setWback(*args):
+        """setWback(self, double inmtx)"""
+        return _aureservoir.DoubleESN_setWback(*args)
+
     def setWout(*args):
         """
-        setWout(self, double wout)
+        setWout(self, double inmtx)
 
         throw ( AUExcept)
         set output weight matrix C-style interface (data will be copied into a
@@ -487,6 +499,10 @@ class DoubleESN(_object):
         Todo check how we can do that without copying 
         """
         return _aureservoir.DoubleESN_setWout(*args)
+
+    def setX(*args):
+        """setX(self, double invec)"""
+        return _aureservoir.DoubleESN_setX(*args)
 
 DoubleESN_swigregister = _aureservoir.DoubleESN_swigregister
 DoubleESN_swigregister(DoubleESN)
@@ -887,9 +903,21 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_setOutputAct(*args)
 
+    def setWin(*args):
+        """setWin(self, float inmtx)"""
+        return _aureservoir.SingleESN_setWin(*args)
+
+    def setW(*args):
+        """setW(self, float inmtx)"""
+        return _aureservoir.SingleESN_setW(*args)
+
+    def setWback(*args):
+        """setWback(self, float inmtx)"""
+        return _aureservoir.SingleESN_setWback(*args)
+
     def setWout(*args):
         """
-        setWout(self, float wout)
+        setWout(self, float inmtx)
 
         throw ( AUExcept)
         set output weight matrix C-style interface (data will be copied into a
@@ -907,6 +935,10 @@ class SingleESN(_object):
         Todo check how we can do that without copying 
         """
         return _aureservoir.SingleESN_setWout(*args)
+
+    def setX(*args):
+        """setX(self, float invec)"""
+        return _aureservoir.SingleESN_setX(*args)
 
 SingleESN_swigregister = _aureservoir.SingleESN_swigregister
 SingleESN_swigregister(SingleESN)

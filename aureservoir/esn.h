@@ -308,17 +308,6 @@ class ESN
   /// set output activation function
   void setOutputAct(ActivationFunction f=ACT_LINEAR) throw(AUExcept);
 
-  /// set output weight matrix
-  void setWout(const DEMatrix &Wout) throw(AUExcept);
-  /*!
-   * set output weight matrix C-style interface
-   * (data will be copied into a FLENS matrix)
-   * @param wout pointer to wout matrix in row major storage (usual C array)
-   * @param rows number of rows
-   * @param cols number of columns
-   */
-  void setWout(T *wout, int rows, int cols) throw(AUExcept);
-
   /*!
    * Additional method to set all parameters with string key-value
    * pairs, which can be used for bindings from other languages
@@ -326,6 +315,60 @@ class ESN
    * @param value the value of that parameter
    */
 //   void setParameter(string param, string value) throw(AUExcept);
+
+  //@}
+  //! @name SET internal data
+  //@{
+
+  /// set input weight matrix
+  void setWin(const DEMatrix &Win) throw(AUExcept);
+  /// set reservoir weight matrix
+  void setW(const DEMatrix &W) throw(AUExcept);
+  /// set feedback weight matrix
+  void setWback(const DEMatrix &Wback) throw(AUExcept);
+  /// set output weight matrix
+  void setWout(const DEMatrix &Wout) throw(AUExcept);
+  /// set internal state vector
+  void setX(const DEVector &x) throw(AUExcept);
+
+  //@}
+  //! @name SET internal data C-style interface
+  //@{
+
+  /*!
+   * set input weight matrix C-style interface
+   * (data will be copied into a FLENS matrix)
+   * @param inmtx pointer to win matrix in row major storage
+   */
+  void setWin(T *inmtx, int inrows, int incols) throw(AUExcept);
+
+  /*!
+   * set reservoir weight matrix C-style interface
+   * (data will be copied into a FLENS matrix)
+   * @param inmtx pointer to a dense reservoir matrix in row major storage
+   */
+  void setW(T *inmtx, int inrows, int incols) throw(AUExcept);
+
+  /*!
+   * set feedback weight matrix C-style interface
+   * (data will be copied into a FLENS matrix)
+   * @param inmtx pointer to wback matrix in row major storage
+   */
+  void setWback(T *inmtx, int inrows, int incols) throw(AUExcept);
+
+  /*!
+   * set output weight matrix C-style interface
+   * (data will be copied into a FLENS matrix)
+   * @param inmtx pointer to wout matrix in row major storage
+   */
+  void setWout(T *inmtx, int inrows, int incols) throw(AUExcept);
+
+  /*!
+   * set internal state vector C-style interface
+   * (data will be copied into a FLENS matrix)
+   * @param invec pointer to state vector
+   */
+  void setX(T *invec, int insize) throw(AUExcept);
 
   //@}
 

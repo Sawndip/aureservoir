@@ -8,7 +8,7 @@ sys.path.append("../")
 from aureservoir import *
 
 
-class test_construction(NumpyTestCase):
+class test_correspondence(NumpyTestCase):
 
     def setUp(self):
 	
@@ -68,6 +68,50 @@ class test_construction(NumpyTestCase):
 	assert_array_almost_equal(self.net.getWin(),netA.getWin())
 	assert_array_almost_equal(self.net.getX(),netA.getX())
 	
+	# simulate both networks separate and test result
+	indata = N.random.rand(self.ins,self.sim_size)*2-1
+	indata = N.asfarray(indata, self.dtype)
+	outdata = N.empty((self.outs,self.sim_size),self.dtype)
+	outdataA = N.empty((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	netA.simulate( indata, outdataA )
+	assert_array_almost_equal(outdata,outdataA)
+
+
+    def testSetInternalData(self, level=1):
+	""" test if manually setting the weigth matrices generates the
+	same result """
+	
+	# train first ESN
+	trainin = N.random.rand(self.ins,self.train_size) * 2 - 1
+	trainout = N.random.rand(self.outs,self.train_size) * 2 - 1
+	trainin = N.asfarray(trainin, self.dtype)
+	trainout = N.asfarray(trainout, self.dtype)
+	self.net.train(trainin,trainout,1)
+	self.net.resetState()
+	
+	# create second ESN
+	if self.dtype is 'float32':
+		netA = SingleESN()
+	else:
+		netA = DoubleESN()
+	netA.setReservoirAct(ACT_TANH)
+	netA.setOutputAct(ACT_TANH)
+	netA.setSize( self.size )
+	netA.setInputs( self.ins )
+	netA.setOutputs( self.outs )
+	netA.setSimAlgorithm(SIM_STD)
+	netA.setTrainAlgorithm(TRAIN_PI)
+	
+	# set internal data in second ESN
+	netA.setWin( self.net.getWin().copy() )
+	netA.setWout( self.net.getWout().copy() )
+	netA.setWback( self.net.getWback().copy() )
+	W = N.empty((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	netA.setW( W )
+	netA.setX( self.net.getX().copy() )
+		
 	# simulate both networks separate and test result
 	indata = N.random.rand(self.ins,self.sim_size)*2-1
 	indata = N.asfarray(indata, self.dtype)

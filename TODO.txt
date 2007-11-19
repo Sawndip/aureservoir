@@ -1,13 +1,15 @@
 
-- Test mit nicht konstanten f1, f2 machen !
+- Test mit nicht konstanten f1, f2 machen ! --> ERLEDIGT
 
 - setter für W, Win, Wback, ... machen, damit man leichter von python
   aus was programmiern kann
 
-- Initialization für bandpass machen, ohne dass man const value
-  setzen muss !
-  (in weiterer Folge dann vielleicht sogar eine eigene BPESN Klasse,
-   sowie jetzt in python ?)
+
+
+- schauen dass post wieder überall (allen algs) funktioniert
+
+
+
 
 reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)

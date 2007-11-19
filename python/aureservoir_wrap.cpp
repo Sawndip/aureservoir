@@ -4596,6 +4596,111 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DoubleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setWin",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setWin" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setWin(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setW",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setW" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setW(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setWback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setWback",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setWback" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setWback(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DoubleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<double > *arg1 = (ESN<double > *) 0 ;
@@ -4619,6 +4724,40 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   {
     try {
       (arg1)->setWout(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setX",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setX" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setX(arg2,arg3);
     } catch (AUExcept &e) {
       PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
       return NULL;
@@ -6427,6 +6566,111 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SingleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setWin",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setWin" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setWin(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setW",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setW" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setW(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setWback(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setWback",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setWback" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setWback(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SingleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
@@ -6450,6 +6694,40 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   {
     try {
       (arg1)->setWout(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setX",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setX" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+  }
+  {
+    try {
+      (arg1)->setX(arg2,arg3);
     } catch (AUExcept &e) {
       PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
       return NULL;
@@ -6504,7 +6782,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DoubleESN_setInitParam", _wrap_DoubleESN_setInitParam, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setReservoirAct", _wrap_DoubleESN_setReservoirAct, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setOutputAct", _wrap_DoubleESN_setOutputAct, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_setWin", _wrap_DoubleESN_setWin, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_setW", _wrap_DoubleESN_setW, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_setWback", _wrap_DoubleESN_setWback, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setWout", _wrap_DoubleESN_setWout, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_setX", _wrap_DoubleESN_setX, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_swigregister", DoubleESN_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_SingleESN", _wrap_new_SingleESN, METH_VARARGS, NULL},
 	 { (char *)"delete_SingleESN", _wrap_delete_SingleESN, METH_VARARGS, NULL},
@@ -6540,7 +6822,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SingleESN_setInitParam", _wrap_SingleESN_setInitParam, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setReservoirAct", _wrap_SingleESN_setReservoirAct, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setOutputAct", _wrap_SingleESN_setOutputAct, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_setWin", _wrap_SingleESN_setWin, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_setW", _wrap_SingleESN_setW, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_setWback", _wrap_SingleESN_setWback, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setWout", _wrap_SingleESN_setWout, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_setX", _wrap_SingleESN_setX, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_swigregister", SingleESN_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };

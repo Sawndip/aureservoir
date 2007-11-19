@@ -117,7 +117,6 @@ inline void ESN<T>::train(T *inmtx, int inrows, int incols,
   DEMatrix flout(outrows,outcols);
 
   // copy data to FLENS matrix (column major storage)
-  /// \todo check how we can do that without copying
   for(int i=0; i<inrows; ++i) {
   for(int j=0; j<incols; ++j) {
     flin(i+1,j+1) = inmtx[i*incols+j];
@@ -500,8 +499,40 @@ void ESN<T>::setOutputAct(ActivationFunction f)
 }
 
 template <typename T>
-void ESN<T>::setWout(const DEMatrix &Wout)
-  throw(AUExcept)
+void ESN<T>::setWin(const DEMatrix &Win) throw(AUExcept)
+{
+  if( Win.numRows() != neurons_ )
+      throw AUExcept("ESN::setWin: wrong row size!");
+  if( Win.numCols() != inputs_ )
+      throw AUExcept("ESN::setWin: wrong column size!");
+
+  Win_ = Win;
+}
+
+template <typename T>
+void ESN<T>::setW(const DEMatrix &W) throw(AUExcept)
+{
+  if( W.numRows() != neurons_ )
+      throw AUExcept("ESN::setW: wrong row size!");
+  if( W.numCols() != neurons_ )
+      throw AUExcept("ESN::setW: wrong column size!");
+
+  W_.initWith(W, 1E-9);
+}
+
+template <typename T>
+void ESN<T>::setWback(const DEMatrix &Wback) throw(AUExcept)
+{
+  if( Wback.numRows() != neurons_ )
+      throw AUExcept("ESN::setWback: wrong row size!");
+  if( Wback.numCols() != outputs_ )
+      throw AUExcept("ESN::setWback: wrong column size!");
+
+  Wback_ = Wback;
+}
+
+template <typename T>
+void ESN<T>::setWout(const DEMatrix &Wout) throw(AUExcept)
 {
   if( Wout.numRows() != outputs_ )
       throw AUExcept("ESN::setWout: Wout must have output_ rows!");
@@ -510,29 +541,99 @@ void ESN<T>::setWout(const DEMatrix &Wout)
       throw AUExcept("ESN::setWout: wrong column size!");
 
   Wout_ = Wout;
+
+  // to allocate sim class data, if we don't use training
   sim_->reallocate();
 }
 
 template <typename T>
-void ESN<T>::setWout(T *wout, int rows, int cols)
-  throw(AUExcept)
+void ESN<T>::setX(const DEVector &x) throw(AUExcept)
 {
-  if( rows != outputs_ )
-      throw AUExcept("ESN::setWout: Wout must have output_ rows!");
-  if( cols != inputs_+neurons_ && 
-      cols != 2*(inputs_+neurons_) )
-      throw AUExcept("ESN::setWout: wrong column size!");
+  if( x.length() != neurons_ )
+      throw AUExcept("ESN::setX: wrong size!");
 
-  Wout_.resize(rows,cols);
+  x_ = x;
+}
 
-  // copy data to FLENS matrix (column major storage)
-  /// \todo check how we can do that without copying
-  for(int i=0; i<rows; ++i) {
-  for(int j=0; j<cols; ++j) {
-    Wout_(i+1,j+1) = wout[i*cols+j];
+template <typename T>
+void ESN<T>::setWin(T *inmtx, int inrows, int incols) throw(AUExcept)
+{
+  if( inrows != neurons_ )
+      throw AUExcept("ESN::setWin: wrong row size!");
+  if( incols != inputs_ )
+      throw AUExcept("ESN::setWin: wrong column size!");
+
+  Win_.resize(inrows,incols);
+
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    Win_(i+1,j+1) = inmtx[i*incols+j];
+  } }
+}
+
+template <typename T>
+void ESN<T>::setW(T *inmtx, int inrows, int incols) throw(AUExcept)
+{
+  if( inrows != neurons_ )
+      throw AUExcept("ESN::setW: wrong row size!");
+  if( incols != neurons_ )
+      throw AUExcept("ESN::setW: wrong column size!");
+
+  DEMatrix Wtmp(neurons_,neurons_);
+
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    Wtmp(i+1,j+1) = inmtx[i*incols+j];
   } }
 
+  W_.initWith(Wtmp, 1E-9);
+}
+
+template <typename T>
+void ESN<T>::setWback(T *inmtx, int inrows, int incols) throw(AUExcept)
+{
+  if( inrows != neurons_ )
+      throw AUExcept("ESN::setWback: wrong row size!");
+  if( incols != outputs_ )
+      throw AUExcept("ESN::setWback: wrong column size!");
+
+  Wback_.resize(inrows,incols);
+
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    Wback_(i+1,j+1) = inmtx[i*incols+j];
+  } }
+}
+
+template <typename T>
+void ESN<T>::setWout(T *inmtx, int inrows, int incols) throw(AUExcept)
+{
+  if( inrows != outputs_ )
+      throw AUExcept("ESN::setWout: Wout must have output_ rows!");
+  if( incols != inputs_+neurons_ && 
+      incols != 2*(inputs_+neurons_) )
+      throw AUExcept("ESN::setWout: wrong column size!");
+
+  Wout_.resize(inrows,incols);
+
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    Wout_(i+1,j+1) = inmtx[i*incols+j];
+  } }
+
+  // needed here when no train() is called
   sim_->reallocate();
+}
+
+template <typename T>
+void ESN<T>::setX(T *invec, int insize) throw(AUExcept)
+{
+  if( insize != neurons_ )
+      throw AUExcept("ESN::setX: wrong size!");
+
+  x_.resize(insize);
+  for(int i=0; i<insize; ++i)
+    x_(i+1) = invec[i];
 }
 
 template <typename T>

@@ -206,7 +206,63 @@ class test_simulation(NumpyTestCase):
 
 
     def testBP(self, level=1):
-	""" test bandpass style neurons simulation """
+	""" test bandpass style neurons simulation
+	(with random cutoff frequencies) """
+        
+	# setup net
+	self.net.setInitAlgorithm(INIT_STD)
+	self.net.setSimAlgorithm(SIM_BP)
+	self.net.init()
+	
+	# set cutoff frequencies
+	f1 = N.random.rand(self.size) * 0.8 + 0.1
+	f2 = N.random.rand(self.size) * 0.8 + 0.1
+	self.net.setBPCutoff(f1,f2)
+	
+	# set output weight matrix
+	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
+	wout = N.asfarray(wout, self.dtype)
+	self.net.setWout( wout )
+	
+	# simulate network
+	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
+	outdata = N.zeros((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	
+	# get data to python
+	W = N.zeros((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	Win = self.net.getWin()
+	Wout = self.net.getWout()
+	Wback = self.net.getWback()
+	x = N.zeros((self.size))
+	outtest = N.zeros((self.outs,self.sim_size),self.dtype)
+	
+	# parameters for bandpass filtering
+	ema1 = N.zeros(x.shape)
+	ema2 = N.zeros(x.shape)
+	scale = f2 / f1 + 1.
+	
+	# recalc algorithm in python
+	for n in range(self.sim_size):
+		# calc new network activation
+		x = N.dot( W, x )
+		x += N.dot( Win, indata[:,n] )
+		if n > 0:
+			x += N.dot( Wback, outtest[:,n-1] )
+		# bandpass style filtering
+		ema1 = ema1 + f1 * (x-ema1)
+		ema2 = ema2 + f2 * (ema1-ema2)
+		x = (ema1 - ema2) * scale
+		# output = Wout * [x; in]
+		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
+	
+	assert_array_almost_equal(outdata,outtest,3)
+
+
+    def testBPConst(self, level=1):
+	""" test bandpass style neurons simulation
+	(with constant cutoff frequencies) """
         
 	# setup net
 	f1 = random.uniform(0.001,1.)
