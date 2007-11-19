@@ -32,19 +32,15 @@ int main(int argc, char *argv[])
   {
     cout << "## INITIALIZATION ##\n";
 
-    int train_size = 150;
+    int train_size = 50;
     int ins = 3;
     int outs = 2;
 
-    net.setSize(50);
+    net.setSize(15);
     net.setInputs(ins);
     net.setOutputs(outs);
-    net.setInitParam(CONNECTIVITY, 0.2);
-//     net.setReservoirSize(5);
-//     net.setInitParam(CONNECTIVITY, 0.1);
-
+    net.setInitParam(CONNECTIVITY, 0.8);
     net.setInitParam(IN_CONNECTIVITY, 0.6);
-//     net.setInitParam(IN_SHIFT, 6);
     net.setInitParam(FB_CONNECTIVITY, 0.4);
 
     net.init();
@@ -53,7 +49,7 @@ int main(int argc, char *argv[])
     net.post();
     cout << endl << "input weights W_in: " << net.getWin();
     cout << endl << "feedback weights W_back: " << net.getWback();
-    cout << endl << "reservoir weight matrix W: " << net.getW() << endl;
+//     cout << endl << "reservoir weight matrix W: " << net.getW() << endl;
 
 
     cout << "\n## TRAINING ##\n";
@@ -69,7 +65,7 @@ int main(int argc, char *argv[])
         out(j,i) = Rand<>::uniform();
     }
 
-    net.train(in, out, 5);
+    net.train(in, out, 20);
 
     cout << "\ntrained output weights W_out: " << net.getWout() << endl;
 
