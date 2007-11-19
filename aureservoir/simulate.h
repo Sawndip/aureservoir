@@ -63,11 +63,7 @@ class SimBase
  public:
 
   /// Constructor
-  SimBase(ESN<T> *esn)
-  {
-    esn_=esn;
-    reallocate();
-  }
+  SimBase(ESN<T> *esn);
 
   /// Destructor
   virtual ~SimBase() {}
@@ -82,18 +78,15 @@ class SimBase
                         typename ESN<T>::DEMatrix &out) = 0;
 
   /// reallocates data buffers
-  virtual void reallocate()
-  {
-    last_out_.resize(esn_->outputs_, 1);
-    t_.resize(esn_->neurons_);
-  }
+  virtual void reallocate();
 
   //! @name additional interface for bandpass style neurons
   //@{
-  virtual void allocateBP() {}
-  virtual void setBPCutoffConst(T f1, T f2) {}
-  virtual void setBPCutoff(typename ESN<T>::DEVector f1,
-                           typename ESN<T>::DEVector f2) throw(AUExcept) {}
+  virtual void allocateBP() throw(AUExcept);
+  virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
+  virtual void setBPCutoff(const typename ESN<T>::DEVector &f1,
+                           const typename ESN<T>::DEVector &f2)
+                           throw(AUExcept);
   //@}
 
   /// output from last simulation
@@ -238,10 +231,10 @@ class SimBP : public SimBase<T>
   virtual ~SimBP() {}
 
   /// allocate ema data buffers
-  virtual void allocateBP();
+  virtual void allocateBP() throw(AUExcept);
 
   /// needed for bandpass style neurons
-  virtual void setBPCutoffConst(T f1, T f2);
+  virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
 
   /// set all LOP and HIP cutoff frequencies
   virtual void setBPCutoff(const typename ESN<T>::DEVector &f1,

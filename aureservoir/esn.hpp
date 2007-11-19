@@ -195,6 +195,8 @@ void ESN<T>::setBPCutoff(const DEVector &f1, const DEVector &f2)
   if( net_info_[SIMULATE_ALG] != SIM_BP )
     throw AUExcept("ESN::setBPCutoff: you need to set SIM_BP and init the matrix first!");
 
+  // allocate ema buffers and set f1,f2 to const value
+  sim_->allocateBP();
   sim_->setBPCutoff(f1,f2);
 }
 

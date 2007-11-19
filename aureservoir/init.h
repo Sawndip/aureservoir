@@ -124,7 +124,10 @@ class InitStd : public InitBase<T>
  * \brief init for bandpass style neurons with constant cutoff frequency
  *
  * Performs same initialization as in InitStd, but additionally
- * initializes the cutoff frequencies of bandpass style neurons.
+ * initializes the cutoff frequencies of bandpass style neurons to a
+ * constant value.
+ * \note You don't need this if you set the cutoff frequencies
+ * manually with setBPCutoff.
  * The lowpass cutoff freq is set to BP_F1, the highpass cutoff frequency
  * to BP_F2.
  *

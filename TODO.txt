@@ -1,8 +1,15 @@
 
-Initialization für bandpass machen, ohne dass man const value
-setzen muss !
+- Test mit nicht konstanten f1, f2 machen !
 
-reverse methode machen, die das ganze reservoir umkehrt !
+- setter für W, Win, Wback, ... machen, damit man leichter von python
+  aus was programmiern kann
+
+- Initialization für bandpass machen, ohne dass man const value
+  setzen muss !
+  (in weiterer Folge dann vielleicht sogar eine eigene BPESN Klasse,
+   sowie jetzt in python ?)
+
+reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)
 -> kann vielleicht die entzerrung leichter machen !?
 
@@ -27,6 +34,7 @@ Tests:
 - noise vector funktion
 
 DOCSTRING:
+ - docstring der einzelnen train/test sachen noch dazutun irgendwie
   - python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
   - sed s/aureservoir:://g tmp.i > ESN.i && rm tmp.i
   - dann ins scons dazu, damits automatisch geht

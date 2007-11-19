@@ -22,6 +22,56 @@
 namespace aureservoir
 {
 
+//! @name class SimBase Implementation
+//@{
+
+template <typename T>
+SimBase<T>::SimBase(ESN<T> *esn)
+{
+  esn_=esn;
+  reallocate();
+}
+
+template <typename T>
+void SimBase<T>::reallocate()
+{
+  last_out_.resize(esn_->outputs_, 1);
+  t_.resize(esn_->neurons_);
+}
+
+template <typename T>
+void SimBase<T>::allocateBP() throw(AUExcept)
+{
+  std::string str = "SimBase::allocateBP: ";
+  str += "allocateBP is not implemented in standard ESNs, ";
+  str += "use e.g. SIM_BP !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+void SimBase<T>::setBPCutoffConst(T f1, T f2) throw(AUExcept)
+{
+  std::string str = "SimBase::setBPCutoffConst: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use e.g. SIM_BP !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+void SimBase<T>::setBPCutoff(const typename ESN<T>::DEVector &f1,
+                             const typename ESN<T>::DEVector &f2)
+  throw(AUExcept)
+{
+  std::string str = "SimBase::setBPCutoff: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use e.g. SIM_BP !";
+
+  throw AUExcept( str );
+}
+
+//@}
 //! @name class SimStd Implementation
 //@{
 
@@ -239,7 +289,7 @@ void SimLI<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@{
 
 template <typename T>
-void SimBP<T>::allocateBP()
+void SimBP<T>::allocateBP() throw(AUExcept)
 {
   ema1_.resizeOrClear(esn_->neurons_);
   ema2_.resizeOrClear(esn_->neurons_);
@@ -249,7 +299,7 @@ void SimBP<T>::allocateBP()
 }
 
 template <typename T>
-void SimBP<T>::setBPCutoffConst(T f1, T f2)
+void SimBP<T>::setBPCutoffConst(T f1, T f2) throw(AUExcept)
 {
   std::fill_n( f1_.data(), f1_.length(), f1 );
   std::fill_n( f2_.data(), f2_.length(), f2 );
@@ -295,7 +345,6 @@ void SimBP<T>::simulate(const typename ESN<T>::DEMatrix &in,
     Wout2 = esn_->Wout_(_,_(esn_->neurons_+1, esn_->neurons_+esn_->inputs_));
 
   /// \todo see SimStd
-
 
   // First run with output from last simulation
 
