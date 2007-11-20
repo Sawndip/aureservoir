@@ -16,6 +16,13 @@
 
 import os, glob, sys
 
+# trying import numpy
+try:
+	import numpy
+except:
+	print "You must have numpy installed !"
+	Exit(1)
+
 #####################################################################
 #  build system help
 #####################################################################
@@ -23,19 +30,25 @@ import os, glob, sys
 Help("\nType: 'scons' to build aureservoir python bindings.")
 Help("\n      'scons -c' to clean objects and python files.\n")
 Help("\n      'scons install' to install python module.\n")
-Help("\n      'scons doc' build module documentation.\n")
+#Help("\n      'scons doc' build module documentation.\n")
 
 #####################################################################
 #  general build options
 #####################################################################
 
-env = Environment( CPPPATH=['.', '../'] )
+env = Environment(ENV = {'PATH' : os.environ['PATH'],
+                         'TERM' : os.environ['TERM'],
+                         'HOME' : os.environ['HOME']})
+env.Append( CPPPATH=['.', '../'] )
 env.Append(CCFLAGS="-O2 -fPIC -Wall -ffast-math -mfpmath=sse -msse -msse2")
-# TODO: besser machen:
-env.Append( LIBS=['flens',] )
-env.Append( CPPPATH=['/usr/include/python2.5','/usr/lib/python2.5/site-packages/numpy/core/include'] )
-# siehe setup.py im numpy swig example, wie man automatisch numpy include
-# path bekommt
+
+# get numpy include path (this works through different versions)
+try:
+    numpy_include = numpy.get_include()
+except AttributeError:
+    numpy_include = numpy.get_numpy_include()
+
+env.Append( CPPPATH=[numpy_include,] )
 
 #####################################################################
 #  command line options
@@ -43,15 +56,26 @@ env.Append( CPPPATH=['/usr/include/python2.5','/usr/lib/python2.5/site-packages/
 
 opt = Options('options.cache')
 opt.AddOptions(
+  PathOption('install_path', 'installation path for python module', \
+             '/usr/lib/python2.5/site-packages'),
+  PathOption('aureservoir_path', 'include path for aureservoir', None),
   PathOption('flens_path', 'include path for FLENS', None),
+  PathOption('python_path', 'include path for python', \
+             '/usr/include/python2.5'),
   ('arch', 'optimize for specific architecture (e.g. pentium4)', None),
 )
 opt.Update(env)
 opt.Save('options.cache',env)
 Help(opt.GenerateHelpText(env))
 
+if env.has_key('install_path'):
+	install_path = env['install_path']
+if env.has_key('aureservoir_path'):
+	env.Append(CPPPATH=[env['aureservoir_path']])
 if env.has_key('flens_path'):
 	env.Append(CPPPATH=[env['flens_path']])
+if env.has_key('python_path'):
+	env.Append(CPPPATH=[env['python_path']])
 if env.has_key('arch'):
 	env.Append(CCFLAGS="-march=" + env['arch'])
 
@@ -67,65 +91,76 @@ if env.GetOption('clean'):
 	checking = 0
 
 # do the checks
-#conf = Configure(env)
-#if checking:
-	#if not conf.CheckLib('aureservoir', language="C++"):
-		#print 'Did not find aureservoir library !'
-		#Exit(1)
-	#if not conf.CheckCXXHeader('aureservoir/aureservoir.h'):
-		#print 'Did not find aureservoir header (aureservoir/aureservoir.h) !'
-		#Exit(1)
-	#if not conf.CheckLib('flens', language="C++"):
-		#print 'Did not find FLENS library !'
-		#Exit(1)
-	#if not conf.CheckCXXHeader('flens/flens.h'):
-		#print 'Did not find FLENS header (flens/flens.h) !'
-		#Exit(1)
-	#if not conf.CheckHeader('m_pd.h'):
-		#print 'Did not find PD header (m_pd.h) !'
-		#Exit(1)
-#env = conf.Finish()
+conf = Configure(env)
+if checking:
+	if not conf.CheckCXXHeader('aureservoir/aureservoir.h'):
+		print 'Did not find aureservoir header (aureservoir/aureservoir.h) !'
+		Exit(1)
+	if not conf.CheckLib('flens', language="C++"):
+		print 'Did not find FLENS library !'
+		Exit(1)
+	if not conf.CheckCXXHeader('flens/flens.h'):
+		print 'Did not find FLENS header (flens/flens.h) !'
+		Exit(1)
+	if not conf.CheckCHeader('Python.h'):
+		print 'Did not find python headers !'
+		Exit(1)
+env = conf.Finish()
+
+#####################################################################
+#  builder for SWIG interface
+#####################################################################
+
+swig = Builder(action = 'swig -c++ -python -o $TARGET $SOURCE')
+env.Append(BUILDERS = {'SWIG' : swig} )
 
 #####################################################################
 #  build python-files
 #####################################################################
 
 target = "aureservoir"
+sources = ['aureservoir_wrap.cpp',]
 
-# run swig command
-# TODO: das muss sofort passiern -> Execute oder so aehnlich verwenden
-env.Command('aureservoir_wrap.cpp','aureservoir.i','swig -c++ -python -o $TARGET $SOURCE')
+# build SWIG interface
+wrapper = env.SWIG('aureservoir_wrap.cpp','aureservoir.i')
 
-sources = glob.glob("*.cpp")
-env.SharedLibrary( target,
+lib = env.SharedLibrary( target,
                    sources,
                    SHLIBPREFIX="_" )
 
-#####################################################################
-#  additional cleanup for SWIG output
-#####################################################################
-
-if env.GetOption('clean'):
-	print "Warum funktioniert CLEAN nicht ?"
-	Delete("*_wrap.cpp")
-	Delete("*.py")
-	Delete("*.pyc")
+Default(wrapper,lib)
 
 #####################################################################
-#  install library
+#  install python module
 #####################################################################
 
-instfiles = [ 'aureservoir.py',
+install_files = [ 'aureservoir.py',
               '_aureservoir.so' ]
 
-# TODO: pfad gscheit handeln
-libinstall = env.Install("/usr/lib/python2.5/site-packages", instfiles)
-
-env.Alias("install", [libinstall,])
+install = env.Install(install_path, install_files)
+env.Alias("install", install)
 
 #####################################################################
 #  build documentation
 #####################################################################
+
+# TODO: diese builder machen !
+# -> im scons manuel wegen den targets nochmal genauer nachlesen
+
+#python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
+
+# so gehts:
+
+#doc1 = Builder(action = 'python doxy2swig.py -n $SOURCE $TARGET')
+#env.Append(BUILDERS = {'Doc1' : doc1} )
+
+#bar = env.Doc1('../aureservoir/xml/classaureservoir_1_1ESN.xml','tmp.i')
+#env.Alias("bar", bar)
+
+
+
+##if 'bar' in COMMAND_LINE_TARGETS:
+	#bar = env.Test()
 
      #env.Command('foo.out', 'foo.in', "sed 's/x/y/' < $SOURCE > $TARGET")
      #sed 's/x/y/' < foo.in > foo.out

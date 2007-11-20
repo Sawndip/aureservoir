@@ -16,13 +16,15 @@ Tests:
 
 DOCSTRING:
  - docstring der einzelnen train/test sachen noch dazutun irgendwie
-  - python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
-  - sed s/aureservoir:://g tmp.i > ESN.i && rm tmp.i
-  - dann ins scons dazu, damits automatisch geht
-    -> schaue scons doku für bsp von cmd line args zu erkennen
 
 SCONS:
-- bei einem andern Programm mal nachschauen wie man das generell gscheit macht !
+- python:
+  - doc builders dazu tun:
+    - python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
+    - sed s/aureservoir:://g tmp.i > ESN.i && rm tmp.i
+
+- aureservoir:
+  - doxygen builder dazu
 
 SWIG:
 - noch (python?) code dazu, dass er den shape automatisch ändert, wenns
@@ -36,10 +38,6 @@ NUMPY STYLE GUID (tests und etc.):
 - http://projects.scipy.org/scipy/numpy/wiki/DistutilsDoc#the-tests-directory
 
 ---------------------
-
-- scons build dependency check machen
-- scons installationsroutinen richtig machen (alle header, python, ...)
-- scons python lib installationspfad zum gscheit eingeben
 
 - Algorithmen/Activation Namen besser abspeichern, am besten in einer map
   oder string konstante, wo die fix zugeordnet sind

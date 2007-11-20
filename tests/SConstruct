@@ -39,6 +39,7 @@ env = Environment(ENV = {'PATH' : os.environ['PATH'],
                          'HOME' : os.environ['HOME']})
 env.Append( CPPPATH=['.', '../'] )
 env.Append(CCFLAGS="-O2 -fPIC -Wall -ffast-math -mfpmath=sse -msse -msse2")
+# TODO: remove gsl -> move init_test to python
 env.Append( LIBS=['gsl', ] )
 
 #####################################################################
@@ -88,8 +89,6 @@ if checking:
 	if not conf.CheckCXXHeader('cppunit/extensions/HelperMacros.h'):
 		print 'Did not find CppUnit headers !'
 		Exit(1)
-#GSL auch noch checken !!! -> Achtung, braucht 1.10 Version !
-#newmat auch !!!
 env = conf.Finish()
 
 #####################################################################
@@ -97,7 +96,6 @@ env = conf.Finish()
 #####################################################################
 
 tests = env.Program(progname, sources)
-#aureservoir = env.Program(libname, sources)
 env.Default(tests)
 
 #####################################################################
