@@ -30,6 +30,7 @@ files += glob.glob("*.hpp")   # install all *.h files
 
 Help("\nType: 'scons' for dependency checking.")
 Help("\n      'scons install' to install headers.\n")
+Help("\n      'scons doc'     to build doxygen documentation.\n")
 
 #####################################################################
 #  general build options
@@ -90,6 +91,24 @@ headerinstall = env.Install(os.path.join(env['prefix'], "include",
                             "aureservoir"), files)
 
 env.Alias("install", [headerinstall,])
+
+#####################################################################
+#  build doxygen documentation
+#####################################################################
+
+def build_doxy(target,source,env):
+	""" Builder-code to build doxygen docu
+	"""
+	cmd = "doxygen " + str(source[0])
+	os.system(cmd)
+	
+builddoc = Builder(action = build_doxy)
+env.Append(BUILDERS = {'Doc' : builddoc} )
+
+# dummy target - is there a better method ?
+doc = env.Doc('html/index.html','Doxyfile')
+env.NoClean(doc)
+env.Alias("doc", doc)
 
 #####################################################################
 #  EOF

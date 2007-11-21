@@ -30,7 +30,7 @@ except:
 Help("\nType: 'scons' to build aureservoir python bindings.")
 Help("\n      'scons -c' to clean objects and python files.\n")
 Help("\n      'scons install' to install python module.\n")
-#Help("\n      'scons doc' build module documentation.\n")
+Help("\n      'scons doc' to build module documentation.\n")
 
 #####################################################################
 #  general build options
@@ -123,6 +123,8 @@ sources = ['aureservoir_wrap.cpp',]
 
 # build SWIG interface
 wrapper = env.SWIG('aureservoir_wrap.cpp','aureservoir.i')
+env.NoClean(wrapper)
+Clean(wrapper, 'aureservoir.pyc')
 
 lib = env.SharedLibrary( target,
                    sources,
@@ -144,33 +146,21 @@ env.Alias("install", install)
 #  build documentation
 #####################################################################
 
-# TODO: diese builder machen !
-# -> im scons manuel wegen den targets nochmal genauer nachlesen
+def build_doc(target,source,env):
+	""" Builder-code to build the documentation.
+	"""
+	cmd1 = "python doxy2swig.py -n " + str(source[0]) + " tmp.i"
+	cmd2 = "sed s/aureservoir:://g tmp.i > " + str(target[0])
+	os.system(cmd1)
+	os.system(cmd2)
+	os.remove("tmp.i")
 
-#python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
+builddoc = Builder(action = build_doc)
+env.Append(BUILDERS = {'Doc' : builddoc} )
 
-# so gehts:
-
-#doc1 = Builder(action = 'python doxy2swig.py -n $SOURCE $TARGET')
-#env.Append(BUILDERS = {'Doc1' : doc1} )
-
-#bar = env.Doc1('../aureservoir/xml/classaureservoir_1_1ESN.xml','tmp.i')
-#env.Alias("bar", bar)
-
-
-
-##if 'bar' in COMMAND_LINE_TARGETS:
-	#bar = env.Test()
-
-     #env.Command('foo.out', 'foo.in', "sed 's/x/y/' < $SOURCE > $TARGET")
-     #sed 's/x/y/' < foo.in > foo.out
-  
-
-#if 'doc' in COMMAND_LINE_TARGETS:
-	## build swig docu from doxygen xml
-	#doc = env.Command('tmp.i', \
-                    #'../aureservoir/xml/classaureservoir_1_1ESN.xml', \
-                    #"python $SOURCE $TARGET")
+doc = env.Doc('ESN.i','../aureservoir/xml/classaureservoir_1_1ESN.xml')
+env.NoClean(doc)
+env.Alias("doc", doc)
 
 #####################################################################
 #  EOF

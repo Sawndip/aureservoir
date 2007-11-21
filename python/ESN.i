@@ -74,9 +74,7 @@ outmtx:  output matrix in row major storage (outputs x timesteps) for
 teacher forcing
 
 washout:  washout time in samples, used to get rid of the transient
-dynamics of the network starting state
-
-Todo check how we can do that without copying ";
+dynamics of the network starting state ";
 
 %feature("docstring")  ESN::simulate "throw ( AUExcept)
 C-style Simulation Algorithm Interface with some additional error
@@ -91,9 +89,7 @@ timesteps)
 
 outmtx:  output matrix in row major storage (outputs x timesteps),
 
-Data must be already allocated!
-
-Todo make these checks here ? ";
+Data must be already allocated! ";
 
 %feature("docstring")  ESN::simulateStep "throw (
 AUExcept) C-style Simulation Algorithm Interface, for single step
@@ -107,9 +103,7 @@ inmtx:  input vector, size = inputs
 
 outmtx:  output vector, size = outputs
 
-Data must be already allocated!
-
-Todo make these checks here ? ";
+Data must be already allocated! ";
 
 /*  Additional Interface for Bandpass Neurons  */
 
@@ -285,8 +279,63 @@ AUExcept) set reservoir activation function ";
 %feature("docstring")  ESN::setOutputAct "throw (
 AUExcept) set output activation function ";
 
+/*  SET internal data  */
+
+/* Additional method to set all parameters with string key-value
+pairs, which can be used for bindings from other languages
+
+Parameters:
+-----------
+
+param:  the parameter to set
+
+value:  the value of that parameter
+
+*/
+
+%feature("docstring")  ESN::setWin "throw ( AUExcept)
+set input weight matrix ";
+
+%feature("docstring")  ESN::setW "throw ( AUExcept) set
+reservoir weight matrix ";
+
+%feature("docstring")  ESN::setWback "throw ( AUExcept)
+set feedback weight matrix ";
+
 %feature("docstring")  ESN::setWout "throw ( AUExcept)
 set output weight matrix ";
+
+%feature("docstring")  ESN::setX "throw ( AUExcept) set
+internal state vector ";
+
+/*  SET internal data C-style interface  */
+
+%feature("docstring")  ESN::setWin "throw ( AUExcept)
+set input weight matrix C-style interface (data will be copied into a
+FLENS matrix)
+
+Parameters:
+-----------
+
+inmtx:  pointer to win matrix in row major storage ";
+
+%feature("docstring")  ESN::setW "throw ( AUExcept) set
+reservoir weight matrix C-style interface (data will be copied into a
+FLENS matrix)
+
+Parameters:
+-----------
+
+inmtx:  pointer to a dense reservoir matrix in row major storage ";
+
+%feature("docstring")  ESN::setWback "throw ( AUExcept)
+set feedback weight matrix C-style interface (data will be copied into
+a FLENS matrix)
+
+Parameters:
+-----------
+
+inmtx:  pointer to wback matrix in row major storage ";
 
 %feature("docstring")  ESN::setWout "throw ( AUExcept)
 set output weight matrix C-style interface (data will be copied into a
@@ -295,13 +344,16 @@ FLENS matrix)
 Parameters:
 -----------
 
-wout:  pointer to wout matrix in row major storage (usual C array)
+inmtx:  pointer to wout matrix in row major storage ";
 
-rows:  number of rows
+%feature("docstring")  ESN::setX "throw ( AUExcept) set
+internal state vector C-style interface (data will be copied into a
+FLENS matrix)
 
-cols:  number of columns
+Parameters:
+-----------
 
-Todo check how we can do that without copying ";
+invec:  pointer to state vector ";
 
 %feature("docstring")  ESN::ESN "
 

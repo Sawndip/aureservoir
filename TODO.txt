@@ -15,16 +15,8 @@ Tests:
 - init_test.cpp in python machen
 
 DOCSTRING:
- - docstring der einzelnen train/test sachen noch dazutun irgendwie
-
-SCONS:
-- python:
-  - doc builders dazu tun:
-    - python doxy2swig.py -n ../aureservoir/xml/classaureservoir_1_1ESN.xml tmp.i
-    - sed s/aureservoir:://g tmp.i > ESN.i && rm tmp.i
-
-- aureservoir:
-  - doxygen builder dazu
+ - docstring der einzelnen train/test sachen noch dazutun rausparsen und
+   in python dazutun
 
 SWIG:
 - noch (python?) code dazu, dass er den shape automatisch ändert, wenns

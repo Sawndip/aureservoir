@@ -149,9 +149,7 @@ class DoubleESN(_object):
         teacher forcing
 
         washout:  washout time in samples, used to get rid of the transient
-        dynamics of the network starting state
-
-        Todo check how we can do that without copying 
+        dynamics of the network starting state 
         """
         return _aureservoir.DoubleESN_train(*args)
 
@@ -172,9 +170,7 @@ class DoubleESN(_object):
 
         outmtx:  output matrix in row major storage (outputs x timesteps),
 
-        Data must be already allocated!
-
-        Todo make these checks here ? 
+        Data must be already allocated! 
         """
         return _aureservoir.DoubleESN_simulate(*args)
 
@@ -194,9 +190,7 @@ class DoubleESN(_object):
 
         outmtx:  output vector, size = outputs
 
-        Data must be already allocated!
-
-        Todo make these checks here ? 
+        Data must be already allocated! 
         """
         return _aureservoir.DoubleESN_simulateStep(*args)
 
@@ -468,15 +462,48 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_setOutputAct(*args)
 
     def setWin(*args):
-        """setWin(self, double inmtx)"""
+        """
+        setWin(self, double inmtx)
+
+        throw ( AUExcept)
+        set input weight matrix C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to win matrix in row major storage 
+        """
         return _aureservoir.DoubleESN_setWin(*args)
 
     def setW(*args):
-        """setW(self, double inmtx)"""
+        """
+        setW(self, double inmtx)
+
+        throw ( AUExcept) set
+        reservoir weight matrix C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to a dense reservoir matrix in row major storage 
+        """
         return _aureservoir.DoubleESN_setW(*args)
 
     def setWback(*args):
-        """setWback(self, double inmtx)"""
+        """
+        setWback(self, double inmtx)
+
+        throw ( AUExcept)
+        set feedback weight matrix C-style interface (data will be copied into
+        a FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to wback matrix in row major storage 
+        """
         return _aureservoir.DoubleESN_setWback(*args)
 
     def setWout(*args):
@@ -490,18 +517,23 @@ class DoubleESN(_object):
         Parameters:
         -----------
 
-        wout:  pointer to wout matrix in row major storage (usual C array)
-
-        rows:  number of rows
-
-        cols:  number of columns
-
-        Todo check how we can do that without copying 
+        inmtx:  pointer to wout matrix in row major storage 
         """
         return _aureservoir.DoubleESN_setWout(*args)
 
     def setX(*args):
-        """setX(self, double invec)"""
+        """
+        setX(self, double invec)
+
+        throw ( AUExcept) set
+        internal state vector C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        invec:  pointer to state vector 
+        """
         return _aureservoir.DoubleESN_setX(*args)
 
 DoubleESN_swigregister = _aureservoir.DoubleESN_swigregister
@@ -585,9 +617,7 @@ class SingleESN(_object):
         teacher forcing
 
         washout:  washout time in samples, used to get rid of the transient
-        dynamics of the network starting state
-
-        Todo check how we can do that without copying 
+        dynamics of the network starting state 
         """
         return _aureservoir.SingleESN_train(*args)
 
@@ -608,9 +638,7 @@ class SingleESN(_object):
 
         outmtx:  output matrix in row major storage (outputs x timesteps),
 
-        Data must be already allocated!
-
-        Todo make these checks here ? 
+        Data must be already allocated! 
         """
         return _aureservoir.SingleESN_simulate(*args)
 
@@ -630,9 +658,7 @@ class SingleESN(_object):
 
         outmtx:  output vector, size = outputs
 
-        Data must be already allocated!
-
-        Todo make these checks here ? 
+        Data must be already allocated! 
         """
         return _aureservoir.SingleESN_simulateStep(*args)
 
@@ -904,15 +930,48 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_setOutputAct(*args)
 
     def setWin(*args):
-        """setWin(self, float inmtx)"""
+        """
+        setWin(self, float inmtx)
+
+        throw ( AUExcept)
+        set input weight matrix C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to win matrix in row major storage 
+        """
         return _aureservoir.SingleESN_setWin(*args)
 
     def setW(*args):
-        """setW(self, float inmtx)"""
+        """
+        setW(self, float inmtx)
+
+        throw ( AUExcept) set
+        reservoir weight matrix C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to a dense reservoir matrix in row major storage 
+        """
         return _aureservoir.SingleESN_setW(*args)
 
     def setWback(*args):
-        """setWback(self, float inmtx)"""
+        """
+        setWback(self, float inmtx)
+
+        throw ( AUExcept)
+        set feedback weight matrix C-style interface (data will be copied into
+        a FLENS matrix)
+
+        Parameters:
+        -----------
+
+        inmtx:  pointer to wback matrix in row major storage 
+        """
         return _aureservoir.SingleESN_setWback(*args)
 
     def setWout(*args):
@@ -926,18 +985,23 @@ class SingleESN(_object):
         Parameters:
         -----------
 
-        wout:  pointer to wout matrix in row major storage (usual C array)
-
-        rows:  number of rows
-
-        cols:  number of columns
-
-        Todo check how we can do that without copying 
+        inmtx:  pointer to wout matrix in row major storage 
         """
         return _aureservoir.SingleESN_setWout(*args)
 
     def setX(*args):
-        """setX(self, float invec)"""
+        """
+        setX(self, float invec)
+
+        throw ( AUExcept) set
+        internal state vector C-style interface (data will be copied into a
+        FLENS matrix)
+
+        Parameters:
+        -----------
+
+        invec:  pointer to state vector 
+        """
         return _aureservoir.SingleESN_setX(*args)
 
 SingleESN_swigregister = _aureservoir.SingleESN_swigregister
