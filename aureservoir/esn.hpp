@@ -137,13 +137,16 @@ inline void ESN<T>::simulate(T *inmtx, int inrows, int incols,
                              T *outmtx, int outrows, int outcols)
   throw(AUExcept)
 {
-  /// \todo make these checks here ?
   if( outcols != incols )
     throw AUExcept("ESN::simulate: output and input must have same nr of columns!");
   if( inrows != inputs_ )
     throw AUExcept("ESN::simulate: wrong input row size!");
   if( outrows != outputs_ )
     throw AUExcept("ESN::simulate: wrong output row size!");
+
+  // check if we already have allocated data in simulation algorithm
+  if( sim_->last_out_.numRows() != outputs_ )
+    throw AUExcept("ESN::simulate: You need to allocate data for simulation algortihm - e.g. set an Wout matrix or train ESN !");
 
   DEMatrix flin(inrows,incols);
   DEMatrix flout(outrows,outcols);
@@ -167,11 +170,14 @@ template <typename T>
 inline void ESN<T>::simulateStep(T *invec, int insize, T *outvec, int outsize)
     throw(AUExcept)
 {
-  /// \todo make these checks here ?
   if( insize != inputs_ )
     throw AUExcept("ESN::simulate: wrong input row size!");
   if( outsize != outputs_ )
     throw AUExcept("ESN::simulate: wrong output row size!");
+
+  // check if we already have allocated data in simulation algorithm
+  if( sim_->last_out_.numRows() != outputs_ )
+    throw AUExcept("ESN::simulate: You need to allocate data for simulation algortihm - e.g. set an Wout matrix or train ESN !");
 
   DEMatrix flin(insize,1);
   DEMatrix flout(outsize,1);
