@@ -1,4 +1,6 @@
 
+last_output in sim schon im init allozieren (nicht in train oder setWout !)
+
 reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)
 -> kann vielleicht die entzerrung leichter machen !?
@@ -13,6 +15,7 @@ Tests:
   (vielleicht kann man das irgendwie der testklassen übergeben)
 - noise vector funktion
 - init_test.cpp in python machen
+- für sigmoid activation functions
 
 DOCSTRING:
  - docstring der einzelnen train/test sachen noch dazutun rausparsen und

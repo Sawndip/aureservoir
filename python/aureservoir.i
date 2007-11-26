@@ -233,5 +233,6 @@ enum TrainAlgorithm
 enum ActivationFunction
 {
   ACT_LINEAR,      //!< linear activation function
-  ACT_TANH         //!< tanh activation function
+  ACT_TANH,
+  ACT_SIGMOID
 };

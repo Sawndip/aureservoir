@@ -1031,5 +1031,6 @@ TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG
 TRAIN_PI_SQUARE = _aureservoir.TRAIN_PI_SQUARE
 ACT_LINEAR = _aureservoir.ACT_LINEAR
 ACT_TANH = _aureservoir.ACT_TANH
+ACT_SIGMOID = _aureservoir.ACT_SIGMOID
 
 

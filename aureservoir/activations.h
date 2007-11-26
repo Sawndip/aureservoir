@@ -33,8 +33,12 @@ namespace aureservoir
 enum ActivationFunction
 {
   ACT_LINEAR,      //!< linear activation function
-  ACT_TANH         //!< tanh activation function
+  ACT_TANH,        //!< tanh activation function
+  ACT_SIGMOID      //!< sigmoid activation function
 };
+
+/// \todo code this activation functions with SSE2 instructions, and/or
+///       make faster interpolations
 
 //! @name linear activation functions
 //@{
@@ -84,6 +88,37 @@ inline void act_invtanh(T *data, int size)
 {
   for(int i=0; i<size; ++i)
     data[i] = atanh( data[i] );
+}
+
+//@}
+//! @name sigmoid activation functions
+//@{
+
+/*!
+ * sigmoid activation function, performed on each element:
+ * y(x) = 1 / (1 + exp(x))
+ * @param data pointer to the data
+ * @param size of the data
+ */
+template <typename T>
+inline void act_sigmoid(T *data, int size)
+{
+  for(int i=0; i<size; ++i)
+    data[i] = 1.0 / (1.0 + exp(data[i]) );
+}
+
+/*!
+ * inverse sigmoid activation function, performed on each element:
+ * y(x) = ln( 1/x - 1 )
+ * \todo make checks here if parameters are in correct range ?
+ * @param data pointer to the data
+ * @param size of the data
+ */
+template <typename T>
+inline void act_invsigmoid(T *data, int size)
+{
+  for(int i=0; i<size; ++i)
+    data[i] = log( 1.0/data[i] - 1.0 );
 }
 
 //@}

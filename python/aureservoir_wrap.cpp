@@ -7419,5 +7419,6 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "TRAIN_PI_SQUARE",SWIG_From_int(static_cast< int >(TRAIN_PI_SQUARE)));
   SWIG_Python_SetConstant(d, "ACT_LINEAR",SWIG_From_int(static_cast< int >(ACT_LINEAR)));
   SWIG_Python_SetConstant(d, "ACT_TANH",SWIG_From_int(static_cast< int >(ACT_TANH)));
+  SWIG_Python_SetConstant(d, "ACT_SIGMOID",SWIG_From_int(static_cast< int >(ACT_SIGMOID)));
 }
 

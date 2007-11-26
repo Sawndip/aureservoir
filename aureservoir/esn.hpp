@@ -476,6 +476,11 @@ void ESN<T>::setReservoirAct(ActivationFunction f)
       net_info_[RESERVOIR_ACT] = ACT_TANH;
       break;
 
+    case ACT_SIGMOID:
+      reservoirAct_= act_sigmoid;
+      net_info_[RESERVOIR_ACT] = ACT_SIGMOID;
+      break;
+
     default:
       throw AUExcept("ESN::setReservoirAct: wrong reservoir activation function!");
   }
@@ -497,6 +502,12 @@ void ESN<T>::setOutputAct(ActivationFunction f)
       outputAct_    = act_tanh;
       outputInvAct_ = act_invtanh;
       net_info_[OUTPUT_ACT] = ACT_TANH;
+      break;
+
+    case ACT_SIGMOID:
+      outputAct_    = act_sigmoid;
+      outputInvAct_ = act_invsigmoid;
+      net_info_[OUTPUT_ACT] = ACT_SIGMOID;
       break;
 
     default:
@@ -652,6 +663,9 @@ string ESN<T>::getActString(int act)
 
     case ACT_TANH:
       return "ACT_TANH";
+
+    case ACT_SIGMOID:
+      return "ACT_SIGMOID";
 
     default:
       throw AUExcept("ESN::getActString: unknown activation function");
