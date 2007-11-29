@@ -289,21 +289,14 @@ void SimLI<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@{
 
 template <typename T>
-void SimBP<T>::allocateBP() throw(AUExcept)
-{
-  ema1_.resizeOrClear(esn_->neurons_);
-  ema2_.resizeOrClear(esn_->neurons_);
-  f1_.resizeOrClear(esn_->neurons_);
-  f2_.resizeOrClear(esn_->neurons_);
-  scale_.resizeOrClear(esn_->neurons_);
-}
-
-template <typename T>
 void SimBP<T>::setBPCutoffConst(T f1, T f2) throw(AUExcept)
 {
-  std::fill_n( f1_.data(), f1_.length(), f1 );
-  std::fill_n( f2_.data(), f2_.length(), f2 );
-  calcScale();
+  typename ESN<T>::DEVector f1vec(esn_->neurons_);
+  typename ESN<T>::DEVector f2vec(esn_->neurons_);
+
+  std::fill_n( f1vec.data(), f1vec.length(), f1 );
+  std::fill_n( f2vec.data(), f2vec.length(), f2 );
+  filter_.setBPCutoff(f1vec,f2vec);
 }
 
 template <typename T>
@@ -311,23 +304,12 @@ void SimBP<T>::setBPCutoff(const typename ESN<T>::DEVector &f1,
                            const typename ESN<T>::DEVector &f2)
   throw(AUExcept)
 {
-  if( f1.length() != f1_.length() )
+  if( f1.length() != esn_->neurons_ )
     throw AUExcept("SimBP: f1 must have same length as reservoir neurons!");
-  if( f2.length() != f2_.length() )
+  if( f2.length() != esn_->neurons_ )
     throw AUExcept("SimBP: f2 must have same length as reservoir neurons!");
 
-  f1_ = f1;
-  f2_ = f2;
-
-  calcScale();
-}
-
-template <typename T>
-void SimBP<T>::calcScale()
-{
-  // scale = 1 + f2/f1;
-  for(int i=1; i<=scale_.length(); ++i)
-    scale_(i) = 1 + f2_(i)/f1_(i);
+  filter_.setBPCutoff(f1,f2);
 }
 
 template <typename T>
@@ -356,16 +338,8 @@ void SimBP<T>::simulate(const typename ESN<T>::DEMatrix &in,
   esn_->x_ += t_;
   esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
 
-  // Bandpass Filtering: new activation = ema1(act) - ema2(ema1(act))
-  // ema1 += f1 * (activation - ema1)
-  // ema2  += f2 * (ema1 - ema2)
-  // activation = (ema1 - ema2) * scale
-  for(int i=1; i<=ema1_.length(); ++i)
-  {
-    ema1_(i) += f1_(i) * ( esn_->x_(i) - ema1_(i) );
-    ema2_(i) += f2_(i) * ( ema1_(i) - ema2_(i) );
-    esn_->x_(i) = (ema1_(i) - ema2_(i)) * scale_(i);
-  }
+  // Bandpass Filtering
+  filter_.calc(esn_->x_);
 
   // output = Wout * [x; in]
   last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1);
@@ -387,13 +361,8 @@ void SimBP<T>::simulate(const typename ESN<T>::DEMatrix &in,
     esn_->x_ += t_;
     esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
 
-    // Bandpass Filtering: new activation = ema1(act) - ema2(ema1(act))
-    for(int i=1; i<=ema1_.length(); ++i)
-    {
-      ema1_(i) += f1_(i) * ( esn_->x_(i) - ema1_(i) );
-      ema2_(i) += f2_(i) * ( ema1_(i) - ema2_(i) );
-      esn_->x_(i) = (ema1_(i) - ema2_(i)) * scale_(i);
-    }
+    // Bandpass Filtering
+    filter_.calc(esn_->x_);
 
     // output = Wout * [x; in]
     last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n);

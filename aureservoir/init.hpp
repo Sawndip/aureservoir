@@ -68,6 +68,13 @@ void InitBase<T>::checkInitParams()
   }
 }
 
+template <typename T>
+void InitBase<T>::allocateWorkData()
+{
+  // to allocate sim class data, if we don't use training
+  esn_->sim_->reallocate();
+}
+
 //@}
 //! @name class InitStd Implementation
 //@{
@@ -77,6 +84,7 @@ void InitStd<T>::init()
   throw(AUExcept)
 {
   this->checkInitParams();
+  this->allocateWorkData();
 
   esn_->Win_.resizeOrClear(esn_->neurons_, esn_->inputs_);
   esn_->Wback_.resizeOrClear(esn_->neurons_, esn_->outputs_);
@@ -193,7 +201,6 @@ void InitBPConst<T>::init()
   InitStd<T>::init();
 
   // allocate ema buffers and set f1,f2 to const value
-  esn_->sim_->allocateBP();
   esn_->sim_->setBPCutoffConst(f1, f2);
 }
 

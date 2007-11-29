@@ -200,8 +200,6 @@ void ESN<T>::setBPCutoff(const DEVector &f1, const DEVector &f2)
   if( net_info_[SIMULATE_ALG] != SIM_BP )
     throw AUExcept("ESN::setBPCutoff: you need to set SIM_BP and init the matrix first!");
 
-  // allocate ema buffers and set f1,f2 to const value
-  sim_->allocateBP();
   sim_->setBPCutoff(f1,f2);
 }
 
@@ -558,9 +556,6 @@ void ESN<T>::setWout(const DEMatrix &Wout) throw(AUExcept)
       throw AUExcept("ESN::setWout: wrong column size!");
 
   Wout_ = Wout;
-
-  // to allocate sim class data, if we don't use training
-  sim_->reallocate();
 }
 
 template <typename T>
@@ -637,9 +632,6 @@ void ESN<T>::setWout(T *inmtx, int inrows, int incols) throw(AUExcept)
   for(int j=0; j<incols; ++j) {
     Wout_(i+1,j+1) = inmtx[i*incols+j];
   } }
-
-  // needed here when no train() is called
-  sim_->reallocate();
 }
 
 template <typename T>

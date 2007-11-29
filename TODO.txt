@@ -1,11 +1,29 @@
 
-last_output in sim schon im init allozieren (nicht in train oder setWout !)
+IIR Filter implementieren:
+- Filter ausprogrammiern
+- SIM_FILTER dann hinzufügen
+- die scale values dann wieder berechnen !
+
+INIT_BP_CONST wieder wegtun, is net sinnvoll
+
+band pass auch bei init_std irgendwie initialisiern
+-> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
 
 reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)
 -> kann vielleicht die entzerrung leichter machen !?
 
 Problem bei esn_predict lösen -> siehe protokoll dort
+
+Online Training:
+- target und output bei train() übergeben
+  -> braucht default parameterübergabe:
+     inline void simulate(const DEMatrix &in, DEMatrix &out,
+                          const DEMatrix &target=DEMatrix())
+- in swig braucht man typecheck
+  -> siehe numpy2carray, bei ARRAY2_IN hab ich schon sowas probiert
+  -> oder sonst warten bis meine Sachen in numpy.i integriert sind, dort ist
+     das schon gemacht
 
 Tests:
 - TrainLS und TrainLSSquare haben manchmal Fehler bei float32

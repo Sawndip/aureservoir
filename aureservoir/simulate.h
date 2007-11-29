@@ -21,6 +21,7 @@
 #define AURESERVOIR_SIMULATE_H__
 
 #include "utilities.h"
+#include "filter.h"
 
 namespace aureservoir
 {
@@ -230,9 +231,6 @@ class SimBP : public SimBase<T>
   SimBP(ESN<T> *esn) : SimBase<T>(esn) {}
   virtual ~SimBP() {}
 
-  /// allocate ema data buffers
-  virtual void allocateBP() throw(AUExcept);
-
   /// needed for bandpass style neurons
   virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
 
@@ -246,21 +244,9 @@ class SimBP : public SimBase<T>
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
 
- private:
-
-  /// calculate scaling factor, to not shrink spectral radius
-  virtual void calcScale();
-
-  /// last output of ema1 (exponential moving average filter 1)
-  typename ESN<T>::DEVector ema1_;
-  /// last output of ema2 (exponential moving average filter 2)
-  typename ESN<T>::DEVector ema2_;
-  /// low pass cutoff frequencies for each neuron
-  typename ESN<T>::DEVector f1_;
-  /// high pass cutoff frequencies for each neuron
-  typename ESN<T>::DEVector f2_;
-  /// scale factor for output, to not shrink spectral radius
-  typename ESN<T>::DEVector scale_;
+ protected:
+  /// the filter object
+  BPFilter<T> filter_;
 };
 
 } // end of namespace aureservoir

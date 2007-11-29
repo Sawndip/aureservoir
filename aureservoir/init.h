@@ -91,6 +91,9 @@ class InitBase
   /// checks if the init parameters have the right values
   virtual void checkInitParams() throw(AUExcept);
 
+  /// allocates working data for algorithms
+  virtual void allocateWorkData();
+
   /// reference to the data of the network
   ESN<T> *esn_;
 };
