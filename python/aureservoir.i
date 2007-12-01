@@ -49,11 +49,17 @@ http://grh.mur.at
 
 %module(docstring=DOCSTRING) aureservoir
 
-%include numpy2carray.i
-
 %{
+#define SWIG_FILE_WITH_INIT
+
 #include "../aureservoir/aureservoir.h"
 using namespace aureservoir;
+%}
+
+// numpy initialization
+%include "numpy.i"
+%init %{
+import_array();
 %}
 
 // general exception handling for AUExcept
@@ -71,46 +77,38 @@ using namespace aureservoir;
 /***************************************************************************/
 // C++ arrays to numpy conversions
 
-ARRAY2_IN( float, float, FLOAT )
-%apply (float *array, int rows, int cols)
+%apply (float *INPLACE_ARRAY2, int DIM1, int DIM2)
 {  (float *inmtx, int inrows, int incols),
    (float *outmtx, int outrows, int outcols),
    (float *wmtx, int wrows, int wcols)  };
 
-ARRAY2_IN( double, double, DOUBLE )
-%apply (double *array, int rows, int cols)
+%apply (double *INPLACE_ARRAY2, int DIM1, int DIM2)
 {  (double *inmtx, int inrows, int incols),
    (double *outmtx, int outrows, int outcols),
    (double *wmtx, int wrows, int wcols)  };
 
-ARRAY1_IN( float, float, FLOAT )
-%apply (float *array, int size)
+%apply (float* INPLACE_ARRAY1, int DIM1)
 {  (float *invec, int insize),
    (float *outvec, int outsize),
    (float *f1vec, int f1size),
    (float *f2vec, int f2size) };
 
-ARRAY1_IN( double, double, DOUBLE )
-%apply (double *array, int size)
+%apply (double* INPLACE_ARRAY1, int DIM1)
 {  (double *invec, int insize),
    (double *outvec, int outsize),
    (double *f1vec, int f1size),
    (double *f2vec, int f2size) };
 
-ARRAY1_OUT( float*, FLOAT )
-%apply (float ** array, int *size)
+%apply (float** ARGOUTVIEW_ARRAY1, int* DIM1)
 { (float **vec, int *length) };
 
-ARRAY1_OUT( double*, DOUBLE )
-%apply (double ** array, int *size)
+%apply (double** ARGOUTVIEW_ARRAY1, int* DIM1)
 { (double **vec, int *length) };
 
-FARRAY2_OUT( float*, FLOAT )
-%apply (float ** array, int *rows, int *cols)
+%apply (float** ARGOUTVIEW_FARRAY2, int* DIM1, int* DIM2)
 { (float **mtx, int *rows, int *cols) };
 
-FARRAY2_OUT( double*, DOUBLE )
-%apply (double ** array, int *rows, int *cols)
+%apply (double** ARGOUTVIEW_FARRAY2, int* DIM1, int* DIM2)
 { (double **mtx, int *rows, int *cols) };
 
 

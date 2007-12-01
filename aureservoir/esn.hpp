@@ -269,8 +269,6 @@ void ESN<T>::post()
 template <typename T>
 void ESN<T>::getWin(T **mtx, int *rows, int *cols)
 {
-//   std::cout << "Win in C++: " << Win_ << std::endl;
-
   *mtx = Win_.data();
   *rows = Win_.numRows();
   *cols = Win_.numCols();
@@ -287,6 +285,8 @@ void ESN<T>::getWback(T **mtx, int *rows, int *cols)
 template <typename T>
 void ESN<T>::getWout(T **mtx, int *rows, int *cols)
 {
+//   std::cout << "Wout in C++: " << Wout_ << std::endl;
+
   *mtx = Wout_.data();
   *rows = Wout_.numRows();
   *cols = Wout_.numCols();

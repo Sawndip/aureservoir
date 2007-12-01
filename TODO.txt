@@ -9,6 +9,9 @@ INIT_BP_CONST wieder wegtun, is net sinnvoll
 band pass auch bei init_std irgendwie initialisiern
 -> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
 
+probiern ob andere typemaps von numpy.i jetzt nicht manchmal besser wären
+(z.B. input statt immer inplace ...)
+
 reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
 (inputs werden zu outputs und umgekehrt)
 -> kann vielleicht die entzerrung leichter machen !?
@@ -44,8 +47,10 @@ SWIG:
   nur eindimensional ist (data.shape = 1,-1)
   -> könnte bei float version auch gleich automatisch daten von double umwandeln
      wenn nötig
+  -> siehe tests in numpy.i, der steht wie man python code hinzufügen kann
 - wenn man bei train z.B. in integer array reinschickt geht es nicht
   (dann is erstes array alles 0)
+  -> schaun ob er das mit numpy.i jetzt alles automatisch macht
 
 NUMPY STYLE GUID (tests und etc.):
 - http://projects.scipy.org/scipy/numpy/wiki/DistutilsDoc#the-tests-directory

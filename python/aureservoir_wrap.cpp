@@ -2468,13 +2468,11 @@ SWIG_Python_MustGetPtr(PyObject *obj, swig_type_info *ty, int argnum, int flags)
 #define SWIGTYPE_p_ESNTdouble_t swig_types[0]
 #define SWIGTYPE_p_ESNTfloat_t swig_types[1]
 #define SWIGTYPE_p_char swig_types[2]
-#define SWIGTYPE_p_double swig_types[3]
-#define SWIGTYPE_p_float swig_types[4]
-#define SWIGTYPE_p_int swig_types[5]
-#define SWIGTYPE_p_p_double swig_types[6]
-#define SWIGTYPE_p_p_float swig_types[7]
-static swig_type_info *swig_types[9];
-static swig_module_info swig_module = {swig_types, 8, 0, 0, 0, 0};
+#define SWIGTYPE_p_int swig_types[3]
+#define SWIGTYPE_p_p_double swig_types[4]
+#define SWIGTYPE_p_p_float swig_types[5]
+static swig_type_info *swig_types[7];
+static swig_module_info swig_module = {swig_types, 6, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2564,63 +2562,395 @@ namespace swig {
 }
 
 
-// include numpy C API
-#define PY_ARRAY_UNIQUE_SYMBOL __example
-#include "numpy/arrayobject.h"
-
-
-/*!
- * Appends @a what to @a where. On input, @a where need not to be
- * a tuple, but on return it always is.
- */
-PyObject *helper_appendToTuple( PyObject *where, PyObject *what ) {
-  PyObject *o2, *o3;
-
-  if ((!where) || (where == Py_None)) {
-    where = what;
-  } else {
-    if (!PyTuple_Check( where )) {
-      o2 = where;
-      where = PyTuple_New( 1 );
-      PyTuple_SetItem( where, 0, o2 );
-    }
-    o3 = PyTuple_New( 1 );
-    PyTuple_SetItem( o3, 0, what );
-    o2 = where;
-    where = PySequence_Concat( o2, o3 );
-    Py_DECREF( o2 );
-    Py_DECREF( o3 );
-  }
-  return where;
-}
-
-/*!
- * Helper to get a PyArrayObject from a PyObject.
- */
-PyArrayObject *helper_getCArrayObject( PyObject *input, int type,
-				       int minDim, int maxDim ) {
-  PyArrayObject *obj;
-
-  if (PyArray_Check( input )) {
-    obj = (PyArrayObject *) input;
-    if (!PyArray_ISCARRAY( obj )) {
-      PyErr_SetString( PyExc_TypeError, "not a C array" );
-      return NULL;
-    }
-    obj = (PyArrayObject *)
-      PyArray_ContiguousFromAny( input, type, minDim, maxDim );
-    if (!obj) return NULL;
-  } else {
-    PyErr_SetString( PyExc_TypeError, "not an array" );
-    return NULL;
-  }
-  return obj;
-}
-
+#define SWIG_FILE_WITH_INIT
 
 #include "../aureservoir/aureservoir.h"
 using namespace aureservoir;
 
+
+#ifndef SWIG_FILE_WITH_INIT
+#  define NO_IMPORT_ARRAY
+#endif
+#include "stdio.h"
+#include <numpy/arrayobject.h>
+
+
+/* Support older NumPy data type names
+ */
+#if NDARRAY_VERSION < 0x01000000
+#define NPY_BOOL          PyArray_BOOL
+#define NPY_BYTE          PyArray_BYTE
+#define NPY_UBYTE         PyArray_UBYTE
+#define NPY_SHORT         PyArray_SHORT
+#define NPY_USHORT        PyArray_USHORT
+#define NPY_INT           PyArray_INT
+#define NPY_UINT          PyArray_UINT
+#define NPY_LONG          PyArray_LONG
+#define NPY_ULONG         PyArray_ULONG
+#define NPY_LONGLONG      PyArray_LONGLONG
+#define NPY_ULONGLONG     PyArray_ULONGLONG
+#define NPY_FLOAT         PyArray_FLOAT
+#define NPY_DOUBLE        PyArray_DOUBLE
+#define NPY_LONGDOUBLE    PyArray_LONGDOUBLE
+#define NPY_CFLOAT        PyArray_CFLOAT
+#define NPY_CDOUBLE       PyArray_CDOUBLE
+#define NPY_CLONGDOUBLE   PyArray_CLONGDOUBLE
+#define NPY_OBJECT        PyArray_OBJECT
+#define NPY_STRING        PyArray_STRING
+#define NPY_UNICODE       PyArray_UNICODE
+#define NPY_VOID          PyArray_VOID
+#define NPY_NTYPES        PyArray_NTYPES
+#define NPY_NOTYPE        PyArray_NOTYPE
+#define NPY_CHAR          PyArray_CHAR
+#define NPY_USERDEF       PyArray_USERDEF
+#define npy_intp          intp
+
+#define NPY_MAX_BYTE      MAX_BYTE
+#define NPY_MIN_BYTE      MIN_BYTE
+#define NPY_MAX_UBYTE     MAX_UBYTE
+#define NPY_MAX_SHORT     MAX_SHORT
+#define NPY_MIN_SHORT     MIN_SHORT
+#define NPY_MAX_USHORT    MAX_USHORT
+#define NPY_MAX_INT       MAX_INT
+#define NPY_MIN_INT       MIN_INT
+#define NPY_MAX_UINT      MAX_UINT
+#define NPY_MAX_LONG      MAX_LONG
+#define NPY_MIN_LONG      MIN_LONG
+#define NPY_MAX_ULONG     MAX_ULONG
+#define NPY_MAX_LONGLONG  MAX_LONGLONG
+#define NPY_MIN_LONGLONG  MIN_LONGLONG
+#define NPY_MAX_ULONGLONG MAX_ULONGLONG
+#define NPY_MAX_INTP      MAX_INTP
+#define NPY_MIN_INTP      MIN_INTP
+
+#define NPY_F_CONTIGUOUS  F_CONTIGUOUS
+#endif
+
+
+/* Macros to extract array attributes.
+ */
+#define is_array(a)            ((a) && PyArray_Check((PyArrayObject *)a))
+#define array_type(a)          (int)(PyArray_TYPE(a))
+#define array_numdims(a)       (((PyArrayObject *)a)->nd)
+#define array_dimensions(a)    (((PyArrayObject *)a)->dimensions)
+#define array_size(a,i)        (((PyArrayObject *)a)->dimensions[i])
+#define array_data(a)          (((PyArrayObject *)a)->data)
+#define array_is_contiguous(a) (PyArray_ISCONTIGUOUS(a))
+#define array_is_native(a)     (PyArray_ISNOTSWAPPED(a))
+#define array_is_fortran(a)    (PyArray_ISFORTRAN(a))
+
+
+  /* Given a PyObject, return a string describing its type.
+   */
+  char* pytype_string(PyObject* py_obj) {
+    if (py_obj == NULL          ) return "C NULL value";
+    if (py_obj == Py_None       ) return "Python None" ;
+    if (PyCallable_Check(py_obj)) return "callable"    ;
+    if (PyString_Check(  py_obj)) return "string"      ;
+    if (PyInt_Check(     py_obj)) return "int"         ;
+    if (PyFloat_Check(   py_obj)) return "float"       ;
+    if (PyDict_Check(    py_obj)) return "dict"        ;
+    if (PyList_Check(    py_obj)) return "list"        ;
+    if (PyTuple_Check(   py_obj)) return "tuple"       ;
+    if (PyFile_Check(    py_obj)) return "file"        ;
+    if (PyModule_Check(  py_obj)) return "module"      ;
+    if (PyInstance_Check(py_obj)) return "instance"    ;
+
+    return "unkown type";
+  }
+
+  /* Given a NumPy typecode, return a string describing the type.
+   */
+  char* typecode_string(int typecode) {
+    static char* type_names[25] = {"bool", "byte", "unsigned byte",
+				   "short", "unsigned short", "int",
+				   "unsigned int", "long", "unsigned long",
+				   "long long", "unsigned long long",
+				   "float", "double", "long double",
+				   "complex float", "complex double",
+				   "complex long double", "object",
+				   "string", "unicode", "void", "ntypes",
+				   "notype", "char", "unknown"};
+    return typecode < 24 ? type_names[typecode] : type_names[24];
+  }
+
+  /* Make sure input has correct numpy type.  Allow character and byte
+   * to match.  Also allow int and long to match.  This is deprecated.
+   * You should use PyArray_EquivTypenums() instead.
+   */
+  int type_match(int actual_type, int desired_type) {
+    return PyArray_EquivTypenums(actual_type, desired_type);
+  }
+
+
+  /* Given a PyObject pointer, cast it to a PyArrayObject pointer if
+   * legal.  If not, set the python error string appropriately and
+   * return NULL.
+   */
+  PyArrayObject* obj_to_array_no_conversion(PyObject* input, int typecode)
+  {
+    PyArrayObject* ary = NULL;
+    if (is_array(input) && (typecode == NPY_NOTYPE ||
+			    PyArray_EquivTypenums(array_type(input), typecode)))
+    {
+      ary = (PyArrayObject*) input;
+    }
+    else if is_array(input)
+    {
+      char* desired_type = typecode_string(typecode);
+      char* actual_type  = typecode_string(array_type(input));
+      PyErr_Format(PyExc_TypeError, 
+		   "Array of type '%s' required.  Array of type '%s' given", 
+		   desired_type, actual_type);
+      ary = NULL;
+    }
+    else
+    {
+      char * desired_type = typecode_string(typecode);
+      char * actual_type  = pytype_string(input);
+      PyErr_Format(PyExc_TypeError, 
+		   "Array of type '%s' required.  A '%s' was given", 
+		   desired_type, actual_type);
+      ary = NULL;
+    }
+    return ary;
+  }
+
+  /* Convert the given PyObject to a NumPy array with the given
+   * typecode.  On success, return a valid PyArrayObject* with the
+   * correct type.  On failure, the python error string will be set and
+   * the routine returns NULL.
+   */
+  PyArrayObject* obj_to_array_allow_conversion(PyObject* input, int typecode,
+					       int* is_new_object)
+  {
+    PyArrayObject* ary = NULL;
+    PyObject* py_obj;
+    if (is_array(input) && (typecode == NPY_NOTYPE ||
+			    PyArray_EquivTypenums(array_type(input),typecode)))
+    {
+      ary = (PyArrayObject*) input;
+      *is_new_object = 0;
+    }
+    else
+    {
+      py_obj = PyArray_FromObject(input, typecode, 0, 0);
+      /* If NULL, PyArray_FromObject will have set python error value.*/
+      ary = (PyArrayObject*) py_obj;
+      *is_new_object = 1;
+    }
+    return ary;
+  }
+
+  /* Given a PyArrayObject, check to see if it is contiguous.  If so,
+   * return the input pointer and flag it as not a new object.  If it is
+   * not contiguous, create a new PyArrayObject using the original data,
+   * flag it as a new object and return the pointer.
+   */
+  PyArrayObject* make_contiguous(PyArrayObject* ary, int* is_new_object,
+				 int min_dims, int max_dims)
+  {
+    PyArrayObject* result;
+    if (array_is_contiguous(ary))
+    {
+      result = ary;
+      *is_new_object = 0;
+    }
+    else
+    {
+      result = (PyArrayObject*) PyArray_ContiguousFromObject((PyObject*)ary, 
+							     array_type(ary), 
+							     min_dims,
+							     max_dims);
+      *is_new_object = 1;
+    }
+    return result;
+  }
+
+  /* Convert a given PyObject to a contiguous PyArrayObject of the
+   * specified type.  If the input object is not a contiguous
+   * PyArrayObject, a new one will be created and the new object flag
+   * will be set.
+   */
+  PyArrayObject* obj_to_array_contiguous_allow_conversion(PyObject* input,
+							  int typecode,
+							  int* is_new_object)
+  {
+    int is_new1 = 0;
+    int is_new2 = 0;
+    PyArrayObject* ary2;
+    PyArrayObject* ary1 = obj_to_array_allow_conversion(input, typecode, 
+							&is_new1);
+    if (ary1)
+    {
+      ary2 = make_contiguous(ary1, &is_new2, 0, 0);
+      if ( is_new1 && is_new2)
+      {
+	Py_DECREF(ary1);
+      }
+      ary1 = ary2;    
+    }
+    *is_new_object = is_new1 || is_new2;
+    return ary1;
+  }
+
+
+  /* Test whether a python object is contiguous.  If array is
+   * contiguous, return 1.  Otherwise, set the python error string and
+   * return 0.
+   */
+  int require_contiguous(PyArrayObject* ary)
+  {
+    int contiguous = 1;
+    if (!array_is_contiguous(ary))
+    {
+      PyErr_SetString(PyExc_TypeError,
+		      "Array must be contiguous.  A non-contiguous array was given");
+      contiguous = 0;
+    }
+    return contiguous;
+  }
+
+  /* Require that a numpy array is not byte-swapped.  If the array is
+   * not byte-swapped, return 1.  Otherwise, set the python error string
+   * and return 0.
+   */
+  int require_native(PyArrayObject* ary)
+  {
+    int native = 1;
+    if (!array_is_native(ary))
+    {
+      PyErr_SetString(PyExc_TypeError,
+		      "Array must have native byteorder.  "
+		      "A byte-swapped array was given");
+      native = 0;
+    }
+    return native;
+  }
+
+  /* Require the given PyArrayObject to have a specified number of
+   * dimensions.  If the array has the specified number of dimensions,
+   * return 1.  Otherwise, set the python error string and return 0.
+   */
+  int require_dimensions(PyArrayObject* ary, int exact_dimensions)
+  {
+    int success = 1;
+    if (array_numdims(ary) != exact_dimensions)
+    {
+      PyErr_Format(PyExc_TypeError, 
+		   "Array must have %d dimensions.  Given array has %d dimensions", 
+		   exact_dimensions, array_numdims(ary));
+      success = 0;
+    }
+    return success;
+  }
+
+  /* Require the given PyArrayObject to have one of a list of specified
+   * number of dimensions.  If the array has one of the specified number
+   * of dimensions, return 1.  Otherwise, set the python error string
+   * and return 0.
+   */
+  int require_dimensions_n(PyArrayObject* ary, int* exact_dimensions, int n)
+  {
+    int success = 0;
+    int i;
+    char dims_str[255] = "";
+    char s[255];
+    for (i = 0; i < n && !success; i++)
+    {
+      if (array_numdims(ary) == exact_dimensions[i])
+      {
+	success = 1;
+      }
+    }
+    if (!success)
+    {
+      for (i = 0; i < n-1; i++)
+      {
+	sprintf(s, "%d, ", exact_dimensions[i]);                
+	strcat(dims_str,s);
+      }
+      sprintf(s, " or %d", exact_dimensions[n-1]);            
+      strcat(dims_str,s);
+      PyErr_Format(PyExc_TypeError, 
+		   "Array must be have %s dimensions.  Given array has %d dimensions",
+		   dims_str, array_numdims(ary));
+    }
+    return success;
+  }    
+
+  /* Require the given PyArrayObject to have a specified shape.  If the
+   * array has the specified shape, return 1.  Otherwise, set the python
+   * error string and return 0.
+   */
+  int require_size(PyArrayObject* ary, npy_intp* size, int n)
+  {
+    int i;
+    int success = 1;
+    int len;
+    char desired_dims[255] = "[";
+    char s[255];
+    char actual_dims[255] = "[";
+    for(i=0; i < n;i++)
+    {
+      if (size[i] != -1 &&  size[i] != array_size(ary,i))
+      {
+	success = 0;    
+      }
+    }
+    if (!success)
+    {
+      for (i = 0; i < n; i++)
+      {
+	if (size[i] == -1)
+	{
+	  sprintf(s, "*,");                
+	}
+	else
+	{
+	  sprintf(s, "%ld,", (long int)size[i]);                
+	}    
+	strcat(desired_dims,s);
+      }
+      len = strlen(desired_dims);
+      desired_dims[len-1] = ']';
+      for (i = 0; i < n; i++)
+      {
+	sprintf(s, "%ld,", (long int)array_size(ary,i));                            
+	strcat(actual_dims,s);
+      }
+      len = strlen(actual_dims);
+      actual_dims[len-1] = ']';
+      PyErr_Format(PyExc_TypeError, 
+		   "Array must be have shape of %s.  Given array has shape of %s",
+		   desired_dims, actual_dims);
+    }
+    return success;
+  }
+
+  /* Require the given PyArrayObject to to be FORTRAN ordered.  If the
+   * the PyArrayObject is already FORTRAN ordered, do nothing.  Else,
+   * set the FORTRAN ordering flag and recompute the strides.
+   */
+  int require_fortran(PyArrayObject* ary)
+  {
+    int success = 1;
+    int nd = array_numdims(ary);
+    int i;
+    if (array_is_fortran(ary)) return success;
+
+    /* Set the FORTRAN ordered flag */
+    ary->flags = NPY_FARRAY;
+//     ary->flags = ary->flags | NPY_F_CONTIGUOUS;
+    /* Recompute the strides */
+    ary->strides[0] = ary->strides[nd-1];
+    for (i=1; i < nd; ++i)
+      ary->strides[i] = ary->strides[i-1] * array_size(ary,i-1);
+
+    return success;
+   }
+
+ 
 
 #include <limits.h>
 #ifndef LLONG_MIN
@@ -2714,43 +3044,99 @@ SWIG_CanCastAsInteger(double *d, double min, double max) {
 }
 
 
-SWIGINTERN int
-SWIG_AsVal_long (PyObject *obj, long* val)
-{
-  if (PyInt_Check(obj)) {
-    if (val) *val = PyInt_AsLong(obj);
-    return SWIG_OK;
-  } else if (PyLong_Check(obj)) {
-    long v = PyLong_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_OK;
-    } else {
-      PyErr_Clear();
-    }
-  }
-#ifdef SWIG_PYTHON_CAST_MODE
+  SWIGINTERN int
+  SWIG_AsVal_long (PyObject * obj, long * val)
   {
-    int dispatch = 0;
-    long v = PyInt_AsLong(obj);
-    if (!PyErr_Occurred()) {
-      if (val) *val = v;
-      return SWIG_AddCast(SWIG_OK);
-    } else {
-      PyErr_Clear();
-    }
-    if (!dispatch) {
-      double d;
-      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
-      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
-	if (val) *val = (long)(d);
-	return res;
+    if (PyInt_Check(obj)) {
+      if (val) *val = PyInt_AsLong(obj);
+      return SWIG_OK;
+    } else if (PyLong_Check(obj)) {
+      long v = PyLong_AsLong(obj);
+      if (!PyErr_Occurred()) {
+	if (val) *val = v;
+	return SWIG_OK;
+      } else {
+	PyErr_Clear();
       }
     }
-  }
+#ifdef SWIG_PYTHON_CAST_MODE
+    {
+      int dispatch = 0;
+      long v = PyInt_AsLong(obj);
+      if (!PyErr_Occurred()) {
+	if (val) *val = v;
+	return SWIG_AddCast(SWIG_OK);
+      } else {
+	PyErr_Clear();
+      }
+      if (!dispatch) {
+	double d;
+	int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
+	if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
+	  if (val) *val = (long)(d);
+	  return res;
+	}
+      }
+    }
 #endif
-  return SWIG_TypeError;
-}
+    if (!PyArray_CheckScalar(obj)) return SWIG_TypeError;
+    int dataType = PyArray_TYPE(obj);
+    switch (dataType)
+    {
+      case NPY_BYTE:
+      {
+	char data = *((char*)PyArray_DATA(obj));
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_UBYTE:
+      {
+	unsigned char data = *((unsigned char*)PyArray_DATA(obj));
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_SHORT:
+      {
+	short data = *((short*)PyArray_DATA(obj));
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_USHORT:
+      {
+	unsigned short data = *((unsigned short*)PyArray_DATA(obj));
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_INT:
+      {
+	int data = *((int*)PyArray_DATA(obj));
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_UINT:
+      {
+	unsigned int data = *((unsigned int*)PyArray_DATA(obj));
+	if (data > NPY_MAX_LONG) return SWIG_OverflowError;
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      case NPY_LONG:
+      {
+	*val = *((long*)PyArray_DATA(obj));
+	break;
+      }
+      case NPY_ULONG:
+      {
+	unsigned long data = *((unsigned long*)PyArray_DATA(obj));
+	if (data > NPY_MAX_LONG) return SWIG_OverflowError;
+	if (val) *val = static_cast< long >(data);
+	break;
+      }
+      default:
+	return SWIG_TypeError;
+    }
+    return SWIG_OK;
+  }
 
 
 SWIGINTERN int
@@ -2984,6 +3370,8 @@ SWIGINTERN PyObject *_wrap_DoubleESN_train(PyObject *SWIGUNUSEDPARM(self), PyObj
   int arg8 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
   int val8 ;
   int ecode8 = 0 ;
   PyObject * obj0 = 0 ;
@@ -2998,10 +3386,20 @@ SWIGINTERN PyObject *_wrap_DoubleESN_train(PyObject *SWIGUNUSEDPARM(self), PyObj
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg5 = (double *) obj->data;    arg6 = obj->dimensions[0];    arg7 = obj->dimensions[1];    Py_DECREF( obj );  
+    array5 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (double*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
   }
   ecode8 = SWIG_AsVal_int(obj3, &val8);
   if (!SWIG_IsOK(ecode8)) {
@@ -3034,6 +3432,8 @@ SWIGINTERN PyObject *_wrap_DoubleESN_simulate(PyObject *SWIGUNUSEDPARM(self), Py
   int arg7 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -3045,10 +3445,20 @@ SWIGINTERN PyObject *_wrap_DoubleESN_simulate(PyObject *SWIGUNUSEDPARM(self), Py
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg5 = (double *) obj->data;    arg6 = obj->dimensions[0];    arg7 = obj->dimensions[1];    Py_DECREF( obj );  
+    array5 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (double*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
   }
   {
     try {
@@ -3074,6 +3484,10 @@ SWIGINTERN PyObject *_wrap_DoubleESN_simulateStep(PyObject *SWIGUNUSEDPARM(self)
   int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyArrayObject *array4 = NULL ;
+  int i4 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -3085,10 +3499,20 @@ SWIGINTERN PyObject *_wrap_DoubleESN_simulateStep(PyObject *SWIGUNUSEDPARM(self)
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg4 = (double *) obj->data;    arg5 = obj->dimensions[0];    Py_DECREF( obj );  
+    array4 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array4 || !require_dimensions(array4,1) || !require_contiguous(array4)
+      || !require_native(array4)) SWIG_fail;
+    arg4 = (double*) array_data(array4);
+    arg5 = 1;
+    for (i4=0; i4 < array_numdims(array4); ++i4) arg5 *= array_size(array4,i4);
   }
   {
     try {
@@ -3114,6 +3538,10 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self),
   int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyArrayObject *array4 = NULL ;
+  int i4 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -3125,10 +3553,20 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self),
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg4 = (double *) obj->data;    arg5 = obj->dimensions[0];    Py_DECREF( obj );  
+    array4 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array4 || !require_dimensions(array4,1) || !require_contiguous(array4)
+      || !require_native(array4)) SWIG_fail;
+    arg4 = (double*) array_data(array4);
+    arg5 = 1;
+    for (i4=0; i4 < array_numdims(array4); ++i4) arg5 *= array_size(array4,i4);
   }
   {
     try {
@@ -3480,13 +3918,15 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double *t12 ;
-  int t22 ;
-  int t32 ;
+  double *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:DoubleESN_getWin",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
@@ -3504,7 +3944,13 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_DOUBLE, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_DOUBLE, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -3520,13 +3966,15 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWback(PyObject *SWIGUNUSEDPARM(self), Py
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double *t12 ;
-  int t22 ;
-  int t32 ;
+  double *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:DoubleESN_getWback",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
@@ -3544,7 +3992,13 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWback(PyObject *SWIGUNUSEDPARM(self), Py
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_DOUBLE, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_DOUBLE, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -3560,13 +4014,15 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWout(PyObject *SWIGUNUSEDPARM(self), PyO
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double *t12 ;
-  int t22 ;
-  int t32 ;
+  double *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:DoubleESN_getWout",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
@@ -3584,7 +4040,13 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getWout(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_DOUBLE, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_DOUBLE, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -3599,12 +4061,13 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getX(PyObject *SWIGUNUSEDPARM(self), PyObje
   int *arg3 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  double *t12 ;
-  int t22 ;
+  double *data_temp2 ;
+  int dim_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;  
+    arg2 = &data_temp2;
+    arg3 = &dim_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:DoubleESN_getX",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
@@ -3622,7 +4085,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getX(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[1]; dim0[0] = (*arg3);    obj = PyArray_FromDimsAndData(1, dim0, PyArray_DOUBLE, (char*)(*arg2));    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[1] = {
+      *arg3 
+    };
+    PyObject * array = PyArray_SimpleNewFromData(1, dims, NPY_DOUBLE, (void*)(*arg2));
+    if (!array) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,array);
   }
   return resultobj;
 fail:
@@ -3638,6 +4106,7 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getW(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -3648,7 +4117,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_getW(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -4604,6 +5078,7 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -4614,7 +5089,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -4639,6 +5119,7 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -4649,7 +5130,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -4674,6 +5160,7 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWback(PyObject *SWIGUNUSEDPARM(self), Py
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -4684,7 +5171,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWback(PyObject *SWIGUNUSEDPARM(self), Py
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -4709,6 +5201,7 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -4719,7 +5212,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 2, 2 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -4743,6 +5241,8 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -4753,7 +5253,12 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<double > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_DOUBLE, 1, 1 );    if (!obj) return NULL;    arg2 = (double *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
     try {
@@ -4954,6 +5459,8 @@ SWIGINTERN PyObject *_wrap_SingleESN_train(PyObject *SWIGUNUSEDPARM(self), PyObj
   int arg8 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
   int val8 ;
   int ecode8 = 0 ;
   PyObject * obj0 = 0 ;
@@ -4968,10 +5475,20 @@ SWIGINTERN PyObject *_wrap_SingleESN_train(PyObject *SWIGUNUSEDPARM(self), PyObj
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg5 = (float *) obj->data;    arg6 = obj->dimensions[0];    arg7 = obj->dimensions[1];    Py_DECREF( obj );  
+    array5 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (float*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
   }
   ecode8 = SWIG_AsVal_int(obj3, &val8);
   if (!SWIG_IsOK(ecode8)) {
@@ -5004,6 +5521,8 @@ SWIGINTERN PyObject *_wrap_SingleESN_simulate(PyObject *SWIGUNUSEDPARM(self), Py
   int arg7 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -5015,10 +5534,20 @@ SWIGINTERN PyObject *_wrap_SingleESN_simulate(PyObject *SWIGUNUSEDPARM(self), Py
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg5 = (float *) obj->data;    arg6 = obj->dimensions[0];    arg7 = obj->dimensions[1];    Py_DECREF( obj );  
+    array5 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (float*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
   }
   {
     try {
@@ -5044,6 +5573,10 @@ SWIGINTERN PyObject *_wrap_SingleESN_simulateStep(PyObject *SWIGUNUSEDPARM(self)
   int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyArrayObject *array4 = NULL ;
+  int i4 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -5055,10 +5588,20 @@ SWIGINTERN PyObject *_wrap_SingleESN_simulateStep(PyObject *SWIGUNUSEDPARM(self)
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg4 = (float *) obj->data;    arg5 = obj->dimensions[0];    Py_DECREF( obj );  
+    array4 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array4 || !require_dimensions(array4,1) || !require_contiguous(array4)
+      || !require_native(array4)) SWIG_fail;
+    arg4 = (float*) array_data(array4);
+    arg5 = 1;
+    for (i4=0; i4 < array_numdims(array4); ++i4) arg5 *= array_size(array4,i4);
   }
   {
     try {
@@ -5084,6 +5627,10 @@ SWIGINTERN PyObject *_wrap_SingleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self),
   int arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyArrayObject *array4 = NULL ;
+  int i4 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
@@ -5095,10 +5642,20 @@ SWIGINTERN PyObject *_wrap_SingleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self),
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj2, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg4 = (float *) obj->data;    arg5 = obj->dimensions[0];    Py_DECREF( obj );  
+    array4 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array4 || !require_dimensions(array4,1) || !require_contiguous(array4)
+      || !require_native(array4)) SWIG_fail;
+    arg4 = (float*) array_data(array4);
+    arg5 = 1;
+    for (i4=0; i4 < array_numdims(array4); ++i4) arg5 *= array_size(array4,i4);
   }
   {
     try {
@@ -5450,13 +6007,15 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float *t12 ;
-  int t22 ;
-  int t32 ;
+  float *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:SingleESN_getWin",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
@@ -5474,7 +6033,13 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_FLOAT, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_FLOAT, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -5490,13 +6055,15 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWback(PyObject *SWIGUNUSEDPARM(self), Py
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float *t12 ;
-  int t22 ;
-  int t32 ;
+  float *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:SingleESN_getWback",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
@@ -5514,7 +6081,13 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWback(PyObject *SWIGUNUSEDPARM(self), Py
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_FLOAT, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_FLOAT, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -5530,13 +6103,15 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWout(PyObject *SWIGUNUSEDPARM(self), PyO
   int *arg4 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float *t12 ;
-  int t22 ;
-  int t32 ;
+  float *data_temp2 ;
+  int dim1_temp2 ;
+  int dim2_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;    arg4 = &t32;  
+    arg2 = &data_temp2;
+    arg3 = &dim1_temp2;
+    arg4 = &dim2_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:SingleESN_getWout",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
@@ -5554,7 +6129,13 @@ SWIGINTERN PyObject *_wrap_SingleESN_getWout(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[2];    dim0[0] = (*arg3); dim0[1] = (*arg4);    obj = PyArray_FromDimsAndData(2, dim0, PyArray_FLOAT, (char*)(*arg2));    PyArrayObject *tmp = (PyArrayObject*)obj;    tmp->flags = NPY_FARRAY;    int s = tmp->strides[1];    tmp->strides[0] = s;    tmp->strides[1] = s * dim0[0];    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[2] = {
+      *arg3, *arg4 
+    };
+    PyObject * obj = PyArray_SimpleNewFromData(2, dims, NPY_FLOAT, (void*)(*arg2));
+    PyArrayObject * array = (PyArrayObject*) obj;
+    if (!array || !require_fortran(array)) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,obj);
   }
   return resultobj;
 fail:
@@ -5569,12 +6150,13 @@ SWIGINTERN PyObject *_wrap_SingleESN_getX(PyObject *SWIGUNUSEDPARM(self), PyObje
   int *arg3 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  float *t12 ;
-  int t22 ;
+  float *data_temp2 ;
+  int dim_temp2 ;
   PyObject * obj0 = 0 ;
   
   {
-    arg2 = &t12;    arg3 = &t22;  
+    arg2 = &data_temp2;
+    arg3 = &dim_temp2;
   }
   if (!PyArg_ParseTuple(args,(char *)"O:SingleESN_getX",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
@@ -5592,7 +6174,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_getX(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   resultobj = SWIG_Py_Void();
   {
-    PyObject *obj;    int dim0[1]; dim0[0] = (*arg3);    obj = PyArray_FromDimsAndData(1, dim0, PyArray_FLOAT, (char*)(*arg2));    resultobj = helper_appendToTuple( resultobj, obj );  
+    npy_intp dims[1] = {
+      *arg3 
+    };
+    PyObject * array = PyArray_SimpleNewFromData(1, dims, NPY_FLOAT, (void*)(*arg2));
+    if (!array) SWIG_fail;
+    resultobj = SWIG_Python_AppendOutput(resultobj,array);
   }
   return resultobj;
 fail:
@@ -5608,6 +6195,7 @@ SWIGINTERN PyObject *_wrap_SingleESN_getW(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -5618,7 +6206,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_getW(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -6574,6 +7167,7 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -6584,7 +7178,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWin(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -6609,6 +7208,7 @@ SWIGINTERN PyObject *_wrap_SingleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -6619,7 +7219,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_setW(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -6644,6 +7249,7 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWback(PyObject *SWIGUNUSEDPARM(self), Py
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -6654,7 +7260,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWback(PyObject *SWIGUNUSEDPARM(self), Py
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -6679,6 +7290,7 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   int arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -6689,7 +7301,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_setWout(PyObject *SWIGUNUSEDPARM(self), PyO
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 2, 2 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    arg4 = obj->dimensions[1];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
   }
   {
     try {
@@ -6713,6 +7330,8 @@ SWIGINTERN PyObject *_wrap_SingleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObje
   int arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -6723,7 +7342,12 @@ SWIGINTERN PyObject *_wrap_SingleESN_setX(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< ESN<float > * >(argp1);
   {
-    PyArrayObject *obj;    obj = helper_getCArrayObject( obj1, PyArray_FLOAT, 1, 1 );    if (!obj) return NULL;    arg2 = (float *) obj->data;    arg3 = obj->dimensions[0];    Py_DECREF( obj );  
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
   }
   {
     try {
@@ -6837,8 +7461,6 @@ static PyMethodDef SwigMethods[] = {
 static swig_type_info _swigt__p_ESNTdouble_t = {"_p_ESNTdouble_t", "ESN<double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_ESNTfloat_t = {"_p_ESNTfloat_t", "ESN<float > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_float = {"_p_float", "float *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_double = {"_p_p_double", "double **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_float = {"_p_p_float", "float **", 0, 0, (void*)0, 0};
@@ -6847,8 +7469,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_ESNTdouble_t,
   &_swigt__p_ESNTfloat_t,
   &_swigt__p_char,
-  &_swigt__p_double,
-  &_swigt__p_float,
   &_swigt__p_int,
   &_swigt__p_p_double,
   &_swigt__p_p_float,
@@ -6857,8 +7477,6 @@ static swig_type_info *swig_type_initial[] = {
 static swig_cast_info _swigc__p_ESNTdouble_t[] = {  {&_swigt__p_ESNTdouble_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_ESNTfloat_t[] = {  {&_swigt__p_ESNTfloat_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_double[] = {  {&_swigt__p_p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_float[] = {  {&_swigt__p_p_float, 0, 0, 0},{0, 0, 0, 0}};
@@ -6867,8 +7485,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_ESNTdouble_t,
   _swigc__p_ESNTfloat_t,
   _swigc__p_char,
-  _swigc__p_double,
-  _swigc__p_float,
   _swigc__p_int,
   _swigc__p_p_double,
   _swigc__p_p_float,
