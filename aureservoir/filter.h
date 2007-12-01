@@ -109,20 +109,20 @@ class IIRFilter
   /**
    * sets the filter coefficients
    * @param B matrix with numerator coefficient vectors (m x nb)
-   *          nb ... nr of filter coefficients
    *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
    * @param A matrix with denominator coefficient vectors (m x na)
    *          \note a[0] must be 1 !
-   *          na ... nr of filter coefficients
    *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
    */
   void setIIRCoeff(const typename DEMatrix<T>::Type &B,
                    const typename DEMatrix<T>::Type &A)
-                   throw(AUExcept) {};
+                   throw(AUExcept);
 
   /// calculates one filter step on each element of x and writes
   /// the result back to x
-  void calc(typename DEVector<T>::Type &x) {};
+  void calc(typename DEVector<T>::Type &x);
 
  protected:
 
@@ -132,6 +132,9 @@ class IIRFilter
   typename DEMatrix<T>::Type A_;
   /// internal data for calculation
   typename DEMatrix<T>::Type S_;
+  /// temporal object to store output
+  typename DEVector<T>::Type y_;
+
 };
 
 } // end of namespace aureservoir

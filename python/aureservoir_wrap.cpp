@@ -2623,6 +2623,7 @@ using namespace aureservoir;
 #define NPY_MAX_INTP      MAX_INTP
 #define NPY_MIN_INTP      MIN_INTP
 
+#define NPY_FARRAY        FARRAY
 #define NPY_F_CONTIGUOUS  F_CONTIGUOUS
 #endif
 
@@ -2938,17 +2939,14 @@ using namespace aureservoir;
     int nd = array_numdims(ary);
     int i;
     if (array_is_fortran(ary)) return success;
-
     /* Set the FORTRAN ordered flag */
     ary->flags = NPY_FARRAY;
-//     ary->flags = ary->flags | NPY_F_CONTIGUOUS;
     /* Recompute the strides */
     ary->strides[0] = ary->strides[nd-1];
     for (i=1; i < nd; ++i)
       ary->strides[i] = ary->strides[i-1] * array_size(ary,i-1);
-
     return success;
-   }
+  }
 
  
 
