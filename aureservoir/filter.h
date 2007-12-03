@@ -59,6 +59,15 @@ class BPFilter
   /// Destructor
   virtual ~BPFilter() {}
 
+  /// assignment operator
+  const BPFilter& operator= (const BPFilter<T>& src)
+  {
+    ema1_ = src.ema1_; ema2_ = src.ema2_;
+    f1_ = src.f1_; f2_ = src.f2_;
+    scale_ = src.scale_;
+    return *this;
+  }
+
   /// set LOP and HIP cutoff frequencies
   void setBPCutoff(const typename DEVector<T>::Type &f1,
                    const typename DEVector<T>::Type &f2)

@@ -76,10 +76,8 @@ ESN<T>::ESN(const ESN<T> &src)
   setTrainAlgorithm(train);
 
   // copy simulation alg and its data
-  SimAlgorithm sim = src.getSimAlgorithm();
-  setSimAlgorithm(sim);
-  sim_->last_out_ = src.sim_->last_out_;
-  /// \todo bei SIM_BP die restlichen buffer variablen auch kopieren
+  net_info_[SIMULATE_ALG] = src.getSimAlgorithm();
+  sim_ = src.sim_->clone(this);
 
   Win_ = src.Win_;
   W_ = src.W_;

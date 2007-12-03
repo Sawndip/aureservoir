@@ -69,6 +69,10 @@ class SimBase
   /// Destructor
   virtual ~SimBase() {}
 
+  /// Clones the simulation algorithm with all its internal data
+  /// (virtual constructor idiom)
+  virtual SimBase<T> *clone(ESN<T> *esn) const = 0;
+
   /*!
    * simulation algorithm
    *
@@ -93,13 +97,13 @@ class SimBase
   /// output from last simulation
   typename ESN<T>::DEMatrix last_out_;
 
+  /// temporary object needed for algorithm calculation
+  typename ESN<T>::DEVector t_;
+
  protected:
 
   /// reference to the data of the network
   ESN<T> *esn_;
-
-  /// temporary object needed for algorithm calculation
-  typename ESN<T>::DEVector t_;
 };
 
 /*!
@@ -122,6 +126,14 @@ class SimStd : public SimBase<T>
  public:
   SimStd(ESN<T> *esn) : SimBase<T>(esn) {}
   virtual ~SimStd() {}
+
+  /// virtual constructor idiom
+  virtual SimStd<T> *clone(ESN<T> *esn) const
+  {
+    SimStd<T> *new_obj = new SimStd<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    return new_obj;
+  }
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
@@ -150,6 +162,14 @@ class SimSquare : public SimBase<T>
  public:
   SimSquare(ESN<T> *esn) : SimBase<T>(esn) {}
   virtual ~SimSquare() {}
+
+  /// virtual constructor idiom
+  virtual SimSquare<T> *clone(ESN<T> *esn) const
+  {
+    SimSquare<T> *new_obj = new SimSquare<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    return new_obj;
+  }
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
@@ -183,6 +203,14 @@ class SimLI : public SimBase<T>
  public:
   SimLI(ESN<T> *esn) : SimBase<T>(esn) {}
   virtual ~SimLI() {}
+
+  /// virtual constructor idiom
+  virtual SimLI<T> *clone(ESN<T> *esn) const
+  {
+    SimLI<T> *new_obj = new SimLI<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    return new_obj;
+  }
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
@@ -231,6 +259,15 @@ class SimBP : public SimBase<T>
   SimBP(ESN<T> *esn) : SimBase<T>(esn) {}
   virtual ~SimBP() {}
 
+  /// virtual constructor idiom
+  virtual SimBP<T> *clone(ESN<T> *esn) const
+  {
+    SimBP<T> *new_obj = new SimBP<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->filter_ = filter_;
+    return new_obj;
+  }
+
   /// needed for bandpass style neurons
   virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
 
@@ -244,7 +281,6 @@ class SimBP : public SimBase<T>
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
 
- protected:
   /// the filter object
   BPFilter<T> filter_;
 };
