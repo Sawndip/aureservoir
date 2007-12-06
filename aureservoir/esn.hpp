@@ -222,6 +222,39 @@ void ESN<T>::setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size)
 }
 
 template <typename T>
+void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A)
+  throw(AUExcept)
+{
+  if( net_info_[SIMULATE_ALG] != SIM_FILTER )
+    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER and init the matrix first!");
+
+  sim_->setIIRCoeff(B,A);
+}
+
+template <typename T>
+void ESN<T>::setIIRCoeff(T *bmtx, int brows, int bcols,
+                         T *amtx, int arows, int acols)
+  throw(AUExcept)
+{
+  if( brows != neurons_ || arows != neurons_ )
+    throw AUExcept("ESN::setIIRCoeff: A and B must have as many rows as neurons in the ESN !");
+  if( bcols != acols )
+    throw AUExcept("ESN::setIIRCoeff: A and B must have same nr of cols !");
+
+  DEMatrix B(brows,bcols);
+  DEMatrix A(arows,acols);
+
+  // copy data to FLENS matrix (column major storage)
+  for(int i=0; i<arows; ++i) {
+  for(int j=0; j<acols; ++j) {
+    A(i+1,j+1) = amtx[i*acols+j];
+    B(i+1,j+1) = bmtx[i*acols+j];
+  } }
+
+  sim_->setIIRCoeff(B,A);
+}
+
+template <typename T>
 void ESN<T>::post()
 {
   std::cout << "--------------------------------------------\n"
@@ -329,12 +362,6 @@ void ESN<T>::setInitAlgorithm(InitAlgorithm alg)
       net_info_[INIT_ALG] = INIT_STD;
       break;
 
-    case INIT_BP_CONST:
-      if(init_) delete init_;
-      init_ = new InitBPConst<T>(this);
-      net_info_[INIT_ALG] = INIT_BP_CONST;
-      break;
-
     default:
       throw AUExcept("ESN::setInitAlgorithm: no valid Algorithm!");
   }
@@ -403,6 +430,12 @@ void ESN<T>::setSimAlgorithm(SimAlgorithm alg)
       if(sim_) delete sim_;
       sim_ = new SimBP<T>(this);
       net_info_[SIMULATE_ALG] = SIM_BP;
+      break;
+
+    case SIM_FILTER:
+      if(sim_) delete sim_;
+      sim_ = new SimFilter<T>(this);
+      net_info_[SIMULATE_ALG] = SIM_FILTER;
       break;
 
     default:
@@ -670,9 +703,6 @@ string ESN<T>::getInitString(int alg)
     case INIT_STD:
       return "INIT_STD";
 
-    case INIT_BP_CONST:
-      return "INIT_BP_CONST";
-
     default:
       throw AUExcept("ESN::getInitString: unknown init algorithm");
   }
@@ -694,6 +724,9 @@ string ESN<T>::getSimString(int alg)
 
     case SIM_BP:
       return "SIM_BP";
+
+    case SIM_FILTER:
+      return "SIM_FILTER";
 
     default:
       throw AUExcept("ESN::getSimString: unknown simulation algorithm");

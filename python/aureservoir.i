@@ -80,12 +80,16 @@ import_array();
 %apply (float *INPLACE_ARRAY2, int DIM1, int DIM2)
 {  (float *inmtx, int inrows, int incols),
    (float *outmtx, int outrows, int outcols),
-   (float *wmtx, int wrows, int wcols)  };
+   (float *wmtx, int wrows, int wcols), 
+   (float *amtx, int arows, int acols),
+   (float *bmtx, int brows, int bcols) };
 
 %apply (double *INPLACE_ARRAY2, int DIM1, int DIM2)
 {  (double *inmtx, int inrows, int incols),
    (double *outmtx, int outrows, int outcols),
-   (double *wmtx, int wrows, int wcols)  };
+   (double *wmtx, int wrows, int wcols),
+   (double *amtx, int arows, int acols),
+   (double *bmtx, int brows, int bcols) };
 
 %apply (float* INPLACE_ARRAY1, int DIM1)
 {  (float *invec, int insize),
@@ -145,7 +149,10 @@ class ESN
   inline void simulate(T *inmtx, int inrows, int incols,
                        T *outmtx, int outrows, int outcols);
   inline void simulateStep(T *invec, int insize, T *outvec, int outsize);
+
   void setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size);
+  void setIIRCoeff(T *bmtx, int brows, int bcols,
+                   T *amtx, int arows, int acols);
 
   void post();
   int getSize();
@@ -201,15 +208,12 @@ enum InitParameter
   FB_SCALE,         //!< scale feedback weight matrix random vaules
   FB_SHIFT,         //!< shift feedback weight matrix random vaules
   LEAKING_RATE,     //!< leaking rate for Leaky Integrator ESNs
-  TIKHONOV_FACTOR,  //!< regularization factor for TrainRidgeReg
-  BP_F1,            //!< lowpass cutoff freq for bandpass style neurons
-  BP_F2             //!< highpass cutoff freq for bandpass style neurons
+  TIKHONOV_FACTOR   //!< regularization factor for TrainRidgeReg
 };
 
 enum InitAlgorithm
 {
-  INIT_STD,
-  INIT_BP_CONST
+  INIT_STD
 };
 
 enum SimAlgorithm
@@ -217,7 +221,8 @@ enum SimAlgorithm
   SIM_STD,    //!< standard simulation \sa class SimStd
   SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
   SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
-  SIM_BP      //!< simulation with bandpass neurons \sa class SimBP
+  SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
+  SIM_FILTER
 };
 
 enum TrainAlgorithm

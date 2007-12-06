@@ -211,6 +211,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_setBPCutoff(*args)
 
+    def setIIRCoeff(*args):
+        """setIIRCoeff(self, double bmtx, double amtx)"""
+        return _aureservoir.DoubleESN_setIIRCoeff(*args)
+
     def post(*args):
         """
         post(self)
@@ -679,6 +683,10 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_setBPCutoff(*args)
 
+    def setIIRCoeff(*args):
+        """setIIRCoeff(self, float bmtx, float amtx)"""
+        return _aureservoir.SingleESN_setIIRCoeff(*args)
+
     def post(*args):
         """
         post(self)
@@ -1017,14 +1025,12 @@ FB_SCALE = _aureservoir.FB_SCALE
 FB_SHIFT = _aureservoir.FB_SHIFT
 LEAKING_RATE = _aureservoir.LEAKING_RATE
 TIKHONOV_FACTOR = _aureservoir.TIKHONOV_FACTOR
-BP_F1 = _aureservoir.BP_F1
-BP_F2 = _aureservoir.BP_F2
 INIT_STD = _aureservoir.INIT_STD
-INIT_BP_CONST = _aureservoir.INIT_BP_CONST
 SIM_STD = _aureservoir.SIM_STD
 SIM_SQUARE = _aureservoir.SIM_SQUARE
 SIM_LI = _aureservoir.SIM_LI
 SIM_BP = _aureservoir.SIM_BP
+SIM_FILTER = _aureservoir.SIM_FILTER
 TRAIN_PI = _aureservoir.TRAIN_PI
 TRAIN_LS = _aureservoir.TRAIN_LS
 TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG

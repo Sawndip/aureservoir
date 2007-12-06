@@ -100,7 +100,8 @@ class BPFilter
  * which has good numeric stability properties.
  * \sa http://ccrma.stanford.edu/~jos/filters/Transposed_Direct_Forms.html
  *
- * The filter calculates the following difference equation:
+ * The filter calculates the following difference equation (same usage as
+ * Matlab's filter object):
  * a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[nb]*x[n-nb]
  *                       - a[1]*y[n-1] - ... - a[na]*y[n-na]
  */
@@ -115,13 +116,22 @@ class IIRFilter
   /// Destructor
   virtual ~IIRFilter() {}
 
+  /// assignment operator
+  const IIRFilter& operator= (const IIRFilter<T>& src)
+  {
+    B_ = src.B_;
+    A_ = src.A_;
+    S_ = src.S_;
+    y_ = src.y_;
+    return *this;
+  }
+
   /**
    * sets the filter coefficients
    * @param B matrix with numerator coefficient vectors (m x nb)
    *          m  ... nr of parallel filters (neurons)
    *          nb ... nr of filter coefficients
    * @param A matrix with denominator coefficient vectors (m x na)
-   *          \note a[0] must be 1 !
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
    */

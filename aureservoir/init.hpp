@@ -36,8 +36,8 @@ void InitBase<T>::checkInitParams()
     throw AUExcept("InitBase::checkInitParams: CONNECTIVITY must be within [0|1]");
 
   tmp = esn_->init_params_[ALPHA];
-  if( tmp<=0 )
-    throw AUExcept("InitBase::checkInitParams: ALPHA must be > 0");
+  if( tmp<0 )
+    throw AUExcept("InitBase::checkInitParams: ALPHA must be >= 0");
 
   tmp = esn_->init_params_[IN_CONNECTIVITY];
   if( tmp<0 || tmp>1 )
@@ -167,41 +167,6 @@ void InitStd<T>::init()
 
   // finally convert it to sparse matrix
   esn_->W_.initWith(Wtmp, 1E-9);
-}
-
-//@}
-//! @name class InitBPConst Implementation
-//@{
-
-template <typename T>
-void InitBPConst<T>::init()
-  throw(AUExcept)
-{
-  T f1, f2;
-
-  // do some additional checks
-
-  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_BP )
-    throw AUExcept("Init::checkInitParams: for INIT_BP_CONST you need to set the simulation algorithm to SIM_BP first!");
-
-  if( esn_->init_params_.find(BP_F1) == esn_->init_params_.end() )
-    throw AUExcept("Init::checkInitParams: No BP_F1 given !");
-  if( esn_->init_params_.find(BP_F2) == esn_->init_params_.end() )
-    throw AUExcept("Init::checkInitParams: No BP_F2 given !");
-
-  f1 = esn_->init_params_[BP_F1];
-  f2 = esn_->init_params_[BP_F2];
-
-  if( f1<=0 || f1>1 )
-    throw AUExcept("Init::checkInitParams: BP_F1 must be within [0,1] !");
-  if( f2<0 || f2>1 )
-    throw AUExcept("Init::checkInitParams: BP_F2 must be within [0,1] !");
-
-  // init network
-  InitStd<T>::init();
-
-  // allocate ema buffers and set f1,f2 to const value
-  esn_->sim_->setBPCutoffConst(f1, f2);
 }
 
 //@}

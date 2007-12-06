@@ -1,7 +1,7 @@
 import sys
 from numpy.testing import *
 import numpy as N
-import random
+import random, scipy.signal
 
 # TODO: right module and path handling
 sys.path.append("../")
@@ -158,6 +158,54 @@ class test_correspondence(NumpyTestCase):
 	self.net.simulate( indata, outdata )
 	netA.simulate( indata, outdataA )
 	assert_array_almost_equal(outdata,outdataA)
+
+
+    def testIIRFilters(self, level=1):
+	""" test correspondence of SIM_FILTER and pythons lfilter """
+        
+	# set parameters for non-interacting neurons:
+	# new state only depends on the input
+	self.net.setSimAlgorithm(SIM_FILTER)
+	self.ins = 1
+	self.outs = 1
+	self.net.setReservoirAct(ACT_LINEAR)
+	self.net.setOutputAct(ACT_LINEAR)
+	self.net.setInputs( self.ins )
+	self.net.setOutputs( self.outs )
+	self.net.setInitParam(ALPHA, 0.)
+	self.net.setInitParam(FB_CONNECTIVITY, 0.)
+	self.net.setInitParam(IN_CONNECTIVITY, 1.)
+	self.net.setInitParam(IN_SCALE, 0.)
+	self.net.setInitParam(IN_SHIFT, 1.)
+	self.net.init()
+	
+	# set paramas for a biquad bandpass filter:
+	B = N.empty((self.size,3))
+	A = N.empty((self.size,3))
+	B[:,0] = 0.29573818
+	B[:,1] = 0.
+	B[:,2] = -0.29573818
+	A[:,0] = 1.29573818
+	A[:,1] = -1.84775907
+	A[:,2] = 0.70426182
+	self.net.setIIRCoeff(B,A)
+	
+	# simulate network step by step:
+	# the states x are now only the filtered input signal, which
+	# is the same for each neuron ! (because ALPHA = 0)
+	indata = N.random.rand(1,self.sim_size)*2-1
+	indata = N.asfarray(indata, self.dtype)
+	filterout = N.zeros((1,self.sim_size),self.dtype)
+	outtmp = N.zeros((self.outs),self.dtype)
+	for n in range(self.sim_size):
+		intmp = indata[:,n].copy()
+		self.net.simulateStep( intmp, outtmp )
+		filterout[0,n] = self.net.getX()[0]
+	
+	# now calculate the same with scipy.signal.lfilter
+	filterout2 = scipy.signal.lfilter(B[0], A[0], indata.flatten())
+	
+	assert_array_almost_equal(filterout.flatten(),filterout2)
 
 
 if __name__ == "__main__":

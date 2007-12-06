@@ -170,8 +170,8 @@ class ESN
     throw(AUExcept);
 
   //@}
-  //! @name Additional Interface for Bandpass Neurons
-  /// \todo rethink if this is consistent
+  //! @name Additional Interface for Bandpass and IIR-Filter Neurons
+  /// \todo rethink if this is consistent -> in neue klasse tun ?
   //@{
 
   /*!
@@ -192,6 +192,33 @@ class ESN
    */
   void setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size)
     throw(AUExcept);
+
+  /*!
+   * sets the IIR-Filter coefficients, like Matlabs filter object.
+   *
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   */
+  void setIIRCoeff(const DEMatrix &B, const DEMatrix &A) throw(AUExcept);
+
+  /*!
+   * sets the IIR-Filter coefficients, like Matlabs filter object.
+   *
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          \note a[0] must be 1 !
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   */
+  void setIIRCoeff(T *bmtx, int brows, int bcols,
+                   T *amtx, int arows, int acols)
+                   throw(AUExcept);
 
   //@}
   //! @name GET parameters
@@ -465,7 +492,6 @@ class ESN
   //@{
   friend class InitBase<T>;
   friend class InitStd<T>;
-  friend class InitBPConst<T>;
   friend class TrainBase<T>;
   friend class TrainPI<T>;
   friend class TrainLS<T>;
@@ -476,6 +502,7 @@ class ESN
   friend class SimSquare<T>;
   friend class SimLI<T>;
   friend class SimBP<T>;
+  friend class SimFilter<T>;
   //@}
 };
 

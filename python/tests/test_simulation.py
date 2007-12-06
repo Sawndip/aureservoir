@@ -1,7 +1,7 @@
 import sys
 from numpy.testing import *
 import numpy as N
-import random
+import random, scipy.signal
 
 # TODO: right module and path handling
 sys.path.append("../")
@@ -265,13 +265,11 @@ class test_simulation(NumpyTestCase):
 	(with constant cutoff frequencies) """
         
 	# setup net
-	f1 = random.uniform(0.001,1.)
-	f2 = random.uniform(0.,1.)
-	self.net.setInitAlgorithm(INIT_BP_CONST)
+	f1 = N.ones(self.size) * random.uniform(0.001,1.)
+	f2 = N.ones(self.size) * random.uniform(0.,1.)
 	self.net.setSimAlgorithm(SIM_BP)
-	self.net.setInitParam(BP_F1, f1)
-	self.net.setInitParam(BP_F2, f2)
 	self.net.init()
+	self.net.setBPCutoff(f1,f2)
 	
 	# set output weight matrix
 	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
@@ -309,6 +307,61 @@ class test_simulation(NumpyTestCase):
 		ema2 = ema2 + f2 * (ema1-ema2)
 		x = (ema1 - ema2) * scale
 		# output = Wout * [x; in]
+		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
+	
+	assert_array_almost_equal(outdata,outtest,3)
+
+
+    def testIIRFilter(self, level=1):
+	""" test IIR-Filter neurons simulation
+	"""
+	# setup net
+	self.net.setInitAlgorithm(INIT_STD)
+	self.net.setSimAlgorithm(SIM_FILTER)
+	self.net.init()
+	
+	# set IIR coeffs (biquad bandpass filter)
+	b = N.array(([0.5,0.,-0.5])) / 1.5
+	a = N.array(([1.5,0.,0.5])) / 1.5
+	B = N.ones((self.size,3)) * b
+	A = N.ones((self.size,3)) * a
+	self.net.setIIRCoeff(B,A)
+	
+	## set output weight matrix
+	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
+	wout = N.asfarray(wout, self.dtype)
+	self.net.setWout( wout )
+	
+	## simulate network
+	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
+	outdata = N.zeros((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	
+	# get data to python
+	W = N.zeros((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	Win = self.net.getWin()
+	Wout = self.net.getWout()
+	Wback = self.net.getWback()
+	x = N.zeros((self.size))
+	outtest = N.zeros((self.outs,self.sim_size),self.dtype)
+	
+	# initial conditions for filter
+	zinit = N.zeros((self.size,2))
+	
+	# recalc algorithm in python
+	for n in range(self.sim_size):
+		#calc new network activation
+		x = N.dot( W, x )
+		x += N.dot( Win, indata[:,n] )
+		if n > 0:
+			x += N.dot( Wback, outtest[:,n-1] )
+		# calc IIR filter:
+		for i in range(self.size):
+			insig = N.array(([x[i],])) # hack for lfilter
+			x[i],zinit[i] = scipy.signal.lfilter(B[i,:], A[i,:], \
+			                insig, zi=zinit[i])
+		#output = Wout * [x; in]
 		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
 	
 	assert_array_almost_equal(outdata,outtest,3)

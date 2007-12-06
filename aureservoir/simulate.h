@@ -37,7 +37,8 @@ enum SimAlgorithm
   SIM_STD,    //!< standard simulation \sa class SimStd
   SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
   SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
-  SIM_BP      //!< simulation with bandpass neurons \sa class SimBP
+  SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
+  SIM_FILTER  //!< simulation with IIR-Filter neurons \sa class SimFilter
 };
 
 template <typename T> class ESN;
@@ -85,12 +86,14 @@ class SimBase
   /// reallocates data buffers
   virtual void reallocate();
 
-  //! @name additional interface for bandpass style neurons
+  //! @name additional interface for bandpass and filter neurons
   //@{
-  virtual void allocateBP() throw(AUExcept);
   virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
   virtual void setBPCutoff(const typename ESN<T>::DEVector &f1,
                            const typename ESN<T>::DEVector &f2)
+                           throw(AUExcept);
+  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                           const typename DEMatrix<T>::Type &A)
                            throw(AUExcept);
   //@}
 
@@ -283,6 +286,70 @@ class SimBP : public SimBase<T>
 
   /// the filter object
   BPFilter<T> filter_;
+};
+
+/*!
+ * \class SimFilter
+ *
+ * \brief algorithm with general IIR-Filter neurons
+ *
+ * This is an extension of the bandpass style neurons to general n-order
+ * IIR-filter neurons.
+ * \sa class SimBP
+ *
+ * The IIR Filter is implemented in Transposed Direct Form 2,
+ * which has good numeric stability properties.
+ * \sa http://ccrma.stanford.edu/~jos/filters/Transposed_Direct_Forms.html
+ *
+ * The filter calculates the following difference equation (same usage as
+ * Matlab's filter object):
+ * a[0]*y[n] = b[0]*x[n] + b[1]*x[n-1] + ... + b[nb]*x[n-nb]
+ *                       - a[1]*y[n-1] - ... - a[na]*y[n-na]
+ * where y is the new calculated activation after the filter and x is the
+ * input to the filter.
+ * The filter is always calculated _after_ the nonlinearity.
+ * \sa class IIRFilter
+ */
+template <typename T>
+class SimFilter : public SimBase<T>
+{
+  using SimBase<T>::esn_;
+  using SimBase<T>::last_out_;
+  using SimBase<T>::t_;
+
+ public:
+  SimFilter(ESN<T> *esn) : SimBase<T>(esn) {}
+  virtual ~SimFilter() {}
+
+  /// virtual constructor idiom
+  virtual SimFilter<T> *clone(ESN<T> *esn) const
+  {
+    SimFilter<T> *new_obj = new SimFilter<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->filter_ = filter_;
+    return new_obj;
+  }
+
+  /**
+   * sets the filter coefficients
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   */
+  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                           const typename DEMatrix<T>::Type &A)
+                           throw(AUExcept);
+
+  /// implementation of the algorithm
+  /// \sa class SimBase::simulate
+  virtual void simulate(const typename ESN<T>::DEMatrix &in,
+                        typename ESN<T>::DEMatrix &out);
+
+  /// the filter object
+  IIRFilter<T> filter_;
 };
 
 } // end of namespace aureservoir

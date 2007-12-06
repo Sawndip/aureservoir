@@ -40,16 +40,6 @@ void SimBase<T>::reallocate()
 }
 
 template <typename T>
-void SimBase<T>::allocateBP() throw(AUExcept)
-{
-  std::string str = "SimBase::allocateBP: ";
-  str += "allocateBP is not implemented in standard ESNs, ";
-  str += "use e.g. SIM_BP !";
-
-  throw AUExcept( str );
-}
-
-template <typename T>
 void SimBase<T>::setBPCutoffConst(T f1, T f2) throw(AUExcept)
 {
   std::string str = "SimBase::setBPCutoffConst: ";
@@ -67,6 +57,18 @@ void SimBase<T>::setBPCutoff(const typename ESN<T>::DEVector &f1,
   std::string str = "SimBase::setBPCutoff: ";
   str += "this is not implemented in standard ESNs, ";
   str += "use e.g. SIM_BP !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+void SimBase<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                             const typename DEMatrix<T>::Type &A)
+  throw(AUExcept)
+{
+  std::string str = "SimBase::setIIRCoeff: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use e.g. SIM_FILTER !";
 
   throw AUExcept( str );
 }
@@ -362,6 +364,85 @@ void SimBP<T>::simulate(const typename ESN<T>::DEMatrix &in,
     esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
 
     // Bandpass Filtering
+    filter_.calc(esn_->x_);
+
+    // output = Wout * [x; in]
+    last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n);
+
+    // output activation
+    esn_->outputAct_( last_out_.data(),
+                      last_out_.numRows()*last_out_.numCols() );
+    out(_,n) = last_out_(_,1);
+  }
+}
+
+//@}
+//! @name class SimFilter Implementation
+//@{
+
+template <typename T>
+void SimFilter<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                           const typename DEMatrix<T>::Type &A)
+  throw(AUExcept)
+{
+  if( B.numRows() != esn_->neurons_ )
+    throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
+  if( A.numRows() != esn_->neurons_ )
+    throw AUExcept("SimBP: A must have same rows as reservoir neurons!");
+
+  filter_.setIIRCoeff(B,A);
+}
+
+template <typename T>
+void SimFilter<T>::simulate(const typename ESN<T>::DEMatrix &in,
+                            typename ESN<T>::DEMatrix &out)
+{
+  assert( in.numRows() == esn_->inputs_ );
+  assert( out.numRows() == esn_->outputs_ );
+  assert( in.numCols() == out.numCols() );
+  assert( last_out_.numRows() == esn_->outputs_ );
+
+  int steps = in.numCols();
+  typename ESN<T>::DEMatrix::View
+    Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
+    Wout2 = esn_->Wout_(_,_(esn_->neurons_+1, esn_->neurons_+esn_->inputs_));
+
+  /// \todo see SimStd
+
+  // First run with output from last simulation
+
+  // calc neuron activation
+  t_ = esn_->x_;
+  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+  // add noise
+  Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+  esn_->x_ += t_;
+  esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+  // IIR Filtering
+  filter_.calc(esn_->x_);
+
+  // output = Wout * [x; in]
+  last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1);
+
+  // output activation
+  esn_->outputAct_( last_out_.data(),
+                    last_out_.numRows()*last_out_.numCols() );
+  out(_,1) = last_out_(_,1);
+
+
+  // the rest
+
+  for(int n=2; n<=steps; ++n)
+  {
+    t_ = esn_->x_; // temp object needed for BLAS
+    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+    // add noise
+    Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+    esn_->x_ += t_;
+    esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+    // IIR Filtering
     filter_.calc(esn_->x_);
 
     // output = Wout * [x; in]

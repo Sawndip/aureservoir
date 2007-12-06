@@ -80,19 +80,19 @@ void IIRFilter<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
   if( B.numCols() != A.numCols() )
     throw AUExcept("BPFilter: B and A must have same cols!");
 
-  // check if a[0] is one !
-  bool check = false;
-  for(int i=1; i<=A.numRows(); ++i)
-    check = (A(i,1) == 1);
-  if( check )
-    throw AUExcept("BPFilter: a[0] must be 1 for all components!");
-
-  B_ = B;
-  A_ = A;
+  A_.resize( A.numRows(), A.numCols() );
+  B_.resize( B.numRows(), B.numCols() );
   S_.resizeOrClear(A.numRows(), A.numCols()-1);
   y_.resizeOrClear(A.numRows());
 
-  /// \todo calc scale matrix
+  // divide coefficients through gains a[0]
+  // and make assignment
+  for(int i=1; i<=A.numRows(); ++i) {
+  for(int j=1; j<=A.numCols(); ++j) {
+    // gain is first element in a: A(i,1)
+    A_(i,j) = A(i,j) / A(i,1);
+    B_(i,j) = B(i,j) / A(i,1);
+  } }
 }
 
 template <typename T>
@@ -100,22 +100,22 @@ void IIRFilter<T>::calc(typename DEVector<T>::Type &x)
 {
   assert( x.length() == S_.numRows() );
 
-  int N = S_.numCols();
-  int size = S_.numRows();
+  int neurons = S_.numRows();
+  int coeffs = S_.numCols();
 
-  for(int i=1; x<=size; ++i)
+  for(int i=1; i<=neurons; ++i)
   {
     // calc new output
-    y_(i) = B_(1,i) * x(i) + S_(1,i);
+    y_(i) = B_(i,1) * x(i) + S_(i,1);
 
     // update internal storage
-    for(int j=1; j<=(N-1); ++j)
-      S_(j,i) = B_(j+1,i) * x(i) - A_(j+1,i) * y_(i) + S_(j+1,i);
-    S_(N,i) = B_(N+1,i) * x(i) - A_(N+1,i) * y_(i);
+    for(int j=1; j<=(coeffs-1); ++j)
+      S_(i,j) = B_(i,j+1) * x(i) - A_(i,j+1) * y_(i) + S_(i,j+1);
+
+    S_(i,coeffs) = B_(i,coeffs+1) * x(i) - A_(i,coeffs+1) * y_(i);
   }
 
   /// \todo rescale output to keep spectral radius
-
   x = y_;
 }
 

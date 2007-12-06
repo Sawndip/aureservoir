@@ -32,8 +32,7 @@ namespace aureservoir
  */
 enum InitAlgorithm
 {
-  INIT_STD,      //!< standard initialization, \sa class InitStd
-  INIT_BP_CONST  //!< bandpass neurons init with constant cutoff frequencies, \sa class InitBPConst
+  INIT_STD      //!< standard initialization, \sa class InitStd
 };
 
 /*!
@@ -53,9 +52,7 @@ enum InitParameter
   FB_SCALE,         //!< scale feedback weight matrix random vaules
   FB_SHIFT,         //!< shift feedback weight matrix random vaules
   LEAKING_RATE,     //!< leaking rate for Leaky Integrator ESNs
-  TIKHONOV_FACTOR,  //!< regularization factor for TrainRidgeReg
-  BP_F1,            //!< lowpass cutoff freq for bandpass style neurons
-  BP_F2             //!< highpass cutoff freq for bandpass style neurons
+  TIKHONOV_FACTOR  //!< regularization factor for TrainRidgeReg
 };
 
 template <typename T> class ESN;
@@ -116,35 +113,6 @@ class InitStd : public InitBase<T>
  public:
   InitStd(ESN<T> *esn) : InitBase<T>(esn) {}
   virtual ~InitStd() {}
-
-  /// the algorithm
-  virtual void init() throw(AUExcept);
-};
-
-/*!
- * \class InitBPConst
- *
- * \brief init for bandpass style neurons with constant cutoff frequency
- *
- * Performs same initialization as in InitStd, but additionally
- * initializes the cutoff frequencies of bandpass style neurons to a
- * constant value.
- * \note You don't need this if you set the cutoff frequencies
- * manually with setBPCutoff.
- * The lowpass cutoff freq is set to BP_F1, the highpass cutoff frequency
- * to BP_F2.
- *
- * \sa class InitStd
- * \sa class SimBP
- */
-template <typename T>
-class InitBPConst : public InitStd<T>
-{
-  using InitStd<T>::esn_;
-
- public:
-  InitBPConst(ESN<T> *esn) : InitStd<T>(esn) {}
-  virtual ~InitBPConst() {}
 
   /// the algorithm
   virtual void init() throw(AUExcept);

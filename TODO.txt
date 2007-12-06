@@ -1,20 +1,17 @@
 
-IIR Filter implementieren:
-- Filter ausprogrammiern
-- SIM_FILTER dann hinzufügen
-- die scale values dann wieder berechnen !
-
-INIT_BP_CONST wieder wegtun, is net sinnvoll
-
 band pass auch bei init_std irgendwie initialisiern
 -> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
 
 probiern ob andere typemaps von numpy.i jetzt nicht manchmal besser wären
 (z.B. input statt immer inplace ...)
 
-reverse methode machen, die das ganze reservoir umkehrt (net ganz so einfach) !
-(inputs werden zu outputs und umgekehrt)
--> kann vielleicht die entzerrung leichter machen !?
+bessere code organisation:
+- filtered ESNs in eigene klasse
+  -> braucht nicht so viele zusätzliche interface funktionen
+- dann simulation algs auch von SimFilterBase ableiten
+  -> braucht nur einmal die simulate routine ausprogammiern
+- Filter Klassen auch von gemeinsamer Basisklasse
+  -> kann sie dynamisch verwenden
 
 Problem bei esn_predict lösen -> siehe protokoll dort
 
@@ -24,9 +21,7 @@ Online Training:
      inline void simulate(const DEMatrix &in, DEMatrix &out,
                           const DEMatrix &target=DEMatrix())
 - in swig braucht man typecheck
-  -> siehe numpy2carray, bei ARRAY2_IN hab ich schon sowas probiert
-  -> oder sonst warten bis meine Sachen in numpy.i integriert sind, dort ist
-     das schon gemacht
+  -> mit numpy.i probiern ob das funktioniert !!
 
 Tests:
 - TrainLS und TrainLSSquare haben manchmal Fehler bei float32
