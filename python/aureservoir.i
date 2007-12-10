@@ -143,6 +143,7 @@ class ESN
 
   void init();
   void resetState();
+  double adapt(T *inmtx, int inrows, int incols);
   inline void train(T *inmtx, int inrows, int incols,
                     T *outmtx, int outrows, int outcols,
                     int washout);
@@ -208,7 +209,10 @@ enum InitParameter
   FB_SCALE,         //!< scale feedback weight matrix random vaules
   FB_SHIFT,         //!< shift feedback weight matrix random vaules
   LEAKING_RATE,     //!< leaking rate for Leaky Integrator ESNs
-  TIKHONOV_FACTOR   //!< regularization factor for TrainRidgeReg
+  TIKHONOV_FACTOR,  //!< regularization factor for TrainRidgeReg
+  IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
+  IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
+  IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation
 };
 
 enum InitAlgorithm
@@ -236,6 +240,7 @@ enum TrainAlgorithm
 enum ActivationFunction
 {
   ACT_LINEAR,      //!< linear activation function
-  ACT_TANH,
-  ACT_SIGMOID
+  ACT_TANH,        //!< tanh activation function
+  ACT_TANH2,       //!< tanh activation function with local slope and bias
+  ACT_SIGMOID      //!< sigmoid activation function
 };

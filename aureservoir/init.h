@@ -52,7 +52,10 @@ enum InitParameter
   FB_SCALE,         //!< scale feedback weight matrix random vaules
   FB_SHIFT,         //!< shift feedback weight matrix random vaules
   LEAKING_RATE,     //!< leaking rate for Leaky Integrator ESNs
-  TIKHONOV_FACTOR  //!< regularization factor for TrainRidgeReg
+  TIKHONOV_FACTOR,  //!< regularization factor for TrainRidgeReg
+  IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
+  IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
+  IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation
 };
 
 template <typename T> class ESN;

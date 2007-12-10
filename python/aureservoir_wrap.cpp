@@ -2950,6 +2950,9 @@ using namespace aureservoir;
 
  
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 #include <limits.h>
 #ifndef LLONG_MIN
 # define LLONG_MIN	LONG_LONG_MIN
@@ -3163,9 +3166,6 @@ SWIG_From_int  (int value)
 }
 
 
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 SWIGINTERNINLINE PyObject *
 SWIG_From_float  (float value)
 {    
@@ -3350,6 +3350,48 @@ SWIGINTERN PyObject *_wrap_DoubleESN_resetState(PyObject *SWIGUNUSEDPARM(self), 
     }
   }
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_adapt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  double result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_adapt",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_adapt" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    try {
+      result = (double)(arg1)->adapt(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5499,6 +5541,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SingleESN_adapt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  double result;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_adapt",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_adapt" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    try {
+      result = (double)(arg1)->adapt(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SingleESN_train(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
@@ -7482,6 +7566,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_DoubleESN", _wrap_delete_DoubleESN, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_init", _wrap_DoubleESN_init, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_resetState", _wrap_DoubleESN_resetState, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_adapt", _wrap_DoubleESN_adapt, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_train", _wrap_DoubleESN_train, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_simulate", _wrap_DoubleESN_simulate, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_simulateStep", _wrap_DoubleESN_simulateStep, METH_VARARGS, NULL},
@@ -7523,6 +7608,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_SingleESN", _wrap_delete_SingleESN, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_init", _wrap_SingleESN_init, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_resetState", _wrap_SingleESN_resetState, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_adapt", _wrap_SingleESN_adapt, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_train", _wrap_SingleESN_train, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_simulate", _wrap_SingleESN_simulate, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_simulateStep", _wrap_SingleESN_simulateStep, METH_VARARGS, NULL},
@@ -8129,6 +8215,9 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "FB_SHIFT",SWIG_From_int(static_cast< int >(FB_SHIFT)));
   SWIG_Python_SetConstant(d, "LEAKING_RATE",SWIG_From_int(static_cast< int >(LEAKING_RATE)));
   SWIG_Python_SetConstant(d, "TIKHONOV_FACTOR",SWIG_From_int(static_cast< int >(TIKHONOV_FACTOR)));
+  SWIG_Python_SetConstant(d, "IP_LEARNRATE",SWIG_From_int(static_cast< int >(IP_LEARNRATE)));
+  SWIG_Python_SetConstant(d, "IP_MEAN",SWIG_From_int(static_cast< int >(IP_MEAN)));
+  SWIG_Python_SetConstant(d, "IP_VAR",SWIG_From_int(static_cast< int >(IP_VAR)));
   SWIG_Python_SetConstant(d, "INIT_STD",SWIG_From_int(static_cast< int >(INIT_STD)));
   SWIG_Python_SetConstant(d, "SIM_STD",SWIG_From_int(static_cast< int >(SIM_STD)));
   SWIG_Python_SetConstant(d, "SIM_SQUARE",SWIG_From_int(static_cast< int >(SIM_SQUARE)));
@@ -8141,6 +8230,7 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "TRAIN_PI_SQUARE",SWIG_From_int(static_cast< int >(TRAIN_PI_SQUARE)));
   SWIG_Python_SetConstant(d, "ACT_LINEAR",SWIG_From_int(static_cast< int >(ACT_LINEAR)));
   SWIG_Python_SetConstant(d, "ACT_TANH",SWIG_From_int(static_cast< int >(ACT_TANH)));
+  SWIG_Python_SetConstant(d, "ACT_TANH2",SWIG_From_int(static_cast< int >(ACT_TANH2)));
   SWIG_Python_SetConstant(d, "ACT_SIGMOID",SWIG_From_int(static_cast< int >(ACT_SIGMOID)));
 }
 

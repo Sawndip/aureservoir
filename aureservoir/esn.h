@@ -92,6 +92,21 @@ class ESN
   { init_->init(); }
 
   /*!
+   * Reservoir Adaptation Algorithm Interface
+   * At the moment this is only the Gaussian-IP reservoir adaptation method
+   * for tanh neurons.
+   * \sa "Adapting reservoirs to get Gaussian distributions" by David Verstraeten,
+   *      Benjamin Schrauwen and Dirk Stroobandt
+   *
+   * @param in matrix of input values (inputs x timesteps),
+   *           the reservoir will be adapted by this number of timesteps.
+   * @return mean value of differences between all parameters before and after
+   *         adaptation, can be used to see if learning still makes an progress.
+   */
+  double adapt(const DEMatrix &in)
+    throw(AUExcept);
+
+  /*!
    * Training Algorithm Interface
    * \sa class TrainBase
    *
@@ -127,6 +142,21 @@ class ESN
   //@}
   //! @name C-style Algorithm interface
   //@{
+
+  /*!
+   * C-style Reservoir Adaptation Algorithm Interface
+   * (data will be copied into a FLENS matrix)
+   * At the moment this is only the Gaussian-IP reservoir adaptation method
+   * for tanh neurons.
+   * \sa "Adapting reservoirs to get Gaussian distributions" by David Verstraeten,
+   *      Benjamin Schrauwen and Dirk Stroobandt
+   *
+   * @param inmtx matrix of input values (inputs x timesteps),
+   *              the reservoir will be adapted by this number of timesteps.
+   * @return mean value of differences between all parameters before and after
+   *         adaptation, can be used to see if learning still makes an progress.
+   */
+  double adapt(T *inmtx, int inrows, int incols) throw(AUExcept);
 
   /*!
    * C-style Training Algorithm Interface

@@ -107,6 +107,90 @@ ESN<T>::~ESN()
 }
 
 template <typename T>
+double ESN<T>::adapt(const DEMatrix &in)
+  throw(AUExcept)
+{
+  // this allocates the data, so we really need ACT_TANH2 activation function
+  if( net_info_[RESERVOIR_ACT] != ACT_TANH2 )
+    throw AUExcept("adapt: You need to set ACT_TANH2 activation function!");
+
+  // check if we have all parameters
+  if( init_params_.find(IP_LEARNRATE) == init_params_.end() )
+    throw AUExcept("adapt: You need IP_LEARNRATE init parameter for adaptation");
+  if( init_params_.find(IP_VAR) == init_params_.end() )
+    throw AUExcept("adapt: You need IP_VAR init parameter for adaptation");
+  if( init_params_.find(IP_MEAN) == init_params_.end() )
+    init_params_[IP_MEAN] = 0.;
+
+  // difference vectors to see learn progress
+  flens::DenseVector<flens::Array<double> > a_diff = tanh2_a_,
+                                            b_diff = tanh2_b_;
+
+  // adaptation algorithm
+
+  DEVector y(neurons_);
+  DEMatrix sim_in(inputs_,1), sim_out(outputs_,1);
+  int steps = in.numCols();
+  T lr = init_params_[IP_LEARNRATE];
+  T mean = init_params_[IP_MEAN];
+  T var = init_params_[IP_VAR];
+  T db;
+
+  // set linear activation function to get values before nonlinearity
+  setReservoirAct(ACT_LINEAR);
+
+  for(int n=1; n<=steps; ++n)
+  {
+    // simulate one step
+    sim_in(_,1) = in(_,n);
+    simulate(sim_in, sim_out);
+    // now we have our network state x_ without activation function
+
+    // calc activation
+    y = x_;
+    act_tanh2( y.data(), y.length() );
+
+    for(int m=1; m<=neurons_; ++m)
+    {
+      db = -lr * ( -mean/var + (y(m)/var)*(2*var+1-pow(y(m),2)+y(m)*mean) );
+      tanh2_b_(m) += db;
+      tanh2_a_(m) += lr/tanh2_a_(m) + db*x_(m);
+    }
+  }
+
+  // re-set original reservoir activation
+  setReservoirAct(ACT_TANH2);
+
+  // calc difference / learn progress
+  double progress=0;
+  a_diff -= tanh2_a_;
+  b_diff -= tanh2_b_;
+  for(int i=1; i<=neurons_; ++i)
+    progress = a_diff(i) + b_diff(i);
+  progress /= 2*neurons_;
+
+  return progress;
+}
+
+template <typename T>
+double ESN<T>::adapt(T *inmtx, int inrows, int incols)
+  throw(AUExcept)
+{
+  if( inrows != inputs_ )
+    throw AUExcept("adapt: wrong input row size!");
+
+  DEMatrix flin(inrows,incols);
+
+  // copy data to FLENS matrix (column major storage)
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    flin(i+1,j+1) = inmtx[i*incols+j];
+  } }
+
+  return adapt(flin);
+}
+
+template <typename T>
 inline void ESN<T>::train(T *inmtx, int inrows, int incols,
                           T *outmtx, int outrows, int outcols, int washout)
   throw(AUExcept)
@@ -238,18 +322,19 @@ void ESN<T>::setIIRCoeff(T *bmtx, int brows, int bcols,
 {
   if( brows != neurons_ || arows != neurons_ )
     throw AUExcept("ESN::setIIRCoeff: A and B must have as many rows as neurons in the ESN !");
-  if( bcols != acols )
-    throw AUExcept("ESN::setIIRCoeff: A and B must have same nr of cols !");
 
   DEMatrix B(brows,bcols);
   DEMatrix A(arows,acols);
 
   // copy data to FLENS matrix (column major storage)
-  for(int i=0; i<arows; ++i) {
-  for(int j=0; j<acols; ++j) {
-    A(i+1,j+1) = amtx[i*acols+j];
-    B(i+1,j+1) = bmtx[i*acols+j];
-  } }
+  for(int i=0; i<arows; ++i)
+  {
+    for(int j=0; j<acols; ++j)
+      A(i+1,j+1) = amtx[i*acols+j];
+
+    for(int j=0; j<bcols; ++j)
+      B(i+1,j+1) = bmtx[i*bcols+j];
+  }
 
   sim_->setIIRCoeff(B,A);
 }
@@ -505,6 +590,11 @@ void ESN<T>::setReservoirAct(ActivationFunction f)
       net_info_[RESERVOIR_ACT] = ACT_TANH;
       break;
 
+    case ACT_TANH2:
+      reservoirAct_= act_tanh2;
+      net_info_[RESERVOIR_ACT] = ACT_TANH2;
+      break;
+
     case ACT_SIGMOID:
       reservoirAct_= act_sigmoid;
       net_info_[RESERVOIR_ACT] = ACT_SIGMOID;
@@ -686,6 +776,10 @@ string ESN<T>::getActString(int act)
 
     case ACT_TANH:
       return "ACT_TANH";
+
+    case ACT_TANH2:
+      return "ACT_TANH2";
+
 
     case ACT_SIGMOID:
       return "ACT_SIGMOID";

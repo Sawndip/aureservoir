@@ -1,4 +1,11 @@
 
+Gaussian-IP:
+- ausprobiern: schauen ob wirklich Gauss Verteilung rauskommt
+- tests dafür machen
+
+versuchen SIM_BP umzurechnen -> brauch nurmehr SIM_FILTER verwende !
+(zumindest ist es mathematisch sowieso interessant)
+
 band pass auch bei init_std irgendwie initialisiern
 -> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
 
@@ -10,8 +17,13 @@ bessere code organisation:
   -> braucht nicht so viele zusätzliche interface funktionen
 - dann simulation algs auch von SimFilterBase ableiten
   -> braucht nur einmal die simulate routine ausprogammiern
-- Filter Klassen auch von gemeinsamer Basisklasse
+- Filter Klassen auch von gemeinsamer Basisklasse ?
   -> kann sie dynamisch verwenden
+- SIM_BP durch SIM_FILTER ersetzen ? (umrechnen)
+- Activation Function: auch als function objects ?
+  -> zumindest ist im moment die globale variable ein hack ...
+  -> schauen wie man das sonst besser lösen kann
+- eigene Interface-Klasse für reservoir adaptation algorithms machen
 
 Problem bei esn_predict lösen -> siehe protokoll dort
 

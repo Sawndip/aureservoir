@@ -73,6 +73,15 @@ void InitBase<T>::allocateWorkData()
 {
   // to allocate sim class data, if we don't use training
   esn_->sim_->reallocate();
+
+  // calc params for tanh2 activation function
+  if( esn_->net_info_[ESN<T>::RESERVOIR_ACT] == ACT_TANH2 )
+  {
+    tanh2_a_.resize( esn_->neurons_ );
+    tanh2_b_.resize( esn_->neurons_ );
+    std::fill_n( tanh2_a_.data(), esn_->neurons_, 1. );
+    std::fill_n( tanh2_b_.data(), esn_->neurons_, 0. );
+  }
 }
 
 //@}

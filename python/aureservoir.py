@@ -131,6 +131,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_resetState(*args)
 
+    def adapt(*args):
+        """adapt(self, double inmtx) -> double"""
+        return _aureservoir.DoubleESN_adapt(*args)
+
     def train(*args):
         """
         train(self, double inmtx, double outmtx, int washout)
@@ -603,6 +607,10 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_resetState(*args)
 
+    def adapt(*args):
+        """adapt(self, float inmtx) -> double"""
+        return _aureservoir.SingleESN_adapt(*args)
+
     def train(*args):
         """
         train(self, float inmtx, float outmtx, int washout)
@@ -1025,6 +1033,9 @@ FB_SCALE = _aureservoir.FB_SCALE
 FB_SHIFT = _aureservoir.FB_SHIFT
 LEAKING_RATE = _aureservoir.LEAKING_RATE
 TIKHONOV_FACTOR = _aureservoir.TIKHONOV_FACTOR
+IP_LEARNRATE = _aureservoir.IP_LEARNRATE
+IP_MEAN = _aureservoir.IP_MEAN
+IP_VAR = _aureservoir.IP_VAR
 INIT_STD = _aureservoir.INIT_STD
 SIM_STD = _aureservoir.SIM_STD
 SIM_SQUARE = _aureservoir.SIM_SQUARE
@@ -1037,6 +1048,7 @@ TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG
 TRAIN_PI_SQUARE = _aureservoir.TRAIN_PI_SQUARE
 ACT_LINEAR = _aureservoir.ACT_LINEAR
 ACT_TANH = _aureservoir.ACT_TANH
+ACT_TANH2 = _aureservoir.ACT_TANH2
 ACT_SIGMOID = _aureservoir.ACT_SIGMOID
 
 

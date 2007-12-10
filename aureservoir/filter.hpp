@@ -77,22 +77,30 @@ void IIRFilter<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
 {
   if( B.numRows() != A.numRows() )
     throw AUExcept("BPFilter: B and A must have same rows!");
-  if( B.numCols() != A.numCols() )
-    throw AUExcept("BPFilter: B and A must have same cols!");
 
-  A_.resize( A.numRows(), A.numCols() );
-  B_.resize( B.numRows(), B.numCols() );
-  S_.resizeOrClear(A.numRows(), A.numCols()-1);
-  y_.resizeOrClear(A.numRows());
+  int cols = B.numCols() > A.numCols() ? B.numCols() : A.numCols();
+  int rows = A.numRows();
+
+  // resize and clear old coefficients, so it is possible to set matrices
+  // A and B which don't have the same size !
+  A_.resizeOrClear( rows, cols );
+  B_.resizeOrClear( rows, cols );
+  std::fill_n( A_.data(), rows*cols, 0 );
+  std::fill_n( B_.data(), rows*cols, 0 );
+
+  S_.resizeOrClear(rows, cols-1);
+  y_.resizeOrClear(rows);
 
   // divide coefficients through gains a[0]
   // and make assignment
-  for(int i=1; i<=A.numRows(); ++i) {
-  for(int j=1; j<=A.numCols(); ++j) {
-    // gain is first element in a: A(i,1)
-    A_(i,j) = A(i,j) / A(i,1);
-    B_(i,j) = B(i,j) / A(i,1);
-  } }
+  for(int i=1; i<=rows; ++i)
+  {
+    for(int j=1; j<=A.numCols(); ++j)
+      A_(i,j) = A(i,j) / A(i,1);
+
+    for(int j=1; j<=B.numCols(); ++j)
+      B_(i,j) = B(i,j) / A(i,1);
+  }
 }
 
 template <typename T>

@@ -34,6 +34,7 @@ enum ActivationFunction
 {
   ACT_LINEAR,      //!< linear activation function
   ACT_TANH,        //!< tanh activation function
+  ACT_TANH2,       //!< tanh activation function with local slope and bias
   ACT_SIGMOID      //!< sigmoid activation function
 };
 
@@ -88,6 +89,48 @@ inline void act_invtanh(T *data, int size)
 {
   for(int i=0; i<size; ++i)
     data[i] = atanh( data[i] );
+}
+
+//@}
+//! @name tanh2 activation functions
+//@{
+
+/// slope vector for tanh2
+DEVector<double>::Type tanh2_a_;
+/// bias vector for tanh2
+DEVector<double>::Type tanh2_b_;
+
+/*!
+ * tanh2 activation function with local slope a and bias b
+ * this means the following: y(x) = tanh( a*x + b )
+ * where a and b are vetors with same size as the data
+ * @param data pointer to the data
+ * @param size of the data
+ */
+template <typename T>
+inline void act_tanh2(T *data, int size)
+{
+  assert( tanh2_a_.length() == size );
+  assert( tanh2_b_.length() == size );
+
+  for(int i=0; i<size; ++i)
+    data[i] = tanh( data[i]*tanh2_a_(i+1) + tanh2_b_(i+1) );
+}
+
+/*!
+ * inverse tanh2 activation function
+ * this means the following: y(x) = (atanh(x) - b) / a
+ * @param data pointer to the data
+ * @param size of the data
+ */
+template <typename T>
+inline void act_invtanh2(T *data, int size)
+{
+  assert( tanh2_a_.length() == size );
+  assert( tanh2_b_.length() == size );
+
+  for(int i=0; i<size; ++i)
+    data[i] = ( atanh(data[i]) - tanh2_b_(i+1) ) / tanh2_a_(i+1);
 }
 
 //@}

@@ -72,7 +72,6 @@ void TrainBase<T>::collectStates(const typename ESN<T>::DEMatrix &in,
     M.resize(steps-washout, 2*(esn_->neurons_+esn_->inputs_));
 
 
-  /// \todo make this with views to not copy data
   typename ESN<T>::DEMatrix sim_in(esn_->inputs_ ,1),
                             sim_out(esn_->outputs_ ,1);
   for(int n=1; n<=steps; ++n)
