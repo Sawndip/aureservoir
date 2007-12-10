@@ -1042,6 +1042,7 @@ SIM_SQUARE = _aureservoir.SIM_SQUARE
 SIM_LI = _aureservoir.SIM_LI
 SIM_BP = _aureservoir.SIM_BP
 SIM_FILTER = _aureservoir.SIM_FILTER
+SIM_FILTER2 = _aureservoir.SIM_FILTER2
 TRAIN_PI = _aureservoir.TRAIN_PI
 TRAIN_LS = _aureservoir.TRAIN_LS
 TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG

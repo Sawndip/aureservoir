@@ -1,7 +1,6 @@
 
 Gaussian-IP:
-- ausprobiern: schauen ob wirklich Gauss Verteilung rauskommt
-- tests dafür machen
+- weitere Versuche machen, dann Bsp dazutun
 
 versuchen SIM_BP umzurechnen -> brauch nurmehr SIM_FILTER verwende !
 (zumindest ist es mathematisch sowieso interessant)

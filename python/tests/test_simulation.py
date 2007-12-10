@@ -364,7 +364,77 @@ class test_simulation(NumpyTestCase):
 		#output = Wout * [x; in]
 		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
 	
-	assert_array_almost_equal(outdata,outtest,3)
+	assert_array_almost_equal(outdata,outtest)
+
+
+    def testSimFilter2(self, level=1):
+	""" test SimFilter2 simulation
+	"""
+	# setup net
+	self.net.setInitAlgorithm(INIT_STD)
+	self.net.setSimAlgorithm(SIM_FILTER2)
+	self.net.init()
+	
+	# set IIR coeffs (biquad bandpass filter)
+	b = N.array(([0.5,0.,-0.5])) / 1.5
+	a = N.array(([1.5,0.,0.5])) / 1.5
+	B = N.ones((self.size,3)) * b
+	A = N.ones((self.size,3)) * a
+	self.net.setIIRCoeff(B,A)
+	
+	# set output weight matrix
+	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
+	wout = N.asfarray(wout, self.dtype)
+	self.net.setWout( wout )
+	
+	# simulate network
+	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
+	outdata = N.zeros((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	
+	# get data to python
+	W = N.zeros((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	Win = self.net.getWin()
+	Wout = self.net.getWout()
+	Wback = self.net.getWback()
+	x = N.zeros((self.size))
+	outtest = N.zeros((self.outs,self.sim_size),self.dtype)
+	
+	# initial conditions for filters
+	fin = N.zeros((self.size,2))
+	ffb = N.zeros((self.size,2))
+	fx = N.zeros((self.size,2))
+	states = N.zeros(self.size)
+	insig = N.zeros(self.size)
+	fbsig = N.zeros(self.size)
+	
+	# recalc algorithm in python
+	for n in range(self.sim_size):
+		# filter calculation
+		for i in range(self.size):
+			# filter reservoir states
+			tmp = N.array(([x[i],]))
+			states[i],fx[i] = scipy.signal.lfilter(B[i,:], A[i,:], \
+			                tmp, zi=fx[i])
+			# filter inputs
+			tmp = N.array(([ N.dot(Win,indata[:,n])[i] ,]))
+			insig[i],fin[i] = scipy.signal.lfilter(B[i,:], A[i,:], \
+			                tmp, zi=fin[i])
+			# filter outputs
+			if n > 0:
+				tmp = N.array(([N.dot(Wback,outtest[:,n-1]) \
+				[i],]))
+			else:
+				tmp = N.array(([0.,]))
+			fbsig[i],ffb[i] = scipy.signal.lfilter(B[i,:], A[i,:], \
+			                tmp, zi=ffb[i])
+		#calc new network activation
+		x = N.dot( W, states ) + insig + fbsig
+		#output = Wout * [x; in]
+		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
+	
+	assert_array_almost_equal(outdata,outtest)
 
 
 if __name__ == "__main__":

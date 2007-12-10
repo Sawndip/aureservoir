@@ -22,6 +22,7 @@
 
 #include "utilities.h"
 #include "filter.h"
+#include <vector>
 
 namespace aureservoir
 {
@@ -38,7 +39,8 @@ enum SimAlgorithm
   SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
   SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
   SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
-  SIM_FILTER  //!< simulation with IIR-Filter neurons \sa class SimFilter
+  SIM_FILTER, //!< simulation with IIR-Filter neurons \sa class SimFilter
+  SIM_FILTER2 //!< IIR-Filter before nonlinearity \sa class SimFilter2
 };
 
 template <typename T> class ESN;
@@ -350,6 +352,70 @@ class SimFilter : public SimBase<T>
 
   /// the filter object
   IIRFilter<T> filter_;
+};
+
+/*!
+ * \class SimFilter2
+ *
+ * \brief algorithm with IIR-Filter before neuron nonlinearity
+ *
+ * This version is similar to SimFilter, but calculates the filtering
+ * _before_ the nonlinearity of the reservoir neurons on input, feedback
+ * and the network states.
+ * \sa class SimFilter
+ * \sa class IIRFilter
+ */
+template <typename T>
+class SimFilter2 : public SimBase<T>
+{
+  using SimBase<T>::esn_;
+  using SimBase<T>::last_out_;
+  using SimBase<T>::t_;
+
+ public:
+  SimFilter2(ESN<T> *esn) : SimBase<T>(esn) {}
+  virtual ~SimFilter2() {}
+
+  /// virtual constructor idiom
+  virtual SimFilter2<T> *clone(ESN<T> *esn) const
+  {
+    SimFilter2<T> *new_obj = new SimFilter2<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->x_filter_ = x_filter_;
+    new_obj->in_filter_ = in_filter_;
+    new_obj->out_filter_ = out_filter_;
+    return new_obj;
+  }
+
+  /**
+   * sets the filter coefficients
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   */
+  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                           const typename DEMatrix<T>::Type &A)
+                           throw(AUExcept);
+
+  /// implementation of the algorithm
+  /// \sa class SimBase::simulate
+  virtual void simulate(const typename ESN<T>::DEMatrix &in,
+                        typename ESN<T>::DEMatrix &out);
+
+  /// filter object for network states
+  IIRFilter<T> x_filter_;
+
+  /// filter object for inputs
+  IIRFilter<T> in_filter_;
+
+  /// filter object for outputs
+  IIRFilter<T> out_filter_;
+
+  /// temporary object needed for algorithm calculation
+  typename ESN<T>::DEVector tin_, tfb_;
 };
 
 } // end of namespace aureservoir

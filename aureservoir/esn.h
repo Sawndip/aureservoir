@@ -533,6 +533,7 @@ class ESN
   friend class SimLI<T>;
   friend class SimBP<T>;
   friend class SimFilter<T>;
+  friend class SimFilter2<T>;
   //@}
 };
 

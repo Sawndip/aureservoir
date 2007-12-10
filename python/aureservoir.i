@@ -226,7 +226,8 @@ enum SimAlgorithm
   SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
   SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
   SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
-  SIM_FILTER
+  SIM_FILTER, //!< simulation with IIR-Filter neurons \sa class SimFilter
+  SIM_FILTER2 //!< IIR-Filter before nonlinearity \sa class SimFilter2
 };
 
 enum TrainAlgorithm

@@ -309,8 +309,9 @@ template <typename T>
 void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A)
   throw(AUExcept)
 {
-  if( net_info_[SIMULATE_ALG] != SIM_FILTER )
-    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER and init the matrix first!");
+  if( net_info_[SIMULATE_ALG] != SIM_FILTER  &&
+      net_info_[SIMULATE_ALG] != SIM_FILTER2 )
+    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER or SIM_FILTER2 and init the matrix first!");
 
   sim_->setIIRCoeff(B,A);
 }
@@ -521,6 +522,12 @@ void ESN<T>::setSimAlgorithm(SimAlgorithm alg)
       if(sim_) delete sim_;
       sim_ = new SimFilter<T>(this);
       net_info_[SIMULATE_ALG] = SIM_FILTER;
+      break;
+
+    case SIM_FILTER2:
+      if(sim_) delete sim_;
+      sim_ = new SimFilter2<T>(this);
+      net_info_[SIMULATE_ALG] = SIM_FILTER2;
       break;
 
     default:
@@ -821,6 +828,10 @@ string ESN<T>::getSimString(int alg)
 
     case SIM_FILTER:
       return "SIM_FILTER";
+
+    case SIM_FILTER2:
+      return "SIM_FILTER2";
+
 
     default:
       throw AUExcept("ESN::getSimString: unknown simulation algorithm");
