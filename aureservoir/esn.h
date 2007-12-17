@@ -388,6 +388,13 @@ class ESN
   /// set internal state vector
   void setX(const DEVector &x) throw(AUExcept);
 
+  /*!
+   * set last output, stored by the simulation algorithm
+   * needed in singleStep simulation with feedback
+   * @param last vector with length = outputs
+   */
+  void setLastOutput(const DEVector &last) throw(AUExcept);
+
   //@}
   //! @name SET internal data C-style interface
   //@{
@@ -426,6 +433,13 @@ class ESN
    * @param invec pointer to state vector
    */
   void setX(T *invec, int insize) throw(AUExcept);
+
+  /*!
+   * set last output, stored by the simulation algorithm
+   * needed in singleStep simulation with feedback
+   * @param last vector with length = outputs
+   */
+  void setLastOutput(T *last, int size) throw(AUExcept);
 
   //@}
 

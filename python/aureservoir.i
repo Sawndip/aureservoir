@@ -95,13 +95,15 @@ import_array();
 {  (float *invec, int insize),
    (float *outvec, int outsize),
    (float *f1vec, int f1size),
-   (float *f2vec, int f2size) };
+   (float *f2vec, int f2size),
+   (float *last, int size) };
 
 %apply (double* INPLACE_ARRAY1, int DIM1)
 {  (double *invec, int insize),
    (double *outvec, int outsize),
    (double *f1vec, int f1size),
-   (double *f2vec, int f2size) };
+   (double *f2vec, int f2size),
+   (double *last, int size) };
 
 %apply (float** ARGOUTVIEW_ARRAY1, int* DIM1)
 { (float **vec, int *length) };
@@ -189,6 +191,7 @@ class ESN
   void setWback(T *inmtx, int inrows, int incols);
   void setWout(T *inmtx, int inrows, int incols);
   void setX(T *invec, int insize);
+  void setLastOutput(T *last, int size);
 };
 
 %template(DoubleESN) ESN<double>;

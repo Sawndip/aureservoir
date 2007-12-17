@@ -19,14 +19,17 @@
 
 #include "aureservoir/aureservoir.h"
 
+#define TYPE double
+
 #include <iostream>
+#include <complex>
 
 using namespace aureservoir;
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-  ESN<float> net;
+  ESN< TYPE > net;
 
   try
   {
@@ -54,15 +57,15 @@ int main(int argc, char *argv[])
 
     cout << "\n## TRAINING ##\n";
 
-    ESN<>::DEMatrix in(ins,train_size), out(outs,train_size);
+    ESN<TYPE>::DEMatrix in(ins,train_size), out(outs,train_size);
 
     for(int i=1; i<=train_size; ++i)
     {
       for(int j=1; j<=ins; ++j)
-        in(j,i) = Rand<>::uniform();
+        in(j,i) = Rand<TYPE>::uniform();
 
       for(int j=1; j<=outs; ++j)
-        out(j,i) = Rand<>::uniform();
+        out(j,i) = Rand<TYPE>::uniform();
     }
 
     net.train(in, out, 20);
@@ -73,7 +76,7 @@ int main(int argc, char *argv[])
     cout << "## SIMULATION ##\n";
 
     int run_size = 10;
-    ESN<>::DEMatrix indata(ins,run_size), result(outs,run_size);
+    ESN<TYPE>::DEMatrix indata(ins,run_size), result(outs,run_size);
 
     for(int i=1; i<=run_size; ++i)
     {

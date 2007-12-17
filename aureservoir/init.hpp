@@ -82,6 +82,20 @@ void InitBase<T>::allocateWorkData()
     std::fill_n( tanh2_a_.data(), esn_->neurons_, 1. );
     std::fill_n( tanh2_b_.data(), esn_->neurons_, 0. );
   }
+
+  // set filtered neurons to standard ESN calculation
+  int simalg = esn_->net_info_[ESN<T>::SIMULATE_ALG];
+  if( simalg==SIM_FILTER || simalg==SIM_FILTER2 || simalg==SIM_SQUARE )
+  {
+    typename DEMatrix<T>::Type B(esn_->neurons_, 2), A(esn_->neurons_, 2);
+
+    for(int i=1; i<=esn_->neurons_; ++i)
+    {
+      B(i,1) = 1.; B(i,2) = 0.;
+      A(i,1) = 1.; A(i,2) = 0.;
+    }
+    esn_->setIIRCoeff(B,A);
+  }
 }
 
 //@}

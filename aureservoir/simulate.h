@@ -22,7 +22,6 @@
 
 #include "utilities.h"
 #include "filter.h"
-#include <vector>
 
 namespace aureservoir
 {
@@ -136,42 +135,6 @@ class SimStd : public SimBase<T>
   virtual SimStd<T> *clone(ESN<T> *esn) const
   {
     SimStd<T> *new_obj = new SimStd<T>(esn);
-    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
-    return new_obj;
-  }
-
-  /// implementation of the algorithm
-  /// \sa class SimBase::simulate
-  virtual void simulate(const typename ESN<T>::DEMatrix &in,
-                        typename ESN<T>::DEMatrix &out);
-};
-
-/*!
- * \class SimSquare
- *
- * \brief algorithm with additional squared state updates
- *
- * Same as SimStd but with additional squared state updates, which
- * has the sense to get more nonlinearities in the reservoir without
- * a need of a very big reservoir size.
- * Describtion in following paper:
- * \sa http://www.faculty.iu-bremen.de/hjaeger/pubs/esn_NIPS02.pdf
- */
-template <typename T>
-class SimSquare : public SimBase<T>
-{
-  using SimBase<T>::esn_;
-  using SimBase<T>::last_out_;
-  using SimBase<T>::t_;
-
- public:
-  SimSquare(ESN<T> *esn) : SimBase<T>(esn) {}
-  virtual ~SimSquare() {}
-
-  /// virtual constructor idiom
-  virtual SimSquare<T> *clone(ESN<T> *esn) const
-  {
-    SimSquare<T> *new_obj = new SimSquare<T>(esn);
     new_obj->t_ = t_; new_obj->last_out_ = last_out_;
     return new_obj;
   }
@@ -416,6 +379,61 @@ class SimFilter2 : public SimBase<T>
 
   /// temporary object needed for algorithm calculation
   typename ESN<T>::DEVector tin_, tfb_;
+};
+
+/*!
+ * \class SimSquare
+ *
+ * \brief algorithm with additional squared state updates
+ *
+ * Same as SimStd but with additional squared state updates, which
+ * has the sense to get more nonlinearities in the reservoir without
+ * a need of a very big reservoir size.
+ * Describtion in following paper:
+ * \sa http://www.faculty.iu-bremen.de/hjaeger/pubs/esn_NIPS02.pdf
+ * \note This algorithm uses also filtered neurons as in SimFilter
+ * \sa SimFilter
+ */
+template <typename T>
+class SimSquare : public SimBase<T>
+{
+  using SimBase<T>::esn_;
+  using SimBase<T>::last_out_;
+  using SimBase<T>::t_;
+
+ public:
+  SimSquare(ESN<T> *esn) : SimBase<T>(esn) {}
+  virtual ~SimSquare() {}
+
+  /// virtual constructor idiom
+  virtual SimSquare<T> *clone(ESN<T> *esn) const
+  {
+    SimSquare<T> *new_obj = new SimSquare<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->filter_ = filter_;
+    return new_obj;
+  }
+
+  /*!
+   * sets the filter coefficients
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   */
+  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                           const typename DEMatrix<T>::Type &A)
+                           throw(AUExcept);
+
+  /// implementation of the algorithm
+  /// \sa class SimBase::simulate
+  virtual void simulate(const typename ESN<T>::DEMatrix &in,
+                        typename ESN<T>::DEMatrix &out);
+
+  /// the filter object
+  IIRFilter<T> filter_;
 };
 
 } // end of namespace aureservoir

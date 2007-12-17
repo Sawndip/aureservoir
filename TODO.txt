@@ -2,11 +2,17 @@
 Gaussian-IP:
 - weitere Versuche machen, dann Bsp dazutun
 
-versuchen SIM_BP umzurechnen -> brauch nurmehr SIM_FILTER verwende !
-(zumindest ist es mathematisch sowieso interessant)
+versuchen SIM_BP umzurechnen
+-> brauch nurmehr SIM_FILTER verwenden !
+-> SIM_LI auch mit SIM_FILTER rechnen !
+-> viel weniger klassen und code !
 
 band pass auch bei init_std irgendwie initialisiern
 -> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
+
+check:
+- wenn SIM_SQUARE und TRAIN_* dann gibts keinen Fehler aber es geht gar nix
+-> in init prüfen, wenn SIM_SQUARE gesetzt, dass auch TRAIN_*_SQUARE gesetzt sein muss !
 
 probiern ob andere typemaps von numpy.i jetzt nicht manchmal besser wären
 (z.B. input statt immer inplace ...)

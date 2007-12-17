@@ -544,6 +544,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_setX(*args)
 
+    def setLastOutput(*args):
+        """setLastOutput(self, double last)"""
+        return _aureservoir.DoubleESN_setLastOutput(*args)
+
 DoubleESN_swigregister = _aureservoir.DoubleESN_swigregister
 DoubleESN_swigregister(DoubleESN)
 
@@ -1019,6 +1023,10 @@ class SingleESN(_object):
         invec:  pointer to state vector 
         """
         return _aureservoir.SingleESN_setX(*args)
+
+    def setLastOutput(*args):
+        """setLastOutput(self, float last)"""
+        return _aureservoir.SingleESN_setLastOutput(*args)
 
 SingleESN_swigregister = _aureservoir.SingleESN_swigregister
 SingleESN_swigregister(SingleESN)

@@ -5369,6 +5369,47 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DoubleESN_setLastOutput(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setLastOutput",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setLastOutput" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
+  }
+  {
+    try {
+      (arg1)->setLastOutput(arg2,arg3);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *DoubleESN_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O|swigregister", &obj)) return NULL;
@@ -7554,6 +7595,47 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SingleESN_setLastOutput(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  int i2 = 1 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setLastOutput",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setLastOutput" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,1) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = 1;
+    for (i2=0; i2 < array_numdims(array2); ++i2) arg3 *= array_size(array2,i2);
+  }
+  {
+    try {
+      (arg1)->setLastOutput(arg2,arg3);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *SingleESN_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O|swigregister", &obj)) return NULL;
@@ -7603,6 +7685,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DoubleESN_setWback", _wrap_DoubleESN_setWback, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setWout", _wrap_DoubleESN_setWout, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setX", _wrap_DoubleESN_setX, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_setLastOutput", _wrap_DoubleESN_setLastOutput, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_swigregister", DoubleESN_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_SingleESN", _wrap_new_SingleESN, METH_VARARGS, NULL},
 	 { (char *)"delete_SingleESN", _wrap_delete_SingleESN, METH_VARARGS, NULL},
@@ -7645,6 +7728,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SingleESN_setWback", _wrap_SingleESN_setWback, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setWout", _wrap_SingleESN_setWout, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setX", _wrap_SingleESN_setX, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_setLastOutput", _wrap_SingleESN_setLastOutput, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_swigregister", SingleESN_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };

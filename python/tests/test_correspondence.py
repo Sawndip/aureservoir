@@ -208,5 +208,57 @@ class test_correspondence(NumpyTestCase):
 	assert_array_almost_equal(filterout.flatten(),filterout2)
 
 
+    def testIIRvsSTDESN(self, level=1):
+	""" test if IIR-ESN with b=1 and a=1 gives same result as
+	standard ESN """
+	
+	self.net.init()
+	
+	# train first ESN
+	trainin = N.random.rand(self.ins,self.train_size) * 2 - 1
+	trainout = N.random.rand(self.outs,self.train_size) * 2 - 1
+	trainin = N.asfarray(trainin, self.dtype)
+	trainout = N.asfarray(trainout, self.dtype)
+	self.net.train(trainin,trainout,1)
+	self.net.resetState()
+	
+	# create second ESN
+	if self.dtype is 'float32':
+		netA = SingleESN()
+	else:
+		netA = DoubleESN()
+	netA.setReservoirAct(ACT_TANH)
+	netA.setOutputAct(ACT_TANH)
+	netA.setSize( self.size )
+	netA.setInputs( self.ins )
+	netA.setOutputs( self.outs )
+	netA.setSimAlgorithm(SIM_FILTER)
+	netA.setTrainAlgorithm(TRAIN_PI)
+	B = N.zeros((self.size,2))
+	A = N.zeros((self.size,2))
+	B[:,0] = 1.
+	A[:,0] = 1.
+	netA.init()
+	netA.setIIRCoeff(B,A)
+	
+	# set internal data in second ESN
+	netA.setWin( self.net.getWin().copy() )
+	netA.setWout( self.net.getWout().copy() )
+	netA.setWback( self.net.getWback().copy() )
+	W = N.empty((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	netA.setW( W )
+	netA.setX( self.net.getX().copy() )
+	
+	# simulate both networks separate and test result
+	indata = N.random.rand(self.ins,self.sim_size)*2-1
+	indata = N.asfarray(indata, self.dtype)
+	outdata = N.empty((self.outs,self.sim_size),self.dtype)
+	outdataA = N.empty((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	netA.simulate( indata, outdataA )
+	assert_array_almost_equal(outdata,outdataA)
+
+
 if __name__ == "__main__":
     NumpyTest().run()

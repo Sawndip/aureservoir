@@ -28,6 +28,7 @@
 #include <iomanip>
 #include <sstream>
 #include <cstdlib>
+// #include <complex>
 
 #include "auexcept.h"
 #include "denormal.h"
@@ -36,7 +37,10 @@ namespace aureservoir
 {
 
 using std::string;
+using std::complex;
 using flens::_;
+
+// typedef complex<double> dcplx;
 
 /// typedef trait class of a real sparse matrix with type T
 template<typename T = float>
@@ -106,6 +110,16 @@ class Rand
     vec += min;
   }
 };
+
+/// specialization for complex
+// template<>
+// static dcplx Rand<dcplx>::uniform(float min, float max)
+// {
+//   double real = std::rand() / (double(RAND_MAX)+1);
+//   double imag = std::rand() / (double(RAND_MAX)+1);
+//   dcplx tmp(real,imag);
+//   return tmp*(dcplx(max)-dcplx(min)) + dcplx(min);
+// }
 
 
 /*!

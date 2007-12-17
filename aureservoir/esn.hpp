@@ -310,7 +310,8 @@ void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A)
   throw(AUExcept)
 {
   if( net_info_[SIMULATE_ALG] != SIM_FILTER  &&
-      net_info_[SIMULATE_ALG] != SIM_FILTER2 )
+      net_info_[SIMULATE_ALG] != SIM_FILTER2 &&
+      net_info_[SIMULATE_ALG] != SIM_SQUARE )
     throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER or SIM_FILTER2 and init the matrix first!");
 
   sim_->setIIRCoeff(B,A);
@@ -696,6 +697,17 @@ void ESN<T>::setX(const DEVector &x) throw(AUExcept)
 }
 
 template <typename T>
+void ESN<T>::setLastOutput(const DEVector &last)
+  throw(AUExcept)
+{
+  if( last.length() != outputs_ )
+      throw AUExcept("setLastOutput: wrong size!");
+
+  sim_->last_out_.resize(last.length(),1);
+  sim_->last_out_(_,1) = last;
+}
+
+template <typename T>
 void ESN<T>::setWin(T *inmtx, int inrows, int incols) throw(AUExcept)
 {
   if( inrows != neurons_ )
@@ -771,6 +783,18 @@ void ESN<T>::setX(T *invec, int insize) throw(AUExcept)
   x_.resize(insize);
   for(int i=0; i<insize; ++i)
     x_(i+1) = invec[i];
+}
+
+template <typename T>
+void ESN<T>::setLastOutput(T *last, int size)
+  throw(AUExcept)
+{
+  if( size != outputs_ )
+      throw AUExcept("setLastOutput: wrong size!");
+
+  sim_->last_out_.resize(size,1);
+  for(int i=0; i<size; ++i)
+    sim_->last_out_(i+1,1) = last[i];
 }
 
 template <typename T>

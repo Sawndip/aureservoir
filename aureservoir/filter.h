@@ -143,7 +143,7 @@ class IIRFilter
   /// the result back to x
   void calc(typename DEVector<T>::Type &x);
 
- protected:
+//  protected:
 
   /// filter numerator coefficients
   typename DEMatrix<T>::Type B_;

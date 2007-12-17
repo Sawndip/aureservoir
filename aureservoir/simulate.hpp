@@ -141,90 +141,6 @@ void SimStd<T>::simulate(const typename ESN<T>::DEMatrix &in,
 }
 
 //@}
-//! @name class SimSquare Implementation
-//@{
-
-template <typename T>
-void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
-                            typename ESN<T>::DEMatrix &out)
-{
-  assert( in.numRows() == esn_->inputs_ );
-  assert( out.numRows() == esn_->outputs_ );
-  assert( in.numCols() == out.numCols() );
-  assert( last_out_.numRows() == esn_->outputs_ );
-
-  // we have to resize Wout_ to also have connections for
-  // the squared states
-  esn_->Wout_.resize(esn_->outputs_, 2*(esn_->neurons_+esn_->inputs_));
-
-  int steps = in.numCols();
-  /// \todo speicher nicht hier allozieren
-  typename ESN<T>::DEVector insq(esn_->inputs_);
-  typename ESN<T>::DEMatrix::View
-    Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
-    Wout2 = esn_->Wout_(_,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)),
-    Wout3 = esn_->Wout_(_,_(esn_->neurons_+esn_->inputs_+1,
-                            2*esn_->neurons_+esn_->inputs_)),
-    Wout4 = esn_->Wout_(_,_(2*esn_->neurons_+esn_->inputs_+1,
-                            2*(esn_->neurons_+esn_->inputs_)));
-
-  /// \todo siehe class SimStd
-
-  // First run with output from last simulation
-
-  t_ = esn_->x_; // temp object needed for BLAS
-  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
-  // add noise
-  Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
-  esn_->x_ += t_;
-  esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
-
-  // calculate squared state version
-  /// \todo vectorize these functions
-  for(int i=1; i<=t_.length(); ++i)
-    t_(i) = pow( esn_->x_(i), 2 );
-  // calculate squared input version
-  for(int i=1; i<=insq.length(); ++i)
-    insq(i) = pow( in(i,1), 2 );
-
-  // output = Wout * [x; in; x^2; in^2]
-  last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1) + Wout3*t_ + Wout4*insq;
-
-  // output activation
-  esn_->outputAct_( last_out_.data(),
-                    last_out_.numRows()*last_out_.numCols() );
-  out(_,1) = last_out_(_,1);
-
-
-  // the rest
-
-  for(int n=2; n<=steps; ++n)
-  {
-    t_ = esn_->x_; // temp object needed for BLAS
-    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
-    // add noise
-    Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
-    esn_->x_ += t_;
-    esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
-
-    // calculate squared state version
-    for(int i=1; i<=t_.length(); ++i)
-      t_(i) = pow( esn_->x_(i), 2 );
-    // calculate squared input version
-    for(int i=1; i<=insq.length(); ++i)
-      insq(i) = pow( in(i,n), 2 );
-
-    // output = Wout * [x; in; x^2; in^2]
-    last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n) + Wout3*t_ + Wout4*insq;
-
-    // output activation
-    esn_->outputAct_( last_out_.data(),
-                      last_out_.numRows()*last_out_.numCols() );
-    out(_,n) = last_out_(_,1);
-  }
-}
-
-//@}
 //! @name class SimLI Implementation
 //@{
 
@@ -456,7 +372,7 @@ void SimFilter<T>::simulate(const typename ESN<T>::DEMatrix &in,
 }
 
 //@}
-//! @name class SimFilter Implementation
+//! @name class SimFilter2 Implementation
 //@{
 
 template <typename T>
@@ -537,6 +453,106 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
     // output = Wout * [x; in]
     last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n);
+
+    // output activation
+    esn_->outputAct_( last_out_.data(),
+                      last_out_.numRows()*last_out_.numCols() );
+    out(_,n) = last_out_(_,1);
+  }
+}
+
+//@}
+//! @name class SimSquare Implementation
+//@{
+
+template <typename T>
+void SimSquare<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                               const typename DEMatrix<T>::Type &A)
+  throw(AUExcept)
+{
+  if( B.numRows() != esn_->neurons_ )
+    throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
+  if( A.numRows() != esn_->neurons_ )
+    throw AUExcept("SimBP: A must have same rows as reservoir neurons!");
+
+  filter_.setIIRCoeff(B,A);
+}
+
+template <typename T>
+void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
+                            typename ESN<T>::DEMatrix &out)
+{
+  assert( in.numRows() == esn_->inputs_ );
+  assert( out.numRows() == esn_->outputs_ );
+  assert( in.numCols() == out.numCols() );
+  assert( last_out_.numRows() == esn_->outputs_ );
+
+  // we have to resize Wout_ to also have connections for
+  // the squared states
+  esn_->Wout_.resize(esn_->outputs_, 2*(esn_->neurons_+esn_->inputs_));
+
+  int steps = in.numCols();
+  /// \todo speicher nicht hier allozieren
+  typename ESN<T>::DEVector insq(esn_->inputs_);
+  typename ESN<T>::DEMatrix::View
+    Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
+    Wout2 = esn_->Wout_(_,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)),
+    Wout3 = esn_->Wout_(_,_(esn_->neurons_+esn_->inputs_+1,
+                            2*esn_->neurons_+esn_->inputs_)),
+    Wout4 = esn_->Wout_(_,_(2*esn_->neurons_+esn_->inputs_+1,
+                            2*(esn_->neurons_+esn_->inputs_)));
+
+  // First run with output from last simulation
+
+  t_ = esn_->x_; // temp object needed for BLAS
+  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+  // add noise
+  Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+  esn_->x_ += t_;
+  esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+  // IIR Filtering
+  filter_.calc(esn_->x_);
+
+  // calculate squared state version
+  for(int i=1; i<=t_.length(); ++i)
+    t_(i) = pow( esn_->x_(i), 2 );
+  // calculate squared input version
+  for(int i=1; i<=insq.length(); ++i)
+    insq(i) = pow( in(i,1), 2 );
+
+  // output = Wout * [x; in; x^2; in^2]
+  last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1) + Wout3*t_ + Wout4*insq;
+
+  // output activation
+  esn_->outputAct_( last_out_.data(),
+                    last_out_.numRows()*last_out_.numCols() );
+  out(_,1) = last_out_(_,1);
+
+
+  // the rest
+
+  for(int n=2; n<=steps; ++n)
+  {
+    t_ = esn_->x_; // temp object needed for BLAS
+    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+    // add noise
+    Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+    esn_->x_ += t_;
+    esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+    // IIR Filtering
+    filter_.calc(esn_->x_);
+
+    // calculate squared state version
+    for(int i=1; i<=t_.length(); ++i)
+      t_(i) = pow( esn_->x_(i), 2 );
+    // calculate squared input version
+    for(int i=1; i<=insq.length(); ++i)
+      insq(i) = pow( in(i,n), 2 );
+
+    // output = Wout * [x; in; x^2; in^2]
+    last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n) + Wout3*t_ + Wout4*insq;
 
     // output activation
     esn_->outputAct_( last_out_.data(),
