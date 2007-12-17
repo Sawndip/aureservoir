@@ -232,8 +232,12 @@ class ESN
    * @param A matrix with denominator coefficient vectors (m x na)
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
    */
-  void setIIRCoeff(const DEMatrix &B, const DEMatrix &A) throw(AUExcept);
+  void setIIRCoeff(const DEMatrix &B, const DEMatrix &A, int series=1)  
+    throw(AUExcept);
 
   /*!
    * sets the IIR-Filter coefficients, like Matlabs filter object.
@@ -242,13 +246,15 @@ class ESN
    *          m  ... nr of parallel filters (neurons)
    *          nb ... nr of filter coefficients
    * @param A matrix with denominator coefficient vectors (m x na)
-   *          \note a[0] must be 1 !
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
    */
   void setIIRCoeff(T *bmtx, int brows, int bcols,
-                   T *amtx, int arows, int acols)
-                   throw(AUExcept);
+                   T *amtx, int arows, int acols,
+                   int series=1) throw(AUExcept);
 
   //@}
   //! @name GET parameters

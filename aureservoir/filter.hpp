@@ -67,7 +67,7 @@ void BPFilter<T>::calc(typename DEVector<T>::Type &x)
 }
 
 //@}
-//! @name class BPFilter Implementation
+//! @name class IIRFilter Implementation
 //@{
 
 template <typename T>
@@ -123,8 +123,54 @@ void IIRFilter<T>::calc(typename DEVector<T>::Type &x)
     S_(i,coeffs) = B_(i,coeffs+1) * x(i) - A_(i,coeffs+1) * y_(i);
   }
 
-  /// \todo rescale output to keep spectral radius
   x = y_;
+}
+
+//@}
+//! @name class SerialIIRFilter Implementation
+//@{
+
+template <typename T>
+void SerialIIRFilter<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                                     const typename DEMatrix<T>::Type &A,
+                                     int series)
+  throw(AUExcept)
+{
+  // simple init for 1 filter
+  if(series==1)
+  {
+    IIRFilter<T> filter;
+    filter.setIIRCoeff(B,A);
+    filters_.push_back(filter);
+    return;
+  }
+
+  // else split up matrix B and A in series
+  int bsize = B.numCols();
+  int asize = A.numCols();
+  if( asize != bsize )
+    throw AUExcept("SerialIIRFilter: serial filters must have same columns A and B!");
+
+  /// \todo check for odd size !
+  int nr = bsize / series;
+  IIRFilter<T> filter;
+  typename DEMatrix<T>::Type a,b;
+
+  for(int i=1; i<=series; ++i)
+  {
+    a = A( _, _((i-1)*nr+1, i*nr) );
+    b = B( _, _((i-1)*nr+1, i*nr) );
+    filter.setIIRCoeff(b,a);
+    filters_.push_back(filter);
+  }
+}
+
+template <typename T>
+void SerialIIRFilter<T>::calc(typename DEVector<T>::Type &x)
+{
+  int size = filters_.size();
+  for(int i=0; i<size; ++i)
+    filters_[i].calc( x );
 }
 
 //@}

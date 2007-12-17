@@ -306,20 +306,21 @@ void ESN<T>::setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size)
 }
 
 template <typename T>
-void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A)
+void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A, int series)
   throw(AUExcept)
 {
   if( net_info_[SIMULATE_ALG] != SIM_FILTER  &&
       net_info_[SIMULATE_ALG] != SIM_FILTER2 &&
       net_info_[SIMULATE_ALG] != SIM_SQUARE )
-    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER or SIM_FILTER2 and init the matrix first!");
+    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER or SIM_FILTER2 or SIM_SQUARE and init the matrix first!");
 
-  sim_->setIIRCoeff(B,A);
+  sim_->setIIRCoeff(B,A,series);
 }
 
 template <typename T>
 void ESN<T>::setIIRCoeff(T *bmtx, int brows, int bcols,
-                         T *amtx, int arows, int acols)
+                         T *amtx, int arows, int acols,
+                         int series)
   throw(AUExcept)
 {
   if( brows != neurons_ || arows != neurons_ )
@@ -338,7 +339,7 @@ void ESN<T>::setIIRCoeff(T *bmtx, int brows, int bcols,
       B(i+1,j+1) = bmtx[i*bcols+j];
   }
 
-  sim_->setIIRCoeff(B,A);
+  sim_->setIIRCoeff(B,A,series);
 }
 
 template <typename T>

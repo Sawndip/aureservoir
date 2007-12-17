@@ -155,7 +155,7 @@ class ESN
 
   void setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size);
   void setIIRCoeff(T *bmtx, int brows, int bcols,
-                   T *amtx, int arows, int acols);
+                   T *amtx, int arows, int acols, int series=1);
 
   void post();
   int getSize();

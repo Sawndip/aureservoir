@@ -3623,7 +3623,70 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_DoubleESN_setIIRCoeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_DoubleESN_setIIRCoeff__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  double *arg5 = (double *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  int arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  int val8 ;
+  int ecode8 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:DoubleESN_setIIRCoeff",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setIIRCoeff" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (double*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  ecode8 = SWIG_AsVal_int(obj3, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "DoubleESN_setIIRCoeff" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      (arg1)->setIIRCoeff(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setIIRCoeff__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<double > *arg1 = (ESN<double > *) 0 ;
   double *arg2 = (double *) 0 ;
@@ -3673,6 +3736,77 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setIIRCoeff(PyObject *SWIGUNUSEDPARM(self),
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setIIRCoeff(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTdouble_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = is_array(argv[1]) && PyArray_EquivTypenums(array_type(argv[1]),
+          NPY_DOUBLE);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]) && PyArray_EquivTypenums(array_type(argv[2]),
+            NPY_DOUBLE);
+        }
+        if (_v) {
+          if (argc <= 3) {
+            return _wrap_DoubleESN_setIIRCoeff__SWIG_1(self, args);
+          }
+          if (argc <= 4) {
+            return _wrap_DoubleESN_setIIRCoeff__SWIG_1(self, args);
+          }
+          return _wrap_DoubleESN_setIIRCoeff__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTdouble_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = is_array(argv[1]) && PyArray_EquivTypenums(array_type(argv[1]),
+          NPY_DOUBLE);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]) && PyArray_EquivTypenums(array_type(argv[2]),
+            NPY_DOUBLE);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_int(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_DoubleESN_setIIRCoeff__SWIG_0(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'DoubleESN_setIIRCoeff'.\n  Possible C/C++ prototypes are:\n    setIIRCoeff(double *,int,int,double *,int,int,int)\n    setIIRCoeff(double *,int,int,double *,int,int)\n");
   return NULL;
 }
 
@@ -5849,7 +5983,70 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SingleESN_setIIRCoeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SingleESN_setIIRCoeff__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  float *arg5 = (float *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  int arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  int val8 ;
+  int ecode8 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:SingleESN_setIIRCoeff",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setIIRCoeff" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (float*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  ecode8 = SWIG_AsVal_int(obj3, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "SingleESN_setIIRCoeff" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      (arg1)->setIIRCoeff(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setIIRCoeff__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
   float *arg2 = (float *) 0 ;
@@ -5899,6 +6096,77 @@ SWIGINTERN PyObject *_wrap_SingleESN_setIIRCoeff(PyObject *SWIGUNUSEDPARM(self),
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setIIRCoeff(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 4); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTfloat_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = is_array(argv[1]) && PyArray_EquivTypenums(array_type(argv[1]),
+          NPY_FLOAT);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]) && PyArray_EquivTypenums(array_type(argv[2]),
+            NPY_FLOAT);
+        }
+        if (_v) {
+          if (argc <= 3) {
+            return _wrap_SingleESN_setIIRCoeff__SWIG_1(self, args);
+          }
+          if (argc <= 4) {
+            return _wrap_SingleESN_setIIRCoeff__SWIG_1(self, args);
+          }
+          return _wrap_SingleESN_setIIRCoeff__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTfloat_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = is_array(argv[1]) && PyArray_EquivTypenums(array_type(argv[1]),
+          NPY_FLOAT);
+      }
+      if (_v) {
+        {
+          _v = is_array(argv[2]) && PyArray_EquivTypenums(array_type(argv[2]),
+            NPY_FLOAT);
+        }
+        if (_v) {
+          {
+            int res = SWIG_AsVal_int(argv[3], NULL);
+            _v = SWIG_CheckState(res);
+          }
+          if (_v) {
+            return _wrap_SingleESN_setIIRCoeff__SWIG_0(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'SingleESN_setIIRCoeff'.\n  Possible C/C++ prototypes are:\n    setIIRCoeff(float *,int,int,float *,int,int,int)\n    setIIRCoeff(float *,int,int,float *,int,int)\n");
   return NULL;
 }
 

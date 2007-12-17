@@ -437,5 +437,67 @@ class test_simulation(NumpyTestCase):
 	assert_array_almost_equal(outdata,outtest)
 
 
+    def testSerialIIRFilter(self, level=1):
+	""" test seris of IIR filters in neurons
+	"""
+	# setup net
+	self.net.setInitAlgorithm(INIT_STD)
+	self.net.setSimAlgorithm(SIM_FILTER)
+	self.net.init()
+	
+	# set IIR coeffs (biquad bandpass filter)
+	b = N.array(([0.5,0.,-0.5])) / 1.5
+	a = N.array(([1.5,0.,0.5])) / 1.5
+	B = N.ones((self.size,6))
+	A = N.ones((self.size,6))
+	B[:,0:3] = B[:,0:3]*b
+	A[:,0:3] = A[:,0:3]*a-0.01
+	B[:,3:6] = B[:,3:6]*b
+	A[:,3:6] = A[:,3:6]*a-0.01
+	self.net.setIIRCoeff(B,A,2)
+	
+	# set output weight matrix
+	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
+	wout = N.asfarray(wout, self.dtype)
+	self.net.setWout( wout )
+	
+	## simulate network
+	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
+	outdata = N.zeros((self.outs,self.sim_size),self.dtype)
+	self.net.simulate( indata, outdata )
+	
+	# get data to python
+	W = N.zeros((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	Win = self.net.getWin()
+	Wout = self.net.getWout()
+	Wback = self.net.getWback()
+	x = N.zeros((self.size))
+	outtest = N.zeros((self.outs,self.sim_size),self.dtype)
+	
+	# initial conditions for filters
+	zinit1 = N.zeros((self.size,2))
+	zinit2 = N.zeros((self.size,2))
+	
+	# recalc algorithm in python
+	for n in range(self.sim_size):
+		#calc new network activation
+		x = N.dot( W, x )
+		x += N.dot( Win, indata[:,n] )
+		if n > 0:
+			x += N.dot( Wback, outtest[:,n-1] )
+		# calc IIR filter:
+		for i in range(self.size):
+			insig = N.array(([x[i],])) # hack for lfilter
+			insig,zinit1[i] = scipy.signal.lfilter(B[i,0:3], \
+			                 A[i,0:3], insig, zi=zinit1[i])
+			x[i],zinit2[i] = scipy.signal.lfilter(B[i,3:6], \
+			                 A[i,3:6], insig, zi=zinit2[i])
+		#output = Wout * [x; in]
+		outtest[:,n] = N.dot( Wout, N.r_[x,indata[:,n]] )
+	
+	assert_array_almost_equal(outdata,outtest)
+
+
 if __name__ == "__main__":
     NumpyTest().run()

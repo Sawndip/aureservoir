@@ -216,7 +216,10 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_setBPCutoff(*args)
 
     def setIIRCoeff(*args):
-        """setIIRCoeff(self, double bmtx, double amtx)"""
+        """
+        setIIRCoeff(self, double bmtx, double amtx, int series=1)
+        setIIRCoeff(self, double bmtx, double amtx)
+        """
         return _aureservoir.DoubleESN_setIIRCoeff(*args)
 
     def post(*args):
@@ -696,7 +699,10 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_setBPCutoff(*args)
 
     def setIIRCoeff(*args):
-        """setIIRCoeff(self, float bmtx, float amtx)"""
+        """
+        setIIRCoeff(self, float bmtx, float amtx, int series=1)
+        setIIRCoeff(self, float bmtx, float amtx)
+        """
         return _aureservoir.SingleESN_setIIRCoeff(*args)
 
     def post(*args):

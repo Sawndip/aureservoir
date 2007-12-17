@@ -63,7 +63,8 @@ void SimBase<T>::setBPCutoff(const typename ESN<T>::DEVector &f1,
 
 template <typename T>
 void SimBase<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                             const typename DEMatrix<T>::Type &A)
+                             const typename DEMatrix<T>::Type &A,
+                             int series)
   throw(AUExcept)
 {
   std::string str = "SimBase::setIIRCoeff: ";
@@ -298,15 +299,16 @@ void SimBP<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
 template <typename T>
 void SimFilter<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
+                           const typename DEMatrix<T>::Type &A,
+                           int series)
   throw(AUExcept)
 {
   if( B.numRows() != esn_->neurons_ )
     throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
   if( A.numRows() != esn_->neurons_ )
-    throw AUExcept("SimBP: A must have same rows as reservoir neurons!");
+    throw AUExcept("SimFilter: A must have same rows as reservoir neurons!");
 
-  filter_.setIIRCoeff(B,A);
+  filter_.setIIRCoeff(B,A,series);
 }
 
 template <typename T>
@@ -377,17 +379,16 @@ void SimFilter<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
 template <typename T>
 void SimFilter2<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
+                           const typename DEMatrix<T>::Type &A,
+                           int series)
   throw(AUExcept)
 {
   if( B.numRows() != esn_->neurons_ )
     throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
   if( A.numRows() != esn_->neurons_ )
-    throw AUExcept("SimBP: A must have same rows as reservoir neurons!");
+    throw AUExcept("SimFilter: A must have same rows as reservoir neurons!");
 
-  x_filter_.setIIRCoeff(B,A);
-  in_filter_.setIIRCoeff(B,A);
-  out_filter_.setIIRCoeff(B,A);
+  filter_.setIIRCoeff(B,A,series);
 }
 
 template <typename T>
@@ -408,16 +409,12 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   // First run with output from last simulation
 
-  // calc filters
-  tin_ = esn_->Win_*in(_,1);
-  tfb_ = esn_->Wback_*last_out_(_,1);
-  t_ = esn_->x_;
-  in_filter_.calc( tin_ );
-  out_filter_.calc( tfb_ );
-  x_filter_.calc( t_ );
+  t_ = esn_->x_; // temp object needed for BLAS
+  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
 
-  // calc new network state
-  esn_->x_ = tin_ + esn_->W_*t_ + tfb_;
+  // IIR Filtering
+  filter_.calc(esn_->x_);
+
   // add noise
   Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
   esn_->x_ += t_;
@@ -436,16 +433,12 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   for(int n=2; n<=steps; ++n)
   {
-    // calc filters
-    tin_ = esn_->Win_*in(_,n);
-    tfb_ = esn_->Wback_*out(_,n-1);
-    t_ = esn_->x_;
-    in_filter_.calc( tin_ );
-    out_filter_.calc( tfb_ );
-    x_filter_.calc( t_ );
+    t_ = esn_->x_; // temp object needed for BLAS
+    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
 
-    // calc new network state
-    esn_->x_ = tin_ + esn_->W_*t_ + tfb_;
+    // IIR Filtering
+    filter_.calc(esn_->x_);
+
     // add noise
     Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
     esn_->x_ += t_;
@@ -467,15 +460,16 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
 template <typename T>
 void SimSquare<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                               const typename DEMatrix<T>::Type &A)
+                               const typename DEMatrix<T>::Type &A,
+                               int series)
   throw(AUExcept)
 {
   if( B.numRows() != esn_->neurons_ )
     throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
   if( A.numRows() != esn_->neurons_ )
-    throw AUExcept("SimBP: A must have same rows as reservoir neurons!");
+    throw AUExcept("SimFilter: A must have same rows as reservoir neurons!");
 
-  filter_.setIIRCoeff(B,A);
+  filter_.setIIRCoeff(B,A,series);
 }
 
 template <typename T>

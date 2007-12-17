@@ -94,8 +94,8 @@ class SimBase
                            const typename ESN<T>::DEVector &f2)
                            throw(AUExcept);
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
-                           throw(AUExcept);
+                           const typename DEMatrix<T>::Type &A,
+                           int series = 1) throw(AUExcept);
   //@}
 
   /// output from last simulation
@@ -263,7 +263,8 @@ class SimBP : public SimBase<T>
  * \sa class SimBP
  *
  * The IIR Filter is implemented in Transposed Direct Form 2,
- * which has good numeric stability properties.
+ * which has good numeric stability properties. It is also possible to cascade
+ * multiple IIR Filters in serie, for better numerical performance.
  * \sa http://ccrma.stanford.edu/~jos/filters/Transposed_Direct_Forms.html
  *
  * The filter calculates the following difference equation (same usage as
@@ -303,10 +304,13 @@ class SimFilter : public SimBase<T>
    * @param A matrix with denominator coefficient vectors (m x na)
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
    */
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
-                           throw(AUExcept);
+                   const typename DEMatrix<T>::Type &A,
+                   int series=1) throw(AUExcept);
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
@@ -314,7 +318,7 @@ class SimFilter : public SimBase<T>
                         typename ESN<T>::DEMatrix &out);
 
   /// the filter object
-  IIRFilter<T> filter_;
+  SerialIIRFilter<T> filter_;
 };
 
 /*!
@@ -344,9 +348,7 @@ class SimFilter2 : public SimBase<T>
   {
     SimFilter2<T> *new_obj = new SimFilter2<T>(esn);
     new_obj->t_ = t_; new_obj->last_out_ = last_out_;
-    new_obj->x_filter_ = x_filter_;
-    new_obj->in_filter_ = in_filter_;
-    new_obj->out_filter_ = out_filter_;
+    new_obj->filter_ = filter_;
     return new_obj;
   }
 
@@ -358,27 +360,21 @@ class SimFilter2 : public SimBase<T>
    * @param A matrix with denominator coefficient vectors (m x na)
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
    */
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
-                           throw(AUExcept);
+                   const typename DEMatrix<T>::Type &A,
+                   int series=1) throw(AUExcept);
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
 
-  /// filter object for network states
-  IIRFilter<T> x_filter_;
-
-  /// filter object for inputs
-  IIRFilter<T> in_filter_;
-
-  /// filter object for outputs
-  IIRFilter<T> out_filter_;
-
-  /// temporary object needed for algorithm calculation
-  typename ESN<T>::DEVector tin_, tfb_;
+  /// the filter object
+  SerialIIRFilter<T> filter_;
 };
 
 /*!
@@ -414,7 +410,7 @@ class SimSquare : public SimBase<T>
     return new_obj;
   }
 
-  /*!
+  /**
    * sets the filter coefficients
    * @param B matrix with numerator coefficient vectors (m x nb)
    *          m  ... nr of parallel filters (neurons)
@@ -422,10 +418,13 @@ class SimSquare : public SimBase<T>
    * @param A matrix with denominator coefficient vectors (m x na)
    *          m  ... nr of parallel filters (neurons)
    *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
    */
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A)
-                           throw(AUExcept);
+                   const typename DEMatrix<T>::Type &A,
+                   int series=1) throw(AUExcept);
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
@@ -433,7 +432,7 @@ class SimSquare : public SimBase<T>
                         typename ESN<T>::DEMatrix &out);
 
   /// the filter object
-  IIRFilter<T> filter_;
+  SerialIIRFilter<T> filter_;
 };
 
 } // end of namespace aureservoir

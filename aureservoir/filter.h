@@ -21,6 +21,7 @@
 #define AURESERVOIR_FILTER_H__
 
 #include "utilities.h"
+#include <vector>
 
 namespace aureservoir
 {
@@ -143,7 +144,7 @@ class IIRFilter
   /// the result back to x
   void calc(typename DEVector<T>::Type &x);
 
-//  protected:
+ protected:
 
   /// filter numerator coefficients
   typename DEMatrix<T>::Type B_;
@@ -154,6 +155,59 @@ class IIRFilter
   /// temporal object to store output
   typename DEVector<T>::Type y_;
 
+};
+
+/*!
+ * \class SerialIIRFilter
+ *
+ * \brief serie of IIR Filters
+ *
+ * This class stacks IIR filters in serie, which is often numerically
+ * more stable.
+ * \sa class IIR Filter
+ */
+template <typename T>
+class SerialIIRFilter
+{
+ public:
+
+  /// Constructor
+  SerialIIRFilter() {}
+
+  /// Destructor
+  virtual ~SerialIIRFilter() {}
+
+  /// assignment operator
+  const SerialIIRFilter& operator= (const IIRFilter<T>& src)
+  {
+    filters_ = src.filters_;
+    return *this;
+  }
+
+  /**
+   * sets the filter coefficients
+   * @param B matrix with numerator coefficient vectors (m x nb)
+   *          m  ... nr of parallel filters (neurons)
+   *          nb ... nr of filter coefficients
+   * @param A matrix with denominator coefficient vectors (m x na)
+   *          m  ... nr of parallel filters (neurons)
+   *          na ... nr of filter coefficients
+   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
+   *              B and A will be divided in its half and calculated with
+   *              2 serial IIR filters
+   */
+  void setIIRCoeff(const typename DEMatrix<T>::Type &B,
+                   const typename DEMatrix<T>::Type &A,
+                   int series=1) throw(AUExcept);
+
+  /// calculates one filter step on each element of x and writes
+  /// the result back to x
+  void calc(typename DEVector<T>::Type &x);
+
+ protected:
+
+   /// the single filters
+   std::vector< IIRFilter<T> > filters_;
 };
 
 } // end of namespace aureservoir

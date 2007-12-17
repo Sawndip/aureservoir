@@ -7,9 +7,6 @@ versuchen SIM_BP umzurechnen
 -> SIM_LI auch mit SIM_FILTER rechnen !
 -> viel weniger klassen und code !
 
-band pass auch bei init_std irgendwie initialisiern
--> sonst jetzt crash bei SIM_BP wenn nix gesetzt !?
-
 check:
 - wenn SIM_SQUARE und TRAIN_* dann gibts keinen Fehler aber es geht gar nix
 -> in init prüfen, wenn SIM_SQUARE gesetzt, dass auch TRAIN_*_SQUARE gesetzt sein muss !
@@ -17,7 +14,7 @@ check:
 probiern ob andere typemaps von numpy.i jetzt nicht manchmal besser wären
 (z.B. input statt immer inplace ...)
 
-bessere code organisation:
+bessere code organisation (???):
 - filtered ESNs in eigene klasse
   -> braucht nicht so viele zusätzliche interface funktionen
 - dann simulation algs auch von SimFilterBase ableiten
