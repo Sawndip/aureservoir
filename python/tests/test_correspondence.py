@@ -208,6 +208,59 @@ class test_correspondence(NumpyTestCase):
 	assert_array_almost_equal(filterout.flatten(),filterout2)
 
 
+    def testSerialIIRFilters(self, level=1):
+	""" test correspondence of a cascaded IIR filter """
+        
+	# set parameters for non-interacting neurons:
+	# new state only depends on the input
+	self.net.setSimAlgorithm(SIM_FILTER)
+	self.ins = 1
+	self.outs = 1
+	self.net.setReservoirAct(ACT_LINEAR)
+	self.net.setOutputAct(ACT_LINEAR)
+	self.net.setInputs( self.ins )
+	self.net.setOutputs( self.outs )
+	self.net.setInitParam(ALPHA, 0.)
+	self.net.setInitParam(FB_CONNECTIVITY, 0.)
+	self.net.setInitParam(IN_CONNECTIVITY, 1.)
+	self.net.setInitParam(IN_SCALE, 0.)
+	self.net.setInitParam(IN_SHIFT, 1.)
+	self.net.init()
+	
+	# set paramas for a gammatone filter
+	# (cascade of 4 biquads)
+	Btmp,Atmp = self._gammatone_biquad(44100,self.size,150)
+	B = N.empty((self.size,12))
+	A = N.empty((self.size,12))
+	serial = 4
+	B[:,0:3] = Btmp[:,0,:]
+	B[:,3:6] = Btmp[:,1,:]
+	B[:,6:9] = Btmp[:,2,:]
+	B[:,9:12] = Btmp[:,3,:]
+	A[:,0:3] = Atmp[:,0,:]
+	A[:,3:6] = Atmp[:,1,:]
+	A[:,6:9] = Atmp[:,2,:]
+	A[:,9:12] = Atmp[:,3,:]
+	self.net.setIIRCoeff(B,A,serial)
+	
+	# simulate network step by step:
+	# the states x are now only the filtered input signal, which
+	# is the same for each neuron ! (because ALPHA = 0)
+	indata = N.random.rand(1,self.sim_size)*2-1
+	indata = N.asfarray(indata, self.dtype)
+	filterout = N.zeros((1,self.sim_size),self.dtype)
+	outtmp = N.zeros((self.outs),self.dtype)
+	for n in range(self.sim_size):
+		intmp = indata[:,n].copy()
+		self.net.simulateStep( intmp, outtmp )
+		filterout[0,n] = self.net.getX()[0]
+	
+	# now calculate the same with scipy.signal.lfilter
+	filterout2 = self._gammatonefilter( indata.flatten() )
+	
+	assert_array_almost_equal(filterout.flatten(),filterout2)
+
+
     def testIIRvsSTDESN(self, level=1):
 	""" test if IIR-ESN with b=1 and a=1 gives same result as
 	standard ESN """
@@ -258,6 +311,102 @@ class test_correspondence(NumpyTestCase):
 	self.net.simulate( indata, outdata )
 	netA.simulate( indata, outdataA )
 	assert_array_almost_equal(outdata,outdataA)
+	
+	
+    def _gammatone_biquad(self,fs,numChannels,lowFreq):
+	""" Computes the filter coefficients for a bank of 
+	Gammatone filters.  These filters were defined by Patterson and 
+	Holdworth for simulating the cochlea.
+	
+	This implements the same as makeGammatoneFilter, but has to be used
+	with a cascade of 4 biquad and therefore avoids the numerical stability
+	problem with high sampling rates and low frequencies.
+	
+	return     B, A    (3d array of coeffs for each channel for each biquad)
+	
+	B: the forward part of the filter,
+	   z.B. B(channel, biquad_nr, biquad_coeff)
+	   index1 = channel of the gammatone filter
+	   index2 = biquad nr (0-3)
+	   index3 = biquad coefficient (0-2)
+	A: the recursive part of the filter (same structure as B)
+	
+	2007,
+	Georg Holzmann
+	"""
+	
+	T = 1./fs
+	
+	# Change the followFreqing three parameters if you wish to use a
+	# different ERB scale.
+	EarQ = 9.26449            # Glasberg and Moore Parameters
+	minBW = 24.7
+	order = 1
+	
+	# All of the following expressions are derived in Apple TR #35, "An
+	# Efficient Implementation of the Patterson-Holdsworth Cochlear
+	# Filter Bank."
+	cf = N.arange(numChannels) + 1
+	cf = -(EarQ*minBW) + N.exp( cf * (-N.log(fs/2. + EarQ*minBW) + \
+	     N.log(lowFreq + EarQ*minBW) ) / numChannels ) \
+	     *(fs/2. + EarQ*minBW)
+	
+	ERB = ((cf/EarQ)**order + minBW**order)**(1/order)
+	B = 1.019*2*N.pi*ERB
+	
+	# calculate gain factor
+	gain = abs( (-2*N.exp(4*1j*cf*N.pi*T)*T + \
+	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * \
+	       (N.cos(2*cf*N.pi*T) - N.sqrt(3. - 2**(3./2.)) * \
+	       N.sin(2*cf*N.pi*T))) * (-2*N.exp(4*1j*cf*N.pi*T)*T + \
+	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * \
+	       (N.cos(2*cf*N.pi*T) + N.sqrt(3. - 2**(3./2.)) * \
+	       N.sin(2*cf*N.pi*T))) * (-2*N.exp(4*1j*cf*N.pi*T)*T + \
+	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * (N.cos(2*cf*N.pi*T) - \
+	       N.sqrt(3. + 2**(3./2.)) * N.sin(2*cf*N.pi*T))) * \
+	       (-2*N.exp(4*1j*cf*N.pi*T)*T + 2*N.exp(-(B*T) + \
+	       2*1j*cf*N.pi*T) * T * (N.cos(2*cf*N.pi*T) + \
+	       N.sqrt(3. + 2**(3./2.)) * N.sin(2*cf*N.pi*T))) / \
+	       (-2. / N.exp(2*B*T) - 2*N.exp(4*1j*cf*N.pi*T) + \
+	       2.*(1. + N.exp(4*1j*cf*N.pi*T)) / N.exp(B*T)) ** 4)
+	
+	# implementation with 4 biquads:
+	# z.B. Afilt(channel, biquad_nr, biquad_coeff)
+	Afilt = N.zeros((len(cf),4,3))  # feedback path
+	Bfilt = N.zeros((len(cf),4,3))  # forward path
+	
+	# init all 4 biquads
+	for n in range(4):
+		Afilt[:,n,0] = 1.
+		Afilt[:,n,1] = -2 * N.cos(2*cf*N.pi*T) / N.exp(B*T)
+		Afilt[:,n,2] = N.exp(-2*B*T)
+		Bfilt[:,n,0] = T
+		Bfilt[:,n,2] = 0.
+	
+	# init the rest
+	tmp = 2*T*N.cos(2*cf*N.pi*T) / N.exp(B*T)
+	Bfilt[:,0,1] = -(tmp+2*N.sqrt(3.+2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
+	Bfilt[:,1,1] = -(tmp-2*N.sqrt(3.+2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
+	Bfilt[:,2,1] = -(tmp+2*N.sqrt(3.-2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
+	Bfilt[:,3,1] = -(tmp-2*N.sqrt(3.-2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
+	
+	# normalize first biquad to gain
+	for n in range(3):
+		Bfilt[:,0,n] = Bfilt[:,0,n] / gain
+	
+	return Bfilt, Afilt
+	
+	
+    def _gammatonefilter(self, signal, chan=0):
+	""" a gammatone filter bank """
+	B,A = self._gammatone_biquad(44100,self.size,150)
+	
+	# run the 4 biquads
+	y = scipy.signal.lfilter(B[chan,0,:],A[chan,0,:],signal)
+	y = scipy.signal.lfilter(B[chan,1,:],A[chan,1,:],y)
+	y = scipy.signal.lfilter(B[chan,2,:],A[chan,2,:],y)
+	y = scipy.signal.lfilter(B[chan,3,:],A[chan,3,:],y)
+	return y
 
 
 if __name__ == "__main__":
