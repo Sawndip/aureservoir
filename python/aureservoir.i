@@ -237,8 +237,7 @@ enum TrainAlgorithm
 {
   TRAIN_PI,        //!< offline, pseudo inverse based \sa class TrainPI
   TRAIN_LS,        //!< offline least square algorithm, \sa class TrainLS
-  TRAIN_RIDGEREG,  //!< with ridge regression, \sa class TrainRidgeReg
-  TRAIN_PI_SQUARE
+  TRAIN_RIDGEREG   //!< with ridge regression, \sa class TrainRidgeReg
 };
 
 enum ActivationFunction

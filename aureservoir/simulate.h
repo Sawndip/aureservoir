@@ -382,7 +382,7 @@ class SimFilter2 : public SimBase<T>
  *
  * \brief algorithm with additional squared state updates
  *
- * Same as SimStd but with additional squared state updates, which
+ * Same as SimFilter but with additional squared state updates, which
  * has the sense to get more nonlinearities in the reservoir without
  * a need of a very big reservoir size.
  * Describtion in following paper:

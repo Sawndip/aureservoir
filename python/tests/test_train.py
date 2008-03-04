@@ -214,13 +214,13 @@ class test_train(NumpyTestCase):
 
 
     def testPISquare(self, level=1):
-	""" test TRAIN_PI_SQUARE with TANH activation functions """
+	""" test squared updates with TANH activation functions """
         
 	# init network
 	self.net.setReservoirAct(ACT_TANH)
 	self.net.setOutputAct(ACT_TANH)
 	self.net.setSimAlgorithm(SIM_SQUARE)
-	self.net.setTrainAlgorithm(TRAIN_PI_SQUARE)
+	self.net.setTrainAlgorithm(TRAIN_PI)
 	self.net.init()
 	
 	# simulate network
@@ -231,6 +231,8 @@ class test_train(NumpyTestCase):
 	outdata = N.asfarray( outdata, self.dtype )
 	self.net.train( indata, outdata, washout )
 	wout_target = self.net.getWout().copy()
+	
+	print "INPUTS: ", self.ins
 	
 	# teacher forcing, collect states
 	X = self._teacherForcing(indata,outdata,N.tanh)

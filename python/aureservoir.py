@@ -104,9 +104,7 @@ class DoubleESN(_object):
 
         Copy Constructor.
 
-        Todo check if maps operator= performs a deep copy !
-
-        Todo bei SIM_BP die restlichen buffer variablen auch kopieren 
+        Todo check if maps operator= performs a deep copy ! 
         """
         this = _aureservoir.new_DoubleESN(*args)
         try: self.this.append(this)
@@ -132,7 +130,25 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_resetState(*args)
 
     def adapt(*args):
-        """adapt(self, double inmtx) -> double"""
+        """
+        adapt(self, double inmtx) -> double
+
+        throw ( AUExcept)
+        C-style Reservoir Adaptation Algorithm Interface (data will be copied
+        into a FLENS matrix) At the moment this is only the Gaussian-IP
+        reservoir adaptation method for tanh neurons. See:  "Adapting
+        reservoirs to get Gaussian distributions" by David Verstraeten,
+        Benjamin Schrauwen and Dirk Stroobandt
+
+        Parameters:
+        -----------
+
+        inmtx:  matrix of input values (inputs x timesteps), the reservoir
+        will be adapted by this number of timesteps.
+
+        mean value of differences between all parameters before and after
+        adaptation, can be used to see if learning still makes an progress. 
+        """
         return _aureservoir.DoubleESN_adapt(*args)
 
     def train(*args):
@@ -219,6 +235,23 @@ class DoubleESN(_object):
         """
         setIIRCoeff(self, double bmtx, double amtx, int series=1)
         setIIRCoeff(self, double bmtx, double amtx)
+
+        throw (
+        AUExcept) sets the IIR-Filter coefficients, like Matlabs filter
+        object.
+
+        Parameters:
+        -----------
+
+        B:  matrix with numerator coefficient vectors (m x nb) m ... nr of
+        parallel filters (neurons) nb ... nr of filter coefficients
+
+        A:  matrix with denominator coefficient vectors (m x na) m ... nr of
+        parallel filters (neurons) na ... nr of filter coefficients
+
+        seris:  nr of serial IIR filters, e.g. if series=2 the coefficients B
+        and A will be divided in its half and calculated with 2 serial IIR
+        filters 
         """
         return _aureservoir.DoubleESN_setIIRCoeff(*args)
 
@@ -548,7 +581,18 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_setX(*args)
 
     def setLastOutput(*args):
-        """setLastOutput(self, double last)"""
+        """
+        setLastOutput(self, double last)
+
+        throw (
+        AUExcept) set last output, stored by the simulation algorithm needed
+        in singleStep simulation with feedback
+
+        Parameters:
+        -----------
+
+        last:  vector with length = outputs 
+        """
         return _aureservoir.DoubleESN_setLastOutput(*args)
 
 DoubleESN_swigregister = _aureservoir.DoubleESN_swigregister
@@ -587,9 +631,7 @@ class SingleESN(_object):
 
         Copy Constructor.
 
-        Todo check if maps operator= performs a deep copy !
-
-        Todo bei SIM_BP die restlichen buffer variablen auch kopieren 
+        Todo check if maps operator= performs a deep copy ! 
         """
         this = _aureservoir.new_SingleESN(*args)
         try: self.this.append(this)
@@ -615,7 +657,25 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_resetState(*args)
 
     def adapt(*args):
-        """adapt(self, float inmtx) -> double"""
+        """
+        adapt(self, float inmtx) -> double
+
+        throw ( AUExcept)
+        C-style Reservoir Adaptation Algorithm Interface (data will be copied
+        into a FLENS matrix) At the moment this is only the Gaussian-IP
+        reservoir adaptation method for tanh neurons. See:  "Adapting
+        reservoirs to get Gaussian distributions" by David Verstraeten,
+        Benjamin Schrauwen and Dirk Stroobandt
+
+        Parameters:
+        -----------
+
+        inmtx:  matrix of input values (inputs x timesteps), the reservoir
+        will be adapted by this number of timesteps.
+
+        mean value of differences between all parameters before and after
+        adaptation, can be used to see if learning still makes an progress. 
+        """
         return _aureservoir.SingleESN_adapt(*args)
 
     def train(*args):
@@ -702,6 +762,23 @@ class SingleESN(_object):
         """
         setIIRCoeff(self, float bmtx, float amtx, int series=1)
         setIIRCoeff(self, float bmtx, float amtx)
+
+        throw (
+        AUExcept) sets the IIR-Filter coefficients, like Matlabs filter
+        object.
+
+        Parameters:
+        -----------
+
+        B:  matrix with numerator coefficient vectors (m x nb) m ... nr of
+        parallel filters (neurons) nb ... nr of filter coefficients
+
+        A:  matrix with denominator coefficient vectors (m x na) m ... nr of
+        parallel filters (neurons) na ... nr of filter coefficients
+
+        seris:  nr of serial IIR filters, e.g. if series=2 the coefficients B
+        and A will be divided in its half and calculated with 2 serial IIR
+        filters 
         """
         return _aureservoir.SingleESN_setIIRCoeff(*args)
 
@@ -1031,7 +1108,18 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_setX(*args)
 
     def setLastOutput(*args):
-        """setLastOutput(self, float last)"""
+        """
+        setLastOutput(self, float last)
+
+        throw (
+        AUExcept) set last output, stored by the simulation algorithm needed
+        in singleStep simulation with feedback
+
+        Parameters:
+        -----------
+
+        last:  vector with length = outputs 
+        """
         return _aureservoir.SingleESN_setLastOutput(*args)
 
 SingleESN_swigregister = _aureservoir.SingleESN_swigregister
@@ -1060,7 +1148,6 @@ SIM_FILTER2 = _aureservoir.SIM_FILTER2
 TRAIN_PI = _aureservoir.TRAIN_PI
 TRAIN_LS = _aureservoir.TRAIN_LS
 TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG
-TRAIN_PI_SQUARE = _aureservoir.TRAIN_PI_SQUARE
 ACT_LINEAR = _aureservoir.ACT_LINEAR
 ACT_TANH = _aureservoir.ACT_TANH
 ACT_TANH2 = _aureservoir.ACT_TANH2

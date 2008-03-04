@@ -36,7 +36,7 @@ void TrainBase<T>::checkParams(const typename ESN<T>::DEMatrix &in,
   if( out.numRows() != esn_->outputs_ )
     throw AUExcept("TrainBase::train: wrong output row size!");
 
-  if( esn_->net_info_[ESN<T>::TRAIN_ALG] != TRAIN_PI_SQUARE )
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
   {
     if( (in.numCols()-washout) < esn_->neurons_+esn_->inputs_ )
     throw AUExcept("TrainBase::train: too few training data!");
@@ -66,7 +66,7 @@ void TrainBase<T>::collectStates(const typename ESN<T>::DEMatrix &in,
 
   // collects reservoir activations and inputs of all timesteps in M
   // (for squared algorithm we need a bigger matrix)
-  if( esn_->net_info_[ESN<T>::TRAIN_ALG] != TRAIN_PI_SQUARE )
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
     M.resize(steps-washout, esn_->neurons_+esn_->inputs_);
   else
     M.resize(steps-washout, 2*(esn_->neurons_+esn_->inputs_));
@@ -98,6 +98,19 @@ void TrainBase<T>::collectStates(const typename ESN<T>::DEMatrix &in,
   O = flens::transpose( out( _,_(washout+1,steps) ) );
 }
 
+template <typename T>
+void TrainBase<T>::squareStates()
+{
+  // add additional squared states and inputs
+  /// \todo vectorize that
+  int Msize = esn_->neurons_+esn_->inputs_;
+  int Mrows = M.numRows();
+  for(int i=1; i<=Mrows; ++i) {
+  for(int j=1; j<=Msize; ++j) {
+    M(i,j+Msize) = pow( M(i,j), 2 );
+  } }
+}
+
 //@}
 //! @name class TrainPI Implementation
 //@{
@@ -113,6 +126,11 @@ void TrainPI<T>::train(const typename ESN<T>::DEMatrix &in,
   // 1. teacher forcing, collect states
   this->collectStates(in,out,washout);
 
+  // add additional squared states when using SIM_SQUARE
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
+    this->squareStates();
+
+
   // 2. offline weight computation
 
   // undo output activation function
@@ -120,7 +138,7 @@ void TrainPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   // calc weights with pseudo inv: Wout_ = (M^-1) * O
   flens::lss( M, O );
-  esn_->Wout_ = flens::transpose( O(_(1,esn_->neurons_+esn_->inputs_),_) );
+  esn_->Wout_ = flens::transpose( O(_( 1, M.numCols() ),_) );
 
   this->clearData();
 }
@@ -140,6 +158,10 @@ void TrainLS<T>::train(const typename ESN<T>::DEMatrix &in,
   // 1. teacher forcing, collect states
   this->collectStates(in,out,washout);
 
+  // add additional squared states when using SIM_SQUARE
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
+    this->squareStates();
+
 
   // 2. offline weight computation
 
@@ -148,7 +170,7 @@ void TrainLS<T>::train(const typename ESN<T>::DEMatrix &in,
 
   // calc weights with least square solver: Wout_ = (M^-1) * O
   flens::ls( flens::NoTrans, M, O );
-  esn_->Wout_ = flens::transpose( O(_(1,esn_->neurons_+esn_->inputs_),_) );
+  esn_->Wout_ = flens::transpose( O(_( 1, M.numCols() ),_) );
 
   this->clearData();
 }
@@ -168,6 +190,10 @@ void TrainRidgeReg<T>::train(const typename ESN<T>::DEMatrix &in,
   // 1. teacher forcing, collect states
   this->collectStates(in,out,washout);
 
+  // add additional squared states when using SIM_SQUARE
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
+    this->squareStates();
+
 
   // 2. offline weight computation
 
@@ -184,7 +210,7 @@ void TrainRidgeReg<T>::train(const typename ESN<T>::DEMatrix &in,
   // temporal objects
   typename ESN<T>::DEMatrix T1(esn_->neurons_+esn_->inputs_,
                                esn_->neurons_+esn_->inputs_);
-  flens::DenseVector<flens::Array<int> > t2( esn_->neurons_+esn_->inputs_ );
+  flens::DenseVector<flens::Array<int> > t2( M.numCols() );
 
   // M.T * M
   T1 = flens::transpose(M)*M;
@@ -206,43 +232,6 @@ void TrainRidgeReg<T>::train(const typename ESN<T>::DEMatrix &in,
   // result = ans.T
   esn_->Wout_ = flens::transpose(T1);
 
-
-  this->clearData();
-}
-
-//@}
-//! @name class TrainPISquare Implementation
-//@{
-
-template <typename T>
-void TrainPISquare<T>::train(const typename ESN<T>::DEMatrix &in,
-                             const typename ESN<T>::DEMatrix &out,
-                             int washout)
-  throw(AUExcept)
-{
-  this->checkParams(in,out,washout);
-
-  // 1. teacher forcing, collect states
-  this->collectStates(in,out,washout);
-
-  // add additional squared states and inputs
-  /// \todo vectorize that
-  int Msize = esn_->neurons_+esn_->inputs_;
-  int Mrows = M.numRows();
-  for(int i=1; i<=Mrows; ++i) {
-  for(int j=1; j<=Msize; ++j) {
-    M(i,j+Msize) = pow( M(i,j), 2 );
-  } }
-
-
-  // 2. offline weight computation
-
-  // undo output activation function
-  esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
-
-  // calc weights with pseudo inverse: Wout_ = (M^-1) * O
-  flens::lss( M, O );
-  esn_->Wout_ = flens::transpose( O(_(1,2*Msize),_) );
 
   this->clearData();
 }

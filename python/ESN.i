@@ -29,6 +29,21 @@ C++ includes: esn.h ";
 Initialization Algorithm for an Echo State Network See:  class
 InitBase ";
 
+%feature("docstring")  ESN::adapt "throw ( AUExcept)
+Reservoir Adaptation Algorithm Interface At the moment this is only
+the Gaussian-IP reservoir adaptation method for tanh neurons. See:
+\"Adapting reservoirs to get Gaussian distributions\" by David
+Verstraeten, Benjamin Schrauwen and Dirk Stroobandt
+
+Parameters:
+-----------
+
+in:  matrix of input values (inputs x timesteps), the reservoir will
+be adapted by this number of timesteps.
+
+mean value of differences between all parameters before and after
+adaptation, can be used to see if learning still makes an progress. ";
+
 %feature("docstring")  ESN::train "throw ( AUExcept)
 Training Algorithm Interface See:  class TrainBase
 
@@ -59,6 +74,22 @@ out:  matrix for output values (outputs x timesteps) ";
 resets the internal state vector x of the reservoir to zero ";
 
 /*  C-style Algorithm interface  */
+
+%feature("docstring")  ESN::adapt "throw ( AUExcept)
+C-style Reservoir Adaptation Algorithm Interface (data will be copied
+into a FLENS matrix) At the moment this is only the Gaussian-IP
+reservoir adaptation method for tanh neurons. See:  \"Adapting
+reservoirs to get Gaussian distributions\" by David Verstraeten,
+Benjamin Schrauwen and Dirk Stroobandt
+
+Parameters:
+-----------
+
+inmtx:  matrix of input values (inputs x timesteps), the reservoir
+will be adapted by this number of timesteps.
+
+mean value of differences between all parameters before and after
+adaptation, can be used to see if learning still makes an progress. ";
 
 %feature("docstring")  ESN::train "throw ( AUExcept)
 C-style Training Algorithm Interface (data will be copied into a FLENS
@@ -105,9 +136,9 @@ outmtx:  output vector, size = outputs
 
 Data must be already allocated! ";
 
-/*  Additional Interface for Bandpass Neurons  */
+/*  Additional Interface for Bandpass and IIR-Filter Neurons  */
 
-/* Todo rethink if this is consistent
+/* Todo rethink if this is consistent -> in neue klasse tun ?
 
 */
 
@@ -132,6 +163,40 @@ Parameters:
 f1:  vector with lowpass cutoff for all neurons (size = neurons)
 
 f2:  vector with highpass cutoffs (size = neurons) ";
+
+%feature("docstring")  ESN::setIIRCoeff "throw (
+AUExcept) sets the IIR-Filter coefficients, like Matlabs filter
+object.
+
+Parameters:
+-----------
+
+B:  matrix with numerator coefficient vectors (m x nb) m ... nr of
+parallel filters (neurons) nb ... nr of filter coefficients
+
+A:  matrix with denominator coefficient vectors (m x na) m ... nr of
+parallel filters (neurons) na ... nr of filter coefficients
+
+seris:  nr of serial IIR filters, e.g. if series=2 the coefficients B
+and A will be divided in its half and calculated with 2 serial IIR
+filters ";
+
+%feature("docstring")  ESN::setIIRCoeff "throw (
+AUExcept) sets the IIR-Filter coefficients, like Matlabs filter
+object.
+
+Parameters:
+-----------
+
+B:  matrix with numerator coefficient vectors (m x nb) m ... nr of
+parallel filters (neurons) nb ... nr of filter coefficients
+
+A:  matrix with denominator coefficient vectors (m x na) m ... nr of
+parallel filters (neurons) na ... nr of filter coefficients
+
+seris:  nr of serial IIR filters, e.g. if series=2 the coefficients B
+and A will be divided in its half and calculated with 2 serial IIR
+filters ";
 
 /*  GET parameters  */
 
@@ -308,6 +373,15 @@ set output weight matrix ";
 %feature("docstring")  ESN::setX "throw ( AUExcept) set
 internal state vector ";
 
+%feature("docstring")  ESN::setLastOutput "throw (
+AUExcept) set last output, stored by the simulation algorithm needed
+in singleStep simulation with feedback
+
+Parameters:
+-----------
+
+last:  vector with length = outputs ";
+
 /*  SET internal data C-style interface  */
 
 %feature("docstring")  ESN::setWin "throw ( AUExcept)
@@ -355,6 +429,15 @@ Parameters:
 
 invec:  pointer to state vector ";
 
+%feature("docstring")  ESN::setLastOutput "throw (
+AUExcept) set last output, stored by the simulation algorithm needed
+in singleStep simulation with feedback
+
+Parameters:
+-----------
+
+last:  vector with length = outputs ";
+
 %feature("docstring")  ESN::ESN "
 
 Constructor. ";
@@ -363,9 +446,7 @@ Constructor. ";
 
 Copy Constructor.
 
-Todo check if maps operator= performs a deep copy !
-
-Todo bei SIM_BP die restlichen buffer variablen auch kopieren ";
+Todo check if maps operator= performs a deep copy ! ";
 
 %feature("docstring")  ESN::~ESN "
 

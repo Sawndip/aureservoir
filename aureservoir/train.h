@@ -34,8 +34,7 @@ enum TrainAlgorithm
 {
   TRAIN_PI,        //!< offline, pseudo inverse based \sa class TrainPI
   TRAIN_LS,        //!< offline least square algorithm, \sa class TrainLS
-  TRAIN_RIDGEREG,  //!< with ridge regression, \sa class TrainRidgeReg
-  TRAIN_PI_SQUARE  //!< TrainPI with squared state updates \sa class TrainPISquare
+  TRAIN_RIDGEREG   //!< with ridge regression, \sa class TrainRidgeReg
 };
 
 template <typename T> class ESN;
@@ -88,6 +87,9 @@ class TrainBase
   void collectStates(const typename ESN<T>::DEMatrix &in,
                      const typename ESN<T>::DEMatrix &out,
                      int washout);
+
+  /// squares states for SIM_SQUARE
+  void squareStates();
 
   /// frees allocated data for M and O
   void clearData()

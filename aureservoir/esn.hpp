@@ -479,12 +479,6 @@ void ESN<T>::setTrainAlgorithm(TrainAlgorithm alg)
       net_info_[TRAIN_ALG] = TRAIN_RIDGEREG;
       break;
 
-    case TRAIN_PI_SQUARE:
-      if(train_) delete train_;
-      train_ = new TrainPISquare<T>(this);
-      net_info_[TRAIN_ALG] = TRAIN_PI_SQUARE;
-      break;
-
     default:
       throw AUExcept("ESN::setTrainAlgorithm: no valid Algorithm!");
   }
@@ -876,9 +870,6 @@ string ESN<T>::getTrainString(int alg)
 
     case TRAIN_RIDGEREG:
       return "TRAIN_RIDGEREG";
-
-    case TRAIN_PI_SQUARE:
-      return "TRAIN_PI_SQUARE";
 
     default:
       throw AUExcept("ESN::getTrainString: unknown training algorithm");
