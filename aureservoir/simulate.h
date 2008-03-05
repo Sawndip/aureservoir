@@ -34,12 +34,13 @@ namespace aureservoir
  */
 enum SimAlgorithm
 {
-  SIM_STD,    //!< standard simulation \sa class SimStd
-  SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
-  SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
-  SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
-  SIM_FILTER, //!< simulation with IIR-Filter neurons \sa class SimFilter
-  SIM_FILTER2 //!< IIR-Filter before nonlinearity \sa class SimFilter2
+  SIM_STD,       //!< standard simulation \sa class SimStd
+  SIM_SQUARE,    //!< additional squared state updates \sa class SimSquare
+  SIM_LI,        //!< simulation with leaky integrator neurons \sa class SimLI
+  SIM_BP,        //!< simulation with bandpass neurons \sa class SimBP
+  SIM_FILTER,    //!< simulation with IIR-Filter neurons \sa class SimFilter
+  SIM_FILTER2,   //!< IIR-Filter before nonlinearity \sa class SimFilter2
+  SIM_FILTER_DS  //!< with Delay&Sum Readout \sa class SimFilterDS
 };
 
 template <typename T> class ESN;
@@ -87,7 +88,7 @@ class SimBase
   /// reallocates data buffers
   virtual void reallocate();
 
-  //! @name additional interface for bandpass and filter neurons
+  //! @name additional interface for filter neurons and delay&sum readout
   //@{
   virtual void setBPCutoffConst(T f1, T f2) throw(AUExcept);
   virtual void setBPCutoff(const typename ESN<T>::DEVector &f1,
@@ -96,6 +97,8 @@ class SimBase
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
                            const typename DEMatrix<T>::Type &A,
                            int series = 1) throw(AUExcept);
+  virtual void setReadoutDelays(const typename DEMatrix<T>::Type &D)
+                           throw(AUExcept);
   //@}
 
   /// output from last simulation
@@ -275,6 +278,10 @@ class SimBP : public SimBase<T>
  * input to the filter.
  * The filter is always calculated _after_ the nonlinearity.
  * \sa class IIRFilter
+ *
+ * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
+ * (Georg Holzmann, 2008).
+ * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
  */
 template <typename T>
 class SimFilter : public SimBase<T>
@@ -333,14 +340,15 @@ class SimFilter : public SimBase<T>
  * \sa class IIRFilter
  */
 template <typename T>
-class SimFilter2 : public SimBase<T>
+class SimFilter2 : public SimFilter<T>
 {
   using SimBase<T>::esn_;
   using SimBase<T>::last_out_;
   using SimBase<T>::t_;
+  using SimFilter<T>::filter_;
 
  public:
-  SimFilter2(ESN<T> *esn) : SimBase<T>(esn) {}
+  SimFilter2(ESN<T> *esn) : SimFilter<T>(esn) {}
   virtual ~SimFilter2() {}
 
   /// virtual constructor idiom
@@ -352,29 +360,61 @@ class SimFilter2 : public SimBase<T>
     return new_obj;
   }
 
-  /**
-   * sets the filter coefficients
-   * @param B matrix with numerator coefficient vectors (m x nb)
-   *          m  ... nr of parallel filters (neurons)
-   *          nb ... nr of filter coefficients
-   * @param A matrix with denominator coefficient vectors (m x na)
-   *          m  ... nr of parallel filters (neurons)
-   *          na ... nr of filter coefficients
-   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
-   *              B and A will be divided in its half and calculated with
-   *              2 serial IIR filters
-   */
-  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                   const typename DEMatrix<T>::Type &A,
-                   int series=1) throw(AUExcept);
-
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
+};
 
-  /// the filter object
-  SerialIIRFilter<T> filter_;
+/*!
+ * \class SimFilterDS
+ *
+ * \brief IIR-Filter neurons with additional delay&sum readout
+ *
+ * This version works like SimFilter, but has an additional delay&sum readout,
+ * which means that not only a single weight but also a delay is learned
+ * in the readout. Therefore it can be used to identify systems with
+ * long-term dependencies.
+ * \sa class SimFilter
+ * \sa class IIRFilter
+ *
+ * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
+ * (Georg Holzmann, 2008).
+ * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
+ */
+template <typename T>
+class SimFilterDS : public SimFilter<T>
+{
+  using SimBase<T>::esn_;
+  using SimBase<T>::last_out_;
+  using SimBase<T>::t_;
+  using SimFilter<T>::filter_;
+
+ public:
+  SimFilterDS(ESN<T> *esn) : SimFilter<T>(esn) {}
+  virtual ~SimFilterDS() {}
+
+  /// virtual constructor idiom
+  virtual SimFilterDS<T> *clone(ESN<T> *esn) const
+  {
+    SimFilterDS<T> *new_obj = new SimFilterDS<T>(esn);
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->filter_ = filter_;
+    new_obj->delays_ = delays_;
+    return new_obj;
+  }
+
+  virtual void setReadoutDelays(const typename DEMatrix<T>::Type &D)
+                           throw(AUExcept) {}
+
+  /// implementation of the algorithm
+  /// \sa class SimBase::simulate
+  virtual void simulate(const typename ESN<T>::DEMatrix &in,
+                        typename ESN<T>::DEMatrix &out) {}
+
+ protected:
+  /// matrix with delays
+  typename ESN<T>::DEMatrix delays_;
 };
 
 /*!
@@ -391,14 +431,15 @@ class SimFilter2 : public SimBase<T>
  * \sa SimFilter
  */
 template <typename T>
-class SimSquare : public SimBase<T>
+class SimSquare : public SimFilter<T>
 {
   using SimBase<T>::esn_;
   using SimBase<T>::last_out_;
   using SimBase<T>::t_;
+  using SimFilter<T>::filter_;
 
  public:
-  SimSquare(ESN<T> *esn) : SimBase<T>(esn) {}
+  SimSquare(ESN<T> *esn) : SimFilter<T>(esn) {}
   virtual ~SimSquare() {}
 
   /// virtual constructor idiom
@@ -410,29 +451,10 @@ class SimSquare : public SimBase<T>
     return new_obj;
   }
 
-  /**
-   * sets the filter coefficients
-   * @param B matrix with numerator coefficient vectors (m x nb)
-   *          m  ... nr of parallel filters (neurons)
-   *          nb ... nr of filter coefficients
-   * @param A matrix with denominator coefficient vectors (m x na)
-   *          m  ... nr of parallel filters (neurons)
-   *          na ... nr of filter coefficients
-   * @param seris nr of serial IIR filters, e.g. if series=2 the coefficients
-   *              B and A will be divided in its half and calculated with
-   *              2 serial IIR filters
-   */
-  virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                   const typename DEMatrix<T>::Type &A,
-                   int series=1) throw(AUExcept);
-
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
-
-  /// the filter object
-  SerialIIRFilter<T> filter_;
 };
 
 } // end of namespace aureservoir

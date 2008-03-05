@@ -8577,6 +8577,7 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "SIM_BP",SWIG_From_int(static_cast< int >(SIM_BP)));
   SWIG_Python_SetConstant(d, "SIM_FILTER",SWIG_From_int(static_cast< int >(SIM_FILTER)));
   SWIG_Python_SetConstant(d, "SIM_FILTER2",SWIG_From_int(static_cast< int >(SIM_FILTER2)));
+  SWIG_Python_SetConstant(d, "SIM_FILTER_DS",SWIG_From_int(static_cast< int >(SIM_FILTER_DS)));
   SWIG_Python_SetConstant(d, "TRAIN_PI",SWIG_From_int(static_cast< int >(TRAIN_PI)));
   SWIG_Python_SetConstant(d, "TRAIN_LS",SWIG_From_int(static_cast< int >(TRAIN_LS)));
   SWIG_Python_SetConstant(d, "TRAIN_RIDGEREG",SWIG_From_int(static_cast< int >(TRAIN_RIDGEREG)));

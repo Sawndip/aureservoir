@@ -99,6 +99,12 @@ void TrainBase<T>::collectStates(const typename ESN<T>::DEMatrix &in,
 }
 
 template <typename T>
+void TrainBase<T>::calcDelays(const typename ESN<T>::DEMatrix &in,
+                              const typename ESN<T>::DEMatrix &out)
+{
+}
+
+template <typename T>
 void TrainBase<T>::squareStates()
 {
   // add additional squared states and inputs

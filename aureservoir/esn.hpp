@@ -311,8 +311,9 @@ void ESN<T>::setIIRCoeff(const DEMatrix &B, const DEMatrix &A, int series)
 {
   if( net_info_[SIMULATE_ALG] != SIM_FILTER  &&
       net_info_[SIMULATE_ALG] != SIM_FILTER2 &&
+      net_info_[SIMULATE_ALG] != SIM_FILTER_DS &&
       net_info_[SIMULATE_ALG] != SIM_SQUARE )
-    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER or SIM_FILTER2 or SIM_SQUARE and init the matrix first!");
+    throw AUExcept("ESN::setIIRCoeff: you need to set SIM_FILTER, SIM_FILTER2, SIM_FILTER_DS or SIM_SQUARE and init the matrix first!");
 
   sim_->setIIRCoeff(B,A,series);
 }
@@ -524,6 +525,12 @@ void ESN<T>::setSimAlgorithm(SimAlgorithm alg)
       if(sim_) delete sim_;
       sim_ = new SimFilter2<T>(this);
       net_info_[SIMULATE_ALG] = SIM_FILTER2;
+      break;
+
+    case SIM_FILTER_DS:
+      if(sim_) delete sim_;
+      sim_ = new SimFilterDS<T>(this);
+      net_info_[SIMULATE_ALG] = SIM_FILTER_DS;
       break;
 
     default:
@@ -851,6 +858,8 @@ string ESN<T>::getSimString(int alg)
     case SIM_FILTER2:
       return "SIM_FILTER2";
 
+    case SIM_FILTER_DS:
+      return "SIM_FILTER_DS";
 
     default:
       throw AUExcept("ESN::getSimString: unknown simulation algorithm");

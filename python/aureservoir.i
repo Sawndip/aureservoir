@@ -225,12 +225,13 @@ enum InitAlgorithm
 
 enum SimAlgorithm
 {
-  SIM_STD,    //!< standard simulation \sa class SimStd
-  SIM_SQUARE, //!< additional squared state updates \sa class SimSquare
-  SIM_LI,     //!< simulation with leaky integrator neurons \sa class SimLI
-  SIM_BP,     //!< simulation with bandpass neurons \sa class SimBP
-  SIM_FILTER, //!< simulation with IIR-Filter neurons \sa class SimFilter
-  SIM_FILTER2 //!< IIR-Filter before nonlinearity \sa class SimFilter2
+  SIM_STD,     //!< standard simulation \sa class SimStd
+  SIM_SQUARE,  //!< additional squared state updates \sa class SimSquare
+  SIM_LI,      //!< simulation with leaky integrator neurons \sa class SimLI
+  SIM_BP,      //!< simulation with bandpass neurons \sa class SimBP
+  SIM_FILTER,  //!< simulation with IIR-Filter neurons \sa class SimFilter
+  SIM_FILTER2, //!< IIR-Filter before nonlinearity \sa class SimFilter2
+  SIM_FILTER_DS
 };
 
 enum TrainAlgorithm

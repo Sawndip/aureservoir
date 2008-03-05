@@ -88,6 +88,10 @@ class TrainBase
                      const typename ESN<T>::DEMatrix &out,
                      int washout);
 
+  /// calculate delays for delay&sum readout
+  void calcDelays(const typename ESN<T>::DEMatrix &in,
+                  const typename ESN<T>::DEMatrix &out);
+
   /// squares states for SIM_SQUARE
   void squareStates();
 

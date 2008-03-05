@@ -74,6 +74,17 @@ void SimBase<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
   throw AUExcept( str );
 }
 
+template <typename T>
+void SimBase<T>::setReadoutDelays(const typename DEMatrix<T>::Type &D)
+  throw(AUExcept)
+{
+  std::string str = "SimBase::setReadoutDelays: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use e.g. SIM_FILTER_DS !";
+
+  throw AUExcept( str );
+}
+
 //@}
 //! @name class SimStd Implementation
 //@{
@@ -378,20 +389,6 @@ void SimFilter<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@{
 
 template <typename T>
-void SimFilter2<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                           const typename DEMatrix<T>::Type &A,
-                           int series)
-  throw(AUExcept)
-{
-  if( B.numRows() != esn_->neurons_ )
-    throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
-  if( A.numRows() != esn_->neurons_ )
-    throw AUExcept("SimFilter: A must have same rows as reservoir neurons!");
-
-  filter_.setIIRCoeff(B,A,series);
-}
-
-template <typename T>
 void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
                             typename ESN<T>::DEMatrix &out)
 {
@@ -457,20 +454,6 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@}
 //! @name class SimSquare Implementation
 //@{
-
-template <typename T>
-void SimSquare<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
-                               const typename DEMatrix<T>::Type &A,
-                               int series)
-  throw(AUExcept)
-{
-  if( B.numRows() != esn_->neurons_ )
-    throw AUExcept("SimFilter: B must have same rows as reservoir neurons!");
-  if( A.numRows() != esn_->neurons_ )
-    throw AUExcept("SimFilter: A must have same rows as reservoir neurons!");
-
-  filter_.setIIRCoeff(B,A,series);
-}
 
 template <typename T>
 void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,

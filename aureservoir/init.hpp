@@ -85,7 +85,7 @@ void InitBase<T>::allocateWorkData()
 
   // set filtered neurons to standard ESN calculation
   int simalg = esn_->net_info_[ESN<T>::SIMULATE_ALG];
-  if( simalg==SIM_FILTER || simalg==SIM_FILTER2 || simalg==SIM_SQUARE )
+  if( simalg==SIM_FILTER || simalg==SIM_FILTER2 || simalg==SIM_FILTER_DS || simalg==SIM_SQUARE )
   {
     typename DEMatrix<T>::Type B(esn_->neurons_, 2), A(esn_->neurons_, 2);
 
