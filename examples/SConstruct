@@ -83,6 +83,9 @@ if checking:
 	if not conf.CheckLib('fftw3', language="C"):
 		print 'Did not find FFTW3 library !'
 		Exit(1)
+	if not conf.CheckLib('fftw3f', language="C"):
+		print 'Did not find FFTW3 single precision library !'
+		Exit(1)
 	if not conf.CheckHeader('fftw3.h'):
 		print 'Did not find FFTW3 header !'
 		Exit(1)

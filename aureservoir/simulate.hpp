@@ -452,6 +452,21 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 }
 
 //@}
+//! @name class SimFilterDS Implementation
+//@{
+
+template <typename T>
+void SimFilterDS<T>::setReadoutDelays(const typename DEMatrix<T>::Type &D)
+  throw(AUExcept)
+{
+  if( D.numRows() != esn_->outputs_ ||
+      D.numCols() != esn_->inputs_+esn_->neurons_ )
+    throw AUExcept("SimFilterDS: wrong size of delay matrix!");
+
+  delays_ = D;
+}
+
+//@}
 //! @name class SimSquare Implementation
 //@{
 

@@ -21,6 +21,7 @@
 #define AURESERVOIR_TRAIN_H__
 
 #include "utilities.h"
+#include "delaysum.h"
 
 namespace aureservoir
 {

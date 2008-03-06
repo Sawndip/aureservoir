@@ -74,6 +74,8 @@ if env.has_key('aureservoir_path'):
 	env.Append(CPPPATH=[env['aureservoir_path']])
 if env.has_key('flens_path'):
 	env.Append(CPPPATH=[env['flens_path']])
+if env.has_key('fftw3_path'):
+	env.Append(CPPPATH=[env['fftw3_path']])
 if env.has_key('python_path'):
 	env.Append(CPPPATH=[env['python_path']])
 if env.has_key('arch'):
@@ -104,6 +106,15 @@ if checking:
 		Exit(1)
 	if not conf.CheckCHeader('Python.h'):
 		print 'Did not find python headers !'
+		Exit(1)
+	if not conf.CheckLib('fftw3', language="C"):
+		print 'Did not find FFTW3 library !'
+		Exit(1)
+	if not conf.CheckLib('fftw3f', language="C"):
+		print 'Did not find FFTW3 single precision library !'
+		Exit(1)
+	if not conf.CheckHeader('fftw3.h'):
+		print 'Did not find FFTW3 header !'
 		Exit(1)
 env = conf.Finish()
 

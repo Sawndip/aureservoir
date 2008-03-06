@@ -182,7 +182,7 @@ class ESN
   void setInputs(int inputs=1);
   void setOutputs(int outputs=1);
   void setNoise(double noise);
-  void setInitParam(InitParameter key, T value);
+  void setInitParam(InitParameter key, T value=0.);
   void setReservoirAct(ActivationFunction f=ACT_TANH);
   void setOutputAct(ActivationFunction f=ACT_LINEAR);
 
@@ -213,6 +213,9 @@ enum InitParameter
   FB_SHIFT,         //!< shift feedback weight matrix random vaules
   LEAKING_RATE,     //!< leaking rate for Leaky Integrator ESNs
   TIKHONOV_FACTOR,  //!< regularization factor for TrainRidgeReg
+  DS_USE_CROSSCORR, //!< use simple cross-correlation for delay calculation
+  DS_USE_GCC,       //!< use generalized cross-correlation for delay calculation
+  DS_MAXDELAY,      //!< maximum delay for delay&sum readout
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
   IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation

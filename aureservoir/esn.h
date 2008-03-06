@@ -364,7 +364,7 @@ class ESN
   void setNoise(double noise) throw(AUExcept);
 
   /// set initialization parameter
-  void setInitParam(InitParameter key, T value);
+  void setInitParam(InitParameter key, T value=0.);
 
   /// set reservoir activation function
   void setReservoirAct(ActivationFunction f=ACT_TANH) throw(AUExcept);

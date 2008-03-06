@@ -404,8 +404,16 @@ class SimFilterDS : public SimFilter<T>
     return new_obj;
   }
 
+  /**
+   * sets the delays for delay&sum readout
+   * used by the training algorithms
+   * @param D matrix with delays from reservoir neurons and inputs to
+  *           all outputs (m x n)
+   *          m  ... nr of outputs
+   *          n ... nr of reservoir neurons + inputs
+   */
   virtual void setReadoutDelays(const typename DEMatrix<T>::Type &D)
-                           throw(AUExcept) {}
+    throw(AUExcept);
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate

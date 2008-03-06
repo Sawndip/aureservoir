@@ -479,7 +479,8 @@ class DoubleESN(_object):
 
     def setInitParam(*args):
         """
-        setInitParam(self, InitParameter key, double value)
+        setInitParam(self, InitParameter key, double value=0.)
+        setInitParam(self, InitParameter key)
 
         set initialization parameter 
         """
@@ -1006,7 +1007,8 @@ class SingleESN(_object):
 
     def setInitParam(*args):
         """
-        setInitParam(self, InitParameter key, float value)
+        setInitParam(self, InitParameter key, float value=0.)
+        setInitParam(self, InitParameter key)
 
         set initialization parameter 
         """
@@ -1135,6 +1137,9 @@ FB_SCALE = _aureservoir.FB_SCALE
 FB_SHIFT = _aureservoir.FB_SHIFT
 LEAKING_RATE = _aureservoir.LEAKING_RATE
 TIKHONOV_FACTOR = _aureservoir.TIKHONOV_FACTOR
+DS_USE_CROSSCORR = _aureservoir.DS_USE_CROSSCORR
+DS_USE_GCC = _aureservoir.DS_USE_GCC
+DS_MAXDELAY = _aureservoir.DS_MAXDELAY
 IP_LEARNRATE = _aureservoir.IP_LEARNRATE
 IP_MEAN = _aureservoir.IP_MEAN
 IP_VAR = _aureservoir.IP_VAR

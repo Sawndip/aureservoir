@@ -40,8 +40,6 @@ using std::string;
 using std::complex;
 using flens::_;
 
-// typedef complex<double> dcplx;
-
 /// typedef trait class of a real sparse matrix with type T
 template<typename T = float>
 struct SPMatrix
@@ -61,6 +59,13 @@ template<typename T = float>
 struct DEVector
 {
   typedef flens::DenseVector<flens::Array<T> > Type;
+};
+
+/// typedef trait class of a complex dense vector with type T
+template<typename T = float>
+struct CDEVector
+{
+  typedef flens::DenseVector<flens::Array< complex<T> > > Type;
 };
 
 

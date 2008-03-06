@@ -102,6 +102,48 @@ template <typename T>
 void TrainBase<T>::calcDelays(const typename ESN<T>::DEMatrix &in,
                               const typename ESN<T>::DEMatrix &out)
 {
+  typename ESN<T>::DEMatrix delays(esn_->outputs_,
+                                   esn_->neurons_+esn_->inputs_);
+
+  // get maxdelay
+  int maxdelay;
+  if( esn_->init_params_.find(DS_MAXDELAY) == esn_->init_params_.end() )
+    maxdelay = 1000;
+  else
+    maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
+
+  // see if we use GCC or simple crosscorr, standard is GCC
+  int filter;
+  if( esn_->init_params_.find(DS_USE_CROSSCORR) == esn_->init_params_.end() )
+    filter = 0;
+  else
+    filter = 1;
+
+  // delay calculation
+  int steps = in.numCols();
+  int fftsize = (int) pow( 2, ceil(log(steps)/log(2)) ); // next power of 2
+  typename CDEVector<T>::Type X,Y;
+  typename DEVector<T>::Type x,y;
+  for(int i=1; i<=esn_->outputs_; ++i)
+  {
+    // calc FFT of target vector
+    y = out(i,_);
+    rfft( y, Y, fftsize );
+
+    // calc delays to reservoir neurons and inputs
+    for(int j=1; j<=esn_->neurons_+esn_->inputs_; ++j)
+    {
+      // calc FFT of neuron/input vector
+      x = M(_,j);
+      rfft( x, X, fftsize );
+
+      // calc delay with GCC
+      delays(i,j) = T( CalcDelay<T>::gcc(X,Y,maxdelay,filter) );
+    }
+  }
+
+  // set delays in the simulation algorithm object
+  esn_->sim_->setReadoutDelays(delays);
 }
 
 template <typename T>
@@ -131,6 +173,10 @@ void TrainPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   // 1. teacher forcing, collect states
   this->collectStates(in,out,washout);
+
+  // calc delays for delay&sum readout
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_FILTER_DS )
+    this->calcDelays(in,out);
 
   // add additional squared states when using SIM_SQUARE
   if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )

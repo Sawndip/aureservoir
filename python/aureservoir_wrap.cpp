@@ -5040,7 +5040,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_DoubleESN_setInitParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_DoubleESN_setInitParam__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<double > *arg1 = (ESN<double > *) 0 ;
   InitParameter arg2 ;
@@ -5082,6 +5082,96 @@ SWIGINTERN PyObject *_wrap_DoubleESN_setInitParam(PyObject *SWIGUNUSEDPARM(self)
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setInitParam__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  InitParameter arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_setInitParam",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_setInitParam" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DoubleESN_setInitParam" "', argument " "2"" of type '" "InitParameter""'");
+  } 
+  arg2 = static_cast< InitParameter >(val2);
+  {
+    try {
+      (arg1)->setInitParam(arg2);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DoubleESN_setInitParam(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTdouble_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_DoubleESN_setInitParam__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTdouble_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_double(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_DoubleESN_setInitParam__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'DoubleESN_setInitParam'.\n  Possible C/C++ prototypes are:\n    setInitParam(InitParameter,double)\n    setInitParam(InitParameter)\n");
   return NULL;
 }
 
@@ -7400,7 +7490,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SingleESN_setInitParam(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SingleESN_setInitParam__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
   InitParameter arg2 ;
@@ -7442,6 +7532,96 @@ SWIGINTERN PyObject *_wrap_SingleESN_setInitParam(PyObject *SWIGUNUSEDPARM(self)
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setInitParam__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  InitParameter arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_setInitParam",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_setInitParam" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SingleESN_setInitParam" "', argument " "2"" of type '" "InitParameter""'");
+  } 
+  arg2 = static_cast< InitParameter >(val2);
+  {
+    try {
+      (arg1)->setInitParam(arg2);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_setInitParam(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = PyObject_Length(args);
+  for (ii = 0; (ii < argc) && (ii < 3); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTfloat_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_SingleESN_setInitParam__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_ESNTfloat_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_float(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_SingleESN_setInitParam__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number of arguments for overloaded function 'SingleESN_setInitParam'.\n  Possible C/C++ prototypes are:\n    setInitParam(InitParameter,float)\n    setInitParam(InitParameter)\n");
   return NULL;
 }
 
@@ -8567,6 +8747,9 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "FB_SHIFT",SWIG_From_int(static_cast< int >(FB_SHIFT)));
   SWIG_Python_SetConstant(d, "LEAKING_RATE",SWIG_From_int(static_cast< int >(LEAKING_RATE)));
   SWIG_Python_SetConstant(d, "TIKHONOV_FACTOR",SWIG_From_int(static_cast< int >(TIKHONOV_FACTOR)));
+  SWIG_Python_SetConstant(d, "DS_USE_CROSSCORR",SWIG_From_int(static_cast< int >(DS_USE_CROSSCORR)));
+  SWIG_Python_SetConstant(d, "DS_USE_GCC",SWIG_From_int(static_cast< int >(DS_USE_GCC)));
+  SWIG_Python_SetConstant(d, "DS_MAXDELAY",SWIG_From_int(static_cast< int >(DS_MAXDELAY)));
   SWIG_Python_SetConstant(d, "IP_LEARNRATE",SWIG_From_int(static_cast< int >(IP_LEARNRATE)));
   SWIG_Python_SetConstant(d, "IP_MEAN",SWIG_From_int(static_cast< int >(IP_MEAN)));
   SWIG_Python_SetConstant(d, "IP_VAR",SWIG_From_int(static_cast< int >(IP_VAR)));
