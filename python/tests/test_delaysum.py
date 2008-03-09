@@ -143,7 +143,7 @@ class test_delaysum(NumpyTestCase):
 	
 	# training data
 	washout = 20
-	iir_delay = 20
+	iir_delay = 15
 	train_size = 100
 	indata = N.random.rand(train_size) * 2 - 1
 	outdata = self._linearIIR(indata,iir_delay)
@@ -182,14 +182,81 @@ class test_delaysum(NumpyTestCase):
 	assert_array_almost_equal(outA,outB,5)
 
 
-# single neuron sin-osc machen
+    def testDS2InOuts(self, level=1):
+	""" test DS readout with 2 inputs and 2 outputs """
+        
+	# init network
+	self.ins = 2
+	self.outs = 2
+	self.netA.setInputs( self.ins )
+	self.netA.setOutputs( self.outs )
+	self.netA.setInitParam(DS_USE_GCC)
+	self.netB.setInputs( self.ins )
+	self.netB.setOutputs( 1 ) # only 1 ! two are not implemented !
+	self.netB.gcctype = 'phat'
+	self.netB.squareupdate = 0
+	self.netA.init()
+	self.netB.init()
+	
+	# set internal data of netB to the same as in netA
+	self.netB.setWin( self.netA.getWin().copy() )
+	W = N.zeros((self.size,self.size))
+	self.netA.getW(W)
+	self.netB.setW(W)
+	
+	# training data
+	washout = 20
+	iir_delay = 0
+	train_size = 100
+	indata = N.zeros((2,train_size))
+	outdata = N.zeros((2,train_size))
+	indata[0] = N.random.rand(train_size) * 2 - 1
+	indata[1] = N.random.rand(train_size) * 2 - 1
+	outdata[0] = self._linearIIR(indata[0],iir_delay)
+	outdata[1] = self._linearIIR(indata[0],iir_delay) # the same !
+	
+	# train data with python ESN
+	outtmp = outdata[0]
+	outtmp.shape = 1,-1
+	self.netB.train(indata, outtmp, washout)
+	delaysB = self.netB.delays
+	#print "trained delays in python:",delaysB
+	woutB = self.netB.getWout().copy()
+	
+	# finally train C++ network with the same data
+	self.netA.train(indata, outdata, washout)
+	delaysA = N.ones((self.outs,self.ins+self.size))
+	self.netA.getDelays(delaysA)
+	#print "trained delays:",delaysA.flatten()
+	woutA = self.netA.getWout().copy()
+	
+	# test if delays and output weights are the same
+	assert_array_almost_equal(delaysA[1].flatten(),delaysB,5)
+	assert_array_almost_equal(delaysA[0].flatten(),delaysB,5)
+	assert_array_almost_equal(woutA[0].flatten(),woutB.flatten(),5)
+	assert_array_almost_equal(woutA[1].flatten(),woutB.flatten(),5) # TODO !
+	
+	# simulation data
+	sim_size = 50
+	indata = N.zeros((2,sim_size))
+	indata[0] = N.random.rand(sim_size) * 2 - 1
+	indata[1] = N.random.rand(sim_size) * 2 - 1
+	outA = N.zeros( indata.shape )
+	outB = N.zeros( (1,sim_size) )
+	
+	## simulate both networks
+	self.netB.simulate(indata, outB)
+	self.netA.simulate(indata, outA)
+	
+	## test if simulation result is the same
+	assert_array_almost_equal(outA[0].flatten(),outB.flatten(),5)
+	assert_array_almost_equal(outA[1].flatten(),outB.flatten(),5)
 
-# two-neuron multiple sin-osc ? (einfach mit starken bp filter ?)
 
 # mehrere outputs halt auch irgendwie testen
 # -> wie ?
-# -> z.B. auf beiden outputs das gleiche und schaun ob dann 2 mal das gleich
-#    rauskommt !
+
+# single neuron sin-osc machen ?
 
 
 if __name__ == "__main__":

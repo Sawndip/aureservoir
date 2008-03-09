@@ -254,7 +254,7 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   int steps = in.numCols();
 
   // collects output of all timesteps in O
-  O.resize(steps-washout, esn_->outputs_);
+  O.resize(steps-washout, 1);
 
   // collects reservoir activations and inputs of all timesteps in M
   // (for squared algorithm we need a bigger matrix)
@@ -279,12 +279,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     M(n,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)) =
     sim_in(_,1);
   }
-
-  // collect desired outputs
-  O = flens::transpose( out( _,_(washout+1,steps) ) );
-
-  // undo output activation function
-  esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
 
 
   // 2. delay calculation for delay&sum readout
@@ -353,7 +347,14 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     ///       do this after the delay calculation, so that we don't have to
     ///       store also the squared states !!!
 
+
     // 3. offline weight computation for each output extra
+
+    // collect desired outputs
+    O(_,1) = out( i ,_(washout+1,steps) );
+
+    // undo output activation function
+    esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
 
     // calc weights with pseudo inv: Wout_ = (M^-1) * O
     M = Mtmp( _(washout+1,steps), _);
@@ -371,8 +372,14 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
       {
         rest = esn_->sim_->getDelayBuffer(i-1,j-1);
         delay = rest.length();
-        M( _(1,steps-delay), j ) = Mtmp( _(delay+1,steps), j );
-        M( _(steps-delay+1,steps), j ) = rest;
+
+        if( delay != 0 )
+        {
+          M( _(1,steps-delay), j ) = Mtmp( _(delay+1,steps), j );
+          M( _(steps-delay+1,steps), j ) = rest;
+        }
+        else
+          M(_,j) = Mtmp(_,j);
       }
     }
   }
