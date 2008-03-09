@@ -257,11 +257,7 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   O.resize(steps-washout, 1);
 
   // collects reservoir activations and inputs of all timesteps in M
-  // (for squared algorithm we need a bigger matrix)
-  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
-    M.resize(steps, esn_->neurons_+esn_->inputs_);
-  else
-    M.resize(steps, 2*(esn_->neurons_+esn_->inputs_));
+  M.resize(steps, esn_->neurons_+esn_->inputs_);
 
   typename ESN<T>::DEMatrix sim_in(esn_->inputs_ ,1),
                             sim_out(esn_->outputs_ ,1);
@@ -284,13 +280,20 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   // 2. delay calculation for delay&sum readout
 
   // check for right simulation algorithm
-  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_FILTER_DS )
-    throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS for this training algorithm!");
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_FILTER_DS &&
+      esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
+    throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
 
   // get maxdelay
   int maxdelay;
   if( esn_->init_params_.find(DS_MAXDELAY) == esn_->init_params_.end() )
-    maxdelay = 1000;
+  {
+    // set maxdelay to 0 if we have squared state updates
+    if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
+      maxdelay = 0;
+    else
+      maxdelay = 1000;
+  }
   else
     maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
 
@@ -309,9 +312,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   typename DEVector<T>::Type x,y,rest;
   typename DEMatrix<T>::Type T1(1,esn_->neurons_+esn_->inputs_);
   typename DEMatrix<T>::Type Mtmp(M.numRows(),M.numCols()); /// \todo memory !!!
-
-//   std::cout << "Now calculating delays ...\n";
-//   std::cout << "maxdelay: " << maxdelay << " - filter: " << filter << std::endl;
 
   for(int i=1; i<=esn_->outputs_; ++i)
   {
@@ -343,10 +343,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
         Mtmp(_,j) = M(_,j);
     }
 
-    /// \todo square states ? where ?
-    ///       do this after the delay calculation, so that we don't have to
-    ///       store also the squared states !!!
-
 
     // 3. offline weight computation for each output extra
 
@@ -356,13 +352,26 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     // undo output activation function
     esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
 
+    // square and double state if we have additional squared state updates
+    if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
+    {
+      M = Mtmp( _(washout+1,steps), _);
+    }
+    else
+    {
+      M.resize( steps-washout, Mtmp.numCols()*2 );
+      M( _, _(1,Mtmp.numCols()) ) = Mtmp( _(washout+1,steps), _);
+      this->squareStates();
+    }
+
     // calc weights with pseudo inv: Wout_ = (M^-1) * O
-    M = Mtmp( _(washout+1,steps), _);
     flens::lss( M, O );
     T1 = flens::transpose( O(_( 1, M.numCols() ),_) );
     esn_->Wout_(i,_) = T1(1,_);
 
-    // restore matrix M
+
+    // 4. restore simulation matrix M
+
     if( i < esn_->outputs_ )
     {
       M.resize( Mtmp.numRows(), Mtmp.numCols() );

@@ -403,10 +403,8 @@ class SimFilterDS : public SimFilter<T>
   virtual SimFilterDS<T> *clone(ESN<T> *esn) const
   {
     SimFilterDS<T> *new_obj = new SimFilterDS<T>(esn);
-    new_obj->t_ = t_;
-    new_obj->last_out_ = last_out_;
-    new_obj->filter_ = filter_;
-    new_obj->dellines_ = dellines_;
+    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->filter_ = filter_; new_obj->dellines_ = dellines_;
     new_obj->intmp_ = intmp_;
     return new_obj;
   }
@@ -468,15 +466,17 @@ class SimFilterDS : public SimFilter<T>
  * \sa SimFilter
  */
 template <typename T>
-class SimSquare : public SimFilter<T>
+class SimSquare : public SimFilterDS<T>
 {
   using SimBase<T>::esn_;
   using SimBase<T>::last_out_;
   using SimBase<T>::t_;
   using SimFilter<T>::filter_;
+  using SimFilterDS<T>::dellines_;
+  using SimFilterDS<T>::intmp_;
 
  public:
-  SimSquare(ESN<T> *esn) : SimFilter<T>(esn) {}
+  SimSquare(ESN<T> *esn) : SimFilterDS<T>(esn) {}
   virtual ~SimSquare() {}
 
   /// virtual constructor idiom
@@ -484,14 +484,23 @@ class SimSquare : public SimFilter<T>
   {
     SimSquare<T> *new_obj = new SimSquare<T>(esn);
     new_obj->t_ = t_; new_obj->last_out_ = last_out_;
-    new_obj->filter_ = filter_;
+    new_obj->filter_ = filter_; new_obj->dellines_ = dellines_;
+    new_obj->intmp_ = intmp_; new_obj->t2_ = t2_;
+    new_obj->insq_ = insq_;
     return new_obj;
   }
+
+  /// reallocates data buffers
+  virtual void reallocate();
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
                         typename ESN<T>::DEMatrix &out);
+ protected:
+  /// temporary object needed for algorithm calculation
+  typename ESN<T>::DEVector t2_;
+  typename ESN<T>::DEVector insq_;
 };
 
 } // end of namespace aureservoir

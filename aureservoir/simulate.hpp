@@ -614,6 +614,17 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@{
 
 template <typename T>
+void SimSquare<T>::reallocate()
+{
+  last_out_.resize(esn_->outputs_, 1);
+  t_.resize(esn_->neurons_);
+  t2_.resize(esn_->neurons_);
+  dellines_.resize( (esn_->neurons_+esn_->inputs_)*esn_->outputs_ );
+  intmp_.resize(esn_->inputs_,1);
+  insq_.resize(esn_->inputs_);
+}
+
+template <typename T>
 void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
                             typename ESN<T>::DEMatrix &out)
 {
@@ -627,8 +638,6 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
   esn_->Wout_.resize(esn_->outputs_, 2*(esn_->neurons_+esn_->inputs_));
 
   int steps = in.numCols();
-  /// \todo speicher nicht hier allozieren
-  typename ESN<T>::DEVector insq(esn_->inputs_);
   typename ESN<T>::DEMatrix::View
     Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
     Wout2 = esn_->Wout_(_,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)),
@@ -636,6 +645,7 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
                             2*esn_->neurons_+esn_->inputs_)),
     Wout4 = esn_->Wout_(_,_(2*esn_->neurons_+esn_->inputs_+1,
                             2*(esn_->neurons_+esn_->inputs_)));
+
 
   // First run with output from last simulation
 
@@ -649,15 +659,30 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
   // IIR Filtering
   filter_.calc(esn_->x_);
 
-  // calculate squared state version
-  for(int i=1; i<=t_.length(); ++i)
-    t_(i) = pow( esn_->x_(i), 2 );
-  // calculate squared input version
-  for(int i=1; i<=insq.length(); ++i)
-    insq(i) = pow( in(i,1), 2 );
+  // delay states and inputs for all individual outputs
+  for(int i=1; i<=esn_->outputs_; ++i)
+  {
+    // delay x_ vector and store into t_
+    for(int j=1; j<=esn_->neurons_; ++j)
+      t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
+                          esn_->x_(j) );
 
-  // output = Wout * [x; in; x^2; in^2]
-  last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1) + Wout3*t_ + Wout4*insq;
+    // store correct delayed input vector in intmp_
+    for(int j=1; j<=esn_->inputs_; ++j)
+      intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
+                                +esn_->neurons_+j-1 ].tic( in(j,1) );
+
+    // calculate squared state version
+    for(int j=1; j<=t_.length(); ++j)
+      t2_(j) = pow( t_(j), 2 );
+    // calculate squared input version
+    for(int j=1; j<=insq_.length(); ++j)
+      insq_(j) = pow( intmp_(j,1), 2 );
+
+    // output = Wout * [x; in; x^2; in^2]
+    last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1)
+                     + Wout3(i,_)*t2_ + Wout4(i,_)*insq_;
+  }
 
   // output activation
   esn_->outputAct_( last_out_.data(),
@@ -679,15 +704,30 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
     // IIR Filtering
     filter_.calc(esn_->x_);
 
-    // calculate squared state version
-    for(int i=1; i<=t_.length(); ++i)
-      t_(i) = pow( esn_->x_(i), 2 );
-    // calculate squared input version
-    for(int i=1; i<=insq.length(); ++i)
-      insq(i) = pow( in(i,n), 2 );
+    // delay states and inputs for all individual outputs
+    for(int i=1; i<=esn_->outputs_; ++i)
+    {
+      // delay x_ vector and store into t_
+      for(int j=1; j<=esn_->neurons_; ++j)
+        t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
+                            esn_->x_(j) );
 
-    // output = Wout * [x; in; x^2; in^2]
-    last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n) + Wout3*t_ + Wout4*insq;
+      // store correct delayed input vector in intmp_
+      for(int j=1; j<=esn_->inputs_; ++j)
+        intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
+                                +esn_->neurons_+j-1 ].tic( in(j,n) );
+
+      // calculate squared state version
+      for(int j=1; j<=t_.length(); ++j)
+        t2_(j) = pow( t_(j), 2 );
+      // calculate squared input version
+      for(int j=1; j<=insq_.length(); ++j)
+        insq_(j) = pow( intmp_(j,1), 2 );
+
+      // output = Wout * [x; in; x^2; in^2]
+      last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1)
+                       + Wout3(i,_)*t2_ + Wout4(i,_)*insq_;
+    }
 
     // output activation
     esn_->outputAct_( last_out_.data(),
