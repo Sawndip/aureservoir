@@ -314,6 +314,12 @@ class ESN
   const DEMatrix &getWout() { return Wout_; }
   /// @return internal state vector x
   const DEVector &getX() { return x_; }
+  /**
+   * query the trained delays in delay&sum readout \sa class SimFilterDS
+   * @return matrix with delay form neurons+inputs to all outputs
+   *         size = (output x neurons+inputs)
+   */
+  DEMatrix getDelays() throw(AUExcept) { return sim_->getDelays(); }
 
   //@}
   //! @name GET internal data C-style interface
@@ -337,6 +343,14 @@ class ESN
    * @param wmtx pointer to matrix of size (neurons_ x neurons_)
    */
   void getW(T *wmtx, int wrows, int wcols) throw(AUExcept);
+  /**
+   * query the trained delays in delay&sum readout \sa class SimFilterDS
+   * and copies the data into a C-style matrix
+   * \attention Memory of the C array must be allocated before!
+   * @param wmtx matrix with delay form neurons+inputs to all outputs
+   *        size = (output x neurons+inputs)
+   */
+  void getDelays(T *wmtx, int wrows, int wcols) throw(AUExcept);
 
   //@}
   //! @name SET methods
@@ -546,7 +560,7 @@ class ESN
   friend class TrainPI<T>;
   friend class TrainLS<T>;
   friend class TrainRidgeReg<T>;
-  friend class TrainPISquare<T>;
+  friend class TrainDSPI<T>;
   friend class SimBase<T>;
   friend class SimStd<T>;
   friend class SimSquare<T>;

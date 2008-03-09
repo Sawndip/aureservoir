@@ -22,6 +22,8 @@
 
 #include "utilities.h"
 #include "filter.h"
+#include "delaysum.h"
+#include <vector>
 
 namespace aureservoir
 {
@@ -97,8 +99,11 @@ class SimBase
   virtual void setIIRCoeff(const typename DEMatrix<T>::Type &B,
                            const typename DEMatrix<T>::Type &A,
                            int series = 1) throw(AUExcept);
-  virtual void setReadoutDelays(const typename DEMatrix<T>::Type &D)
-                           throw(AUExcept);
+  virtual void initDelayLine(int index, const typename DEVector<T>::Type &initbuf)
+                             throw(AUExcept);
+  virtual typename DEMatrix<T>::Type getDelays() throw(AUExcept);
+  virtual typename DEVector<T>::Type &getDelayBuffer(int output, int nr)
+    throw(AUExcept);
   //@}
 
   /// output from last simulation
@@ -398,31 +403,55 @@ class SimFilterDS : public SimFilter<T>
   virtual SimFilterDS<T> *clone(ESN<T> *esn) const
   {
     SimFilterDS<T> *new_obj = new SimFilterDS<T>(esn);
-    new_obj->t_ = t_; new_obj->last_out_ = last_out_;
+    new_obj->t_ = t_;
+    new_obj->last_out_ = last_out_;
     new_obj->filter_ = filter_;
-    new_obj->delays_ = delays_;
+    new_obj->dellines_ = dellines_;
+    new_obj->intmp_ = intmp_;
     return new_obj;
   }
 
+  /// reallocates data buffers
+  virtual void reallocate();
+
   /**
-   * sets the delays for delay&sum readout
-   * used by the training algorithms
-   * @param D matrix with delays from reservoir neurons and inputs to
-  *           all outputs (m x n)
-   *          m  ... nr of outputs
-   *          n ... nr of reservoir neurons + inputs
+   * initializes the delay lines from each neuron+input to all outputs
+   * @param index which delayline to init, reservoir neurons are first,
+   *              then inputs, then to all outputs.
+   *              index starts from 0 !!!
+   * @param initbuf initial values of the delayline \sa class DelayLine
    */
-  virtual void setReadoutDelays(const typename DEMatrix<T>::Type &D)
+  virtual void initDelayLine(int index,
+                             const typename DEVector<T>::Type &initbuf)
+                             throw(AUExcept);
+
+  /**
+   * query the trained delays
+   * @return matrix with delay form neurons+inputs to all outputs
+   *         size = (output x neurons+inputs)
+   */
+  virtual typename DEMatrix<T>::Type getDelays() throw(AUExcept);
+
+  /**
+   * @param output delayline to this output (starting from 0)
+   * @param nr which neuron or input (starting from 0)
+   * @return the buffer of the delayline
+   */
+  virtual typename DEVector<T>::Type &getDelayBuffer(int output, int nr)
     throw(AUExcept);
 
   /// implementation of the algorithm
   /// \sa class SimBase::simulate
   virtual void simulate(const typename ESN<T>::DEMatrix &in,
-                        typename ESN<T>::DEMatrix &out) {}
+                        typename ESN<T>::DEMatrix &out);
 
  protected:
-  /// matrix with delays
-  typename ESN<T>::DEMatrix delays_;
+
+  /// vector with delaylines for each neuron+input to output connection
+  std::vector< DelayLine<T> > dellines_;
+
+  /// temporary object needed for algorithm calculation
+  typename ESN<T>::DEMatrix intmp_;
 };
 
 /*!

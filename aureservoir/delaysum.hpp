@@ -92,27 +92,29 @@ void irfft(CDEVector<float>::Type &X, DEVector<float>::Type &x)
 //@{
 
 template <typename T>
-int CalcDelay<T>::gcc(typename CDEVector<T>::Type &X,
-                      typename CDEVector<T>::Type &Y, int maxdelay, int filter)
+int CalcDelay<T>::gcc(const typename CDEVector<T>::Type &X,
+                      const typename CDEVector<T>::Type &Y, int maxdelay, int filter)
 {
   assert( X.length() == Y.length() );
+
+  typename CDEVector<T>::Type tmp( X.length() );
 
   int fftsize = 2*(X.length()-1);
 
   // multiplication in frequency domain
   for(int i=1; i<=X.length(); ++i)
-    Y(i) = conj( X(i) ) * Y(i);
+    tmp(i) = conj( X(i) ) * Y(i);
 
   // calc phase transform if needed
   if( filter == 1 )
   {
     for(int i=1; i<=X.length(); ++i)
-      if( std::abs(Y(i)) != 0) Y(i) = Y(i) / std::abs(Y(i));
+      if( std::abs(tmp(i)) != 0) tmp(i) = tmp(i) / std::abs(tmp(i));
   }
 
   // calc crosscorr with IFFT
   typename DEVector<T>::Type crosscorr;
-  irfft(Y,crosscorr);
+  irfft(tmp,crosscorr);
 
   // calc delay
   for(int i=1; i<=fftsize; ++i)
@@ -150,7 +152,7 @@ T DelayLine<T>::tic(T sample)
 
   T outsample = buffer_( readpt_ );
   buffer_( readpt_ ) = sample;
-  readpt_ = (readpt_+1) % delay_;
+  readpt_ = (readpt_ % delay_) + 1;
 
   return outsample;
 }

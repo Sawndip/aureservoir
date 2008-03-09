@@ -35,7 +35,8 @@ enum TrainAlgorithm
 {
   TRAIN_PI,        //!< offline, pseudo inverse based \sa class TrainPI
   TRAIN_LS,        //!< offline least square algorithm, \sa class TrainLS
-  TRAIN_RIDGEREG   //!< with ridge regression, \sa class TrainRidgeReg
+  TRAIN_RIDGEREG,  //!< with ridge regression, \sa class TrainRidgeReg
+  TRAIN_DS_PI      //!< trains a delay&sum readout with PI \sa class TrainDSPI
 };
 
 template <typename T> class ESN;
@@ -88,10 +89,6 @@ class TrainBase
   void collectStates(const typename ESN<T>::DEMatrix &in,
                      const typename ESN<T>::DEMatrix &out,
                      int washout);
-
-  /// calculate delays for delay&sum readout
-  void calcDelays(const typename ESN<T>::DEMatrix &in,
-                  const typename ESN<T>::DEMatrix &out);
 
   /// squares states for SIM_SQUARE
   void squareStates();
@@ -225,25 +222,29 @@ class TrainRidgeReg : public TrainBase<T>
 };
 
 /*!
- * \class TrainLSSquare
+ * \class TrainDSPI
  *
- * \brief offline algorithm (least square) with squared state updates
+ * \brief offline algorithm for delay&sum readout with PI
  *
- * Same as TrainLS, but for network which use additional squared state
- * updates as in SimSquare.
- * \sa class TrainLS
- * \sa class SimSquare
+ * Training like in class TrainPI, put an additional delay is learned
+ * in the readout.
+ * \sa class TrainPI
+ * \sa class SimFilterDS
+ *
+ * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
+ * (Georg Holzmann, 2008).
+ * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
  */
 template <typename T>
-class TrainPISquare : public TrainBase<T>
+class TrainDSPI : public TrainBase<T>
 {
   using TrainBase<T>::esn_;
   using TrainBase<T>::M;
   using TrainBase<T>::O;
 
  public:
-  TrainPISquare(ESN<T> *esn) : TrainBase<T>(esn) {}
-  virtual ~TrainPISquare() {}
+  TrainDSPI(ESN<T> *esn) : TrainBase<T>(esn) {}
+  virtual ~TrainDSPI() {}
 
   /// training algorithm
   virtual void train(const typename ESN<T>::DEMatrix &in,

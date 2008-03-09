@@ -174,6 +174,7 @@ class ESN
   void getWout(T **mtx, int *rows, int *cols);
   void getX(T **vec, int *length);
   void getW(T *wmtx, int wrows, int wcols);
+  void getDelays(T *wmtx, int wrows, int wcols);
 
   void setInitAlgorithm(InitAlgorithm alg=INIT_STD);
   void setTrainAlgorithm(TrainAlgorithm alg=TRAIN_LEASTSQUARE);
@@ -241,7 +242,8 @@ enum TrainAlgorithm
 {
   TRAIN_PI,        //!< offline, pseudo inverse based \sa class TrainPI
   TRAIN_LS,        //!< offline least square algorithm, \sa class TrainLS
-  TRAIN_RIDGEREG   //!< with ridge regression, \sa class TrainRidgeReg
+  TRAIN_RIDGEREG,  //!< with ridge regression, \sa class TrainRidgeReg
+  TRAIN_DS_PI      //!< trains a delay&sum readout with PI \sa class TrainDSPI
 };
 
 enum ActivationFunction

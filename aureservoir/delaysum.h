@@ -84,8 +84,8 @@ class CalcDelay
    *               1 = phase transform (PHAT)
    * @return delay between the two signals
    */
-  static int gcc(typename CDEVector<T>::Type &X,
-                 typename CDEVector<T>::Type &Y,
+  static int gcc(const typename CDEVector<T>::Type &X,
+                 const typename CDEVector<T>::Type &Y,
                  int maxdelay=1000, int filter=0);
 };
 
@@ -98,7 +98,9 @@ class DelayLine
 {
  public:
 
-  DelayLine() {}
+  DelayLine()
+  { delay_=0; readpt_=1; }
+
   virtual ~DelayLine() {}
 
   /*!
@@ -116,7 +118,14 @@ class DelayLine
    */
   T tic(T sample);
 
- protected:
+  /// assignment operator
+  const DelayLine& operator= (const DelayLine<T>& src)
+  {
+    readpt_ = src.readpt_;
+    delay_ = src.delay_;
+    buffer_ = src.buffer_;
+    return *this;
+  }
 
   /// ringbuffer for the delay line
   typename DEVector<T>::Type buffer_;

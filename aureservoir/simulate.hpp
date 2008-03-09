@@ -75,12 +75,35 @@ void SimBase<T>::setIIRCoeff(const typename DEMatrix<T>::Type &B,
 }
 
 template <typename T>
-void SimBase<T>::setReadoutDelays(const typename DEMatrix<T>::Type &D)
+void SimBase<T>::initDelayLine(int index,
+                               const typename DEVector<T>::Type &initbuf)
   throw(AUExcept)
 {
-  std::string str = "SimBase::setReadoutDelays: ";
+  std::string str = "SimBase::initDelayLines: ";
   str += "this is not implemented in standard ESNs, ";
-  str += "use e.g. SIM_FILTER_DS !";
+  str += "use ESN with delay&sum readout, e.g. SIM_FILTER_DS !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+typename DEMatrix<T>::Type SimBase<T>::getDelays()
+  throw(AUExcept)
+{
+  std::string str = "SimBase::getDelays: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use ESN with delay&sum readout, e.g. SIM_FILTER_DS !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+typename DEVector<T>::Type &SimBase<T>::getDelayBuffer(int output, int nr)
+    throw(AUExcept)
+{
+  std::string str = "SimBase::getDelayBuffer: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use ESN with delay&sum readout, e.g. SIM_FILTER_DS !";
 
   throw AUExcept( str );
 }
@@ -456,14 +479,134 @@ void SimFilter2<T>::simulate(const typename ESN<T>::DEMatrix &in,
 //@{
 
 template <typename T>
-void SimFilterDS<T>::setReadoutDelays(const typename DEMatrix<T>::Type &D)
+void SimFilterDS<T>::reallocate()
+{
+  last_out_.resize(esn_->outputs_, 1);
+  t_.resize(esn_->neurons_);
+  dellines_.resize( (esn_->neurons_+esn_->inputs_)*esn_->outputs_ );
+  intmp_.resize(esn_->inputs_,1);
+}
+
+template <typename T>
+void SimFilterDS<T>::initDelayLine(int index,
+                               const typename DEVector<T>::Type &initbuf)
   throw(AUExcept)
 {
-  if( D.numRows() != esn_->outputs_ ||
-      D.numCols() != esn_->inputs_+esn_->neurons_ )
-    throw AUExcept("SimFilterDS: wrong size of delay matrix!");
+  assert( index >= 0 );
+  assert( index < esn_->outputs_*(esn_->inputs_+esn_->neurons_) );
 
-  delays_ = D;
+  dellines_[index].initBuffer(initbuf);
+}
+
+template <typename T>
+typename DEMatrix<T>::Type SimFilterDS<T>::getDelays() throw(AUExcept)
+{
+  typename DEMatrix<T>::Type del(esn_->outputs_,
+                                 esn_->inputs_+esn_->neurons_);
+
+  for(int i=1; i<=esn_->outputs_;++i) {
+  for(int j=1; j<=esn_->inputs_+esn_->neurons_; ++j) {
+    del(i,j) = T( dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].delay_ );
+  } }
+
+  return del;
+}
+
+template <typename T>
+typename DEVector<T>::Type &SimFilterDS<T>::getDelayBuffer(int output, int nr)
+    throw(AUExcept)
+{
+  return dellines_[output*(esn_->neurons_+esn_->inputs_)+nr].buffer_;
+}
+
+template <typename T>
+void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
+                              typename ESN<T>::DEMatrix &out)
+{
+  assert( in.numRows() == esn_->inputs_ );
+  assert( out.numRows() == esn_->outputs_ );
+  assert( in.numCols() == out.numCols() );
+  assert( last_out_.numRows() == esn_->outputs_ );
+
+  int steps = in.numCols();
+  typename ESN<T>::DEMatrix::View
+    Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
+    Wout2 = esn_->Wout_(_,_(esn_->neurons_+1, esn_->neurons_+esn_->inputs_));
+
+  /// \todo see SimStd
+
+  // First run with output from last simulation
+
+  // calc neuron activation
+  t_ = esn_->x_;
+  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+  // add noise
+  Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+  esn_->x_ += t_;
+  esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+  // IIR Filtering
+  filter_.calc(esn_->x_);
+
+  // delay states and inputs for all individual outputs
+  for(int i=1; i<=esn_->outputs_; ++i)
+  {
+    // delay x_ vector and store into t_
+    for(int j=1; j<=esn_->neurons_; ++j)
+      t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
+                          esn_->x_(j) );
+
+    // store correct delayed input vector in intmp_
+    for(int j=1; j<=esn_->inputs_; ++j)
+      intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
+                                +esn_->neurons_+j-1 ].tic( in(j,1) );
+
+    // calc  Wout * [x; in] for current output with delayed values
+    last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1);
+  }
+
+  // output activation
+  esn_->outputAct_( last_out_.data(),
+                    last_out_.numRows()*last_out_.numCols() );
+  out(_,1) = last_out_(_,1);
+
+
+  // the rest
+
+  for(int n=2; n<=steps; ++n)
+  {
+    t_ = esn_->x_; // temp object needed for BLAS
+    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+    // add noise
+    Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
+    esn_->x_ += t_;
+    esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+    // IIR Filtering
+    filter_.calc(esn_->x_);
+
+    // delay states and inputs for all individual outputs
+    for(int i=1; i<=esn_->outputs_; ++i)
+    {
+      // delay x_ vector and store into t_
+      for(int j=1; j<=esn_->neurons_; ++j)
+        t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
+                            esn_->x_(j) );
+
+      // store correct delayed input vector in intmp_
+      for(int j=1; j<=esn_->inputs_; ++j)
+        intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
+                                  +esn_->neurons_+j-1 ].tic( in(j,n) );
+
+      // calc  Wout * [x; in] for current output with delayed values
+      last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1);
+    }
+
+    // output activation
+    esn_->outputAct_( last_out_.data(),
+                      last_out_.numRows()*last_out_.numCols() );
+    out(_,n) = last_out_(_,1);
+  }
 }
 
 //@}

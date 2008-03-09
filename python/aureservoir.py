@@ -403,6 +403,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_getW(*args)
 
+    def getDelays(*args):
+        """getDelays(self, double wmtx)"""
+        return _aureservoir.DoubleESN_getDelays(*args)
+
     def setInitAlgorithm(*args):
         """
         setInitAlgorithm(self, InitAlgorithm alg=INIT_STD)
@@ -931,6 +935,10 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_getW(*args)
 
+    def getDelays(*args):
+        """getDelays(self, float wmtx)"""
+        return _aureservoir.SingleESN_getDelays(*args)
+
     def setInitAlgorithm(*args):
         """
         setInitAlgorithm(self, InitAlgorithm alg=INIT_STD)
@@ -1154,6 +1162,7 @@ SIM_FILTER_DS = _aureservoir.SIM_FILTER_DS
 TRAIN_PI = _aureservoir.TRAIN_PI
 TRAIN_LS = _aureservoir.TRAIN_LS
 TRAIN_RIDGEREG = _aureservoir.TRAIN_RIDGEREG
+TRAIN_DS_PI = _aureservoir.TRAIN_DS_PI
 ACT_LINEAR = _aureservoir.ACT_LINEAR
 ACT_TANH = _aureservoir.ACT_TANH
 ACT_TANH2 = _aureservoir.ACT_TANH2

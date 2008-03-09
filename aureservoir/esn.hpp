@@ -440,6 +440,23 @@ void ESN<T>::getW(T *wmtx, int wrows, int wcols)
 }
 
 template <typename T>
+void ESN<T>::getDelays(T *wmtx, int wrows, int wcols)
+  throw(AUExcept)
+{
+  DEMatrix Dtmp = getDelays();
+
+  if( wrows != Dtmp.numRows() )
+    throw AUExcept("ESN::getDelays: wrong row size!");
+  if( wcols != Dtmp.numCols() )
+    throw AUExcept("ESN::getDelays: wrong column size!");
+
+  for(int i=0; i<wrows; ++i) {
+  for(int j=0; j<wcols; ++j) {
+    wmtx[i*wcols+j] = Dtmp(i+1,j+1);
+  } }
+}
+
+template <typename T>
 void ESN<T>::setInitAlgorithm(InitAlgorithm alg)
   throw(AUExcept)
 {
@@ -478,6 +495,12 @@ void ESN<T>::setTrainAlgorithm(TrainAlgorithm alg)
       if(train_) delete train_;
       train_ = new TrainRidgeReg<T>(this);
       net_info_[TRAIN_ALG] = TRAIN_RIDGEREG;
+      break;
+
+    case TRAIN_DS_PI:
+      if(train_) delete train_;
+      train_ = new TrainDSPI<T>(this);
+      net_info_[TRAIN_ALG] = TRAIN_DS_PI;
       break;
 
     default:
@@ -879,6 +902,9 @@ string ESN<T>::getTrainString(int alg)
 
     case TRAIN_RIDGEREG:
       return "TRAIN_RIDGEREG";
+
+    case TRAIN_DS_PI:
+      return "TRAIN_DS_PI";
 
     default:
       throw AUExcept("ESN::getTrainString: unknown training algorithm");

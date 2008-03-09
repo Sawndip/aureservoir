@@ -99,54 +99,6 @@ void TrainBase<T>::collectStates(const typename ESN<T>::DEMatrix &in,
 }
 
 template <typename T>
-void TrainBase<T>::calcDelays(const typename ESN<T>::DEMatrix &in,
-                              const typename ESN<T>::DEMatrix &out)
-{
-  typename ESN<T>::DEMatrix delays(esn_->outputs_,
-                                   esn_->neurons_+esn_->inputs_);
-
-  // get maxdelay
-  int maxdelay;
-  if( esn_->init_params_.find(DS_MAXDELAY) == esn_->init_params_.end() )
-    maxdelay = 1000;
-  else
-    maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
-
-  // see if we use GCC or simple crosscorr, standard is GCC
-  int filter;
-  if( esn_->init_params_.find(DS_USE_CROSSCORR) == esn_->init_params_.end() )
-    filter = 0;
-  else
-    filter = 1;
-
-  // delay calculation
-  int steps = in.numCols();
-  int fftsize = (int) pow( 2, ceil(log(steps)/log(2)) ); // next power of 2
-  typename CDEVector<T>::Type X,Y;
-  typename DEVector<T>::Type x,y;
-  for(int i=1; i<=esn_->outputs_; ++i)
-  {
-    // calc FFT of target vector
-    y = out(i,_);
-    rfft( y, Y, fftsize );
-
-    // calc delays to reservoir neurons and inputs
-    for(int j=1; j<=esn_->neurons_+esn_->inputs_; ++j)
-    {
-      // calc FFT of neuron/input vector
-      x = M(_,j);
-      rfft( x, X, fftsize );
-
-      // calc delay with GCC
-      delays(i,j) = T( CalcDelay<T>::gcc(X,Y,maxdelay,filter) );
-    }
-  }
-
-  // set delays in the simulation algorithm object
-  esn_->sim_->setReadoutDelays(delays);
-}
-
-template <typename T>
 void TrainBase<T>::squareStates()
 {
   // add additional squared states and inputs
@@ -173,10 +125,6 @@ void TrainPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   // 1. teacher forcing, collect states
   this->collectStates(in,out,washout);
-
-  // calc delays for delay&sum readout
-  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_FILTER_DS )
-    this->calcDelays(in,out);
 
   // add additional squared states when using SIM_SQUARE
   if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
@@ -284,6 +232,150 @@ void TrainRidgeReg<T>::train(const typename ESN<T>::DEMatrix &in,
   // result = ans.T
   esn_->Wout_ = flens::transpose(T1);
 
+
+  this->clearData();
+}
+
+//@}
+//! @name class TrainDSPI Implementation
+//@{
+
+template <typename T>
+void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
+                       const typename ESN<T>::DEMatrix &out,
+                       int washout)
+  throw(AUExcept)
+{
+  this->checkParams(in,out,washout);
+
+
+  // 1. teacher forcing, collect states
+
+  int steps = in.numCols();
+
+  // collects output of all timesteps in O
+  O.resize(steps-washout, esn_->outputs_);
+
+  // collects reservoir activations and inputs of all timesteps in M
+  // (for squared algorithm we need a bigger matrix)
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
+    M.resize(steps, esn_->neurons_+esn_->inputs_);
+  else
+    M.resize(steps, 2*(esn_->neurons_+esn_->inputs_));
+
+  typename ESN<T>::DEMatrix sim_in(esn_->inputs_ ,1),
+                            sim_out(esn_->outputs_ ,1);
+  for(int n=1; n<=steps; ++n)
+  {
+    sim_in(_,1) = in(_,n);
+    esn_->simulate(sim_in, sim_out);
+
+    // for teacherforcing with feedback in single step simulation
+    // we need to set the correct last output
+    esn_->sim_->last_out_(_,1) = out(_,n);
+
+    // store internal states, inputs and outputs
+    M(n,_(1,esn_->neurons_)) = esn_->x_;
+    M(n,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)) =
+    sim_in(_,1);
+  }
+
+  // collect desired outputs
+  O = flens::transpose( out( _,_(washout+1,steps) ) );
+
+  // undo output activation function
+  esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
+
+
+  // 2. delay calculation for delay&sum readout
+
+  // check for right simulation algorithm
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_FILTER_DS )
+    throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS for this training algorithm!");
+
+  // get maxdelay
+  int maxdelay;
+  if( esn_->init_params_.find(DS_MAXDELAY) == esn_->init_params_.end() )
+    maxdelay = 1000;
+  else
+    maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
+
+  // see if we use GCC or simple crosscorr, standard is GCC
+  int filter;
+  if( esn_->init_params_.find(DS_USE_CROSSCORR) == esn_->init_params_.end() )
+    filter = 1;
+  else
+    filter = 0;
+
+  // delay calculation
+
+  int delay = 0;
+  int fftsize = (int) pow( 2, ceil(log(steps)/log(2)) ); // next power of 2
+  typename CDEVector<T>::Type X,Y;
+  typename DEVector<T>::Type x,y,rest;
+  typename DEMatrix<T>::Type T1(1,esn_->neurons_+esn_->inputs_);
+  typename DEMatrix<T>::Type Mtmp(M.numRows(),M.numCols()); /// \todo memory !!!
+
+//   std::cout << "Now calculating delays ...\n";
+//   std::cout << "maxdelay: " << maxdelay << " - filter: " << filter << std::endl;
+
+  for(int i=1; i<=esn_->outputs_; ++i)
+  {
+    // calc FFT of target vector
+    y = out(i,_);
+    rfft( y, Y, fftsize );
+
+    // calc delays to reservoir neurons and inputs
+    for(int j=1; j<=esn_->neurons_+esn_->inputs_; ++j)
+    {
+      // calc FFT of neuron/input vector
+      x = M(_,j);
+      rfft( x, X, fftsize );
+
+      // calc delay with GCC
+      delay = CalcDelay<T>::gcc(X,Y,maxdelay,filter);
+
+      if( delay != 0 )
+      {
+        // shift signal the right amount
+        rest = M( _(M.numRows()-delay+1,M.numRows()), j );
+        Mtmp( _(1,delay), j ) = 0.;
+        Mtmp( _(delay+1,M.numRows()), j ) = M( _(1,M.numRows()-delay), j );
+
+        // init delay lines with the rest of the buffer
+        esn_->sim_->initDelayLine((i-1)*(esn_->neurons_+esn_->inputs_)+j-1, rest);
+      }
+      else
+        Mtmp(_,j) = M(_,j);
+    }
+
+    /// \todo square states ? where ?
+    ///       do this after the delay calculation, so that we don't have to
+    ///       store also the squared states !!!
+
+    // 3. offline weight computation for each output extra
+
+    // calc weights with pseudo inv: Wout_ = (M^-1) * O
+    M = Mtmp( _(washout+1,steps), _);
+    flens::lss( M, O );
+    T1 = flens::transpose( O(_( 1, M.numCols() ),_) );
+    esn_->Wout_(i,_) = T1(1,_);
+
+    // restore matrix M
+    if( i < esn_->outputs_ )
+    {
+      M.resize( Mtmp.numRows(), Mtmp.numCols() );
+
+      // undo the delays and store it again into M
+      for(int j=1; j<=esn_->neurons_+esn_->inputs_; ++j)
+      {
+        rest = esn_->sim_->getDelayBuffer(i-1,j-1);
+        delay = rest.length();
+        M( _(1,steps-delay), j ) = Mtmp( _(delay+1,steps), j );
+        M( _(steps-delay+1,steps), j ) = rest;
+      }
+    }
+  }
 
   this->clearData();
 }
