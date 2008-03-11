@@ -304,15 +304,15 @@ class ESN
   //! @name GET internal data
   //@{
 
-  /// @return input weight matrix
+  /// @return input weight matrix (neurons x inputs)
   const DEMatrix &getWin() { return Win_; }
-  /// @return reservoir weight matrix
+  /// @return reservoir weight matrix (neurons x neurons)
   const SPMatrix &getW() { return W_; }
-  /// @return feedback (output to reservoir) weight matrix
+  /// @return feedback (output to reservoir) weight matrix (neurons x outputs)
   const DEMatrix &getWback() { return Wback_; }
-  /// @return output weight matrix
+  /// @return output weight matrix (outputs x neurons+inputs)
   const DEMatrix &getWout() { return Wout_; }
-  /// @return internal state vector x
+  /// @return internal state vector x (size = neurons)
   const DEVector &getX() { return x_; }
   /**
    * query the trained delays in delay&sum readout \sa class SimFilterDS
@@ -326,12 +326,15 @@ class ESN
   //@{
 
   /// get pointer to input weight matrix data and dimensions
+  /// (neurons x inputs)
   /// \warning This data is in fortran style column major storage !
   void getWin(T **mtx, int *rows, int *cols);
-  /// get pointer to feedback weight matrix data and dimensions
+  /// get pointer to feedback weight matrix data and dimensions 
+  /// (neurons x outputs)
   /// \warning This data is in fortran style column major storage !
   void getWback(T **mtx, int *rows, int *cols);
   /// get pointer to output weight matrix data and dimensions
+  /// (outputs x neurons+inputs)
   /// \warning This data is in fortran style column major storage !
   void getWout(T **mtx, int *rows, int *cols);
   /// get pointer to internal state vector x data and length
@@ -397,15 +400,15 @@ class ESN
   //! @name SET internal data
   //@{
 
-  /// set input weight matrix
+  /// set input weight matrix (neurons x inputs)
   void setWin(const DEMatrix &Win) throw(AUExcept);
-  /// set reservoir weight matrix
+  /// set reservoir weight matrix (neurons x neurons)
   void setW(const DEMatrix &W) throw(AUExcept);
-  /// set feedback weight matrix
+  /// set feedback weight matrix (neurons x outputs)
   void setWback(const DEMatrix &Wback) throw(AUExcept);
-  /// set output weight matrix
+  /// set output weight matrix (outputs x neurons+inputs)
   void setWout(const DEMatrix &Wout) throw(AUExcept);
-  /// set internal state vector
+  /// set internal state vector (size = neurons)
   void setX(const DEVector &x) throw(AUExcept);
 
   /*!
@@ -420,35 +423,35 @@ class ESN
   //@{
 
   /*!
-   * set input weight matrix C-style interface
+   * set input weight matrix C-style interface (neurons x inputs)
    * (data will be copied into a FLENS matrix)
    * @param inmtx pointer to win matrix in row major storage
    */
   void setWin(T *inmtx, int inrows, int incols) throw(AUExcept);
 
   /*!
-   * set reservoir weight matrix C-style interface
+   * set reservoir weight matrix C-style interface (neurons x neurons)
    * (data will be copied into a FLENS matrix)
    * @param inmtx pointer to a dense reservoir matrix in row major storage
    */
   void setW(T *inmtx, int inrows, int incols) throw(AUExcept);
 
   /*!
-   * set feedback weight matrix C-style interface
+   * set feedback weight matrix C-style interface (neurons x outputs)
    * (data will be copied into a FLENS matrix)
    * @param inmtx pointer to wback matrix in row major storage
    */
   void setWback(T *inmtx, int inrows, int incols) throw(AUExcept);
 
   /*!
-   * set output weight matrix C-style interface
+   * set output weight matrix C-style interface (outputs x neurons+inputs)
    * (data will be copied into a FLENS matrix)
    * @param inmtx pointer to wout matrix in row major storage
    */
   void setWout(T *inmtx, int inrows, int incols) throw(AUExcept);
 
   /*!
-   * set internal state vector C-style interface
+   * set internal state vector C-style interface (size = neurons)
    * (data will be copied into a FLENS matrix)
    * @param invec pointer to state vector
    */
@@ -457,7 +460,7 @@ class ESN
   /*!
    * set last output, stored by the simulation algorithm
    * needed in singleStep simulation with feedback
-   * @param last vector with length = outputs
+   * @param last vector with size = outputs
    */
   void setLastOutput(T *last, int size) throw(AUExcept);
 

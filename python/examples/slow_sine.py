@@ -1,6 +1,9 @@
 ###########################################################
-# slow sine genration task with standard ESN
-# with standard and bandpass ESNs
+# slow sine genration task with standard and BP ESN
+#
+# see Jaeger H. (2002), "Tutorial on training recurrent
+# neural networks, covering BPPT, RTRL, EKF and the
+# echo state network approach"
 #
 # 2007, Georg Holzmann
 ###########################################################
@@ -11,14 +14,14 @@ from aureservoir import *
 import sys
 sys.path.append("../")
 from aureservoir import *
+import errorcalc, filteresn
 
 
 ###########################################################
 # FUNCTIONS
 
 def setup_STD_ESN():
-	""" configuration of a standard ESN
-	"""
+	""" configuration of a standard ESN """
 	net = DoubleESN()
 	net.setSize(20)
 	net.setInputs(1)
@@ -33,33 +36,29 @@ def setup_STD_ESN():
 	net.setOutputAct( ACT_LINEAR )
 	net.setSimAlgorithm( SIM_STD )
 	net.setTrainAlgorithm( TRAIN_PI )
-	#net.setTrainAlgorithm( TRAIN_RIDGEREG )
-	#net.setInitParam( TIKHONOV_FACTOR, 1e-4 )
 	trainnoise = 1e-6
 	testnoise = 0.
 	return net, trainnoise, testnoise
 
-def setup_ESN_LI():
-	""" configuration of a leaky integrating ESN """
-	net = DoubleESN()
+def setup_ESN_BP():
+	""" configuration of a bandpass ESN with cutoff frequency
+	at the sine frequency """
+	net = filteresn.BPESN()
 	net.setSize(20)
 	net.setInputs(1)
 	net.setOutputs(1)
 	net.setInitParam( CONNECTIVITY, 0.2 )
-	net.setInitParam( ALPHA, 0.45*0.8 )
-	net.setInitParam( LEAKING_RATE, 0.8 )
+	net.setInitParam( ALPHA, 0.3 )
 	net.setInitParam( IN_CONNECTIVITY, 0. )
 	net.setInitParam( IN_SCALE, 0. )
 	net.setInitParam( FB_CONNECTIVITY, 1. )
 	net.setInitParam( FB_SCALE, 1. )
 	net.setReservoirAct( ACT_TANH )
 	net.setOutputAct( ACT_LINEAR )
-	net.setSimAlgorithm( SIM_LI )
+	net.setSimAlgorithm( SIM_BP )
 	net.setTrainAlgorithm( TRAIN_PI )
-	#net.setTrainAlgorithm( TRAIN_RIDGEREG )
-	#net.setInitParam( TIKHONOV_FACTOR, 1e-4 )
-	trainnoise = 1e-6
-	#trainnoise = 0.
+	net.setConstCutoffs(0.01, 0.01) # sine frequency
+	trainnoise = 0.
 	testnoise = 0.
 	return net, trainnoise, testnoise
 
@@ -85,19 +84,6 @@ def get_esn_data(signal,trainsize,testsize):
 	
 	return trainin, trainout, testin, testout
 
-def nrmse( testsig, origsig, discard=0 ):
-	""" calculates the NRMSE (normalized root mean square error) """
-	# TODO: make for matrix in and target
-	
-	# reshape values
-	testsig.shape = -1,
-	origsig.shape = -1,
-	
-	error = (origsig - testsig)**2
-	nrmse = N.sqrt( error.mean() / (origsig.var()**2) )
-	
-	return nrmse
-
 def plot(esnout,testout):
 	""" plotting """
 	P.title('Original=blue, ESNout=red')
@@ -112,9 +98,9 @@ trainsize = 4000
 washout = 2000
 testsize = 8000
 
-# choose ESN
-#net, trainnoise, testnoise = setup_STD_ESN()
-net, trainnoise, testnoise = setup_ESN_LI()
+# choose ESN: compare STD-ESN with BP-ESN
+net, trainnoise, testnoise = setup_STD_ESN()
+#net, trainnoise, testnoise = setup_ESN_BP()
 net.init()
 
 # generate signals
@@ -131,5 +117,5 @@ print "\tmean: ", net.getWout().mean(), "\tmax: ", abs(net.getWout()).max()
 esnout = N.empty(testout.shape)
 net.setNoise(testnoise)
 net.simulate(testin,esnout)
-print "\nNRMSE: ", nrmse( esnout, testout, 50 )
+print "\nNRMSE: ", errorcalc.nrmse( esnout, testout, 50 )
 plot(esnout,testout)

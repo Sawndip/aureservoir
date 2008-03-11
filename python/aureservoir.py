@@ -355,8 +355,9 @@ class DoubleESN(_object):
         """
         getWin(self, double mtx)
 
-        get pointer to input weight matrix data and dimensions WARNING:  This
-        data is in fortran style column major storage ! 
+        get pointer to input weight matrix data and dimensions (neurons x
+        inputs) WARNING:  This data is in fortran style column major storage !
+
         """
         return _aureservoir.DoubleESN_getWin(*args)
 
@@ -364,8 +365,9 @@ class DoubleESN(_object):
         """
         getWback(self, double mtx)
 
-        get pointer to feedback weight matrix data and dimensions WARNING:
-        This data is in fortran style column major storage ! 
+        get pointer to feedback weight matrix data and dimensions (neurons x
+        outputs) WARNING:  This data is in fortran style column major storage
+        ! 
         """
         return _aureservoir.DoubleESN_getWback(*args)
 
@@ -373,8 +375,9 @@ class DoubleESN(_object):
         """
         getWout(self, double mtx)
 
-        get pointer to output weight matrix data and dimensions WARNING:  This
-        data is in fortran style column major storage ! 
+        get pointer to output weight matrix data and dimensions (outputs x
+        neurons+inputs) WARNING:  This data is in fortran style column major
+        storage ! 
         """
         return _aureservoir.DoubleESN_getWout(*args)
 
@@ -404,7 +407,21 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_getW(*args)
 
     def getDelays(*args):
-        """getDelays(self, double wmtx)"""
+        """
+        getDelays(self, double wmtx)
+
+        throw (
+        AUExcept) query the trained delays in delay&sum readout See:  class
+        SimFilterDS and copies the data into a C-style matrix
+
+        Memory of the C array must be allocated before!
+
+        Parameters:
+        -----------
+
+        wmtx:  matrix with delay form neurons+inputs to all outputs size =
+        (output x neurons+inputs) 
+        """
         return _aureservoir.DoubleESN_getDelays(*args)
 
     def setInitAlgorithm(*args):
@@ -515,8 +532,8 @@ class DoubleESN(_object):
         setWin(self, double inmtx)
 
         throw ( AUExcept)
-        set input weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        set input weight matrix C-style interface (neurons x inputs) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -530,8 +547,8 @@ class DoubleESN(_object):
         setW(self, double inmtx)
 
         throw ( AUExcept) set
-        reservoir weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        reservoir weight matrix C-style interface (neurons x neurons) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -545,8 +562,8 @@ class DoubleESN(_object):
         setWback(self, double inmtx)
 
         throw ( AUExcept)
-        set feedback weight matrix C-style interface (data will be copied into
-        a FLENS matrix)
+        set feedback weight matrix C-style interface (neurons x outputs) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -560,8 +577,8 @@ class DoubleESN(_object):
         setWout(self, double inmtx)
 
         throw ( AUExcept)
-        set output weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        set output weight matrix C-style interface (outputs x neurons+inputs)
+        (data will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -575,8 +592,8 @@ class DoubleESN(_object):
         setX(self, double invec)
 
         throw ( AUExcept) set
-        internal state vector C-style interface (data will be copied into a
-        FLENS matrix)
+        internal state vector C-style interface (size = neurons) (data will be
+        copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -596,7 +613,7 @@ class DoubleESN(_object):
         Parameters:
         -----------
 
-        last:  vector with length = outputs 
+        last:  vector with size = outputs 
         """
         return _aureservoir.DoubleESN_setLastOutput(*args)
 
@@ -887,8 +904,9 @@ class SingleESN(_object):
         """
         getWin(self, float mtx)
 
-        get pointer to input weight matrix data and dimensions WARNING:  This
-        data is in fortran style column major storage ! 
+        get pointer to input weight matrix data and dimensions (neurons x
+        inputs) WARNING:  This data is in fortran style column major storage !
+
         """
         return _aureservoir.SingleESN_getWin(*args)
 
@@ -896,8 +914,9 @@ class SingleESN(_object):
         """
         getWback(self, float mtx)
 
-        get pointer to feedback weight matrix data and dimensions WARNING:
-        This data is in fortran style column major storage ! 
+        get pointer to feedback weight matrix data and dimensions (neurons x
+        outputs) WARNING:  This data is in fortran style column major storage
+        ! 
         """
         return _aureservoir.SingleESN_getWback(*args)
 
@@ -905,8 +924,9 @@ class SingleESN(_object):
         """
         getWout(self, float mtx)
 
-        get pointer to output weight matrix data and dimensions WARNING:  This
-        data is in fortran style column major storage ! 
+        get pointer to output weight matrix data and dimensions (outputs x
+        neurons+inputs) WARNING:  This data is in fortran style column major
+        storage ! 
         """
         return _aureservoir.SingleESN_getWout(*args)
 
@@ -936,7 +956,21 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_getW(*args)
 
     def getDelays(*args):
-        """getDelays(self, float wmtx)"""
+        """
+        getDelays(self, float wmtx)
+
+        throw (
+        AUExcept) query the trained delays in delay&sum readout See:  class
+        SimFilterDS and copies the data into a C-style matrix
+
+        Memory of the C array must be allocated before!
+
+        Parameters:
+        -----------
+
+        wmtx:  matrix with delay form neurons+inputs to all outputs size =
+        (output x neurons+inputs) 
+        """
         return _aureservoir.SingleESN_getDelays(*args)
 
     def setInitAlgorithm(*args):
@@ -1047,8 +1081,8 @@ class SingleESN(_object):
         setWin(self, float inmtx)
 
         throw ( AUExcept)
-        set input weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        set input weight matrix C-style interface (neurons x inputs) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -1062,8 +1096,8 @@ class SingleESN(_object):
         setW(self, float inmtx)
 
         throw ( AUExcept) set
-        reservoir weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        reservoir weight matrix C-style interface (neurons x neurons) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -1077,8 +1111,8 @@ class SingleESN(_object):
         setWback(self, float inmtx)
 
         throw ( AUExcept)
-        set feedback weight matrix C-style interface (data will be copied into
-        a FLENS matrix)
+        set feedback weight matrix C-style interface (neurons x outputs) (data
+        will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -1092,8 +1126,8 @@ class SingleESN(_object):
         setWout(self, float inmtx)
 
         throw ( AUExcept)
-        set output weight matrix C-style interface (data will be copied into a
-        FLENS matrix)
+        set output weight matrix C-style interface (outputs x neurons+inputs)
+        (data will be copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -1107,8 +1141,8 @@ class SingleESN(_object):
         setX(self, float invec)
 
         throw ( AUExcept) set
-        internal state vector C-style interface (data will be copied into a
-        FLENS matrix)
+        internal state vector C-style interface (size = neurons) (data will be
+        copied into a FLENS matrix)
 
         Parameters:
         -----------
@@ -1128,7 +1162,7 @@ class SingleESN(_object):
         Parameters:
         -----------
 
-        last:  vector with length = outputs 
+        last:  vector with size = outputs 
         """
         return _aureservoir.SingleESN_setLastOutput(*args)
 

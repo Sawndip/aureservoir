@@ -256,40 +256,50 @@ output activation function ";
 
 %feature("docstring")  ESN::getWin "
 
-input weight matrix ";
+input weight matrix (neurons x inputs) ";
 
 %feature("docstring")  ESN::getW "
 
-reservoir weight matrix ";
+reservoir weight matrix (neurons x neurons) ";
 
 %feature("docstring")  ESN::getWback "
 
-feedback (output to reservoir) weight matrix ";
+feedback (output to reservoir) weight matrix (neurons x outputs) ";
 
 %feature("docstring")  ESN::getWout "
 
-output weight matrix ";
+output weight matrix (outputs x neurons+inputs) ";
 
 %feature("docstring")  ESN::getX "
 
-internal state vector x ";
+internal state vector x (size = neurons) ";
+
+%feature("docstring")  ESN::getDelays "throw (
+AUExcept) query the trained delays in delay&sum readout See:  class
+SimFilterDS
+
+matrix with delay form neurons+inputs to all outputs size = (output x
+neurons+inputs) ";
 
 /*  GET internal data C-style interface  */
 
 %feature("docstring")  ESN::getWin "
 
-get pointer to input weight matrix data and dimensions WARNING:  This
-data is in fortran style column major storage ! ";
+get pointer to input weight matrix data and dimensions (neurons x
+inputs) WARNING:  This data is in fortran style column major storage !
+";
 
 %feature("docstring")  ESN::getWback "
 
-get pointer to feedback weight matrix data and dimensions WARNING:
-This data is in fortran style column major storage ! ";
+get pointer to feedback weight matrix data and dimensions (neurons x
+outputs) WARNING:  This data is in fortran style column major storage
+! ";
 
 %feature("docstring")  ESN::getWout "
 
-get pointer to output weight matrix data and dimensions WARNING:  This
-data is in fortran style column major storage ! ";
+get pointer to output weight matrix data and dimensions (outputs x
+neurons+inputs) WARNING:  This data is in fortran style column major
+storage ! ";
 
 %feature("docstring")  ESN::getX "
 
@@ -305,6 +315,18 @@ Parameters:
 wmtx:  pointer to matrix of size (neurons_ x neurons_)
 
 Todo check if this can be avoided ";
+
+%feature("docstring")  ESN::getDelays "throw (
+AUExcept) query the trained delays in delay&sum readout See:  class
+SimFilterDS and copies the data into a C-style matrix
+
+Memory of the C array must be allocated before!
+
+Parameters:
+-----------
+
+wmtx:  matrix with delay form neurons+inputs to all outputs size =
+(output x neurons+inputs) ";
 
 /*  SET methods  */
 
@@ -359,19 +381,19 @@ value:  the value of that parameter
 */
 
 %feature("docstring")  ESN::setWin "throw ( AUExcept)
-set input weight matrix ";
+set input weight matrix (neurons x inputs) ";
 
 %feature("docstring")  ESN::setW "throw ( AUExcept) set
-reservoir weight matrix ";
+reservoir weight matrix (neurons x neurons) ";
 
 %feature("docstring")  ESN::setWback "throw ( AUExcept)
-set feedback weight matrix ";
+set feedback weight matrix (neurons x outputs) ";
 
 %feature("docstring")  ESN::setWout "throw ( AUExcept)
-set output weight matrix ";
+set output weight matrix (outputs x neurons+inputs) ";
 
 %feature("docstring")  ESN::setX "throw ( AUExcept) set
-internal state vector ";
+internal state vector (size = neurons) ";
 
 %feature("docstring")  ESN::setLastOutput "throw (
 AUExcept) set last output, stored by the simulation algorithm needed
@@ -385,8 +407,8 @@ last:  vector with length = outputs ";
 /*  SET internal data C-style interface  */
 
 %feature("docstring")  ESN::setWin "throw ( AUExcept)
-set input weight matrix C-style interface (data will be copied into a
-FLENS matrix)
+set input weight matrix C-style interface (neurons x inputs) (data
+will be copied into a FLENS matrix)
 
 Parameters:
 -----------
@@ -394,8 +416,8 @@ Parameters:
 inmtx:  pointer to win matrix in row major storage ";
 
 %feature("docstring")  ESN::setW "throw ( AUExcept) set
-reservoir weight matrix C-style interface (data will be copied into a
-FLENS matrix)
+reservoir weight matrix C-style interface (neurons x neurons) (data
+will be copied into a FLENS matrix)
 
 Parameters:
 -----------
@@ -403,8 +425,8 @@ Parameters:
 inmtx:  pointer to a dense reservoir matrix in row major storage ";
 
 %feature("docstring")  ESN::setWback "throw ( AUExcept)
-set feedback weight matrix C-style interface (data will be copied into
-a FLENS matrix)
+set feedback weight matrix C-style interface (neurons x outputs) (data
+will be copied into a FLENS matrix)
 
 Parameters:
 -----------
@@ -412,8 +434,8 @@ Parameters:
 inmtx:  pointer to wback matrix in row major storage ";
 
 %feature("docstring")  ESN::setWout "throw ( AUExcept)
-set output weight matrix C-style interface (data will be copied into a
-FLENS matrix)
+set output weight matrix C-style interface (outputs x neurons+inputs)
+(data will be copied into a FLENS matrix)
 
 Parameters:
 -----------
@@ -421,8 +443,8 @@ Parameters:
 inmtx:  pointer to wout matrix in row major storage ";
 
 %feature("docstring")  ESN::setX "throw ( AUExcept) set
-internal state vector C-style interface (data will be copied into a
-FLENS matrix)
+internal state vector C-style interface (size = neurons) (data will be
+copied into a FLENS matrix)
 
 Parameters:
 -----------
@@ -436,7 +458,7 @@ in singleStep simulation with feedback
 Parameters:
 -----------
 
-last:  vector with length = outputs ";
+last:  vector with size = outputs ";
 
 %feature("docstring")  ESN::ESN "
 

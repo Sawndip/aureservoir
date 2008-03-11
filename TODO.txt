@@ -1,4 +1,12 @@
 
+vor Release auf reservoir computing liste:
+- bsp vom d+s paper dazutun zu examples
+- beschreibung wie man die library kompiliert bzw flens halt
+- auch wo die examples, tests usw. sind gscheit beschreiben
+  (dass man halt die python sachen anschauen sollte)
+
+
+
 Gaussian-IP:
 - weitere Versuche machen, dann Bsp dazutun
 
@@ -15,13 +23,6 @@ probiern ob andere typemaps von numpy.i jetzt nicht manchmal besser wären
 (z.B. input statt immer inplace ...)
 
 bessere code organisation (???):
-- filtered ESNs in eigene klasse
-  -> braucht nicht so viele zusätzliche interface funktionen
-- dann simulation algs auch von SimFilterBase ableiten
-  -> braucht nur einmal die simulate routine ausprogammiern
-- Filter Klassen auch von gemeinsamer Basisklasse ?
-  -> kann sie dynamisch verwenden
-- SIM_BP durch SIM_FILTER ersetzen ? (umrechnen)
 - Activation Function: auch als function objects ?
   -> zumindest ist im moment die globale variable ein hack ...
   -> schauen wie man das sonst besser lösen kann
@@ -93,6 +94,5 @@ weitere Doxygen tags:
 (muss EXAMPLE_PATH im doxyfile richtig setzen !)
 
 -----------------------
-
 
 see "\todo" tags in the doxygen documentation
