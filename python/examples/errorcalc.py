@@ -1,5 +1,5 @@
 ###########################################################
-# Some mean square error calculation utilities.
+# Some mean square error calculation utilities
 #
 # 2007, Georg Holzmann
 ###########################################################

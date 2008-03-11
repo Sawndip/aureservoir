@@ -127,6 +127,9 @@ class SimBase
  * and one activation function for the readout neurons, as described in
  * Jaeger's "Tutorial on training recurrent neural networks"
  * \sa http://www.faculty.iu-bremen.de/hjaeger/pubs/ESNTutorial.pdf
+ *
+ * \example "slow_sine.py"
+ * \example "narma10.py"
  */
 template <typename T>
 class SimStd : public SimBase<T>
@@ -223,6 +226,8 @@ class SimLI : public SimBase<T>
  * Finally the output needs to be scale with
  * new_activation = new_activation * (1 + f2/f1)
  * to keep the current spectral radius.
+ *
+ * \example "slow_sine.py"
  */
 template <typename T>
 class SimBP : public SimBase<T>
@@ -287,6 +292,8 @@ class SimBP : public SimBase<T>
  * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
  * (Georg Holzmann, 2008).
  * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
+ *
+ * \example "multiple_sines.py"
  */
 template <typename T>
 class SimFilter : public SimBase<T>
@@ -386,6 +393,10 @@ class SimFilter2 : public SimFilter<T>
  * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
  * (Georg Holzmann, 2008).
  * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
+ *
+ * \example "singleneuron_sinosc.py"
+ * \example "multiple_sines.py"
+ * \example "sparse_nonlin_system_identification.py"
  */
 template <typename T>
 class SimFilterDS : public SimFilter<T>
@@ -463,7 +474,10 @@ class SimFilterDS : public SimFilter<T>
  * Describtion in following paper:
  * \sa http://www.faculty.iu-bremen.de/hjaeger/pubs/esn_NIPS02.pdf
  * \note This algorithm uses also filtered neurons as in SimFilter
- * \sa SimFilter
+ * \sa SimFilterDS
+ *
+ * \example "narma10.py"
+ * \example "sparse_nonlin_system_identification.py"
  */
 template <typename T>
 class SimSquare : public SimFilterDS<T>

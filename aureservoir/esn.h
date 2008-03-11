@@ -55,6 +55,7 @@ namespace aureservoir
  * from \sa http://www.faculty.iu-bremen.de/hjaeger/esn_research.html
  *
  * \example "esn_example.cpp"
+ * \example "slow_sine.py"
  */
 template <typename T = float>
 class ESN

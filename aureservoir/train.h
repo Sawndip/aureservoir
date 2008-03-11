@@ -129,6 +129,8 @@ class TrainBase
  * For a more mathematical description:
  * \sa http://en.wikipedia.org/wiki/Linear_least_squares
  * \sa http://www.netlib.org/lapack/lug/node27.html
+ *
+ * \example "slow_sine.py"
  */
 template <typename T>
 class TrainPI : public TrainBase<T>
@@ -234,6 +236,8 @@ class TrainRidgeReg : public TrainBase<T>
  * See "Echo State Networks with Filter Neurons and a Delay&Sum Readout"
  * (Georg Holzmann, 2008).
  * \sa http://grh.mur.at/misc/ESNsWithFilterNeuronsAndDSReadout.pdf
+ *
+ * \example "singleneuron_sinosc.py"
  */
 template <typename T>
 class TrainDSPI : public TrainBase<T>

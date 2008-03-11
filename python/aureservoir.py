@@ -102,9 +102,7 @@ class DoubleESN(_object):
         __init__(self) -> DoubleESN
         __init__(self, DoubleESN src) -> DoubleESN
 
-        Copy Constructor.
-
-        Todo check if maps operator= performs a deep copy ! 
+        Copy Constructor. 
         """
         this = _aureservoir.new_DoubleESN(*args)
         try: self.this.append(this)
@@ -200,17 +198,7 @@ class DoubleESN(_object):
 
         throw (
         AUExcept) C-style Simulation Algorithm Interface, for single step
-        simulation See:  class SimBase Todo see if we can do this in python
-        without this additional method
-
-        Parameters:
-        -----------
-
-        inmtx:  input vector, size = inputs
-
-        outmtx:  output vector, size = outputs
-
-        Data must be already allocated! 
+        simulation See:  class SimBase 
         """
         return _aureservoir.DoubleESN_simulateStep(*args)
 
@@ -259,8 +247,7 @@ class DoubleESN(_object):
         """
         post(self)
 
-        posts current parameters to stdoutTodo maybe return a outputstream (if
-        stdout is not useful) or just use the << operator ? 
+        posts current parameters to stdout 
         """
         return _aureservoir.DoubleESN_post(*args)
 
@@ -400,9 +387,7 @@ class DoubleESN(_object):
         Parameters:
         -----------
 
-        wmtx:  pointer to matrix of size (neurons_ x neurons_)
-
-        Todo check if this can be avoided 
+        wmtx:  pointer to matrix of size (neurons_ x neurons_) 
         """
         return _aureservoir.DoubleESN_getW(*args)
 
@@ -651,9 +636,7 @@ class SingleESN(_object):
         __init__(self) -> SingleESN
         __init__(self, SingleESN src) -> SingleESN
 
-        Copy Constructor.
-
-        Todo check if maps operator= performs a deep copy ! 
+        Copy Constructor. 
         """
         this = _aureservoir.new_SingleESN(*args)
         try: self.this.append(this)
@@ -749,17 +732,7 @@ class SingleESN(_object):
 
         throw (
         AUExcept) C-style Simulation Algorithm Interface, for single step
-        simulation See:  class SimBase Todo see if we can do this in python
-        without this additional method
-
-        Parameters:
-        -----------
-
-        inmtx:  input vector, size = inputs
-
-        outmtx:  output vector, size = outputs
-
-        Data must be already allocated! 
+        simulation See:  class SimBase 
         """
         return _aureservoir.SingleESN_simulateStep(*args)
 
@@ -808,8 +781,7 @@ class SingleESN(_object):
         """
         post(self)
 
-        posts current parameters to stdoutTodo maybe return a outputstream (if
-        stdout is not useful) or just use the << operator ? 
+        posts current parameters to stdout 
         """
         return _aureservoir.SingleESN_post(*args)
 
@@ -949,9 +921,7 @@ class SingleESN(_object):
         Parameters:
         -----------
 
-        wmtx:  pointer to matrix of size (neurons_ x neurons_)
-
-        Todo check if this can be avoided 
+        wmtx:  pointer to matrix of size (neurons_ x neurons_) 
         """
         return _aureservoir.SingleESN_getW(*args)
 

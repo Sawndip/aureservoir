@@ -124,23 +124,11 @@ Data must be already allocated! ";
 
 %feature("docstring")  ESN::simulateStep "throw (
 AUExcept) C-style Simulation Algorithm Interface, for single step
-simulation See:  class SimBase Todo see if we can do this in python
-without this additional method
-
-Parameters:
------------
-
-inmtx:  input vector, size = inputs
-
-outmtx:  output vector, size = outputs
-
-Data must be already allocated! ";
+simulation See:  class SimBase ";
 
 /*  Additional Interface for Bandpass and IIR-Filter Neurons  */
 
-/* Todo rethink if this is consistent -> in neue klasse tun ?
-
-*/
+/* */
 
 %feature("docstring")  ESN::setBPCutoff "throw (
 AUExcept) Set lowpass/highpass cutoff frequencies for bandpass style
@@ -202,8 +190,7 @@ filters ";
 
 %feature("docstring")  ESN::post "
 
-posts current parameters to stdoutTodo maybe return a outputstream (if
-stdout is not useful) or just use the << operator ? ";
+posts current parameters to stdout ";
 
 %feature("docstring")  ESN::getSize "
 
@@ -312,9 +299,7 @@ matrix. Memory of the C array must be allocated before!
 Parameters:
 -----------
 
-wmtx:  pointer to matrix of size (neurons_ x neurons_)
-
-Todo check if this can be avoided ";
+wmtx:  pointer to matrix of size (neurons_ x neurons_) ";
 
 %feature("docstring")  ESN::getDelays "throw (
 AUExcept) query the trained delays in delay&sum readout See:  class
@@ -466,9 +451,7 @@ Constructor. ";
 
 %feature("docstring")  ESN::ESN "
 
-Copy Constructor.
-
-Todo check if maps operator= performs a deep copy ! ";
+Copy Constructor. ";
 
 %feature("docstring")  ESN::~ESN "
 

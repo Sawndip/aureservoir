@@ -3,9 +3,9 @@
    example files
 
 NOTE:
-This is only a very small part of the examples.
+Here is only one very simple ESN examples.
 
-More example can be found in python - as the python syntax is
+Much more can be found in python - as the python syntax is
 the same you can use those examples analogous in C++.
 
 The python examples are located in
