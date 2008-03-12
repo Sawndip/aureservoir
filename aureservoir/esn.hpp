@@ -686,7 +686,8 @@ void ESN<T>::setW(const DEMatrix &W) throw(AUExcept)
   if( W.numCols() != neurons_ )
       throw AUExcept("ESN::setW: wrong column size!");
 
-  W_.initWith(W, 1E-9);
+//   W_.initWith(W, 1E-9);
+  W_ = W;
 }
 
 template <typename T>
@@ -763,7 +764,8 @@ void ESN<T>::setW(T *inmtx, int inrows, int incols) throw(AUExcept)
     Wtmp(i+1,j+1) = inmtx[i*incols+j];
   } }
 
-  W_.initWith(Wtmp, 1E-9);
+//   W_.initWith(Wtmp, 1E-9);
+  W_ = Wtmp;
 }
 
 template <typename T>

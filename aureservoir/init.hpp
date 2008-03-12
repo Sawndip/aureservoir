@@ -189,7 +189,8 @@ void InitStd<T>::init()
   Wtmp *= (alpha / max_ew);
 
   // finally convert it to sparse matrix
-  esn_->W_.initWith(Wtmp, 1E-9);
+//   esn_->W_.initWith(Wtmp, 1E-9);
+  esn_->W_ = Wtmp; /// \todo check initialization with epsillon again in flens !!!
 }
 
 //@}

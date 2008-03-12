@@ -60,6 +60,7 @@ opt.AddOptions(
              '/usr/lib/python2.5/site-packages'),
   PathOption('aureservoir_path', 'include path for aureservoir', None),
   PathOption('flens_path', 'include path for FLENS', None),
+  PathOption('fftw3_path', 'include path for FFTW3', None),
   PathOption('python_path', 'include path for python', \
              '/usr/include/python2.5'),
   ('arch', 'optimize for specific architecture (e.g. pentium4)', None),

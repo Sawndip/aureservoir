@@ -5,7 +5,7 @@
 
 The main python examples are located in this directory.
 As the aureservoir python syntax is the same as in C++
-you can uses this examples analogous in C++.
+one can use these examples analogous in C++.
 
 
 Following files are included ATM:

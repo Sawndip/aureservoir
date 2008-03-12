@@ -200,7 +200,7 @@ class SimLI : public SimBase<T>
 /*!
  * \class SimBP
  *
- * \brief algorithm with bandpass style neurons
+ * \brief algorithm with bandpass style neurons as in Wustlich and Siewert
  *
  * It can be shown that leaky integrator neurons perform somehow a lowpass
  * filtering on the reservoir states.

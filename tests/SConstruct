@@ -50,6 +50,7 @@ opt = Options('options.cache')
 opt.AddOptions(
   PathOption('flens_path', 'include path for FLENS', None),
   PathOption('cppunit_path', 'include path for CppUnit', None),
+  PathOption('fftw3_path', 'include path for FFTW3', None),
   ('arch', 'optimize for specific architecture (e.g. pentium4)', None)
 )
 opt.Update(env)
@@ -60,6 +61,8 @@ if env.has_key('flens_path'):
 	env.Append(CPPPATH=[env['flens_path']])
 if env.has_key('cppunit_path'):
 	env.Append(CPPPATH=[env['cppunit_path']])
+if env.has_key('fftw3_path'):
+	env.Append(CPPPATH=[env['fftw3_path']])
 if env.has_key('arch'):
 	env.Append(CCFLAGS="-march=" + env['arch'])
 
@@ -88,6 +91,15 @@ if checking:
 		Exit(1)
 	if not conf.CheckCXXHeader('cppunit/extensions/HelperMacros.h'):
 		print 'Did not find CppUnit headers !'
+		Exit(1)
+	if not conf.CheckLib('fftw3', language="C"):
+		print 'Did not find FFTW3 library !'
+		Exit(1)
+	if not conf.CheckLib('fftw3f', language="C"):
+		print 'Did not find FFTW3 single precision library !'
+		Exit(1)
+	if not conf.CheckHeader('fftw3.h'):
+		print 'Did not find FFTW3 header !'
 		Exit(1)
 env = conf.Finish()
 
