@@ -1,8 +1,6 @@
 
 :::_aureservoir_:::
 
-Version 0.1
-
 http://aureservoir.sourceforge.net
 
 
