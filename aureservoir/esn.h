@@ -54,6 +54,9 @@ namespace aureservoir
  * highly efficient linear regression algorithms.
  * from \sa http://www.faculty.iu-bremen.de/hjaeger/esn_research.html
  *
+ * For more information and a complete documentation of this library
+ * see \sa http://aureservoir.sourceforge.net
+ *
  * \example "esn_example.cpp"
  * \example "slow_sine.py"
  */
