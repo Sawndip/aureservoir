@@ -332,6 +332,13 @@ class DSESN(IIRESN):
 	# additional squared state updates
 	squareupdate = 0
 	
+	# maximum delay for delays in reservoir
+	maxreservoirdelay = 10
+	
+	# set this to 1 to also have delays in the reservoir
+	have_res_delays = 0
+	
+	
 	def train(self, indata, outdata, washout):
 		""" set to desired train method here """
 		#DoubleESN.train(self,indata,outdata,washout)
@@ -344,13 +351,34 @@ class DSESN(IIRESN):
 		#DoubleESN.simulate(self,indata,outdata)
 	
 	
+	def initDelay(self,Wdel):
+		""" initialization of delays in the reservoir
+		"""
+		size = self.getSize()
+		self.W = N.zeros((size,size))
+		self.getW(self.W)
+		
+		# init and create delay lines for the reservoir
+		self.Wdel = []
+		for i in range(size):
+			for j in range(size):
+				d = int( Wdel[i,j] )
+				self.Wdel.append( DelLine(d, N.zeros(d)) )
+		
+		# for simulation algorithm
+		self.lastout = N.zeros( self.getOutputs() )
+		self.Win = self.getWin()
+		self.Wout = self.getWout()
+		self.Wback = self.getWback()
+	
+	
 	def trainDelaySum(self, indata, outdata, washout):
 		""" Calculates the optimal delay for each readout neuron with
 		the crosscorrelation.
 		"""
 		steps = indata.shape[1]
 		size = self.getSize()
-		maxdelay = self.maxdelay
+		maxdelay = min(self.maxdelay+1,steps-washout)
 		insig = indata.copy()
 		
 		# teacher forcing
@@ -362,11 +390,11 @@ class DSESN(IIRESN):
 		for n in range(size):
 			xcorr = abs( util.GCC(X[n],outdata[0], \
 			             self.gcctype, 0) )
-			self.delays[n] = xcorr[0:maxdelay+1].argmax()
+			self.delays[n] = xcorr[0:maxdelay].argmax()
 		for n in range(self.getInputs()):
 			xcorr = abs( util.GCC(insig[n],outdata[0], \
 			             self.gcctype, 0) )
-			self.delays[n+size] = xcorr[0:maxdelay+1].argmax()
+			self.delays[n+size] = xcorr[0:maxdelay].argmax()
 		del xcorr
 		
 		# setup the "delay lines" for each neuron
@@ -375,12 +403,12 @@ class DSESN(IIRESN):
 		# now delay neuron signals as calculated:
 		# add zeros to the beginning and store the rest into the delaylines
 		for n in range(size):
-			d = self.delays[n]
+			d = int(self.delays[n])
 			rest = X[n,steps-d:steps].copy()
 			X[n,:] = N.r_[ N.zeros(d), X[n,0:steps-d] ]
 			self.dellines.append( DelLine(d,rest) )
 		for n in range(self.getInputs()):
-			d = self.delays[n+size]
+			d = int(self.delays[n+size])
 			rest = insig[n,steps-d:steps].copy()
 			insig[n,:] = N.r_[ N.zeros(d), insig[n,0:steps-d] ]
 			self.dellines.append( DelLine(d,rest) )
@@ -394,7 +422,6 @@ class DSESN(IIRESN):
 		#washout += int(self.delays.max())
 		#print "effective trainsize:",steps-washout
 		
-		
 		if (self.squareupdate == 0):
 			# restructure data
 			M = N.r_[X,insig]
@@ -404,8 +431,7 @@ class DSESN(IIRESN):
 			# calc pseudo inverse: wout = pinv(M) * T
 			# or with least square (much faster):
 			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( M, T )
-			self.wout = wout[0:size+self.getInputs()].T
-			
+			self.wout = wout[0:size+self.getInputs()].T	
 		else:
 			# restructure data
 			M = N.r_[X,insig,X**2,insig**2]
@@ -442,7 +468,10 @@ class DSESN(IIRESN):
 		outtmp = N.empty((self.getOutputs(),))
 		
 		# simulate one step
-		self.simulateStep(indata, outtmp)
+		if self.have_res_delays==0:
+			self.simulateStep(indata, outtmp)
+		else:
+			self._simulateStepDelay(indata, outtmp)
 		x = self.getX().copy()
 		
 		# get delayed value for each neuron and input
@@ -457,6 +486,7 @@ class DSESN(IIRESN):
 			state = N.r_[x,indata,x**2,indata**2]
 		outdata[:] = N.dot( self.wout, state ).copy()
 		self.setLastOutput(outdata)
+		self.lastout = outdata
 	
 	
 	def _teacherForcing(self, indata, outdata):
@@ -473,8 +503,47 @@ class DSESN(IIRESN):
 		
 		# step by step ESN simulation
 		for n in range(steps):
-			self.simulateStep(indata[:,n].flatten(), outtmp)
-			self.setLastOutput(outdata[:,n].flatten())
+			if self.have_res_delays==0:
+				self.simulateStep( \
+				     indata[:,n].flatten(), outtmp)
+				self.setLastOutput(outdata[:,n].flatten())
+			else:
+				self._simulateStepDelay( \
+				      indata[:,n].flatten(), outtmp)
+				self.lastout = outdata[:,n].flatten().copy()
 			X[:,n] = self.getX().copy()
 		
 		return X
+	
+	
+	def _simulateStepDelay(self, indata, outtmp):
+		""" simulate one step with delays in the reservoir
+		ATTENTION: only for tanh reservoir activation function !
+		"""
+		x = self.getX().copy()
+		Wout = self.getWout().copy()
+		
+		# calc new network activation
+		x = self._dotDelay( self.W, x )
+		x += N.dot( self.Win, indata )
+		x += N.dot( self.Wback, self.lastout )
+		noise = self.getNoise()
+		x += (N.random.rand(len(x))*2-1)*noise
+		
+		# reservoir activation function
+		x = N.tanh( x )
+		
+		# finally set new calculated state
+		self.setX(x)
+	
+	
+	def _dotDelay(self, W, x):
+		""" helper function for matrix multiplication with delays
+		"""
+		n = W.shape[0]
+		t = N.zeros(n)
+		for i in range(n):
+			for j in range(n):
+				t[i] += self.Wdel[i*n+j].tic(W[i,j]*x[j])
+		return t
+

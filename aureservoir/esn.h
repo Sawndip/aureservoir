@@ -324,6 +324,13 @@ class ESN
    *         size = (output x neurons+inputs)
    */
   DEMatrix getDelays() throw(AUExcept) { return sim_->getDelays(); }
+  /**
+   * query the (fixed) delays between reservoir neurons \sa class SimFilterDS
+   * @return matrix with delays between all reservoir neurons
+   *         size = (neurons x neurons)
+   */
+  DEMatrix getReservoirDelays() throw(AUExcept)
+  { return sim_->getReservoirDelays(); }
 
   //@}
   //! @name GET internal data C-style interface
@@ -358,6 +365,14 @@ class ESN
    *        size = (output x neurons+inputs)
    */
   void getDelays(T *wmtx, int wrows, int wcols) throw(AUExcept);
+  /**
+   * query the (fixed) delays between reservoir neurons \sa class SimFilterDS
+   * and copies the data into a C-style matrix
+   * \attention Memory of the C array must be allocated before!
+   * @param wmtx matrix with delays between all reservoir neurons
+   *        size = (neurons x neurons)
+   */
+  void getReservoirDelays(T *wmtx, int wrows, int wcols) throw(AUExcept);
 
   //@}
   //! @name SET methods

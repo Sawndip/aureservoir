@@ -127,7 +127,7 @@ License as published by the Free Software Foundation. Either
 version 2.1 of the License, or (at your option) any later version.
 
 Releases of aureservoir can be found at
-<a href="http://sourceforge.net/projects/aureservoir/">
+<a href="https://sourceforge.net/project/showfiles.php?group_id=209855">
 http://sourceforge.net/projects/aureservoir/</a>.
 
 To get the latest source of aureservoir one can check out the

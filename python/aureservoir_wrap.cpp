@@ -4408,6 +4408,47 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DoubleESN_getReservoirDelays(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:DoubleESN_getReservoirDelays",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_getReservoirDelays" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    try {
+      (arg1)->getReservoirDelays(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DoubleESN_setInitAlgorithm__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<double > *arg1 = (ESN<double > *) 0 ;
@@ -6899,6 +6940,47 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SingleESN_getReservoirDelays(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:SingleESN_getReservoirDelays",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_getReservoirDelays" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    try {
+      (arg1)->getReservoirDelays(arg2,arg3,arg4);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SingleESN_setInitAlgorithm__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
@@ -8201,6 +8283,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DoubleESN_getX", _wrap_DoubleESN_getX, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_getW", _wrap_DoubleESN_getW, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_getDelays", _wrap_DoubleESN_getDelays, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_getReservoirDelays", _wrap_DoubleESN_getReservoirDelays, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setInitAlgorithm", _wrap_DoubleESN_setInitAlgorithm, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setTrainAlgorithm", _wrap_DoubleESN_setTrainAlgorithm, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setSimAlgorithm", _wrap_DoubleESN_setSimAlgorithm, METH_VARARGS, NULL},
@@ -8245,6 +8328,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SingleESN_getX", _wrap_SingleESN_getX, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_getW", _wrap_SingleESN_getW, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_getDelays", _wrap_SingleESN_getDelays, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_getReservoirDelays", _wrap_SingleESN_getReservoirDelays, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setInitAlgorithm", _wrap_SingleESN_setInitAlgorithm, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setTrainAlgorithm", _wrap_SingleESN_setTrainAlgorithm, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setSimAlgorithm", _wrap_SingleESN_setSimAlgorithm, METH_VARARGS, NULL},
@@ -8834,6 +8918,7 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "DS_USE_CROSSCORR",SWIG_From_int(static_cast< int >(DS_USE_CROSSCORR)));
   SWIG_Python_SetConstant(d, "DS_USE_GCC",SWIG_From_int(static_cast< int >(DS_USE_GCC)));
   SWIG_Python_SetConstant(d, "DS_MAXDELAY",SWIG_From_int(static_cast< int >(DS_MAXDELAY)));
+  SWIG_Python_SetConstant(d, "DS_RESERVOIR_MAXDELAY",SWIG_From_int(static_cast< int >(DS_RESERVOIR_MAXDELAY)));
   SWIG_Python_SetConstant(d, "IP_LEARNRATE",SWIG_From_int(static_cast< int >(IP_LEARNRATE)));
   SWIG_Python_SetConstant(d, "IP_MEAN",SWIG_From_int(static_cast< int >(IP_MEAN)));
   SWIG_Python_SetConstant(d, "IP_VAR",SWIG_From_int(static_cast< int >(IP_VAR)));

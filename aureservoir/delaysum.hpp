@@ -119,7 +119,7 @@ int CalcDelay<T>::gcc(const typename CDEVector<T>::Type &X,
   // calc delay
   for(int i=1; i<=fftsize; ++i)
     crosscorr(i) = std::abs( crosscorr(i) );
-  int mdelay = (fftsize < maxdelay+1) ? fftsize : maxdelay+1;
+  int mdelay = (fftsize < maxdelay) ? fftsize : maxdelay;
 
   int delay = (int) ( std::max_element( crosscorr.data(),
                                         crosscorr.data()+mdelay )

@@ -175,6 +175,7 @@ class ESN
   void getX(T **vec, int *length);
   void getW(T *wmtx, int wrows, int wcols);
   void getDelays(T *wmtx, int wrows, int wcols);
+  void getReservoirDelays(T *wmtx, int wrows, int wcols);
 
   void setInitAlgorithm(InitAlgorithm alg=INIT_STD);
   void setTrainAlgorithm(TrainAlgorithm alg=TRAIN_LEASTSQUARE);
@@ -217,6 +218,7 @@ enum InitParameter
   DS_USE_CROSSCORR, //!< use simple cross-correlation for delay calculation
   DS_USE_GCC,       //!< use generalized cross-correlation for delay calculation
   DS_MAXDELAY,      //!< maximum delay for delay&sum readout
+  DS_RESERVOIR_MAXDELAY, //!< maximum static delay in the dynamic reservoir
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
   IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation

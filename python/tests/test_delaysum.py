@@ -387,6 +387,137 @@ class test_delaysum(NumpyTestCase):
 	## test if simulation result is the same
 	assert_array_almost_equal(outA[0].flatten(),outB.flatten(),5)
 	assert_array_almost_equal(outA[1].flatten(),outB.flatten(),5)
+	
+
+    def testDelaysInReservoir(self, level=1):
+	""" test simulation with fixed delays in the reservoir
+	"""
+	# init network
+	self.netA.setInitParam(DS_MAXDELAY, 0)
+	self.netA.setInitParam(DS_USE_GCC)
+	self.netA.setInitParam(DS_RESERVOIR_MAXDELAY, 3)
+	self.netB.gcctype = 'phat'
+	self.netB.maxdelay = 0
+	self.netB.squareupdate = 0
+	self.netB.maxreservoirdelay = 3
+	self.netB.have_res_delays = 1
+	self.netA.init()
+	self.netB.init()
+	
+	# set internal data of netB to the same as in netA
+	self.netB.setWin( self.netA.getWin().copy() )
+	W = N.zeros((self.size,self.size))
+	self.netA.getW(W)
+	self.netB.setW(W)
+	# set delays as in netA
+	self.netA.getReservoirDelays(W)
+	self.netB.initDelay(W)
+	
+	# training data
+	washout = 20
+	iir_delay = 0
+	train_size = 50
+	indata = N.random.rand(train_size) * 2 - 1
+	outdata = self._linearIIR(indata,iir_delay)
+	indata.shape = 1,-1
+	outdata.shape = 1,-1
+	
+	# train data with python ESN
+	self.netB.train(indata, outdata, washout)
+	delaysB = self.netB.delays
+	woutB = self.netB.getWout().copy()
+	
+	# finally train C++ network with the same data
+	self.netA.train(indata, outdata, washout)
+	delaysA = N.ones((self.outs,self.ins+self.size))
+	self.netA.getDelays(delaysA)
+	woutA = self.netA.getWout().copy()
+	
+	# test if weights are the same
+	assert_array_almost_equal(delaysA.flatten(),delaysB,5)
+	assert_array_almost_equal(woutA,woutB,5)
+	
+	# simulation data
+	sim_size = 50
+	indata = N.random.rand(sim_size) * 2 - 1
+	indata.shape = 1,-1
+	outA = N.zeros( indata.shape )
+	outB = N.zeros( indata.shape )
+	
+	# simulate both networks
+	self.netB.simulate(indata, outB)
+	self.netA.simulate(indata, outA)
+	
+	# test if simulation result is the same
+	assert_array_almost_equal(outA,outB,5)
+
+
+    def testDelaysInReservoirSquare(self, level=1):
+	""" test squared simulation with delays in the reservoir
+	and feedback
+	"""
+	# init network
+	self.netA.setInitParam(DS_MAXDELAY, 100)
+	self.netA.setInitParam(DS_USE_GCC)
+	self.netA.setInitParam(DS_RESERVOIR_MAXDELAY, 3)
+	self.netA.setSimAlgorithm(SIM_SQUARE)
+	self.netA.setInitParam(FB_CONNECTIVITY, 0.3)
+	self.netB.setInitParam(FB_CONNECTIVITY, 0.3)
+	self.netB.gcctype = 'phat'
+	self.netB.maxdelay = 100
+	self.netB.squareupdate = 1
+	self.netB.maxreservoirdelay = 3
+	self.netB.have_res_delays = 1
+	self.netA.init()
+	self.netB.init()
+	
+	# set internal data of netB to the same as in netA
+	self.netB.setWin( self.netA.getWin().copy() )
+	self.netB.setWback( self.netA.getWback().copy() )
+	W = N.zeros((self.size,self.size))
+	self.netA.getW(W)
+	self.netB.setW(W)
+	# set delays as in netA
+	self.netA.getReservoirDelays(W)
+	self.netB.initDelay(W)
+	
+	# training data
+	washout = 20
+	iir_delay = 10
+	train_size = 50
+	indata = N.random.rand(train_size) * 2 - 1
+	outdata = self._linearIIR(indata,iir_delay)
+	indata.shape = 1,-1
+	outdata.shape = 1,-1
+	
+	# train data with python ESN
+	self.netB.train(indata, outdata, washout)
+	delaysB = self.netB.delays
+	woutB = self.netB.getWout().copy()
+	
+	# finally train C++ network with the same data
+	self.netA.train(indata, outdata, washout)
+	delaysA = N.ones((self.outs,self.ins+self.size))
+	self.netA.getDelays(delaysA)
+	woutA = self.netA.getWout().copy()
+	
+	# test if weights are the same
+	assert_array_almost_equal(delaysA.flatten(),delaysB,5)
+	assert_array_almost_equal(woutA,woutB,5)
+	
+	# simulation data
+	sim_size = 50
+	indata = N.random.rand(sim_size) * 2 - 1
+	indata.shape = 1,-1
+	outA = N.zeros( indata.shape )
+	outB = N.zeros( indata.shape )
+	
+	# simulate both networks
+	self.netB.simulate(indata, outB)
+	self.netA.simulate(indata, outA)
+	
+	# test if simulation result is the same
+	assert_array_almost_equal(outA,outB,5)
 
 
 if __name__ == "__main__":

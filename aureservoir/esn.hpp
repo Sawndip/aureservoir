@@ -457,6 +457,23 @@ void ESN<T>::getDelays(T *wmtx, int wrows, int wcols)
 }
 
 template <typename T>
+void ESN<T>::getReservoirDelays(T *wmtx, int wrows, int wcols)
+  throw(AUExcept)
+{
+  DEMatrix Dtmp = getReservoirDelays();
+
+  if( wrows != Dtmp.numRows() )
+    throw AUExcept("ESN::getReservoirDelays: wrong row size!");
+  if( wcols != Dtmp.numCols() )
+    throw AUExcept("ESN::getReservoirDelays: wrong column size!");
+
+  for(int i=0; i<wrows; ++i) {
+  for(int j=0; j<wcols; ++j) {
+    wmtx[i*wcols+j] = Dtmp(i+1,j+1);
+  } }
+}
+
+template <typename T>
 void ESN<T>::setInitAlgorithm(InitAlgorithm alg)
   throw(AUExcept)
 {

@@ -88,7 +88,9 @@ class DoubleESN(_object):
     signals. This idea leads to training algorithms where only the
     network-to-output connection weights have to be trained. This can be
     done with known, highly efficient linear regression algorithms. from
-    See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html
+    See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html  For
+    more information and a complete documentation of this library see See:
+    http://aureservoir.sourceforge.net
 
     C++ includes: esn.h 
     """
@@ -409,6 +411,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_getDelays(*args)
 
+    def getReservoirDelays(*args):
+        """getReservoirDelays(self, double wmtx)"""
+        return _aureservoir.DoubleESN_getReservoirDelays(*args)
+
     def setInitAlgorithm(*args):
         """
         setInitAlgorithm(self, InitAlgorithm alg=INIT_STD)
@@ -622,7 +628,9 @@ class SingleESN(_object):
     signals. This idea leads to training algorithms where only the
     network-to-output connection weights have to be trained. This can be
     done with known, highly efficient linear regression algorithms. from
-    See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html
+    See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html  For
+    more information and a complete documentation of this library see See:
+    http://aureservoir.sourceforge.net
 
     C++ includes: esn.h 
     """
@@ -943,6 +951,10 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_getDelays(*args)
 
+    def getReservoirDelays(*args):
+        """getReservoirDelays(self, float wmtx)"""
+        return _aureservoir.SingleESN_getReservoirDelays(*args)
+
     def setInitAlgorithm(*args):
         """
         setInitAlgorithm(self, InitAlgorithm alg=INIT_STD)
@@ -1152,6 +1164,7 @@ TIKHONOV_FACTOR = _aureservoir.TIKHONOV_FACTOR
 DS_USE_CROSSCORR = _aureservoir.DS_USE_CROSSCORR
 DS_USE_GCC = _aureservoir.DS_USE_GCC
 DS_MAXDELAY = _aureservoir.DS_MAXDELAY
+DS_RESERVOIR_MAXDELAY = _aureservoir.DS_RESERVOIR_MAXDELAY
 IP_LEARNRATE = _aureservoir.IP_LEARNRATE
 IP_MEAN = _aureservoir.IP_MEAN
 IP_VAR = _aureservoir.IP_VAR

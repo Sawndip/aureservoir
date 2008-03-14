@@ -284,18 +284,15 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
       esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
     throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
 
-  // get maxdelay
+  // get maxdelay or set it to 0 if not given
   int maxdelay;
   if( esn_->init_params_.find(DS_MAXDELAY) == esn_->init_params_.end() )
-  {
-    // set maxdelay to 0 if we have squared state updates
-    if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
-      maxdelay = 0;
-    else
-      maxdelay = 1000;
-  }
+    maxdelay = 0;
   else
     maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
+
+  // maximum of maxdelay is the number of steps
+  maxdelay = (steps-washout < maxdelay+1) ? steps-washout : maxdelay+1;
 
   // see if we use GCC or simple crosscorr, standard is GCC
   int filter;

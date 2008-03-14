@@ -17,7 +17,9 @@ desired output signal from the rich variety of excited reservoir
 signals. This idea leads to training algorithms where only the
 network-to-output connection weights have to be trained. This can be
 done with known, highly efficient linear regression algorithms. from
-See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html
+See:  http://www.faculty.iu-bremen.de/hjaeger/esn_research.html  For
+more information and a complete documentation of this library see See:
+http://aureservoir.sourceforge.net
 
 C++ includes: esn.h ";
 

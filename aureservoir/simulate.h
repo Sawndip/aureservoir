@@ -101,7 +101,9 @@ class SimBase
                            int series = 1) throw(AUExcept);
   virtual void initDelayLine(int index, const typename DEVector<T>::Type &initbuf)
                              throw(AUExcept);
+  virtual void initReservoirDelays() throw(AUExcept);
   virtual typename DEMatrix<T>::Type getDelays() throw(AUExcept);
+  virtual typename DEMatrix<T>::Type getReservoirDelays() throw(AUExcept);
   virtual typename DEVector<T>::Type &getDelayBuffer(int output, int nr)
     throw(AUExcept);
   //@}
@@ -407,7 +409,9 @@ class SimFilterDS : public SimFilter<T>
   using SimFilter<T>::filter_;
 
  public:
-  SimFilterDS(ESN<T> *esn) : SimFilter<T>(esn) {}
+  SimFilterDS(ESN<T> *esn) : SimFilter<T>(esn)
+  { use_reservoir_delays_ = false; }
+
   virtual ~SimFilterDS() {}
 
   /// virtual constructor idiom
@@ -415,8 +419,10 @@ class SimFilterDS : public SimFilter<T>
   {
     SimFilterDS<T> *new_obj = new SimFilterDS<T>(esn);
     new_obj->t_ = t_; new_obj->last_out_ = last_out_;
-    new_obj->filter_ = filter_; new_obj->dellines_ = dellines_;
+    new_obj->filter_ = filter_;
+    new_obj->dellines_ = dellines_; new_obj->Wdel_ = Wdel_;
     new_obj->intmp_ = intmp_;
+    new_obj->use_reservoir_delays_ = use_reservoir_delays_;
     return new_obj;
   }
 
@@ -434,12 +440,22 @@ class SimFilterDS : public SimFilter<T>
                              const typename DEVector<T>::Type &initbuf)
                              throw(AUExcept);
 
+  /// initializes static (not learnable) delays in the reservoir
+  virtual void initReservoirDelays() throw(AUExcept);
+
   /**
    * query the trained delays
    * @return matrix with delay form neurons+inputs to all outputs
    *         size = (output x neurons+inputs)
    */
   virtual typename DEMatrix<T>::Type getDelays() throw(AUExcept);
+
+  /**
+   * query the (fixed) delays between reservoir neurons
+   * @return matrix with delays between all reservoir neurons
+   *         size = (neurons x neurons)
+   */
+  virtual typename DEMatrix<T>::Type getReservoirDelays() throw(AUExcept);
 
   /**
    * @param output delayline to this output (starting from 0)
@@ -456,11 +472,22 @@ class SimFilterDS : public SimFilter<T>
 
  protected:
 
+  /// sparse (matrix+delays)*vector multiplication
+  void mvdel(const typename ESN<T>::SPMatrix &AA,
+             const typename ESN<T>::DEVector &xx,
+             typename ESN<T>::DEVector &yy);
+
   /// vector with delaylines for each neuron+input to output connection
   std::vector< DelayLine<T> > dellines_;
 
+  /// vector with delaylines for reservoir connections
+  std::vector< DelayLine<T> > Wdel_;
+
   /// temporary object needed for algorithm calculation
   typename ESN<T>::DEMatrix intmp_;
+
+  /// helper to enable delays in the reservoir
+  bool use_reservoir_delays_;
 };
 
 /*!
@@ -487,7 +514,9 @@ class SimSquare : public SimFilterDS<T>
   using SimBase<T>::t_;
   using SimFilter<T>::filter_;
   using SimFilterDS<T>::dellines_;
+  using SimFilterDS<T>::Wdel_;
   using SimFilterDS<T>::intmp_;
+  using SimFilterDS<T>::use_reservoir_delays_;
 
  public:
   SimSquare(ESN<T> *esn) : SimFilterDS<T>(esn) {}
@@ -500,7 +529,8 @@ class SimSquare : public SimFilterDS<T>
     new_obj->t_ = t_; new_obj->last_out_ = last_out_;
     new_obj->filter_ = filter_; new_obj->dellines_ = dellines_;
     new_obj->intmp_ = intmp_; new_obj->t2_ = t2_;
-    new_obj->insq_ = insq_;
+    new_obj->insq_ = insq_; new_obj->Wdel_ = Wdel_;
+    new_obj->use_reservoir_delays_ = use_reservoir_delays_;
     return new_obj;
   }
 

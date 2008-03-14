@@ -87,12 +87,34 @@ void SimBase<T>::initDelayLine(int index,
 }
 
 template <typename T>
+void SimBase<T>::initReservoirDelays()
+  throw(AUExcept)
+{
+  std::string str = "SimBase::initReservoirDelays: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use ESN with delays in the reservoir, e.g. SIM_FILTER_DS !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
 typename DEMatrix<T>::Type SimBase<T>::getDelays()
   throw(AUExcept)
 {
   std::string str = "SimBase::getDelays: ";
   str += "this is not implemented in standard ESNs, ";
   str += "use ESN with delay&sum readout, e.g. SIM_FILTER_DS !";
+
+  throw AUExcept( str );
+}
+
+template <typename T>
+typename DEMatrix<T>::Type SimBase<T>::getReservoirDelays()
+  throw(AUExcept)
+{
+  std::string str = "SimBase::getReservoirDelays: ";
+  str += "this is not implemented in standard ESNs, ";
+  str += "use ESN with delays in the reservoir, e.g. SIM_FILTER_DS !";
 
   throw AUExcept( str );
 }
@@ -499,6 +521,46 @@ void SimFilterDS<T>::initDelayLine(int index,
 }
 
 template <typename T>
+void SimFilterDS<T>::initReservoirDelays()
+  throw(AUExcept)
+{
+  Wdel_.clear();
+
+  if( esn_->init_params_.find(DS_RESERVOIR_MAXDELAY)
+      == esn_->init_params_.end() )
+  {
+    use_reservoir_delays_ = false;
+    return;
+  }
+
+  int maxdelay = (int) esn_->init_params_[DS_RESERVOIR_MAXDELAY];
+  maxdelay += 1;
+
+  if( maxdelay == 0 )
+  {
+    use_reservoir_delays_ = false;
+    return;
+  }
+
+  int delay = 0;
+  typename DEVector<T>::Type buffer;
+
+  // iterate over reservoir matrix W_ and initialize buffers
+  typedef typename SPMatrix<T>::Type::const_iterator It;
+  for (It it=esn_->W_.begin(); it!=esn_->W_.end(); ++it)
+  {
+    delay = std::rand() % maxdelay;
+    typename DEVector<T>::Type buffer(delay);
+    std::fill_n( buffer.data(), delay, 0 );
+    DelayLine<T> delline;
+    delline.initBuffer(buffer);
+    Wdel_.push_back( delline );
+  }
+
+  use_reservoir_delays_ = true;
+}
+
+template <typename T>
 typename DEMatrix<T>::Type SimFilterDS<T>::getDelays() throw(AUExcept)
 {
   typename DEMatrix<T>::Type del(esn_->outputs_,
@@ -513,10 +575,71 @@ typename DEMatrix<T>::Type SimFilterDS<T>::getDelays() throw(AUExcept)
 }
 
 template <typename T>
+typename DEMatrix<T>::Type SimFilterDS<T>::getReservoirDelays() throw(AUExcept)
+{
+  typename DEMatrix<T>::Type del(esn_->neurons_,esn_->neurons_);
+  std::fill_n( del.data(), esn_->neurons_*esn_->neurons_, 0 );
+
+  if( !use_reservoir_delays_ )
+    return del;
+
+  // iterate over reservoir matrix W_ and read from delaylines
+  int n = 0;
+  typedef typename SPMatrix<T>::Type::const_iterator It;
+  for (It it=esn_->W_.begin(); it!=esn_->W_.end(); ++it)
+  {
+    del(it->first.first, it->first.second) = T( Wdel_[n].delay_ );
+    ++n;
+  }
+
+  return del;
+}
+
+template <typename T>
 typename DEVector<T>::Type &SimFilterDS<T>::getDelayBuffer(int output, int nr)
     throw(AUExcept)
 {
   return dellines_[output*(esn_->neurons_+esn_->inputs_)+nr].buffer_;
+}
+
+template <typename T>
+void SimFilterDS<T>::mvdel(const typename ESN<T>::SPMatrix &AA,
+                           const typename ESN<T>::DEVector &xx,
+                           typename ESN<T>::DEVector &yy)
+{
+  // this implementation is taken from flens sparse mv implementation
+
+  // some checks
+  assert( ADDRESS(yy) != ADDRESS(xx) );
+  assert(AA.numCols()==xx.length());
+  assert(yy.length() == AA.numRows() );
+  assert(xx.stride()==1);
+  assert(yy.stride()==1);
+  assert(Wdel_.size()!=0);
+
+  // get data pointers
+  int m = AA.numRows();
+  const T *a = AA.engine().values.data();
+  const int *ia = AA.engine().rows.data();
+  const int *ja = AA.engine().columns.data();
+  const T *x = xx.data();
+  T *y = yy.data();
+
+  // shift to index base 1
+  a = a-1;
+  ia = ia-1;
+  ja = ja-1;
+  x = x-1;
+  y = y-1;
+
+  for (int i=1; i<=m; ++i)
+  {
+    y[i] = T(0);
+    for (int k=ia[i]; k<ia[i+1]; ++k)
+    {
+      y[i] += Wdel_[k-1].tic( a[k]*x[ja[k]] );
+    }
+  }
 }
 
 template <typename T>
@@ -539,7 +662,12 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   // calc neuron activation
   t_ = esn_->x_;
-  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+  if( use_reservoir_delays_ )
+    mvdel(esn_->W_, t_, esn_->x_);
+  else
+    esn_->x_ = esn_->W_*t_;
+  esn_->x_ += esn_->Win_*in(_,1) + esn_->Wback_*last_out_(_,1);
+
   // add noise
   Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
   esn_->x_ += t_;
@@ -575,8 +703,13 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   for(int n=2; n<=steps; ++n)
   {
-    t_ = esn_->x_; // temp object needed for BLAS
-    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+    t_ = esn_->x_;
+    if( use_reservoir_delays_ )
+      mvdel(esn_->W_, t_, esn_->x_);
+    else
+      esn_->x_ = esn_->W_*t_;
+    esn_->x_ += esn_->Win_*in(_,n) + esn_->Wback_*out(_,n-1);
+
     // add noise
     Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
     esn_->x_ += t_;
@@ -649,8 +782,14 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   // First run with output from last simulation
 
-  t_ = esn_->x_; // temp object needed for BLAS
-  esn_->x_ = esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+  // calc neuron activation
+  t_ = esn_->x_;
+  if( use_reservoir_delays_ )
+    mvdel(esn_->W_, t_, esn_->x_);
+  else
+    esn_->x_ = esn_->W_*t_;
+  esn_->x_ += esn_->Win_*in(_,1) + esn_->Wback_*last_out_(_,1);
+
   // add noise
   Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
   esn_->x_ += t_;
@@ -694,8 +833,13 @@ void SimSquare<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
   for(int n=2; n<=steps; ++n)
   {
-    t_ = esn_->x_; // temp object needed for BLAS
-    esn_->x_ = esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+    t_ = esn_->x_;
+    if( use_reservoir_delays_ )
+      mvdel(esn_->W_, t_, esn_->x_);
+    else
+      esn_->x_ = esn_->W_*t_;
+    esn_->x_ += esn_->Win_*in(_,n) + esn_->Wback_*out(_,n-1);
+
     // add noise
     Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
     esn_->x_ += t_;
