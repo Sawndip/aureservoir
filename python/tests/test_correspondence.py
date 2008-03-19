@@ -1,4 +1,4 @@
-import sys
+import sys, filtering
 from numpy.testing import *
 import numpy as N
 import random, scipy.signal
@@ -229,7 +229,7 @@ class test_correspondence(NumpyTestCase):
 	
 	# set paramas for a gammatone filter
 	# (cascade of 4 biquads)
-	Btmp,Atmp = self._gammatone_biquad(44100,self.size,150)
+	Btmp,Atmp = filtering.gammatone_biquad(44100,self.size,150)
 	B = N.empty((self.size,12))
 	A = N.empty((self.size,12))
 	serial = 4
@@ -313,93 +313,83 @@ class test_correspondence(NumpyTestCase):
 	assert_array_almost_equal(outdata,outdataA)
 	
 	
-    def _gammatone_biquad(self,fs,numChannels,lowFreq):
-	""" Computes the filter coefficients for a bank of 
-	Gammatone filters.  These filters were defined by Patterson and 
-	Holdworth for simulating the cochlea.
+    #def testInverseSTDESN(self, level=1):
+	#""" tests the inversion of a standard ESN
+	#"""
 	
-	This implements the same as makeGammatoneFilter, but has to be used
-	with a cascade of 4 biquad and therefore avoids the numerical stability
-	problem with high sampling rates and low frequencies.
+	#self.ins = 1
+	#self.outs = 1
+	#self.net.setInputs( self.ins )
+	#self.net.setOutputs( self.outs )
+	#self.net.setReservoirAct(ACT_LINEAR)
+	#self.net.setOutputAct(ACT_LINEAR)
+	#self.net.setInitParam(FB_CONNECTIVITY, 0.)
+	#self.net.init()
 	
-	return     B, A    (3d array of coeffs for each channel for each biquad)
+	## train ESN
+	#trainin = N.random.rand(self.ins,self.train_size) * 2 - 1
+	#trainout = N.random.rand(self.outs,self.train_size) * 2 - 1
+	#trainin = N.asfarray(trainin, self.dtype)
+	#trainout = N.asfarray(trainout, self.dtype)
+	#Wout = self.net.getWout().copy()
+	#Wout = N.random.rand(Wout.shape[0],Wout.shape[1])*2-1
+	#self.net.setWout(Wout)
 	
-	B: the forward part of the filter,
-	   z.B. B(channel, biquad_nr, biquad_coeff)
-	   index1 = channel of the gammatone filter
-	   index2 = biquad nr (0-3)
-	   index3 = biquad coefficient (0-2)
-	A: the recursive part of the filter (same structure as B)
+	## get internal data
+	#Win = self.net.getWin().copy()
+	#W = N.empty((self.size,self.size),self.dtype)
+	#self.net.getW( W )
 	
-	2007,
-	Georg Holzmann
-	"""
+	## simulate network
+	#indata = N.random.rand(self.ins,self.sim_size)*2-1
+	#indata = N.asfarray(indata, self.dtype)
+	#outdata = N.empty((self.outs,self.sim_size),self.dtype)
+	#x = N.zeros(self.size)
+	##self.net.simulate( indata, outdata )
+	## simulate in python without input2output connection !!!
+	#Wout = N.delete(Wout, (1,N.size(Wout)) )
+	#for n in range(self.sim_size):
+		## calc new network activation
+		#x = N.dot( W, x )
+		#x += N.dot( Win, indata[:,n] )
+		## reservoir activation function
+		##x = N.tanh( x )
+		## output = Wout * [x] without input !!!
+		#outdata[:,n] = N.dot( Wout, x )
 	
-	T = 1./fs
+	## simulate the inverted ESN
+	#outdataInv = N.zeros((self.outs,self.sim_size),self.dtype)
 	
-	# Change the followFreqing three parameters if you wish to use a
-	# different ERB scale.
-	EarQ = 9.26449            # Glasberg and Moore Parameters
-	minBW = 24.7
-	order = 1
+	## invert weights
+	#Wout = Wout.flatten()
+	#Win = Win.flatten()
+	#for n in range(self.size):
+		#if Wout[n] != 0:
+			#Wout[n] = 1 / Wout[n]
+		#if Win[n] != 0:
+			#Win[n] = 1 / Win[n]
+	#print "Win:",Win
+	#print "Wout:",Wout
 	
-	# All of the following expressions are derived in Apple TR #35, "An
-	# Efficient Implementation of the Patterson-Holdsworth Cochlear
-	# Filter Bank."
-	cf = N.arange(numChannels) + 1
-	cf = -(EarQ*minBW) + N.exp( cf * (-N.log(fs/2. + EarQ*minBW) + \
-	     N.log(lowFreq + EarQ*minBW) ) / numChannels ) \
-	     *(fs/2. + EarQ*minBW)
+	## simulate the inverted ESN
+	#outdataInv = N.zeros((self.outs,self.sim_size),self.dtype)
+	#for n in range(1,self.sim_size):
+		##t1 = N.arctanh( outdata[0,n]*Wout.flatten() )
+		#t1 = outdata[0,n]*Wout
+		##print "T1:",t1
+		#t2 = N.dot( W, outdata[0,n-1]*Wout )
+		##print "T2:",t2
+		#outdataInv[:,n] = N.dot( t1-t2, Win )
+		##print "t1-t2",t1-t2
+		##print "win:",Win
+		##print "output:",outdataInv[0,n]
 	
-	ERB = ((cf/EarQ)**order + minBW**order)**(1/order)
-	B = 1.019*2*N.pi*ERB
-	
-	# calculate gain factor
-	gain = abs( (-2*N.exp(4*1j*cf*N.pi*T)*T + \
-	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * \
-	       (N.cos(2*cf*N.pi*T) - N.sqrt(3. - 2**(3./2.)) * \
-	       N.sin(2*cf*N.pi*T))) * (-2*N.exp(4*1j*cf*N.pi*T)*T + \
-	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * \
-	       (N.cos(2*cf*N.pi*T) + N.sqrt(3. - 2**(3./2.)) * \
-	       N.sin(2*cf*N.pi*T))) * (-2*N.exp(4*1j*cf*N.pi*T)*T + \
-	       2*N.exp(-(B*T) + 2*1j*cf*N.pi*T) * T * (N.cos(2*cf*N.pi*T) - \
-	       N.sqrt(3. + 2**(3./2.)) * N.sin(2*cf*N.pi*T))) * \
-	       (-2*N.exp(4*1j*cf*N.pi*T)*T + 2*N.exp(-(B*T) + \
-	       2*1j*cf*N.pi*T) * T * (N.cos(2*cf*N.pi*T) + \
-	       N.sqrt(3. + 2**(3./2.)) * N.sin(2*cf*N.pi*T))) / \
-	       (-2. / N.exp(2*B*T) - 2*N.exp(4*1j*cf*N.pi*T) + \
-	       2.*(1. + N.exp(4*1j*cf*N.pi*T)) / N.exp(B*T)) ** 4)
-	
-	# implementation with 4 biquads:
-	# z.B. Afilt(channel, biquad_nr, biquad_coeff)
-	Afilt = N.zeros((len(cf),4,3))  # feedback path
-	Bfilt = N.zeros((len(cf),4,3))  # forward path
-	
-	# init all 4 biquads
-	for n in range(4):
-		Afilt[:,n,0] = 1.
-		Afilt[:,n,1] = -2 * N.cos(2*cf*N.pi*T) / N.exp(B*T)
-		Afilt[:,n,2] = N.exp(-2*B*T)
-		Bfilt[:,n,0] = T
-		Bfilt[:,n,2] = 0.
-	
-	# init the rest
-	tmp = 2*T*N.cos(2*cf*N.pi*T) / N.exp(B*T)
-	Bfilt[:,0,1] = -(tmp+2*N.sqrt(3.+2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
-	Bfilt[:,1,1] = -(tmp-2*N.sqrt(3.+2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
-	Bfilt[:,2,1] = -(tmp+2*N.sqrt(3.-2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
-	Bfilt[:,3,1] = -(tmp-2*N.sqrt(3.-2**1.5)*T*N.sin(2*cf*N.pi*T)/N.exp(B*T))/2.
-	
-	# normalize first biquad to gain
-	for n in range(3):
-		Bfilt[:,0,n] = Bfilt[:,0,n] / gain
-	
-	return Bfilt, Afilt
+	#assert_array_almost_equal( outdata, outdataInv )
 	
 	
     def _gammatonefilter(self, signal, chan=0):
 	""" a gammatone filter bank """
-	B,A = self._gammatone_biquad(44100,self.size,150)
+	B,A = filtering.gammatone_biquad(44100,self.size,150)
 	
 	# run the 4 biquads
 	y = scipy.signal.lfilter(B[chan,0,:],A[chan,0,:],signal)
