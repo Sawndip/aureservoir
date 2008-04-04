@@ -650,11 +650,12 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
   assert( out.numRows() == esn_->outputs_ );
   assert( in.numCols() == out.numCols() );
   assert( last_out_.numRows() == esn_->outputs_ );
+  assert( esn_->Wout_.numRows() != 0 );
+  assert( esn_->Wout_.numCols() != 0 );
 
   int steps = in.numCols();
-  typename ESN<T>::DEMatrix::View
-    Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
-    Wout2 = esn_->Wout_(_,_(esn_->neurons_+1, esn_->neurons_+esn_->inputs_));
+  typename ESN<T>::DEMatrix::View Wout1 = esn_->Wout_(_,_(1, esn_->neurons_)),
+     Wout2 = esn_->Wout_(_,_(esn_->neurons_+1, esn_->neurons_+esn_->inputs_));
 
   /// \todo see SimStd
 

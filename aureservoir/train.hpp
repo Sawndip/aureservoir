@@ -29,6 +29,7 @@ void TrainBase<T>::checkParams(const typename ESN<T>::DEMatrix &in,
                                int washout)
   throw(AUExcept)
 {
+  // check data size
   if( in.numCols() != out.numCols() )
     throw AUExcept("TrainBase::train: input and output must be same column size!");
   if( in.numRows() != esn_->inputs_ )
@@ -36,6 +37,7 @@ void TrainBase<T>::checkParams(const typename ESN<T>::DEMatrix &in,
   if( out.numRows() != esn_->outputs_ )
     throw AUExcept("TrainBase::train: wrong output row size!");
 
+  // check if we have enough training data
   if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
   {
     if( (in.numCols()-washout) < esn_->neurons_+esn_->inputs_ )
@@ -46,6 +48,10 @@ void TrainBase<T>::checkParams(const typename ESN<T>::DEMatrix &in,
     if( (in.numCols()-washout) < 2*(esn_->neurons_+esn_->inputs_) )
     throw AUExcept("TrainBase::train: too few training data!");
   }
+
+  // check if we have an Wout matrix
+  if( esn_->Wout_.numRows() == 0 || esn_->Wout_.numCols() == 0 )
+    throw AUExcept("TrainBase::train: you need to have a Wout matrix, so init the net or set Wout manually!");
 
   /// \todo check also for the right algorithm combination
   ///       -> or better do that in init()
@@ -248,6 +254,11 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 {
   this->checkParams(in,out,washout);
 
+  // check for right simulation algorithm
+  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_FILTER_DS &&
+      esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
+    throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
+
 
   // 1. teacher forcing, collect states
 
@@ -278,11 +289,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
 
   // 2. delay calculation for delay&sum readout
-
-  // check for right simulation algorithm
-  if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_FILTER_DS &&
-      esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
-    throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
 
   // get maxdelay or set it to 0 if not given
   int maxdelay;
@@ -368,7 +374,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
 
     // 4. restore simulation matrix M
-
     if( i < esn_->outputs_ )
     {
       M.resize( Mtmp.numRows(), Mtmp.numCols() );

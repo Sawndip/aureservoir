@@ -321,19 +321,15 @@ class test_correspondence(NumpyTestCase):
 	#self.outs = 1
 	#self.net.setInputs( self.ins )
 	#self.net.setOutputs( self.outs )
-	#self.net.setReservoirAct(ACT_LINEAR)
+	#self.net.setReservoirAct(ACT_TANH)
 	#self.net.setOutputAct(ACT_LINEAR)
 	#self.net.setInitParam(FB_CONNECTIVITY, 0.)
 	#self.net.init()
 	
 	## train ESN
 	#trainin = N.random.rand(self.ins,self.train_size) * 2 - 1
-	#trainout = N.random.rand(self.outs,self.train_size) * 2 - 1
 	#trainin = N.asfarray(trainin, self.dtype)
-	#trainout = N.asfarray(trainout, self.dtype)
-	#Wout = self.net.getWout().copy()
-	#Wout = N.random.rand(Wout.shape[0],Wout.shape[1])*2-1
-	#self.net.setWout(Wout)
+	#Wout = N.random.rand(1,self.size)*2-1
 	
 	## get internal data
 	#Win = self.net.getWin().copy()
@@ -347,7 +343,6 @@ class test_correspondence(NumpyTestCase):
 	#x = N.zeros(self.size)
 	##self.net.simulate( indata, outdata )
 	## simulate in python without input2output connection !!!
-	#Wout = N.delete(Wout, (1,N.size(Wout)) )
 	#for n in range(self.sim_size):
 		## calc new network activation
 		#x = N.dot( W, x )
@@ -361,28 +356,40 @@ class test_correspondence(NumpyTestCase):
 	#outdataInv = N.zeros((self.outs,self.sim_size),self.dtype)
 	
 	## invert weights
-	#Wout = Wout.flatten()
-	#Win = Win.flatten()
-	#for n in range(self.size):
-		#if Wout[n] != 0:
-			#Wout[n] = 1 / Wout[n]
-		#if Win[n] != 0:
-			#Win[n] = 1 / Win[n]
-	#print "Win:",Win
-	#print "Wout:",Wout
+	##WoutOld = Wout.copy()
+	##WinOld = Win.copy()
+	#Wout = N.linalg.pinv(Wout)
+	#Win = N.linalg.pinv(Win)
+	
+	##Wout = Wout.flatten()
+	##Win = Win.flatten()
+	##for n in range(self.size):
+		##if Win[n] != 0:
+			##Win[n] = 1 / Win[n]
+		##if Wout[n] != 0:
+			##Wout[n] = 1 / Wout[n]
+		##print n,": Win: ",Win[0,n]," old: ",WinOld[n]," ratio: ",(WinOld[n])/Win[0,n]
+	##print "Win:",Win
+	##print "Wout:",Wout
 	
 	## simulate the inverted ESN
 	#outdataInv = N.zeros((self.outs,self.sim_size),self.dtype)
-	#for n in range(1,self.sim_size):
-		##t1 = N.arctanh( outdata[0,n]*Wout.flatten() )
+	#for n in range(0,self.sim_size):
+		##t1 = N.arctanh( outdata[0,n]*Wout )
 		#t1 = outdata[0,n]*Wout
 		##print "T1:",t1
 		#t2 = N.dot( W, outdata[0,n-1]*Wout )
 		##print "T2:",t2
-		#outdataInv[:,n] = N.dot( t1-t2, Win )
+		##outdataInv[:,n] = N.dot( Win, t1 )
+		#outdataInv[:,n] = N.dot( Win, t1-t2 )
 		##print "t1-t2",t1-t2
 		##print "win:",Win
 		##print "output:",outdataInv[0,n]
+	
+	#scale = outdata / outdataInv
+	#print scale
+	#outdataInv = outdataInv*scale[0,0]
+	## wie kann man scale faktor bestimmen ???
 	
 	#assert_array_almost_equal( outdata, outdataInv )
 	
