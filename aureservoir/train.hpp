@@ -259,6 +259,7 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
       esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
     throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
 
+  /// \todo make the whole algorithm work for multiple outputs !!!
 
   // 1. teacher forcing, collect states
 
@@ -269,6 +270,11 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   // collects reservoir activations and inputs of all timesteps in M
   M.resize(steps, esn_->neurons_+esn_->inputs_);
+
+  // collect desired outputs
+  O(_,1) = out( 1 ,_(washout+1,steps) );
+  // undo output activation function
+  esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
 
   typename ESN<T>::DEMatrix sim_in(esn_->inputs_ ,1),
                             sim_out(esn_->outputs_ ,1);
@@ -286,7 +292,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     M(n,_(esn_->neurons_+1,esn_->neurons_+esn_->inputs_)) =
     sim_in(_,1);
   }
-
 
   // 2. delay calculation for delay&sum readout
 
@@ -307,7 +312,183 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   else
     filter = 0;
 
-  // delay calculation
+  // get the nr of iterations for EM algorithm
+  int emiters = 0; /// \todo change this to 1 if EM algorithm is working !
+  if( esn_->init_params_.find(DS_EM_ITERATIONS) != esn_->init_params_.end() )
+  {
+    emiters = (int) esn_->init_params_[DS_EM_ITERATIONS];
+    emiters = (emiters < 0) ? 0 : emiters;
+  }
+
+
+  ///////////////////////////////////////////////////////////
+  // EM algorithm for delay+weight calculation
+
+  if( emiters > 0 )
+  {
+    int fftsize = (int) pow( 2, ceil(log(steps-washout+1)/log(2)) ); // next power of 2
+    typename DEMatrix<T>::Type Mtmp(steps-washout,M.numCols());
+    typename DEVector<T>::Type t(steps-washout),targ(steps-washout);
+    typename DEVector<T>::Type r(steps-washout);
+    typename CDEVector<T>::Type rF,tF;
+    typename DEVector<T>::Type rest;
+    typename DEMatrix<T>::Type t2(steps-washout,1);
+    typename DEMatrix<T>::Type r2(steps-washout,1);
+
+    int L = Mtmp.numCols();
+
+    typename DEVector<T>::Type w(L), wold(L);
+    int delays[L];
+    int delold[L];
+
+    // set initial weights and delays to 0
+    std::fill_n( w.data(), w.length(), 0. );
+    std::fill_n( delays, L, 0 );
+
+    bool converged = false;
+    int itercount = 0;
+
+    // delay neuron signals without delay
+    for(int i=0; i<Mtmp.numCols(); ++i)
+      Mtmp(_, i+1) = M( _(washout+1,M.numRows()), i+1 );
+
+    // init target vector
+    targ = O(_,1);
+
+    while( !converged )
+    {
+      // store previous delays and weights
+      wold = w;
+      for(int i=0; i<esn_->neurons_+esn_->inputs_; ++i)
+        delold[i] = delays[i];
+
+      for(int i=0; i<L; ++i)
+      {
+        //////////////////
+        // E-step
+
+        // delay neuronsignal from las step with new delay and remove it from target
+        int ii = L-1;
+        if( i>0 )
+          ii = (i-1) % L; // to not get negative numbers out of %
+        Mtmp(_, ii+1) = M( _(washout+1-delays[ii],M.numRows()-delays[ii]), ii+1 );
+        targ = targ-Mtmp(_,ii+1)*w(ii+1);
+
+        // remove contribution from all other neuron signals from target output O
+        // (recursive implementation)
+        t2(_,1) = Mtmp(_,i+1)*w(i+1);
+        t = targ + t2(_,1);
+        t = t / L;
+        targ = targ + t2(_,1);
+
+        //////////////////
+        // M-step
+
+        // current neuron signal
+        r = M( _(washout+1,M.numRows()), i+1 );
+
+        // calc FFT of target and neuron signal
+        rfft( r, rF, fftsize );
+        rfft( t, tF, fftsize );
+        // estimate time delay between target signal x
+        delays[i] = CalcDelay<T>::gcc(rF,tF,maxdelay,filter);
+
+        // delay current neuron signal with new delay
+        r = M( _(washout+1-delays[i],M.numRows()-delays[i]), i+1 );
+
+        /// \todo remove this copying -> use direct blas interface with data arrays
+        r2(_,1) = r;
+        t2(_,1) = t;
+        flens::ls( flens::NoTrans, r2, t2 );
+//         flens::lss( r2, t2 );  // pinv
+        w(i+1) = t2(1,1);
+      }
+
+      itercount++;
+
+      // calc delay difference:
+      int deldiff = 0;
+      for(int i=0; i<esn_->neurons_+esn_->inputs_; ++i)
+        deldiff += abs( delold[i] - delays[i] );
+
+      // calc weight difference:
+      T wdiff = 0;
+      for(int i=0; i<esn_->neurons_+esn_->inputs_; ++i)
+        wdiff += std::abs( wold(i+1) - w(i+1) );
+
+      // calc average weight
+      T wmean = 0;
+      for(int i=0; i<w.length(); ++i)
+        wmean += w(i+1);
+      wmean /= w.length();
+
+      std::cout << "\titeration " << itercount << " - |d-dold| diff = "
+                << deldiff << " - |w-wold| diff = " << wdiff
+                << " - average weight = " << wmean << "\n";
+
+      if( itercount >= emiters )
+        converged = true;
+    }
+
+    // init delay lines with calculated delays
+    for(int i=0; i<L; ++i)
+    {
+      if( delays[i] != 0 )
+      {
+        // shift reservoir signals the right amount
+        Mtmp(_, i+1) = M( _(washout+1-delays[i],M.numRows()-delays[i]), i+1 );
+
+        // init delay lines with the rest of the buffer
+        rest = M( _(M.numRows()-delays[i]+1,M.numRows()), i+1 );
+        esn_->sim_->initDelayLine(i, rest);
+      }
+      else
+        Mtmp(_, i+1) = M( _(washout+1,M.numRows()), i+1 );
+    }
+
+
+    // check if we should take the weight from EM algorithm
+    /// \todo squared state update !
+    if( esn_->init_params_.find(DS_WEIGHTS_EM) != esn_->init_params_.end() )
+    {
+      std::cerr << "take EM weights !!!!!!!!\n";
+      esn_->Wout_(1,_) = w;
+      this->clearData();
+      return;
+    }
+
+
+    // otherwise calculate output weights with pseudo inverse
+
+    if( esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
+    {
+       // calc weights with pseudo inv: Wout_ = (M^-1) * O
+       flens::lss( Mtmp, O );
+       t2 = flens::transpose( O(_( 1, M.numCols() ),_) );
+       esn_->Wout_(1,_) = t2(1,_);
+    }
+    else
+    {
+      // square and double state if we have additional squared state updates
+      M.resize( steps-washout, Mtmp.numCols()*2 );
+      M( _, _(1,Mtmp.numCols()) ) = Mtmp;
+      this->squareStates();
+
+      // calc weights with pseudo inv: Wout_ = (M^-1) * O
+      flens::lss( M, O );
+      t2 = flens::transpose( O(_( 1, M.numCols() ),_) );
+      esn_->Wout_(1,_) = t2(1,_);
+    }
+
+    this->clearData();
+    return;
+
+  } // end of EM based calculation
+
+
+
+  ///////////////////////////////////////////////////////////////
+  // OLD delay calculation algorithm:
 
   int delay = 0;
   int fftsize = (int) pow( 2, ceil(log(steps)/log(2)) ); // next power of 2

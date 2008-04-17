@@ -3,9 +3,8 @@ from aureservoir import *
 import filtering, util
 import pylab as P
 from scipy import signal
-from scipy.linalg import pinv, inv
+from scipy.linalg import pinv, inv, norm
 import scipy.lib.lapack.clapack
-#from scipy.fftpack import hilbert
 
 
 class DelLine():
@@ -318,9 +317,9 @@ class IIRESN(DoubleESN):
 
 
 class DSESN(IIRESN):
-	""" ESN class for some experiments.
+	""" ESN class with delay+sum readout.
 	
-	2007, Georg Holzmann
+	2007-2008, Georg Holzmann
 	"""
 	
 	# maximum delay of the delayline
@@ -338,11 +337,17 @@ class DSESN(IIRESN):
 	# set this to 1 to also have delays in the reservoir
 	have_res_delays = 0
 	
+	# iterations for EM based delay+weight calculation
+	emiterations = 0
+	
 	
 	def train(self, indata, outdata, washout):
 		""" set to desired train method here """
 		#DoubleESN.train(self,indata,outdata,washout)
-		self.trainDelaySum(indata,outdata,washout)
+		if self.emiterations==0:
+			self.trainDelaySum(indata,outdata,washout)
+		else:
+			self.trainDelaySumEM(indata,outdata,washout)
 	
 	
 	def simulate(self, indata, outdata):
@@ -445,6 +450,46 @@ class DSESN(IIRESN):
 		
 		# set the readout to the radius
 		self.setWout(self.wout.copy())
+
+
+	def trainDelaySumEM(self, indata, outdata, washout):
+		""" EM algorithm for delay+weight learning
+		"""
+		if( outdata.shape[0] > 1 ):
+			raise ValueError, "ATM only for 1 output !"
+		
+		steps = indata.shape[1]
+		size = self.getSize()
+		insig = indata.copy()
+		
+		# teacher forcing
+		X = self._teacherForcing(insig,outdata)
+		
+		# restructure data
+		M = N.r_[X,insig]
+		M = M.T
+		T = outdata[0,washout:steps].flatten()
+		
+		self.wout,self.delays = self._delaylearning_em(T,M,washout, \
+		                                          self.emiterations)
+		
+		# shift reservoir signals with the right delay
+		K = N.zeros(( steps-washout, M.shape[1] ))
+		for n in range( M.shape[1] ):
+			K[:,n] = M[washout-self.delays[n]:steps-self.delays[n],n]
+		
+		if (self.squareupdate == 0):
+			# calc least square
+			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( K, T )
+			self.wout = wout[0:size+self.getInputs()].T
+		else:
+			# restructure data
+			M = N.c_[K,K**2]
+			# calc least square
+			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( M, T )
+			self.wout = wout[0:2*(size+self.getInputs())].T
+		self.wout.shape = 1,-1
+		self.setWout( self.wout.copy() )
 	
 	
 	def simulateDelaySum(self, indata, outdata):
@@ -546,4 +591,85 @@ class DSESN(IIRESN):
 			for j in range(n):
 				t[i] += self.Wdel[i*n+j].tic(W[i,j]*x[j])
 		return t
-
+	
+	
+	def _delaylearning_em(self,z,M,washout=100,emiterations=1):
+		""" EM algorithm to learn delay and weights
+		
+		input:
+		z              target output data
+		M              matrix with all input data from the reservoir neurons
+		washout        ESN washout time
+		emiterations   nr of emiterations
+		
+		output: (w,d)
+		w              estimated weights
+		d              estimated delays
+		"""
+		# nr of steps
+		steps = M.shape[0]
+		# nr of components
+		L = M.shape[1]
+		# matrix for delayd neuron signals without washout
+		K = N.zeros(( steps-washout, L ))
+		
+		# allocate memory for weights and delays
+		w = N.zeros(L)
+		d = N.zeros(L, dtype='int32')
+		
+		#print "EM-based delay+weight parameter estimation ..."
+		converged = 0
+		ccount = 0
+		while not converged:
+			l = 0
+			wold = w.copy()
+			dold = d.copy()
+			
+			while l<L:
+				########################
+				# E-step
+				
+				# delay all neuron signals with delay from previous step
+				for n in range(L):
+					K[:,n] = M[washout-d[n]:steps-d[n],n]
+				
+				# now remove contribution from all other neurons
+				#x =  (z-N.dot(K,w))/L + K[:,l]*w[l]
+				x =  ( z-N.dot(K,w) + K[:,l]*w[l] ) / L
+				
+				########################
+				# M-step
+				
+				# current neuron-signal
+				r = M[washout:steps,l]
+				
+				# estimate time delay between target signal x
+				xcorr = abs( util.GCC(r,x,self.gcctype,0) )
+				d[l] = xcorr[0:self.maxdelay+1].argmax()
+				
+				# delay current neuron signal with new delay
+				r = M[washout-d[l]:steps-d[l],l]
+				
+				# calculate new weight w(l) with pseudo-inverse:
+				pinvr = pinv(r.reshape(-1,1))
+				w[l] = N.dot( pinvr, x)
+				#print "\tl:",l," - wl:",w[l],", d:",d[l]
+				
+				l=l+1
+			ccount=ccount+1
+			
+			# check if we shoud continue
+			print "\titeration", ccount, ", |d-dold| diff =", \
+			      abs(d-dold).sum(), "- average weight =", w.mean()
+			
+			# check if we shoud continue
+			if ccount >= emiterations:
+				converged = 1
+			
+		# init delaylines with final delays
+		self.dellines = []
+		for n in range(L):
+			rest = M[steps-d[n]:steps,n].copy()
+			self.dellines.append( DelLine(d[n],rest) )
+		
+		return w, d
