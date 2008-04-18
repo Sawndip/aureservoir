@@ -121,8 +121,7 @@ class ESN
    *                transient dynamics of the network starting state
    */
   inline void train(const DEMatrix &in, const DEMatrix &out, int washout)
-    throw(AUExcept)
-  { train_->train(in, out, washout); }
+    throw(AUExcept);
 
   /*!
    * Simulation Algorithm Interface
@@ -133,6 +132,15 @@ class ESN
    */
   inline void simulate(const DEMatrix &in, DEMatrix &out)
   { sim_->simulate(in, out); }
+
+  /*!
+   * Teacher Forcing a input and target signal without learning output weights.
+   * This is useful for ESNs in generator mode to initialize the internal state.
+   *
+   * @param in matrix of input values (inputs x timesteps)
+   * @param out matrix for output values (outputs x timesteps)
+   */
+  void teacherForce(const DEMatrix &in, DEMatrix &out);
 
    /*!
    * resets the internal state vector x of the reservoir to zero
@@ -202,6 +210,18 @@ class ESN
    */
   inline void simulateStep(T *invec, int insize, T *outvec, int outsize)
     throw(AUExcept);
+
+  /*!
+   * Teacher Forcing a input and target signal without learning output weights.
+   * This is useful for ESNs in generator mode to initialize the internal state.
+   *
+   * @param inmtx input matrix in row major storage (usual C array)
+   *              (inputs x timesteps)
+   * @param outmtx output matrix in row major storage (outputs x timesteps)
+   *               for teacher forcing
+   */
+  void teacherForce(T *inmtx, int inrows, int incols,
+                       T *outmtx, int outrows, int outcols) throw(AUExcept);
 
   //@}
   //! @name Additional Interface for Bandpass and IIR-Filter Neurons

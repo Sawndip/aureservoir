@@ -173,6 +173,83 @@ double ESN<T>::adapt(const DEMatrix &in)
 }
 
 template <typename T>
+inline void ESN<T>::train(const DEMatrix &in, const DEMatrix &out, int washout)
+  throw(AUExcept)
+{
+  /// \todo is this a good place to implement these relaxation stages approach ?
+  int rstages = 0;
+  if( init_params_.find(RELAXATION_STAGES) != init_params_.end() )
+    rstages = (int) init_params_[RELAXATION_STAGES];
+
+  // "usual" training
+  if( !rstages )
+  {
+    train_->train(in, out, washout);
+    return;
+  }
+
+  // relaxation stages: training algorithm useful for ESNs in generator mode
+  // with output feedback, the method is from
+  // "Harnessing nonlinearity: predicting chaotic systems and saving energy
+  // in wireless telecommunication" by Jäger and Haas
+
+  DEMatrix out1=out; /// \todo should we change out to non-const instead of copying ?
+  int steps = in.numCols();
+  DEMatrix sim_in(inputs_ ,1), sim_out(outputs_ ,1), last_out(outputs_ ,1);
+
+  // 1. calculate output weights wout0
+  train_->train(in, out, washout);
+
+  while( rstages != 0 )
+  {
+    std::cout << "\trelaxation stage nr. " << rstages << "\n";
+
+    // 2. calculate new teacher signal as in Jägers paper: simulate the ESN step
+    // by step and take the output as the new teacher signal
+    sim_in(_,1) = in(_,1);
+    simulate(sim_in, sim_out);
+    sim_->last_out_(_,1) = out1(_,1);
+
+    for(int n=2; n<=steps; ++n)
+    {
+      sim_in(_,1) = in(_,n);
+      simulate(sim_in, sim_out);
+      sim_->last_out_(_,1) = out1(_,n);
+
+      // set new teacher signal
+      out1(_,n) = sim_out(_,1);
+    }
+
+    // 3. re-train the network with the new training/teacher signal
+    train_->train(in, out1, washout);
+
+    rstages--;
+  }
+}
+
+template <typename T>
+void ESN<T>::teacherForce(const DEMatrix &in, DEMatrix &out)
+{
+  if( out.numCols() != in.numCols() )
+    throw AUExcept("ESN::teacherForce: output and input must have same nr of columns!");
+  if( in.numRows() != inputs_ )
+    throw AUExcept("ESN::teacherForce: wrong input row size!");
+  if( out.numRows() != outputs_ )
+    throw AUExcept("ESN::teacherForce: wrong output row size!");
+
+  int steps = in.numCols();
+
+  DEMatrix sim_in(inputs_ ,1), sim_out(outputs_ ,1);
+  // do teacher forcing for all steps
+  for(int n=1; n<=steps; ++n)
+  {
+    sim_in(_,1) = in(_,n);
+    simulate(sim_in, sim_out);
+    sim_->last_out_(_,1) = out(_,n);
+  }
+}
+
+template <typename T>
 double ESN<T>::adapt(T *inmtx, int inrows, int incols)
   throw(AUExcept)
 {
@@ -273,6 +350,27 @@ inline void ESN<T>::simulateStep(T *invec, int insize, T *outvec, int outsize)
   // copy data to output
   for(int i=0; i<outsize; ++i)
     outvec[i] = flout(i+1,1);
+}
+
+template <typename T>
+void ESN<T>::teacherForce(T *inmtx, int inrows, int incols,
+                          T *outmtx, int outrows, int outcols)
+  throw(AUExcept)
+{
+  DEMatrix flin(inrows,incols);
+  DEMatrix flout(outrows,outcols);
+
+  // copy data to FLENS matrix (column major storage)
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    flin(i+1,j+1) = inmtx[i*incols+j];
+  } }
+  for(int i=0; i<outrows; ++i) {
+  for(int j=0; j<outcols; ++j) {
+    flout(i+1,j+1) = outmtx[i*outcols+j];
+  } }
+
+  teacherForce(flin, flout);
 }
 
 template <typename T>

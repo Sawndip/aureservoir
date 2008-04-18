@@ -634,8 +634,9 @@ class DSESN(IIRESN):
 					K[:,n] = M[washout-d[n]:steps-d[n],n]
 				
 				# now remove contribution from all other neurons
-				#x =  (z-N.dot(K,w))/L + K[:,l]*w[l]
-				x =  ( z-N.dot(K,w) + K[:,l]*w[l] ) / L
+				x =  (z-N.dot(K,w))/L + K[:,l]*w[l]
+				#x =  ( z-N.dot(K,w) + K[:,l]*w[l] ) / L
+				#x =  z-N.dot(K,w) + K[:,l]*w[l]
 				
 				########################
 				# M-step

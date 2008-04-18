@@ -3569,6 +3569,60 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DoubleESN_teacherForce(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<double > *arg1 = (ESN<double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  double *arg5 = (double *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:DoubleESN_teacherForce",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTdouble_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_teacherForce" "', argument " "1"" of type '" "ESN<double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (double*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  {
+    try {
+      (arg1)->teacherForce(arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DoubleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<double > *arg1 = (ESN<double > *) 0 ;
@@ -6101,6 +6155,60 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SingleESN_teacherForce(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN<float > *arg1 = (ESN<float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  float *arg5 = (float *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:SingleESN_teacherForce",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNTfloat_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_teacherForce" "', argument " "1"" of type '" "ESN<float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN<float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (float*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  {
+    try {
+      (arg1)->teacherForce(arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_SingleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN<float > *arg1 = (ESN<float > *) 0 ;
@@ -8264,6 +8372,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DoubleESN_train", _wrap_DoubleESN_train, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_simulate", _wrap_DoubleESN_simulate, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_simulateStep", _wrap_DoubleESN_simulateStep, METH_VARARGS, NULL},
+	 { (char *)"DoubleESN_teacherForce", _wrap_DoubleESN_teacherForce, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setBPCutoff", _wrap_DoubleESN_setBPCutoff, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_setIIRCoeff", _wrap_DoubleESN_setIIRCoeff, METH_VARARGS, NULL},
 	 { (char *)"DoubleESN_post", _wrap_DoubleESN_post, METH_VARARGS, NULL},
@@ -8309,6 +8418,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SingleESN_train", _wrap_SingleESN_train, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_simulate", _wrap_SingleESN_simulate, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_simulateStep", _wrap_SingleESN_simulateStep, METH_VARARGS, NULL},
+	 { (char *)"SingleESN_teacherForce", _wrap_SingleESN_teacherForce, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setBPCutoff", _wrap_SingleESN_setBPCutoff, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_setIIRCoeff", _wrap_SingleESN_setIIRCoeff, METH_VARARGS, NULL},
 	 { (char *)"SingleESN_post", _wrap_SingleESN_post, METH_VARARGS, NULL},
@@ -8924,6 +9034,7 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "IP_LEARNRATE",SWIG_From_int(static_cast< int >(IP_LEARNRATE)));
   SWIG_Python_SetConstant(d, "IP_MEAN",SWIG_From_int(static_cast< int >(IP_MEAN)));
   SWIG_Python_SetConstant(d, "IP_VAR",SWIG_From_int(static_cast< int >(IP_VAR)));
+  SWIG_Python_SetConstant(d, "RELAXATION_STAGES",SWIG_From_int(static_cast< int >(RELAXATION_STAGES)));
   SWIG_Python_SetConstant(d, "INIT_STD",SWIG_From_int(static_cast< int >(INIT_STD)));
   SWIG_Python_SetConstant(d, "SIM_STD",SWIG_From_int(static_cast< int >(SIM_STD)));
   SWIG_Python_SetConstant(d, "SIM_SQUARE",SWIG_From_int(static_cast< int >(SIM_SQUARE)));

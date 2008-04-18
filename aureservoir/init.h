@@ -61,7 +61,8 @@ enum InitParameter
   DS_WEIGHTS_EM,    //!< use calculated weights from EM algorithm
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
-  IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation
+  IP_VAR,           //!< desired variance for Gaussian-IP reservoir adaptation
+  RELAXATION_STAGES //!< relaxation stages in training algorithm
 };
 
 template <typename T> class ESN;

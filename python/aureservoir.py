@@ -204,6 +204,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_simulateStep(*args)
 
+    def teacherForce(*args):
+        """teacherForce(self, double inmtx, double outmtx)"""
+        return _aureservoir.DoubleESN_teacherForce(*args)
+
     def setBPCutoff(*args):
         """
         setBPCutoff(self, double f1vec, double f2vec)
@@ -744,6 +748,10 @@ class SingleESN(_object):
         """
         return _aureservoir.SingleESN_simulateStep(*args)
 
+    def teacherForce(*args):
+        """teacherForce(self, float inmtx, float outmtx)"""
+        return _aureservoir.SingleESN_teacherForce(*args)
+
     def setBPCutoff(*args):
         """
         setBPCutoff(self, float f1vec, float f2vec)
@@ -1170,6 +1178,7 @@ DS_WEIGHTS_EM = _aureservoir.DS_WEIGHTS_EM
 IP_LEARNRATE = _aureservoir.IP_LEARNRATE
 IP_MEAN = _aureservoir.IP_MEAN
 IP_VAR = _aureservoir.IP_VAR
+RELAXATION_STAGES = _aureservoir.RELAXATION_STAGES
 INIT_STD = _aureservoir.INIT_STD
 SIM_STD = _aureservoir.SIM_STD
 SIM_SQUARE = _aureservoir.SIM_SQUARE

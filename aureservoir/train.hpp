@@ -259,8 +259,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
       esn_->net_info_[ESN<T>::SIMULATE_ALG] != SIM_SQUARE )
     throw AUExcept("TrainDSPI::train: you need to use SIM_FILTER_DS or SIM_SQUARE for this training algorithm!");
 
-  /// \todo make the whole algorithm work for multiple outputs !!!
-
   // 1. teacher forcing, collect states
 
   int steps = in.numCols();
@@ -313,7 +311,7 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     filter = 0;
 
   // get the nr of iterations for EM algorithm
-  int emiters = 0; /// \todo change this to 1 if EM algorithm is working !
+  int emiters = 0; /// \todo change this to 1 if EM algorithm is working ?
   if( esn_->init_params_.find(DS_EM_ITERATIONS) != esn_->init_params_.end() )
   {
     emiters = (int) esn_->init_params_[DS_EM_ITERATIONS];
@@ -326,6 +324,10 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   if( emiters > 0 )
   {
+    /// \todo implement this for multiple outputs !
+    if( esn_->outputs_ != 1 )
+      throw AUExcept("TrainDSPI::train: DS_EM_ITERATIONS only for one output ATM !");
+
     int fftsize = (int) pow( 2, ceil(log(steps-washout+1)/log(2)) ); // next power of 2
     typename DEMatrix<T>::Type Mtmp(steps-washout,M.numCols());
     typename DEVector<T>::Type t(steps-washout),targ(steps-washout);
@@ -377,8 +379,9 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
         // remove contribution from all other neuron signals from target output O
         // (recursive implementation)
         t2(_,1) = Mtmp(_,i+1)*w(i+1);
-        t = targ + t2(_,1);
-        t = t / L;
+//         t = targ + t2(_,1);
+        t = targ/L + t2(_,1);
+//         t = t / L;
         targ = targ + t2(_,1);
 
         //////////////////
@@ -448,10 +451,13 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
 
     // check if we should take the weight from EM algorithm
-    /// \todo squared state update !
     if( esn_->init_params_.find(DS_WEIGHTS_EM) != esn_->init_params_.end() )
     {
-      std::cerr << "take EM weights !!!!!!!!\n";
+      /// \todo squared state update !
+      if( esn_->net_info_[ESN<T>::SIMULATE_ALG] == SIM_SQUARE )
+        throw AUExcept("TrainDSPI::train: SQUARE not yet implemented for DS_WEIGHTS_EM!");
+
+      std::cout << "\tusing weights from EM algorithm !\n";
       esn_->Wout_(1,_) = w;
       this->clearData();
       return;

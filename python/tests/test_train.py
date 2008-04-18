@@ -254,5 +254,58 @@ class test_train(NumpyTestCase):
 	assert_array_almost_equal(wout_target,wout,2)
 
 
+    def testRelaxationStages(self, level=1):
+	""" relaxation stages for ESNs in generator mode """
+        
+	# init network
+	self.net.setReservoirAct(ACT_TANH)
+	self.net.setSimAlgorithm(SIM_STD)
+	self.net.setTrainAlgorithm(TRAIN_PI)
+	self.net.setInitParam(FB_CONNECTIVITY, 0.9)
+	self.net.init()
+	
+	# copy network
+	if self.dtype is 'float32':
+		netB = SingleESN(self.net)
+	else:
+		netB = DoubleESN(self.net)
+	
+	# train network
+	self.net.setInitParam(RELAXATION_STAGES, 1)
+	washout = 2
+	# test with zero input:
+	indata = N.zeros((self.ins,self.train_size),self.dtype)
+	outdata = N.random.rand(self.outs,self.train_size) * 2 - 1
+	indata = N.asfarray( indata, self.dtype )
+	outdata = N.asfarray( outdata, self.dtype )
+	self.net.train( indata, outdata, washout )
+	wout_target = self.net.getWout().copy()
+	
+	# recalc algorithm
+	
+	# 1. train initial output weights
+	netB.train( indata, outdata, washout )
+	
+	# 2. calculate new teacher signal
+	t_new = N.zeros( outdata.shape )
+	t_new[:,0] = outdata[:,0]
+	outtmp = N.empty( self.outs )
+	netB.simulateStep( indata[:,0].flatten(), outtmp )
+	netB.setLastOutput( outdata[:,0].flatten() )
+	for n in range(1,indata.shape[1]):
+		netB.simulateStep( indata[:,n].flatten(), outtmp )
+		netB.setLastOutput( outdata[:,n].flatten() )
+		t_new[:,n] = outtmp
+	
+	# 3. calculate weights with new teacher signal
+	netB.train( indata, t_new, washout )
+	
+	# normalize result for comparison
+	woutB = netB.getWout().copy()
+	woutB = woutB / abs(woutB).max()
+	wout_target = wout_target / abs(wout_target).max()
+	assert_array_almost_equal(wout_target,woutB,2)
+
+
 if __name__ == "__main__":
     NumpyTest().run()

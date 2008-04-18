@@ -152,6 +152,8 @@ class ESN
   inline void simulate(T *inmtx, int inrows, int incols,
                        T *outmtx, int outrows, int outcols);
   inline void simulateStep(T *invec, int insize, T *outvec, int outsize);
+  void teacherForce(T *inmtx, int inrows, int incols,
+                    T *outmtx, int outrows, int outcols);
 
   void setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size);
   void setIIRCoeff(T *bmtx, int brows, int bcols,
@@ -223,7 +225,8 @@ enum InitParameter
   DS_WEIGHTS_EM,    //!< use calculated weights from EM algorithm
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
-  IP_VAR            //!< desired variance for Gaussian-IP reservoir adaptation
+  IP_VAR,           //!< desired variance for Gaussian-IP reservoir adaptation
+  RELAXATION_STAGES //!< relaxation stages in training algorithm
 };
 
 enum InitAlgorithm
