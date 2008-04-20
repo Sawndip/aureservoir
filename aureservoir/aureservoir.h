@@ -21,6 +21,7 @@
 #define AURESERVOIR_AURESERVOIR_H__
 
 #include "esn.h"
+#include "arrayesn.h"
 
 #include "utilities.h"
 #include "auexcept.h"

@@ -1159,6 +1159,112 @@ class SingleESN(_object):
 SingleESN_swigregister = _aureservoir.SingleESN_swigregister
 SingleESN_swigregister(SingleESN)
 
+class DoubleArrayESN(_object):
+    """Proxy of C++ DoubleArrayESN class"""
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DoubleArrayESN, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, DoubleArrayESN, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """__init__(self, DoubleESN model, int array_size) -> DoubleArrayESN"""
+        this = _aureservoir.new_DoubleArrayESN(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _aureservoir.delete_DoubleArrayESN
+    __del__ = lambda self : None;
+    def init(*args):
+        """init(self)"""
+        return _aureservoir.DoubleArrayESN_init(*args)
+
+    def train(*args):
+        """train(self, double inmtx, double outmtx, int washout)"""
+        return _aureservoir.DoubleArrayESN_train(*args)
+
+    def simulate(*args):
+        """simulate(self, double inmtx, double outmtx)"""
+        return _aureservoir.DoubleArrayESN_simulate(*args)
+
+    def teacherForce(*args):
+        """teacherForce(self, double inmtx, double outmtx)"""
+        return _aureservoir.DoubleArrayESN_teacherForce(*args)
+
+    def getArraySize(*args):
+        """getArraySize(self) -> int"""
+        return _aureservoir.DoubleArrayESN_getArraySize(*args)
+
+    def getNetwork(*args):
+        """getNetwork(self, int index) -> DoubleESN"""
+        return _aureservoir.DoubleArrayESN_getNetwork(*args)
+
+    def printWoutMean(*args):
+        """printWoutMean(self)"""
+        return _aureservoir.DoubleArrayESN_printWoutMean(*args)
+
+    def printWoutMax(*args):
+        """printWoutMax(self)"""
+        return _aureservoir.DoubleArrayESN_printWoutMax(*args)
+
+    def setNoise(*args):
+        """setNoise(self, double noise)"""
+        return _aureservoir.DoubleArrayESN_setNoise(*args)
+
+DoubleArrayESN_swigregister = _aureservoir.DoubleArrayESN_swigregister
+DoubleArrayESN_swigregister(DoubleArrayESN)
+
+class SingleArrayESN(_object):
+    """Proxy of C++ SingleArrayESN class"""
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SingleArrayESN, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SingleArrayESN, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        """__init__(self, SingleESN model, int array_size) -> SingleArrayESN"""
+        this = _aureservoir.new_SingleArrayESN(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _aureservoir.delete_SingleArrayESN
+    __del__ = lambda self : None;
+    def init(*args):
+        """init(self)"""
+        return _aureservoir.SingleArrayESN_init(*args)
+
+    def train(*args):
+        """train(self, float inmtx, float outmtx, int washout)"""
+        return _aureservoir.SingleArrayESN_train(*args)
+
+    def simulate(*args):
+        """simulate(self, float inmtx, float outmtx)"""
+        return _aureservoir.SingleArrayESN_simulate(*args)
+
+    def teacherForce(*args):
+        """teacherForce(self, float inmtx, float outmtx)"""
+        return _aureservoir.SingleArrayESN_teacherForce(*args)
+
+    def getArraySize(*args):
+        """getArraySize(self) -> int"""
+        return _aureservoir.SingleArrayESN_getArraySize(*args)
+
+    def getNetwork(*args):
+        """getNetwork(self, int index) -> SingleESN"""
+        return _aureservoir.SingleArrayESN_getNetwork(*args)
+
+    def printWoutMean(*args):
+        """printWoutMean(self)"""
+        return _aureservoir.SingleArrayESN_printWoutMean(*args)
+
+    def printWoutMax(*args):
+        """printWoutMax(self)"""
+        return _aureservoir.SingleArrayESN_printWoutMax(*args)
+
+    def setNoise(*args):
+        """setNoise(self, double noise)"""
+        return _aureservoir.SingleArrayESN_setNoise(*args)
+
+SingleArrayESN_swigregister = _aureservoir.SingleArrayESN_swigregister
+SingleArrayESN_swigregister(SingleArrayESN)
+
 CONNECTIVITY = _aureservoir.CONNECTIVITY
 ALPHA = _aureservoir.ALPHA
 IN_CONNECTIVITY = _aureservoir.IN_CONNECTIVITY

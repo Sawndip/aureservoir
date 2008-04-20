@@ -198,8 +198,32 @@ class ESN
   void setLastOutput(T *last, int size);
 };
 
+template <typename T>
+class ArrayESN
+{
+ public:
+  ArrayESN(const ESN<T> &model, int array_size);
+  ~ArrayESN();
+
+  void init();
+  void train(T *inmtx, int inrows, int incols,
+             T *outmtx, int outrows, int outcols, int washout);
+  void simulate(T *inmtx, int inrows, int incols,
+                T *outmtx, int outrows, int outcols);
+  void teacherForce(T *inmtx, int inrows, int incols,
+                    T *outmtx, int outrows, int outcols);
+
+  int getArraySize();
+  ESN<T> getNetwork(int index);
+  void printWoutMean();
+  void printWoutMax();
+  void setNoise(double noise);
+};
+
 %template(DoubleESN) ESN<double>;
 %template(SingleESN) ESN<float>;
+%template(DoubleArrayESN) ArrayESN<double>;
+%template(SingleArrayESN) ArrayESN<float>;
 
 
 /***************************************************************************/

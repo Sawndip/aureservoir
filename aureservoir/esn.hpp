@@ -57,6 +57,12 @@ ESN<T>::ESN()
 template <typename T>
 ESN<T>::ESN(const ESN<T> &src)
 {
+  operator=(src);
+}
+
+template <typename T>
+ESN<T> &ESN<T>::operator= (const ESN<T> &src)
+{
   init_=0;
   train_=0;
   sim_=0;
@@ -89,12 +95,7 @@ ESN<T>::ESN(const ESN<T> &src)
   setReservoirAct(tmp);
   tmp = src.getOutputAct();
   setOutputAct(tmp);
-}
 
-template <typename T>
-const ESN<T> &ESN<T>::operator= (const ESN<T> &src)
-{
-  ESN<T>::ESN(src);
   return *this;
 }
 

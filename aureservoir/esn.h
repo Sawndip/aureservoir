@@ -79,7 +79,7 @@ class ESN
   ESN(const ESN<T> &src);
 
   /// assignement operator
-  const ESN& operator= (const ESN<T>& src);
+  ESN& operator= (const ESN<T>& src);
 
   /// Destructor
   ~ESN();

@@ -263,16 +263,11 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   int steps = in.numCols();
 
-  // collects output of all timesteps in O
-  O.resize(steps-washout, 1);
-
   // collects reservoir activations and inputs of all timesteps in M
   M.resize(steps, esn_->neurons_+esn_->inputs_);
 
   // collect desired outputs
-  O(_,1) = out( 1 ,_(washout+1,steps) );
-  // undo output activation function
-  esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
+  O.resize(steps-washout, 1);
 
   typename ESN<T>::DEMatrix sim_in(esn_->inputs_ ,1),
                             sim_out(esn_->outputs_ ,1);
@@ -338,6 +333,11 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     typename DEMatrix<T>::Type r2(steps-washout,1);
 
     int L = Mtmp.numCols();
+
+    // collect desired outputs
+    O(_,1) = out( 1 ,_(washout+1,steps) );
+    // undo output activation function
+    esn_->outputInvAct_( O.data(), O.numRows()*O.numCols() );
 
     typename DEVector<T>::Type w(L), wold(L);
     int delays[L];
@@ -507,6 +507,7 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
   {
     // calc FFT of target vector
     y = out(i,_);
+    esn_->outputInvAct_( y.data(), y.length() );
     rfft( y, Y, fftsize );
 
     // calc delays to reservoir neurons and inputs
