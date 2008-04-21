@@ -17,6 +17,8 @@
  *
  ***************************************************************************/
 
+#include <algorithm>
+
 namespace aureservoir
 {
 
@@ -194,7 +196,7 @@ inline void ESN<T>::train(const DEMatrix &in, const DEMatrix &out, int washout)
   // "Harnessing nonlinearity: predicting chaotic systems and saving energy
   // in wireless telecommunication" by Jäger and Haas
 
-  DEMatrix out1=out; /// \todo should we change out to non-const instead of copying ?
+  DEMatrix out1=out;
   int steps = in.numCols();
   DEMatrix sim_in(inputs_ ,1), sim_out(outputs_ ,1), last_out(outputs_ ,1);
 
@@ -205,13 +207,34 @@ inline void ESN<T>::train(const DEMatrix &in, const DEMatrix &out, int washout)
   {
     std::cout << "\trelaxation stage nr. " << rstages << "\n";
 
+    // get maximum delay in case of a delay&sum readout
+    int delay;
+    if( init_params_.find(DS_MAXDELAY) == init_params_.end() )
+      delay = 1;
+    else
+    {
+      if( init_params_[DS_MAXDELAY] == 0 )
+        delay = 1;
+      else
+      {
+        // get delay matrix and then the maximum of it
+        DEMatrix delm = getDelays();
+        T maxdel = *std::max_element( delm.data(),
+                                      delm.data()+delm.numRows()+delm.numCols() );
+        delay = maxdel >= 1 ? (int) maxdel : 1;
+      }
+    }
+
     // 2. calculate new teacher signal as in Jägers paper: simulate the ESN step
     // by step and take the output as the new teacher signal
-    sim_in(_,1) = in(_,1);
-    simulate(sim_in, sim_out);
-    sim_->last_out_(_,1) = out1(_,1);
-
-    for(int n=2; n<=steps; ++n)
+    // with a delay&sum readout wait until all the delays are initialized
+    for(int n=1; n<=delay; ++n)
+    {
+      sim_in(_,1) = in(_,n);
+      simulate(sim_in, sim_out);
+      sim_->last_out_(_,1) = out1(_,n);
+    }
+    for(int n=delay+1; n<=steps; ++n)
     {
       sim_in(_,1) = in(_,n);
       simulate(sim_in, sim_out);
