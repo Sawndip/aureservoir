@@ -340,6 +340,9 @@ class DSESN(IIRESN):
 	# iterations for EM based delay+weight calculation
 	emiterations = 0
 	
+	# version of the EM algorithm
+	em_version = 1
+	
 	
 	def train(self, indata, outdata, washout):
 		""" set to desired train method here """
@@ -620,6 +623,7 @@ class DSESN(IIRESN):
 		#print "EM-based delay+weight parameter estimation ..."
 		converged = 0
 		ccount = 0
+		firsttime = 1
 		while not converged:
 			l = 0
 			wold = w.copy()
@@ -632,11 +636,20 @@ class DSESN(IIRESN):
 				# delay all neuron signals with delay from previous step
 				for n in range(L):
 					K[:,n] = M[washout-d[n]:steps-d[n],n]
-				
+
 				# now remove contribution from all other neurons
-				x =  (z-N.dot(K,w))/L + K[:,l]*w[l]
-				#x =  ( z-N.dot(K,w) + K[:,l]*w[l] ) / L
-				#x =  z-N.dot(K,w) + K[:,l]*w[l]
+				if ( self.em_version == 1 ):
+					x =  z-N.dot(K,w) + K[:,l]*w[l]
+				elif( self.em_version == 2 ):
+					x =  (z-N.dot(K,w))/L + K[:,l]*w[l]
+				else:
+					#print "version 3"
+					if firsttime == 1:
+						beta = 1
+						firsttime = 0
+					else:
+						beta = 1-(abs(w[l])/abs(w).sum())
+					x =  (z-N.dot(K,w))*beta + K[:,l]*w[l]
 				
 				########################
 				# M-step

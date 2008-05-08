@@ -319,10 +319,6 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
   if( emiters > 0 )
   {
-    /// \todo implement this for multiple outputs !
-    if( esn_->outputs_ != 1 )
-      throw AUExcept("TrainDSPI::train: DS_EM_ITERATIONS only for one output ATM !");
-
     int fftsize = (int) pow( 2, ceil(log(steps-washout+1)/log(2)) ); // next power of 2
     typename DEMatrix<T>::Type Mtmp(steps-washout,M.numCols());
     typename DEVector<T>::Type t(steps-washout),targ(steps-washout);
@@ -350,12 +346,23 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     bool converged = false;
     int itercount = 0;
 
-    // delay neuron signals without delay
+    // delay neuron signals without delay (just copy)
     for(int i=0; i<Mtmp.numCols(); ++i)
       Mtmp(_, i+1) = M( _(washout+1,M.numRows()), i+1 );
 
     // init target vector
     targ = O(_,1);
+
+    ///\todo only for testing - remove this ?
+    int em_version = 1;
+    if( esn_->init_params_.find(EM_VERSION) != esn_->init_params_.end() )
+    {
+      em_version = (int) esn_->init_params_[EM_VERSION];
+      std::cout << "EM_VERSION: " << em_version << "\n";
+    }
+    bool first_time = true;
+
+
 
     while( !converged )
     {
@@ -378,11 +385,38 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
 
         // remove contribution from all other neuron signals from target output O
         // (recursive implementation)
-        t2(_,1) = Mtmp(_,i+1)*w(i+1);
-//         t = targ + t2(_,1);
-        t = targ/L + t2(_,1);
-//         t = t / L;
-        targ = targ + t2(_,1);
+        if( em_version == 1 )
+        {
+          t2(_,1) = Mtmp(_,i+1)*w(i+1);
+          t = targ + t2(_,1);
+          targ = targ + t2(_,1);
+        }
+        if( em_version == 2 )
+        {
+          t2(_,1) = Mtmp(_,i+1)*w(i+1);
+          t = targ/L + t2(_,1);
+          targ = targ + t2(_,1);
+        }
+        if( em_version == 3 )
+        {
+          T beta = 0.;
+          if( first_time )
+          {
+            beta = 1.;
+            first_time = false;
+          }
+          else
+          {
+            // beta = 1 - ( abs(w(i+1)) / abs(w).sum() )
+            T sum = 0.;
+            for(int n=1; n<=L; ++n)
+              sum += std::abs( w(n) );
+            beta = 1 - ( std::abs( w(i+1) ) / sum );
+          }
+          t2(_,1) = Mtmp(_,i+1)*w(i+1);
+          t = targ*beta + t2(_,1);
+          targ = targ + t2(_,1);
+        }
 
         //////////////////
         // M-step

@@ -71,6 +71,19 @@ in:  matrix of input values (inputs x timesteps)
 
 out:  matrix for output values (outputs x timesteps) ";
 
+%feature("docstring")  ESN::teacherForce "
+
+Teacher Forcing a input and target signal without learning output
+weights. This is useful for ESNs in generator mode to initialize the
+internal state.
+
+Parameters:
+-----------
+
+in:  matrix of input values (inputs x timesteps)
+
+out:  matrix for output values (outputs x timesteps) ";
+
 %feature("docstring")  ESN::resetState "
 
 resets the internal state vector x of the reservoir to zero ";
@@ -127,6 +140,20 @@ Data must be already allocated! ";
 %feature("docstring")  ESN::simulateStep "throw (
 AUExcept) C-style Simulation Algorithm Interface, for single step
 simulation See:  class SimBase ";
+
+%feature("docstring")  ESN::teacherForce "throw (
+AUExcept) Teacher Forcing a input and target signal without learning
+output weights. This is useful for ESNs in generator mode to
+initialize the internal state.
+
+Parameters:
+-----------
+
+inmtx:  input matrix in row major storage (usual C array) (inputs x
+timesteps)
+
+outmtx:  output matrix in row major storage (outputs x timesteps) for
+teacher forcing ";
 
 /*  Additional Interface for Bandpass and IIR-Filter Neurons  */
 
@@ -270,6 +297,13 @@ SimFilterDS
 matrix with delay form neurons+inputs to all outputs size = (output x
 neurons+inputs) ";
 
+%feature("docstring")  ESN::getReservoirDelays "throw (
+AUExcept) query the (fixed) delays between reservoir neurons See:
+class SimFilterDS
+
+matrix with delays between all reservoir neurons size = (neurons x
+neurons) ";
+
 /*  GET internal data C-style interface  */
 
 %feature("docstring")  ESN::getWin "
@@ -314,6 +348,18 @@ Parameters:
 
 wmtx:  matrix with delay form neurons+inputs to all outputs size =
 (output x neurons+inputs) ";
+
+%feature("docstring")  ESN::getReservoirDelays "throw (
+AUExcept) query the (fixed) delays between reservoir neurons See:
+class SimFilterDS and copies the data into a C-style matrix
+
+Memory of the C array must be allocated before!
+
+Parameters:
+-----------
+
+wmtx:  matrix with delays between all reservoir neurons size =
+(neurons x neurons) ";
 
 /*  SET methods  */
 

@@ -247,6 +247,7 @@ enum InitParameter
   DS_RESERVOIR_MAXDELAY, //!< maximum static delay in the dynamic reservoir
   DS_EM_ITERATIONS, //!< nr of EM iterations for delay+weight calculation
   DS_WEIGHTS_EM,    //!< use calculated weights from EM algorithm
+  EM_VERSION,       //!< TESTING !!!! 
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
   IP_VAR,           //!< desired variance for Gaussian-IP reservoir adaptation

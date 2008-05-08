@@ -205,7 +205,23 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_simulateStep(*args)
 
     def teacherForce(*args):
-        """teacherForce(self, double inmtx, double outmtx)"""
+        """
+        teacherForce(self, double inmtx, double outmtx)
+
+        throw (
+        AUExcept) Teacher Forcing a input and target signal without learning
+        output weights. This is useful for ESNs in generator mode to
+        initialize the internal state.
+
+        Parameters:
+        -----------
+
+        inmtx:  input matrix in row major storage (usual C array) (inputs x
+        timesteps)
+
+        outmtx:  output matrix in row major storage (outputs x timesteps) for
+        teacher forcing 
+        """
         return _aureservoir.DoubleESN_teacherForce(*args)
 
     def setBPCutoff(*args):
@@ -416,7 +432,21 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_getDelays(*args)
 
     def getReservoirDelays(*args):
-        """getReservoirDelays(self, double wmtx)"""
+        """
+        getReservoirDelays(self, double wmtx)
+
+        throw (
+        AUExcept) query the (fixed) delays between reservoir neurons See:
+        class SimFilterDS and copies the data into a C-style matrix
+
+        Memory of the C array must be allocated before!
+
+        Parameters:
+        -----------
+
+        wmtx:  matrix with delays between all reservoir neurons size =
+        (neurons x neurons) 
+        """
         return _aureservoir.DoubleESN_getReservoirDelays(*args)
 
     def setInitAlgorithm(*args):
@@ -749,7 +779,23 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_simulateStep(*args)
 
     def teacherForce(*args):
-        """teacherForce(self, float inmtx, float outmtx)"""
+        """
+        teacherForce(self, float inmtx, float outmtx)
+
+        throw (
+        AUExcept) Teacher Forcing a input and target signal without learning
+        output weights. This is useful for ESNs in generator mode to
+        initialize the internal state.
+
+        Parameters:
+        -----------
+
+        inmtx:  input matrix in row major storage (usual C array) (inputs x
+        timesteps)
+
+        outmtx:  output matrix in row major storage (outputs x timesteps) for
+        teacher forcing 
+        """
         return _aureservoir.SingleESN_teacherForce(*args)
 
     def setBPCutoff(*args):
@@ -960,7 +1006,21 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_getDelays(*args)
 
     def getReservoirDelays(*args):
-        """getReservoirDelays(self, float wmtx)"""
+        """
+        getReservoirDelays(self, float wmtx)
+
+        throw (
+        AUExcept) query the (fixed) delays between reservoir neurons See:
+        class SimFilterDS and copies the data into a C-style matrix
+
+        Memory of the C array must be allocated before!
+
+        Parameters:
+        -----------
+
+        wmtx:  matrix with delays between all reservoir neurons size =
+        (neurons x neurons) 
+        """
         return _aureservoir.SingleESN_getReservoirDelays(*args)
 
     def setInitAlgorithm(*args):
@@ -1281,6 +1341,7 @@ DS_MAXDELAY = _aureservoir.DS_MAXDELAY
 DS_RESERVOIR_MAXDELAY = _aureservoir.DS_RESERVOIR_MAXDELAY
 DS_EM_ITERATIONS = _aureservoir.DS_EM_ITERATIONS
 DS_WEIGHTS_EM = _aureservoir.DS_WEIGHTS_EM
+EM_VERSION = _aureservoir.EM_VERSION
 IP_LEARNRATE = _aureservoir.IP_LEARNRATE
 IP_MEAN = _aureservoir.IP_MEAN
 IP_VAR = _aureservoir.IP_VAR

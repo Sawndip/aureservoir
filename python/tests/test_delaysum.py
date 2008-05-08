@@ -528,9 +528,11 @@ class test_delaysum(NumpyTestCase):
 	self.netA.setInitParam(DS_USE_CROSSCORR)
 	self.netA.setInitParam(DS_EM_ITERATIONS, 5)
 	self.netA.setInitParam(DS_MAXDELAY, 30)
+	self.netA.setInitParam(EM_VERSION, 3)
 	self.netB.gcctype = 'unfiltered'
 	self.netB.emiterations = 5
 	self.netB.maxdelay = 30
+	self.netB.em_version = 3
 	self.netA.init()
 	self.netB.init()
 	
@@ -647,6 +649,7 @@ class test_delaysum(NumpyTestCase):
 	
 	# test if simulation result is the same
 	assert_array_almost_equal(outA,outB,5)
+
 
 if __name__ == "__main__":
     NumpyTest().run()

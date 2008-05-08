@@ -9937,6 +9937,7 @@ SWIGEXPORT void SWIG_init(void) {
   SWIG_Python_SetConstant(d, "DS_RESERVOIR_MAXDELAY",SWIG_From_int(static_cast< int >(DS_RESERVOIR_MAXDELAY)));
   SWIG_Python_SetConstant(d, "DS_EM_ITERATIONS",SWIG_From_int(static_cast< int >(DS_EM_ITERATIONS)));
   SWIG_Python_SetConstant(d, "DS_WEIGHTS_EM",SWIG_From_int(static_cast< int >(DS_WEIGHTS_EM)));
+  SWIG_Python_SetConstant(d, "EM_VERSION",SWIG_From_int(static_cast< int >(EM_VERSION)));
   SWIG_Python_SetConstant(d, "IP_LEARNRATE",SWIG_From_int(static_cast< int >(IP_LEARNRATE)));
   SWIG_Python_SetConstant(d, "IP_MEAN",SWIG_From_int(static_cast< int >(IP_MEAN)));
   SWIG_Python_SetConstant(d, "IP_VAR",SWIG_From_int(static_cast< int >(IP_VAR)));
