@@ -296,7 +296,13 @@ void TrainDSPI<T>::train(const typename ESN<T>::DEMatrix &in,
     maxdelay = (int) esn_->init_params_[DS_MAXDELAY];
 
   // maximum of maxdelay is the number of steps
-  maxdelay = (steps-washout < maxdelay+1) ? steps-washout : maxdelay+1;
+  if( esn_->init_params_.find(DS_FORCE_MAXDELAY) != 
+      esn_->init_params_.end() )
+    maxdelay = maxdelay+1;
+  else
+    maxdelay = (steps-washout < maxdelay+1) ?
+                steps-washout : maxdelay+1;
+  
 
   // see if we use GCC or simple crosscorr, standard is GCC
   int filter;
