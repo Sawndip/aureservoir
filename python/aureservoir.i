@@ -251,7 +251,8 @@ enum InitParameter
   IP_LEARNRATE,     //!< learnrate for Gaussian-IP reservoir adaptation
   IP_MEAN,          //!< desired mean for Gaussian-IP reservoir adaptation
   IP_VAR,           //!< desired variance for Gaussian-IP reservoir adaptation
-  RELAXATION_STAGES //!< relaxation stages in training algorithm
+  RELAXATION_STAGES, //!< relaxation stages in training algorithm
+  DS_FORCE_MAXDELAY  //!< force a specific maxdelay without checks
 };
 
 enum InitAlgorithm
