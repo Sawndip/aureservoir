@@ -139,7 +139,16 @@ Data must be already allocated! ";
 
 %feature("docstring")  ESN::simulateStep "throw (
 AUExcept) C-style Simulation Algorithm Interface, for single step
-simulation See:  class SimBase ";
+simulation See:  class SimBase
+
+Parameters:
+-----------
+
+inmtx:  input vector, size = inputs
+
+outmtx:  output vector, size = outputs
+
+Data must be already allocated! ";
 
 %feature("docstring")  ESN::teacherForce "throw (
 AUExcept) Teacher Forcing a input and target signal without learning

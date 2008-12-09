@@ -37,7 +37,7 @@ env = Environment(ENV = {'PATH' : os.environ['PATH'],
                          'TERM' : os.environ['TERM'],
                          'HOME' : os.environ['HOME']})
 env.Append( CPPPATH=['.', '../'] )
-env.Append(CCFLAGS="-O2 -fPIC -Wall -ffast-math -mfpmath=sse -msse -msse2")
+env.Append(CCFLAGS="-O2 -fPIC -Wall -Wno-deprecated -ffast-math -mfpmath=sse -msse -msse2")
 
 #####################################################################
 #  command line options
