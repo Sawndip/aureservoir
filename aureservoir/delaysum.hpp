@@ -25,7 +25,7 @@ namespace aureservoir
 //! @name FFT routines
 //@{
 
-void rfft(const DEVector<double>::Type &x,
+inline void rfft(const DEVector<double>::Type &x,
           CDEVector<double>::Type &X, int fftsize)
 {
   // zero pad to fftsize
@@ -43,7 +43,7 @@ void rfft(const DEVector<double>::Type &x,
   fftw_destroy_plan(p1);
 }
 
-void rfft(const DEVector<float>::Type &x,
+inline void rfft(const DEVector<float>::Type &x,
           CDEVector<float>::Type &X, int fftsize)
 {
   // zero pad to fftsize
@@ -61,7 +61,7 @@ void rfft(const DEVector<float>::Type &x,
   fftwf_destroy_plan(p1);
 }
 
-void irfft(CDEVector<double>::Type &X, DEVector<double>::Type &x)
+inline void irfft(CDEVector<double>::Type &X, DEVector<double>::Type &x)
 {
   int fftsize = 2*(X.length()-1);
 
@@ -74,7 +74,7 @@ void irfft(CDEVector<double>::Type &X, DEVector<double>::Type &x)
   fftw_destroy_plan(p1);
 }
 
-void irfft(CDEVector<float>::Type &X, DEVector<float>::Type &x)
+inline void irfft(CDEVector<float>::Type &X, DEVector<float>::Type &x)
 {
   int fftsize = 2*(X.length()-1);
 

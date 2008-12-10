@@ -1,7 +1,7 @@
 import numpy as N
 from aureservoir import *
 import filtering, util
-import pylab as P
+# import pylab as P  # avoid this dependency for the tests !
 from scipy import signal
 from scipy.linalg import pinv, inv, norm
 import scipy.lib.lapack.clapack

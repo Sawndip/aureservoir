@@ -169,6 +169,7 @@ Therefore you have to install the CVS version of FLENS first.
 Detailed instructions on how to do that can be found at
 <a href="http://flens.sourceforge.net/obtain.html">
 Obtain and Install FLENS </a>.
+Please also run the tests of FLENS first, to be sure that the library is working.
 </li>
 
 <li>

@@ -96,9 +96,9 @@ inline void act_invtanh(T *data, int size)
 //@{
 
 /// slope vector for tanh2
-DEVector<double>::Type tanh2_a_;
+static DEVector<double>::Type tanh2_a_;
 /// bias vector for tanh2
-DEVector<double>::Type tanh2_b_;
+static DEVector<double>::Type tanh2_b_;
 
 /*!
  * tanh2 activation function with local slope a and bias b
