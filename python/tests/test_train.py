@@ -5,7 +5,7 @@ from scipy.linalg import pinv, inv
 import random
 
 # TODO: right module and path handling
-sys.path.append("../")
+sys.path.append("python/")
 from aureservoir import *
 
 

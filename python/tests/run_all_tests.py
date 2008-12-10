@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import unittest
 import glob
 all_tests = glob.glob( 'test_*.py' )

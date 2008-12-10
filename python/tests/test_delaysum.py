@@ -5,7 +5,7 @@ import random, scipy.signal
 import testesns
 
 # TODO: right module and path handling
-sys.path.append("../")
+sys.path.append("python/")
 from aureservoir import *
 
 

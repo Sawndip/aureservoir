@@ -1,4 +1,6 @@
 import numpy as N
+import sys
+sys.path.append("python/")
 from aureservoir import *
 import filtering, util
 # import pylab as P  # avoid this dependency for the tests !

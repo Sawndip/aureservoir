@@ -4,7 +4,7 @@ import numpy as N
 import random, scipy.signal
 
 # TODO: right module and path handling
-sys.path.append("../")
+sys.path.append("python/")
 from aureservoir import *
 
 
