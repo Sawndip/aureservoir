@@ -233,7 +233,7 @@ want to install it system wide.
 That's it, you should be able to use it now, so have a look at
 the \ref examples_sec .<br>
 You can also try if all the included tests are successful, change to
-aureservoir/python/tests and type <b><i>python run_all_tests.py</i></b>.
+aureservoir/tests and type <b><i>python run_all_tests.py</i></b>.
 </li>
 
 </ul>
