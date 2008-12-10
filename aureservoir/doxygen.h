@@ -286,14 +286,11 @@ See also <a href="examples.html">examples</a>.
 The algorithms are extensively tested.
 All are recalculated in python and tested against the C++ implementation.
 
-The python tests are in the directory aureservoir/python/tests.
-However, there are still some (old) C++ tests in aureservoir/tests
-using <a href="http://sourceforge.net/projects/cppunit">cppunit</a>.
-
-To run all the python unit tests change to aureservoir/python/tests
+The python tests are in the directory aureservoir/tests.
+To run all unit tests change to aureservoir/tests
 and type <b><i>python run_all_tests.py</i></b>.
 This should give you an <i>OK</i> at the bottom of the output if
-everything works.
+everything works well.
 
 
 <br>
