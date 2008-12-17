@@ -77,8 +77,6 @@ class TrainBase
                      const typename ESN<T>::DEMatrix &out,
                      int washout) throw(AUExcept) = 0;
 
- protected:
-
   /// check parameters
   void checkParams(const typename ESN<T>::DEMatrix &in,
                    const typename ESN<T>::DEMatrix &out,
@@ -97,13 +95,15 @@ class TrainBase
   void clearData()
   { M.resize(1,1); O.resize(1,1); }
 
-  /// reference to the data of the network
-  ESN<T> *esn_;
-
   /// matrix for network states and inputs over all timesteps
   typename ESN<T>::DEMatrix M;
   /// matrix for outputs over all timesteps
   typename ESN<T>::DEMatrix O;
+  
+ protected:
+ 
+  /// reference to the data of the network
+  ESN<T> *esn_;
 };
 
 /*!

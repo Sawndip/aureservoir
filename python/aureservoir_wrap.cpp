@@ -3658,6 +3658,69 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DoubleESN_collectStates(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN< double > *arg1 = (ESN< double > *) 0 ;
+  double *arg2 = (double *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  double *arg5 = (double *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  int arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  int val8 ;
+  int ecode8 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:DoubleESN_collectStates",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNT_double_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DoubleESN_collectStates" "', argument " "1"" of type '" "ESN< double > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN< double > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_DOUBLE);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (double*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_DOUBLE);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (double*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  ecode8 = SWIG_AsVal_int(obj3, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "DoubleESN_collectStates" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      (arg1)->collectStates(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DoubleESN_setBPCutoff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   ESN< double > *arg1 = (ESN< double > *) 0 ;
@@ -6265,6 +6328,69 @@ SWIGINTERN PyObject *_wrap_SingleESN_teacherForce(PyObject *SWIGUNUSEDPARM(self)
   {
     try {
       (arg1)->teacherForce(arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (AUExcept &e) {
+      PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
+      return NULL;
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SingleESN_collectStates(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  ESN< float > *arg1 = (ESN< float > *) 0 ;
+  float *arg2 = (float *) 0 ;
+  int arg3 ;
+  int arg4 ;
+  float *arg5 = (float *) 0 ;
+  int arg6 ;
+  int arg7 ;
+  int arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyArrayObject *array2 = NULL ;
+  PyArrayObject *array5 = NULL ;
+  int val8 ;
+  int ecode8 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:SingleESN_collectStates",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_ESNT_float_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SingleESN_collectStates" "', argument " "1"" of type '" "ESN< float > *""'"); 
+  }
+  arg1 = reinterpret_cast< ESN< float > * >(argp1);
+  {
+    array2 = obj_to_array_no_conversion(obj1, NPY_FLOAT);
+    if (!array2 || !require_dimensions(array2,2) || !require_contiguous(array2)
+      || !require_native(array2)) SWIG_fail;
+    arg2 = (float*) array_data(array2);
+    arg3 = (int) array_size(array2,0);
+    arg4 = (int) array_size(array2,1);
+  }
+  {
+    array5 = obj_to_array_no_conversion(obj2, NPY_FLOAT);
+    if (!array5 || !require_dimensions(array5,2) || !require_contiguous(array5)
+      || !require_native(array5)) SWIG_fail;
+    arg5 = (float*) array_data(array5);
+    arg6 = (int) array_size(array5,0);
+    arg7 = (int) array_size(array5,1);
+  }
+  ecode8 = SWIG_AsVal_int(obj3, &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "SingleESN_collectStates" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      (arg1)->collectStates(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (AUExcept &e) {
       PyErr_SetString( PyExc_RuntimeError, e.what().c_str() );
       return NULL;
@@ -9446,6 +9572,7 @@ static PyMethodDef SwigMethods[] = {
 		"outmtx:  output matrix in row major storage (outputs x timesteps) for\n"
 		"teacher forcing \n"
 		""},
+	 { (char *)"DoubleESN_collectStates", _wrap_DoubleESN_collectStates, METH_VARARGS, (char *)"DoubleESN_collectStates(DoubleESN self, double inmtx, double outmtx, int washout)"},
 	 { (char *)"DoubleESN_setBPCutoff", _wrap_DoubleESN_setBPCutoff, METH_VARARGS, (char *)"\n"
 		"DoubleESN_setBPCutoff(DoubleESN self, double f1vec, double f2vec)\n"
 		"\n"
@@ -9869,6 +9996,7 @@ static PyMethodDef SwigMethods[] = {
 		"outmtx:  output matrix in row major storage (outputs x timesteps) for\n"
 		"teacher forcing \n"
 		""},
+	 { (char *)"SingleESN_collectStates", _wrap_SingleESN_collectStates, METH_VARARGS, (char *)"SingleESN_collectStates(SingleESN self, float inmtx, float outmtx, int washout)"},
 	 { (char *)"SingleESN_setBPCutoff", _wrap_SingleESN_setBPCutoff, METH_VARARGS, (char *)"\n"
 		"SingleESN_setBPCutoff(SingleESN self, float f1vec, float f2vec)\n"
 		"\n"

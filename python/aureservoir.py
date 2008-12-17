@@ -233,6 +233,10 @@ class DoubleESN(_object):
         """
         return _aureservoir.DoubleESN_teacherForce(*args)
 
+    def collectStates(*args):
+        """collectStates(self, double inmtx, double outmtx, int washout)"""
+        return _aureservoir.DoubleESN_collectStates(*args)
+
     def setBPCutoff(*args):
         """
         setBPCutoff(self, double f1vec, double f2vec)
@@ -815,6 +819,10 @@ class SingleESN(_object):
         teacher forcing 
         """
         return _aureservoir.SingleESN_teacherForce(*args)
+
+    def collectStates(*args):
+        """collectStates(self, float inmtx, float outmtx, int washout)"""
+        return _aureservoir.SingleESN_collectStates(*args)
 
     def setBPCutoff(*args):
         """

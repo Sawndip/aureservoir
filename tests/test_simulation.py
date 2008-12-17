@@ -499,5 +499,45 @@ class test_simulation(NumpyTestCase):
 	assert_array_almost_equal(outdata,outtest)
 
 
+    def testCollectStates(self, level=1):
+	""" test the collection of states """
+        
+	# setup net
+	self.net.setSimAlgorithm(SIM_STD)
+	self.net.init()
+	
+	# set output weight matrix
+	wout = N.random.rand(self.outs,self.size+self.ins) * 2 - 1
+	wout = N.asfarray(wout, self.dtype)
+	self.net.setWout( wout )
+	W = N.zeros((self.size,self.size),self.dtype)
+	self.net.getW( W )
+	Win = self.net.getWin()
+	x = N.zeros(self.size)
+	
+	# simulate network
+	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
+	#outdata = N.zeros((self.outs,self.sim_size),self.dtype)
+	washout = 5
+	states = N.zeros((self.sim_size-washout,self.ins+self.size),self.dtype)
+	
+	# collect states
+	self.net.resetState()
+	self.net.collectStates( indata, states, washout )
+	
+	# recalc algorithm and manually collect states
+	states2 = N.zeros((self.sim_size-washout,self.ins+self.size),self.dtype)
+	self.net.resetState()
+	for n in range(self.sim_size):
+		# calc new network activation
+		x = N.dot( W, x )
+		x += N.dot( Win, indata[:,n] )
+		if n >= washout:
+		    states2[n-washout,:self.size] = x
+		    states2[n-washout,self.size:self.size+self.ins] = indata[:,n]
+	
+	assert_array_almost_equal(states,states2)
+
+
 if __name__ == "__main__":
     NumpyTest().run()

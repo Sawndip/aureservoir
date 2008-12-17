@@ -274,6 +274,28 @@ void ESN<T>::teacherForce(const DEMatrix &in, DEMatrix &out)
 }
 
 template <typename T>
+void ESN<T>::collectStates(const DEMatrix &in, DEMatrix &X, int washout)
+  throw(AUExcept)
+{
+  //! \todo think if we should remove the input here from X ?
+  //!       it's not the reservoir ...
+
+  if( in.numCols() != X.numRows()+washout )
+    throw AUExcept("ESN::collectStates: X must have same timesteps as in, minus the washout !");
+  if( in.numRows() != inputs_ )
+    throw AUExcept("ESN::collectStates: wrong input row size!");
+  if( X.numCols() != inputs_+neurons_ )
+    throw AUExcept("ESN::collectStates: wrong X column size!");
+
+  // collect states of the reservoir
+  DEMatrix out(outputs_, in.numCols());
+  std::fill_n( out.data(), outputs_*in.numCols(), 0 );
+  
+  train_->collectStates(in,out,washout);
+  X = train_->M;
+}
+
+template <typename T>
 double ESN<T>::adapt(T *inmtx, int inrows, int incols)
   throw(AUExcept)
 {
@@ -395,6 +417,30 @@ void ESN<T>::teacherForce(T *inmtx, int inrows, int incols,
   } }
 
   teacherForce(flin, flout);
+}
+
+template <typename T>
+void ESN<T>::collectStates(T *inmtx, int inrows, int incols,
+                           T *outmtx, int outrows, int outcols,
+                           int washout)
+  throw(AUExcept)
+{
+  DEMatrix flin(inrows,incols);
+  DEMatrix flout(outrows,outcols);
+  
+  // copy data to FLENS matrix (column major storage)
+  for(int i=0; i<inrows; ++i) {
+  for(int j=0; j<incols; ++j) {
+    flin(i+1,j+1) = inmtx[i*incols+j];
+  } }
+
+  collectStates(flin, flout, washout);
+  
+  // copy data to output
+  for(int i=0; i<outrows; ++i) {
+  for(int j=0; j<outcols; ++j) {
+    outmtx[i*outcols+j] = flout(i+1,j+1);
+  } }
 }
 
 template <typename T>

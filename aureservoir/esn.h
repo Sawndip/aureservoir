@@ -142,6 +142,19 @@ class ESN
    */
   void teacherForce(const DEMatrix &in, DEMatrix &out);
 
+  /*!
+   * Collect network/reservoir states and return the whole
+   * state matrix over time.
+   *
+   * @param in matrix of input values (inputs x timesteps)
+   * @param X matrix with internal reservoir states over time
+   *          (timesteps-washout x neurons+inputs)
+   * @param washout washout time in samples, used to get rid of the
+   *                transient dynamics of the network starting state
+   */
+  void collectStates(const DEMatrix &in, DEMatrix &X, int washout=0)
+    throw(AUExcept);
+
    /*!
    * resets the internal state vector x of the reservoir to zero
    */
@@ -222,6 +235,20 @@ class ESN
    */
   void teacherForce(T *inmtx, int inrows, int incols,
                        T *outmtx, int outrows, int outcols) throw(AUExcept);
+
+  /*!
+   * Collect network/reservoir states and return the whole
+   * state matrix over time.
+   *
+   * @param inmtx matrix of input values (inputs x timesteps)
+   * @param outmtx matrix with internal reservoir states over time
+   *               (timesteps-washout x neurons+inputs)
+   * @param washout washout time in samples, used to get rid of the
+   *                transient dynamics of the network starting state
+   */
+  void collectStates(T *inmtx, int inrows, int incols,
+                     T *outmtx, int outrows, int outcols,
+                     int washout) throw(AUExcept);
 
   //@}
   //! @name Additional Interface for Bandpass and IIR-Filter Neurons

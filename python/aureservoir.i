@@ -154,6 +154,9 @@ class ESN
   inline void simulateStep(T *invec, int insize, T *outvec, int outsize);
   void teacherForce(T *inmtx, int inrows, int incols,
                     T *outmtx, int outrows, int outcols);
+  void collectStates(T *inmtx, int inrows, int incols,
+                     T *outmtx, int outrows, int outcols,
+                     int washout);
 
   void setBPCutoff(T *f1vec, int f1size, T *f2vec, int f2size);
   void setIIRCoeff(T *bmtx, int brows, int bcols,
