@@ -148,7 +148,7 @@ class ESN
    *
    * @param in matrix of input values (inputs x timesteps)
    * @param X matrix with internal reservoir states over time
-   *          (timesteps-washout x neurons+inputs)
+   *          (timesteps-washout x neurons)
    * @param washout washout time in samples, used to get rid of the
    *                transient dynamics of the network starting state
    */

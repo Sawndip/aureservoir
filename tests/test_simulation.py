@@ -519,14 +519,14 @@ class test_simulation(NumpyTestCase):
 	indata = N.asfarray(N.random.rand(self.ins,self.sim_size),self.dtype)*2-1
 	#outdata = N.zeros((self.outs,self.sim_size),self.dtype)
 	washout = 5
-	states = N.zeros((self.sim_size-washout,self.ins+self.size),self.dtype)
+	states = N.zeros((self.sim_size-washout,self.size),self.dtype)
 	
 	# collect states
 	self.net.resetState()
 	self.net.collectStates( indata, states, washout )
 	
 	# recalc algorithm and manually collect states
-	states2 = N.zeros((self.sim_size-washout,self.ins+self.size),self.dtype)
+	states2 = N.zeros((self.sim_size-washout,self.size),self.dtype)
 	self.net.resetState()
 	for n in range(self.sim_size):
 		# calc new network activation
@@ -534,7 +534,6 @@ class test_simulation(NumpyTestCase):
 		x += N.dot( Win, indata[:,n] )
 		if n >= washout:
 		    states2[n-washout,:self.size] = x
-		    states2[n-washout,self.size:self.size+self.ins] = indata[:,n]
 	
 	assert_array_almost_equal(states,states2)
 

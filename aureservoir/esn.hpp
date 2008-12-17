@@ -277,14 +277,11 @@ template <typename T>
 void ESN<T>::collectStates(const DEMatrix &in, DEMatrix &X, int washout)
   throw(AUExcept)
 {
-  //! \todo think if we should remove the input here from X ?
-  //!       it's not the reservoir ...
-
   if( in.numCols() != X.numRows()+washout )
     throw AUExcept("ESN::collectStates: X must have same timesteps as in, minus the washout !");
   if( in.numRows() != inputs_ )
     throw AUExcept("ESN::collectStates: wrong input row size!");
-  if( X.numCols() != inputs_+neurons_ )
+  if( X.numCols() != neurons_ )
     throw AUExcept("ESN::collectStates: wrong X column size!");
 
   // collect states of the reservoir
@@ -292,7 +289,7 @@ void ESN<T>::collectStates(const DEMatrix &in, DEMatrix &X, int washout)
   std::fill_n( out.data(), outputs_*in.numCols(), 0 );
   
   train_->collectStates(in,out,washout);
-  X = train_->M;
+  X = train_->M(_,_(1,neurons_));
 }
 
 template <typename T>
