@@ -84,6 +84,21 @@ in:  matrix of input values (inputs x timesteps)
 
 out:  matrix for output values (outputs x timesteps) ";
 
+%feature("docstring")  ESN::collectStates "throw (
+AUExcept) Collect network/reservoir states and return the whole state
+matrix over time.
+
+Parameters:
+-----------
+
+in:  matrix of input values (inputs x timesteps)
+
+X:  matrix with internal reservoir states over time (timesteps-washout
+x neurons)
+
+washout:  washout time in samples, used to get rid of the transient
+dynamics of the network starting state ";
+
 %feature("docstring")  ESN::resetState "
 
 resets the internal state vector x of the reservoir to zero ";
@@ -163,6 +178,21 @@ timesteps)
 
 outmtx:  output matrix in row major storage (outputs x timesteps) for
 teacher forcing ";
+
+%feature("docstring")  ESN::collectStates "throw (
+AUExcept) Collect network/reservoir states and return the whole state
+matrix over time.
+
+Parameters:
+-----------
+
+inmtx:  matrix of input values (inputs x timesteps)
+
+outmtx:  matrix with internal reservoir states over time (timesteps-
+washout x neurons)
+
+washout:  washout time in samples, used to get rid of the transient
+dynamics of the network starting state ";
 
 /*  Additional Interface for Bandpass and IIR-Filter Neurons  */
 

@@ -234,7 +234,24 @@ class DoubleESN(_object):
         return _aureservoir.DoubleESN_teacherForce(*args)
 
     def collectStates(*args):
-        """collectStates(self, double inmtx, double outmtx, int washout)"""
+        """
+        collectStates(self, double inmtx, double outmtx, int washout)
+
+        throw (
+        AUExcept) Collect network/reservoir states and return the whole state
+        matrix over time.
+
+        Parameters:
+        -----------
+
+        inmtx:  matrix of input values (inputs x timesteps)
+
+        outmtx:  matrix with internal reservoir states over time (timesteps-
+        washout x neurons)
+
+        washout:  washout time in samples, used to get rid of the transient
+        dynamics of the network starting state 
+        """
         return _aureservoir.DoubleESN_collectStates(*args)
 
     def setBPCutoff(*args):
@@ -821,7 +838,24 @@ class SingleESN(_object):
         return _aureservoir.SingleESN_teacherForce(*args)
 
     def collectStates(*args):
-        """collectStates(self, float inmtx, float outmtx, int washout)"""
+        """
+        collectStates(self, float inmtx, float outmtx, int washout)
+
+        throw (
+        AUExcept) Collect network/reservoir states and return the whole state
+        matrix over time.
+
+        Parameters:
+        -----------
+
+        inmtx:  matrix of input values (inputs x timesteps)
+
+        outmtx:  matrix with internal reservoir states over time (timesteps-
+        washout x neurons)
+
+        washout:  washout time in samples, used to get rid of the transient
+        dynamics of the network starting state 
+        """
         return _aureservoir.SingleESN_collectStates(*args)
 
     def setBPCutoff(*args):

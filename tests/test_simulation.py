@@ -191,14 +191,15 @@ class test_simulation(NumpyTestCase):
 	Wback = self.net.getWback()
 	x = N.zeros((self.size))
 	outtest = N.zeros((self.outs,self.sim_size),self.dtype)
-	
 	## recalc algorithm in python
 	for n in range(self.sim_size):
+                xold = x
 		# calc new network activation
-		x = (1-self.lr)*x + N.dot( W, x )
+		x = N.dot( W, x )
 		x += N.dot( Win, indata[:,n] )
 		if n > 0:
 			x += N.dot( Wback, outtest[:,n-1] )
+                x += (1-self.lr)*xold
 		# output = Wout * [x; in]
 		outtest[:,n] = N.dot( Wout, N.r_[x, indata[:,n]] )
 	

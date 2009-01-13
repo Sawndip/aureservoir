@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="599" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="599" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="626" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="626" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1ffcd21225865c34b1366ce6b8e166fa2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="600" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="600" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="627" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="627" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1fadb2174ebe2fc0e46e4189829495d8a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="601" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="601" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="628" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="628" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_17e49b87f78cfa7e35a6d873a4c40b9dd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="602" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="602" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="629" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="629" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1e7c4beca8c90bf892827a3716e978f4a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="603" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="603" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="630" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="630" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1cd5aba36fe572e08dd1cbe7d881a56e4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="604" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="604" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="631" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="631" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1446111b9fdc9f67797ef49bd87b58c24" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="605" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="605" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="632" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="632" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_13e3c3fdbb36eb2486bdd7c0753c2f9ff" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="606" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="606" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="633" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="633" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_114588a3c64b2c4106d3669ed86b41f38" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="607" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="607" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="634" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="634" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_11552ee6255e2596578a8859aba9f5a3d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="608" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="608" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="635" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="635" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1206264c0d590319efec92db462588748" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="609" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="609" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="636" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="636" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1fd00f52134466f63ee8b919951733757" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="610" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="610" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="637" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="637" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1f095d841bde905bddf3923445b8e0ebd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="611" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="611" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="638" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="638" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_11578954dfa00c2d838c7d023c9f6026d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="612" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="612" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="639" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="639" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classaureservoir_1_1ESN_1c8b28874c27f39ce0067ca5e1474d226" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>friend class</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="613" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="613" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="640" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="640" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -225,7 +225,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="96" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="94" bodyend="96"/>
-        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="511">aureservoir::ESN&lt; T &gt;::init_</references>
+        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="538">aureservoir::ESN&lt; T &gt;::init_</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -258,21 +258,19 @@
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce09c6f5805c0ee627c9469fcca1900bf4" compoundref="activations_8h" startline="35">aureservoir::ACT_LINEAR</references>
         <references refid="namespaceaureservoir_1fa29fb60114d2064a41bff293bfb14ee" compoundref="activations_8h" startline="111" endline="118">aureservoir::act_tanh2</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce560574625ce248cdb43b7fa05815ca3f" compoundref="activations_8h" startline="37">aureservoir::ACT_TANH2</references>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98140e457ae43c6e96b4e13db653be14a2" compoundref="init_8h" startline="63">aureservoir::IP_LEARNRATE</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b9859be72149c51dec368313cba91e5057a" compoundref="init_8h" startline="64">aureservoir::IP_MEAN</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b9898ff0a83e60538e4ecb8ac70b2ab761e" compoundref="init_8h" startline="65">aureservoir::IP_VAR</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="576">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
-        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="750" endline="778">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="603">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
+        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="793" endline="821">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
         <references refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</references>
-        <references refid="namespaceaureservoir_1900a3f9e9843e3c9861c483c1611400f" compoundref="activations_8h" startline="99">aureservoir::tanh2_a_</references>
-        <references refid="namespaceaureservoir_1527c5b6714a8d3bfb2e4052e37f69f58" compoundref="activations_8h" startline="101">aureservoir::tanh2_b_</references>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
-        <referencedby refid="classaureservoir_1_1ESN_1d9ed5ad77d21639a04d2c7d431636e46" compoundref="esn_8hpp" startline="277" endline="292">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
+        <referencedby refid="classaureservoir_1_1ESN_1d9ed5ad77d21639a04d2c7d431636e46" compoundref="esn_8hpp" startline="296" endline="311">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -323,16 +321,16 @@
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="124" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="179" bodyend="252"/>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98f657a7254946e753f6df7b91ef07dc60" compoundref="init_8h" startline="58">aureservoir::DS_MAXDELAY</references>
-        <references refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="346" endline="346">aureservoir::ESN&lt; T &gt;::getDelays</references>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="373" endline="373">aureservoir::ESN&lt; T &gt;::getDelays</references>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b980fbdae1c822812f076727a0349efeb7d" compoundref="init_8h" startline="66">aureservoir::RELAXATION_STAGES</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</references>
-        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="514">aureservoir::ESN&lt; T &gt;::train_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1b078825cfdbc5f11d337942d768d79e8" compoundref="esn_8hpp" startline="295" endline="316">aureservoir::ESN&lt; T &gt;::train</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1b078825cfdbc5f11d337942d768d79e8" compoundref="esn_8hpp" startline="314" endline="335">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -370,10 +368,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="134" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="133" bodyend="134"/>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="319" endline="350">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="353" endline="377">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="338" endline="369">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="372" endline="396">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e401e0ebee9169990dc2d177ce94dd64" compoundref="esn_8hpp" startline="255" endline="274">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
@@ -412,11 +410,65 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="143" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="255" bodyend="274"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</references>
-        <referencedby refid="classaureservoir_1_1ESN_1e6fb9b7fbf1499756d0939c5ccf2ea31" compoundref="esn_8hpp" startline="380" endline="398">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1e6fb9b7fbf1499756d0939c5ccf2ea31" compoundref="esn_8hpp" startline="399" endline="417">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void aureservoir::ESN&lt; T &gt;::collectStates</definition>
+        <argsstring>(const DEMatrix &amp;in, DEMatrix &amp;X, int washout=0)</argsstring>
+        <name>collectStates</name>
+        <param>
+          <type>const <ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref> &amp;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type><ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref> &amp;</type>
+          <declname>X</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>washout</declname>
+          <defval>0</defval>
+        </param>
+        <exceptions> throw (<ref refid="classaureservoir_1_1AUExcept" kindref="compound">AUExcept</ref>)</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Collect network/reservoir states and return the whole state matrix over time.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix of input values (inputs x timesteps) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>X</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix with internal reservoir states over time (timesteps-washout x neurons) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>washout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>washout time in samples, used to get rid of the transient dynamics of the network starting state </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="156" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="277" bodyend="293"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
+        <referencedby refid="classaureservoir_1_1ESN_1c818b940f2d00b423088aef011e6ace3" compoundref="esn_8hpp" startline="420" endline="441">aureservoir::ESN&lt; T &gt;::collectStates</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -429,10 +481,10 @@
 <para>resets the internal state vector x of the reservoir to zero </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="149" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="148" bodyend="152"/>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="162" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="161" bodyend="165"/>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -471,9 +523,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="171" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="277" bodyend="292"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="184" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="296" bodyend="311"/>
         <references refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</references>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1b078825cfdbc5f11d337942d768d79e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -538,7 +590,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="187" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="295" bodyend="316"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="200" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="314" bodyend="335"/>
         <references refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -594,10 +646,10 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="201" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="319" bodyend="350"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="214" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="338" bodyend="369"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -645,10 +697,10 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="212" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="353" bodyend="377"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="225" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="372" bodyend="396"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1e6fb9b7fbf1499756d0939c5ccf2ea31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -702,8 +754,73 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="224" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="380" bodyend="398"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="237" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="399" bodyend="417"/>
         <references refid="classaureservoir_1_1ESN_1e401e0ebee9169990dc2d177ce94dd64" compoundref="esn_8hpp" startline="255" endline="274">aureservoir::ESN&lt; T &gt;::teacherForce</references>
+      </memberdef>
+      <memberdef kind="function" id="classaureservoir_1_1ESN_1c818b940f2d00b423088aef011e6ace3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void aureservoir::ESN&lt; T &gt;::collectStates</definition>
+        <argsstring>(T *inmtx, int inrows, int incols, T *outmtx, int outrows, int outcols, int washout)</argsstring>
+        <name>collectStates</name>
+        <param>
+          <type>T *</type>
+          <declname>inmtx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>inrows</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>incols</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>outmtx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>outrows</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>outcols</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>washout</declname>
+        </param>
+        <exceptions> throw (<ref refid="classaureservoir_1_1AUExcept" kindref="compound">AUExcept</ref>)</exceptions>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Collect network/reservoir states and return the whole state matrix over time.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inmtx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix of input values (inputs x timesteps) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outmtx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix with internal reservoir states over time (timesteps-washout x neurons) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>washout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>washout time in samples, used to get rid of the transient dynamics of the network starting state </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="251" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="420" bodyend="441"/>
+        <references refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" compoundref="esn_8hpp" startline="277" endline="293">aureservoir::ESN&lt; T &gt;::collectStates</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -745,12 +862,12 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="238" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="401" bodyend="408"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="265" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="444" bodyend="451"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a2304986b6862a50a3a8e633080d36b03" compoundref="simulate_8h" startline="42">aureservoir::SIM_BP</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
-        <referencedby refid="classaureservoir_1_1ESN_191d0fb143a7c8dbfb63bbaa1fccbda55" compoundref="esn_8hpp" startline="411" endline="428">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <referencedby refid="classaureservoir_1_1ESN_191d0fb143a7c8dbfb63bbaa1fccbda55" compoundref="esn_8hpp" startline="454" endline="471">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_191d0fb143a7c8dbfb63bbaa1fccbda55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -795,9 +912,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="248" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="411" bodyend="428"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="401" endline="408">aureservoir::ESN&lt; T &gt;::setBPCutoff</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="275" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="454" bodyend="471"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="444" endline="451">aureservoir::ESN&lt; T &gt;::setBPCutoff</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_190413e9cb722f478b8771a0cdfd6a441" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -846,14 +963,14 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="264" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="431" bodyend="441"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="291" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="474" bodyend="484"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123ab47d5c9464ab2f7dcb81bfcd386b2369" compoundref="simulate_8h" startline="43">aureservoir::SIM_FILTER</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a342f6ab7bc5d63f3d828c99f3811aaad" compoundref="simulate_8h" startline="44">aureservoir::SIM_FILTER2</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a3946a935a47b2ebffa86bcffbfcff65f" compoundref="simulate_8h" startline="45">aureservoir::SIM_FILTER_DS</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a37fb0f9ed7a59fdb80971a142a08ccd6" compoundref="simulate_8h" startline="40">aureservoir::SIM_SQUARE</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1a7f9011ad241e85620adee8d14cd207f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -918,9 +1035,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="281" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="444" bodyend="466"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="308" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="487" bodyend="509"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -936,32 +1053,32 @@
 <para>posts current parameters to stdout </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="292" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="469" bodyend="509"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="319" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="512" bodyend="552"/>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98db1dca4e49516b1790fe21ec1cff75f5" compoundref="init_8h" startline="47">aureservoir::ALPHA</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98d5a6a266b20feb9dfe011d0d5e223087" compoundref="init_8h" startline="46">aureservoir::CONNECTIVITY</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b980cd43ea7ef81d55c9222dba73288a043" compoundref="init_8h" startline="51">aureservoir::FB_CONNECTIVITY</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b9829e7183dbadf26019d129ff5fb7877a4" compoundref="init_8h" startline="52">aureservoir::FB_SCALE</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98490f6a2e77017327c1b60bbd65873ada" compoundref="init_8h" startline="53">aureservoir::FB_SHIFT</references>
-        <references refid="classaureservoir_1_1ESN_1d2b7c4da5d09cabaf476126a82802d55" compoundref="esn_8hpp" startline="967" endline="987">aureservoir::ESN&lt; T &gt;::getActString</references>
-        <references refid="classaureservoir_1_1ESN_11db6876e512c3f95d74a1a4551b7c556" compoundref="esn_8hpp" startline="990" endline="1000">aureservoir::ESN&lt; T &gt;::getInitString</references>
-        <references refid="classaureservoir_1_1ESN_1c787f77ca1d66b92597a3f40b73da5a5" compoundref="esn_8hpp" startline="1003" endline="1031">aureservoir::ESN&lt; T &gt;::getSimString</references>
-        <references refid="classaureservoir_1_1ESN_1dc760e3521c01ed98ec1d857026851cf" compoundref="esn_8hpp" startline="1034" endline="1053">aureservoir::ESN&lt; T &gt;::getTrainString</references>
+        <references refid="classaureservoir_1_1ESN_1d2b7c4da5d09cabaf476126a82802d55" compoundref="esn_8hpp" startline="1010" endline="1030">aureservoir::ESN&lt; T &gt;::getActString</references>
+        <references refid="classaureservoir_1_1ESN_11db6876e512c3f95d74a1a4551b7c556" compoundref="esn_8hpp" startline="1033" endline="1043">aureservoir::ESN&lt; T &gt;::getInitString</references>
+        <references refid="classaureservoir_1_1ESN_1c787f77ca1d66b92597a3f40b73da5a5" compoundref="esn_8hpp" startline="1046" endline="1074">aureservoir::ESN&lt; T &gt;::getSimString</references>
+        <references refid="classaureservoir_1_1ESN_1dc760e3521c01ed98ec1d857026851cf" compoundref="esn_8hpp" startline="1077" endline="1096">aureservoir::ESN&lt; T &gt;::getTrainString</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98b3b22e40718b8703a4ed57c5cc21d80c" compoundref="init_8h" startline="48">aureservoir::IN_CONNECTIVITY</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b980b3995db2fb6ca472d1745fcbfdadfe7" compoundref="init_8h" startline="49">aureservoir::IN_SCALE</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b9802f10438caaa2d1b279162a7828b986c" compoundref="init_8h" startline="50">aureservoir::IN_SHIFT</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="578">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="605">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98426b53a081b250d219eda89599413a26" compoundref="init_8h" startline="54">aureservoir::LEAKING_RATE</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="567">aureservoir::ESN&lt; T &gt;::noise_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="577">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="576">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="594">aureservoir::ESN&lt; T &gt;::noise_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="604">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="603">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a38879faf2a4c65df30952d06c8c4bde6" compoundref="simulate_8h" startline="41">aureservoir::SIM_LI</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="579">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="606">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_141e3e08f736780e1afce7ba926c46f92" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -975,8 +1092,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="295" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="295" bodyend="295"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="322" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="322" bodyend="322"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_138d67c10d14b742d37c31fb248c8d175" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -990,8 +1107,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="297" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="297" bodyend="297"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="324" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="324" bodyend="324"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1cb5fb557989a39b2f29853e4e5e294a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -1005,8 +1122,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="299" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="299" bodyend="299"/>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="326" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="326" bodyend="326"/>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1ce91732de641dc4c102ee24da668bf01" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -1020,8 +1137,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="301" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="301" bodyend="301"/>
-        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="567">aureservoir::ESN&lt; T &gt;::noise_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="328" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="328" bodyend="328"/>
+        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="594">aureservoir::ESN&lt; T &gt;::noise_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1ea7de7feaa7d81c2d27a17d048b13447" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T</type>
@@ -1047,8 +1164,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="308" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="308" bodyend="308"/>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="335" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="335" bodyend="335"/>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1e9bc7c3da6f9ab961c0505a81f117c46" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="namespaceaureservoir_1fcd13e94b1f8f20257eab73b6a8498ce" kindref="member">InitAlgorithm</ref></type>
@@ -1062,9 +1179,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="312" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="311" bodyend="312"/>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="578">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="339" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="338" bodyend="339"/>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="605">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_19a4ccadd8ba92b87332e38882acfef40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1079,9 +1196,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="315" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="314" bodyend="315"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="579">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="342" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="341" bodyend="342"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="606">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_104eb6c2bfba313922734c58fbff8b4af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1096,9 +1213,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="318" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="317" bodyend="318"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="345" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="344" bodyend="345"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_10572a08a81856629baafdff0f1871915" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1113,9 +1230,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="322" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="321" bodyend="322"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="576">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="349" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="348" bodyend="349"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="603">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_175b75a2dc732f0a666e18f8ca2189767" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1130,9 +1247,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="325" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="324" bodyend="325"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="577">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="352" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="351" bodyend="352"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="604">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
       </sectiondef>
@@ -1150,8 +1267,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="332" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="332" bodyend="332"/>
-        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="522">aureservoir::ESN&lt; T &gt;::Win_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="359" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="359" bodyend="359"/>
+        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="549">aureservoir::ESN&lt; T &gt;::Win_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1d1b8423502f283e0ff7b219525abc337" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structaureservoir_1_1SPMatrix" kindref="compound">SPMatrix</ref> &amp;</type>
@@ -1165,8 +1282,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="334" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="334" bodyend="334"/>
-        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="525">aureservoir::ESN&lt; T &gt;::W_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="361" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="361" bodyend="361"/>
+        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="552">aureservoir::ESN&lt; T &gt;::W_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_136e2868278aa27b9df6b7651ed5b867a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref> &amp;</type>
@@ -1180,8 +1297,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="336" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="336" bodyend="336"/>
-        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="529">aureservoir::ESN&lt; T &gt;::Wback_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="363" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="363" bodyend="363"/>
+        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="556">aureservoir::ESN&lt; T &gt;::Wback_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_157d29599c228981c785925b499596595" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref> &amp;</type>
@@ -1195,8 +1312,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="338" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="338" bodyend="338"/>
-        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="533">aureservoir::ESN&lt; T &gt;::Wout_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="365" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="365" bodyend="365"/>
+        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::Wout_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1edd9902fbc9a74b4540b35e6aa9a6ea0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="structaureservoir_1_1DEVector" kindref="compound">DEVector</ref> &amp;</type>
@@ -1210,8 +1327,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="340" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="340" bodyend="340"/>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="367" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="367" bodyend="367"/>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref></type>
@@ -1227,9 +1344,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="346" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="346" bodyend="346"/>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
-        <referencedby refid="classaureservoir_1_1ESN_1c296d48ca9aacaf8fb8872ea1a1b4146" compoundref="esn_8hpp" startline="565" endline="579">aureservoir::ESN&lt; T &gt;::getDelays</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="373" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="373" bodyend="373"/>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <referencedby refid="classaureservoir_1_1ESN_1c296d48ca9aacaf8fb8872ea1a1b4146" compoundref="esn_8hpp" startline="608" endline="622">aureservoir::ESN&lt; T &gt;::getDelays</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1a4f9ab709955a0ea4cdf9bde95437d2e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1246,9 +1363,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="353" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="352" bodyend="353"/>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
-        <referencedby refid="classaureservoir_1_1ESN_14769796e004939f475154a67bf23c593" compoundref="esn_8hpp" startline="582" endline="596">aureservoir::ESN&lt; T &gt;::getReservoirDelays</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="380" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="379" bodyend="380"/>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <referencedby refid="classaureservoir_1_1ESN_14769796e004939f475154a67bf23c593" compoundref="esn_8hpp" startline="625" endline="639">aureservoir::ESN&lt; T &gt;::getReservoirDelays</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -1277,8 +1394,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="362" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="512" bodyend="517"/>
-        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="522">aureservoir::ESN&lt; T &gt;::Win_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="389" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="555" bodyend="560"/>
+        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="549">aureservoir::ESN&lt; T &gt;::Win_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1b276273e0fa6b1ba9be3b08ce868a4f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1304,8 +1421,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="366" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="520" bodyend="525"/>
-        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="529">aureservoir::ESN&lt; T &gt;::Wback_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="393" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="563" bodyend="568"/>
+        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="556">aureservoir::ESN&lt; T &gt;::Wback_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_12016b1cd44e7c5eecfff9671cbae41d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1331,8 +1448,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="370" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="528" bodyend="535"/>
-        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="533">aureservoir::ESN&lt; T &gt;::Wout_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="397" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="571" bodyend="578"/>
+        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::Wout_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1f4e9d4f79a7c51a9436a9de7d680692a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1353,8 +1470,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="372" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="538" bodyend="542"/>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="399" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="581" bodyend="585"/>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1c41303adb436ae8d99ad287307c6afec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1389,8 +1506,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="379" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="545" bodyend="562"/>
-        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="525">aureservoir::ESN&lt; T &gt;::W_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="406" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="588" bodyend="605"/>
+        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="552">aureservoir::ESN&lt; T &gt;::W_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1c296d48ca9aacaf8fb8872ea1a1b4146" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1426,8 +1543,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="387" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="565" bodyend="579"/>
-        <references refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="346" endline="346">aureservoir::ESN&lt; T &gt;::getDelays</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="414" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="608" bodyend="622"/>
+        <references refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="373" endline="373">aureservoir::ESN&lt; T &gt;::getDelays</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_14769796e004939f475154a67bf23c593" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1463,8 +1580,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="395" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="582" bodyend="596"/>
-        <references refid="classaureservoir_1_1ESN_1a4f9ab709955a0ea4cdf9bde95437d2e" compoundref="esn_8h" startline="352" endline="353">aureservoir::ESN&lt; T &gt;::getReservoirDelays</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="422" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="625" bodyend="639"/>
+        <references refid="classaureservoir_1_1ESN_1a4f9ab709955a0ea4cdf9bde95437d2e" compoundref="esn_8h" startline="379" endline="380">aureservoir::ESN&lt; T &gt;::getReservoirDelays</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -1486,11 +1603,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="403" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="599" bodyend="613"/>
-        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="511">aureservoir::ESN&lt; T &gt;::init_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="578">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="430" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="642" bodyend="656"/>
+        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="538">aureservoir::ESN&lt; T &gt;::init_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeaad7a7be9350552a1c9f36b3fa765ec05" compoundref="esn_8h" startline="605">aureservoir::ESN&lt; T &gt;::INIT_ALG</references>
         <references refid="namespaceaureservoir_1fcd13e94b1f8f20257eab73b6a8498ce0403fe730010b776fc7384aafffbafc5" compoundref="init_8h" startline="35">aureservoir::INIT_STD</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
       </memberdef>
@@ -1511,10 +1628,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="406" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="616" bodyend="648"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="514">aureservoir::ESN&lt; T &gt;::train_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="579">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="433" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="659" bodyend="691"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4e8457810739551b22be6c4557eb8076" compoundref="esn_8h" startline="606">aureservoir::ESN&lt; T &gt;::TRAIN_ALG</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbf943e2c08a10ad9e95586b1b80afd2a56" compoundref="train_8h" startline="39">aureservoir::TRAIN_DS_PI</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbf247075eb070cb4c346ebc08eab32db87" compoundref="train_8h" startline="37">aureservoir::TRAIN_LS</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbfd06a4f161263a72d56f6ecabb98fa54e" compoundref="train_8h" startline="36">aureservoir::TRAIN_PI</references>
@@ -1539,9 +1656,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="409" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="651" bodyend="701"/>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="436" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="694" bodyend="744"/>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a2304986b6862a50a3a8e633080d36b03" compoundref="simulate_8h" startline="42">aureservoir::SIM_BP</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123ab47d5c9464ab2f7dcb81bfcd386b2369" compoundref="simulate_8h" startline="43">aureservoir::SIM_FILTER</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a342f6ab7bc5d63f3d828c99f3811aaad" compoundref="simulate_8h" startline="44">aureservoir::SIM_FILTER2</references>
@@ -1549,7 +1666,7 @@
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a38879faf2a4c65df30952d06c8c4bde6" compoundref="simulate_8h" startline="41">aureservoir::SIM_LI</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a37fb0f9ed7a59fdb80971a142a08ccd6" compoundref="simulate_8h" startline="40">aureservoir::SIM_SQUARE</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a3c8795d9c803f1d48d917b0604e796b7" compoundref="simulate_8h" startline="39">aureservoir::SIM_STD</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_185982669a674fda1518d3d7b8387badc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1569,8 +1686,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="412" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="704" bodyend="711"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="439" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="747" bodyend="754"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1d8c5c336ed685583d3468436e979d8a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1590,8 +1707,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="414" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="714" bodyend="721"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="441" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="757" bodyend="764"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_11d5834b88eeda02d31500bcee464c743" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1611,8 +1728,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="416" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="724" bodyend="731"/>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="443" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="767" bodyend="774"/>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1b2054d6478b52b33e6575b3783b5c05e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1639,8 +1756,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="420" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="734" bodyend="741"/>
-        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="567">aureservoir::ESN&lt; T &gt;::noise_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="447" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="777" bodyend="784"/>
+        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="594">aureservoir::ESN&lt; T &gt;::noise_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_10d84cb7a8e0d0e3f0bb8c7cf609bfc77" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1662,8 +1779,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="423" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="744" bodyend="747"/>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="450" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="787" bodyend="790"/>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1683,7 +1800,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="426" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="750" bodyend="778"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="453" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="793" bodyend="821"/>
         <references refid="namespaceaureservoir_1be8a09ee0290ad4668127f350ed405e4" compoundref="activations_8h" startline="53" endline="54">aureservoir::act_linear</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce09c6f5805c0ee627c9469fcca1900bf4" compoundref="activations_8h" startline="35">aureservoir::ACT_LINEAR</references>
         <references refid="namespaceaureservoir_17c6d0a8b9f5e88d029fe6988e45157db" compoundref="activations_8h" startline="147" endline="151">aureservoir::act_sigmoid</references>
@@ -1692,8 +1809,8 @@
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce1c132ad6945e95f8324319128cd22210" compoundref="activations_8h" startline="36">aureservoir::ACT_TANH</references>
         <references refid="namespaceaureservoir_1fa29fb60114d2064a41bff293bfb14ee" compoundref="activations_8h" startline="111" endline="118">aureservoir::act_tanh2</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce560574625ce248cdb43b7fa05815ca3f" compoundref="activations_8h" startline="37">aureservoir::ACT_TANH2</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="576">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea97cd57f7b6817ee0ae026526e6119ae1" compoundref="esn_8h" startline="603">aureservoir::ESN&lt; T &gt;::RESERVOIR_ACT</references>
         <references refid="classaureservoir_1_1ESN_12958fdd9ccf6324fccea5625a1209e18">aureservoir::ESN&lt; T &gt;::reservoirAct_</references>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
@@ -1716,7 +1833,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="428" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="781" bodyend="807"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="455" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="824" bodyend="850"/>
         <references refid="namespaceaureservoir_10e7ea0589074ceb326f001ef1a839c19" compoundref="activations_8h" startline="62" endline="63">aureservoir::act_invlinear</references>
         <references refid="namespaceaureservoir_15ed90c120a22372b9c6e14ee7896196d" compoundref="activations_8h" startline="161" endline="165">aureservoir::act_invsigmoid</references>
         <references refid="namespaceaureservoir_17121b5c78e4930be09eb44178864c29e" compoundref="activations_8h" startline="88" endline="92">aureservoir::act_invtanh</references>
@@ -1726,8 +1843,8 @@
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce90f145a551bf0955e1ab02eebf429234" compoundref="activations_8h" startline="38">aureservoir::ACT_SIGMOID</references>
         <references refid="namespaceaureservoir_18325ec625014a4e8599229b111c11f23" compoundref="activations_8h" startline="76" endline="80">aureservoir::act_tanh</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce1c132ad6945e95f8324319128cd22210" compoundref="activations_8h" startline="36">aureservoir::ACT_TANH</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="577">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea4b87db9277a823b8bedb26ea4dfa8dd0" compoundref="esn_8h" startline="604">aureservoir::ESN&lt; T &gt;::OUTPUT_ACT</references>
         <references refid="classaureservoir_1_1ESN_131797669e65f0d039cda2435fef79a1d">aureservoir::ESN&lt; T &gt;::outputAct_</references>
         <references refid="classaureservoir_1_1ESN_16d80a03ed3868b8284e8b5bdf69cbab6">aureservoir::ESN&lt; T &gt;::outputInvAct_</references>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
@@ -1768,10 +1885,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="443" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="810" bodyend="818"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="522">aureservoir::ESN&lt; T &gt;::Win_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="470" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="853" bodyend="861"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="549">aureservoir::ESN&lt; T &gt;::Win_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_11855dda7ab5db07b04d0b64a75d718c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1789,9 +1906,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="445" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="821" bodyend="830"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="525">aureservoir::ESN&lt; T &gt;::W_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="472" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="864" bodyend="873"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="552">aureservoir::ESN&lt; T &gt;::W_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1809,10 +1926,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="447" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="833" bodyend="841"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="529">aureservoir::ESN&lt; T &gt;::Wback_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="474" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="876" bodyend="884"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="556">aureservoir::ESN&lt; T &gt;::Wback_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1830,11 +1947,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="449" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="844" bodyend="853"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="533">aureservoir::ESN&lt; T &gt;::Wout_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="476" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="887" bodyend="896"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::Wout_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_15bee5e66fc658cad6dfed224a2816ad4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1852,9 +1969,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="451" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="856" bodyend="862"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="478" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="899" bodyend="905"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_188d42b6b03f3e5fdace793674896171e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1880,9 +1997,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="458" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="865" bodyend="873"/>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="485" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="908" bodyend="916"/>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -1919,10 +2036,10 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="469" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="876" bodyend="889"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="522">aureservoir::ESN&lt; T &gt;::Win_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="496" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="919" bodyend="932"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="549">aureservoir::ESN&lt; T &gt;::Win_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1d6dcd49bcd183e6cca7fb51ceede7011" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1956,9 +2073,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="476" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="892" bodyend="908"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="525">aureservoir::ESN&lt; T &gt;::W_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="503" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="935" bodyend="951"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="552">aureservoir::ESN&lt; T &gt;::W_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_14e6e2af8884d217f0f2b3e8271ad75b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1992,10 +2109,10 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="483" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="911" bodyend="924"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="529">aureservoir::ESN&lt; T &gt;::Wback_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="510" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="954" bodyend="967"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="556">aureservoir::ESN&lt; T &gt;::Wback_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_11a6e3ae588a547941ecf6356ee5505b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -2029,11 +2146,11 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="490" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="927" bodyend="941"/>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="533">aureservoir::ESN&lt; T &gt;::Wout_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="517" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="970" bodyend="984"/>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::Wout_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_10baf7970fefc595668eee0ca7c8867a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -2063,9 +2180,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="497" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="944" bodyend="952"/>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="524" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="987" bodyend="995"/>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1ea9bf0ca87290c6b88e237d20840a85e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -2095,9 +2212,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="504" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="955" bodyend="964"/>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="531" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="998" bodyend="1007"/>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-type">
@@ -2144,7 +2261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="575" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="574" bodyend="581"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="602" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="601" bodyend="608"/>
       </memberdef>
       <memberdef kind="typedef" id="classaureservoir_1_1ESN_19a682ddd9c6fd4ae431ea8a638b78839" prot="protected" static="no">
         <type>std::map&lt; <ref refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdea" kindref="member">NetInfo</ref>, int &gt;</type>
@@ -2157,7 +2274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="582" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="582" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="609" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="609" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-type">
@@ -2226,11 +2343,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="511" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="511" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="538" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="538" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e2922b7050f6259db289e456661454d1" compoundref="esn_8h" startline="94" endline="96">aureservoir::ESN&lt; T &gt;::init</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="599" endline="613">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="642" endline="656">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e5bf8ab49d24a8b46df4801c0b2af787" compoundref="esn_8hpp" startline="105" endline="110">aureservoir::ESN&lt; T &gt;::~ESN</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" prot="protected" static="no" mutable="no">
@@ -2244,10 +2361,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="514" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="514" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="541" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="541" bodyend="-1"/>
+        <referencedby refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" compoundref="esn_8hpp" startline="277" endline="293">aureservoir::ESN&lt; T &gt;::collectStates</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="616" endline="648">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="659" endline="691">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e5bf8ab49d24a8b46df4801c0b2af787" compoundref="esn_8hpp" startline="105" endline="110">aureservoir::ESN&lt; T &gt;::~ESN</referencedby>
       </memberdef>
@@ -2262,18 +2380,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="517" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="517" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="544" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="544" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="346" endline="346">aureservoir::ESN&lt; T &gt;::getDelays</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1a4f9ab709955a0ea4cdf9bde95437d2e" compoundref="esn_8h" startline="352" endline="353">aureservoir::ESN&lt; T &gt;::getReservoirDelays</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1a319071ee7b33034aca7babbbc0adf81" compoundref="esn_8h" startline="373" endline="373">aureservoir::ESN&lt; T &gt;::getDelays</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1a4f9ab709955a0ea4cdf9bde95437d2e" compoundref="esn_8h" startline="379" endline="380">aureservoir::ESN&lt; T &gt;::getReservoirDelays</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="148" endline="152">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="401" endline="408">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_190413e9cb722f478b8771a0cdfd6a441" compoundref="esn_8hpp" startline="431" endline="441">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_188d42b6b03f3e5fdace793674896171e" compoundref="esn_8hpp" startline="865" endline="873">aureservoir::ESN&lt; T &gt;::setLastOutput</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="651" endline="701">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="161" endline="165">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="444" endline="451">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_190413e9cb722f478b8771a0cdfd6a441" compoundref="esn_8hpp" startline="474" endline="484">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_188d42b6b03f3e5fdace793674896171e" compoundref="esn_8hpp" startline="908" endline="916">aureservoir::ESN&lt; T &gt;::setLastOutput</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="694" endline="744">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e9ebb9c720273693b3de73dacc4356f3" compoundref="esn_8h" startline="133" endline="134">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="353" endline="377">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="372" endline="396">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e401e0ebee9169990dc2d177ce94dd64" compoundref="esn_8hpp" startline="255" endline="274">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e5bf8ab49d24a8b46df4801c0b2af787" compoundref="esn_8hpp" startline="105" endline="110">aureservoir::ESN&lt; T &gt;::~ESN</referencedby>
@@ -2289,10 +2407,10 @@
 <para>input weight matrix </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="522" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="522" bodyend="-1"/>
-        <referencedby refid="classaureservoir_1_1ESN_103cf21acca2dc7410ebf4e5f2f87818f" compoundref="esn_8h" startline="332" endline="332">aureservoir::ESN&lt; T &gt;::getWin</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="549" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="549" bodyend="-1"/>
+        <referencedby refid="classaureservoir_1_1ESN_103cf21acca2dc7410ebf4e5f2f87818f" compoundref="esn_8h" startline="359" endline="359">aureservoir::ESN&lt; T &gt;::getWin</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="810" endline="818">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="853" endline="861">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" prot="protected" static="no" mutable="no">
         <type><ref refid="structaureservoir_1_1SPMatrix" kindref="compound">SPMatrix</ref></type>
@@ -2305,10 +2423,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="525" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="525" bodyend="-1"/>
-        <referencedby refid="classaureservoir_1_1ESN_1d1b8423502f283e0ff7b219525abc337" compoundref="esn_8h" startline="334" endline="334">aureservoir::ESN&lt; T &gt;::getW</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="552" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="552" bodyend="-1"/>
+        <referencedby refid="classaureservoir_1_1ESN_1d1b8423502f283e0ff7b219525abc337" compoundref="esn_8h" startline="361" endline="361">aureservoir::ESN&lt; T &gt;::getW</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11855dda7ab5db07b04d0b64a75d718c2" compoundref="esn_8hpp" startline="821" endline="830">aureservoir::ESN&lt; T &gt;::setW</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11855dda7ab5db07b04d0b64a75d718c2" compoundref="esn_8hpp" startline="864" endline="873">aureservoir::ESN&lt; T &gt;::setW</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" prot="protected" static="no" mutable="no">
         <type><ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref></type>
@@ -2321,10 +2439,10 @@
 <para>feedback (output to reservoir) weight matrix </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="529" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="529" bodyend="-1"/>
-        <referencedby refid="classaureservoir_1_1ESN_136e2868278aa27b9df6b7651ed5b867a" compoundref="esn_8h" startline="336" endline="336">aureservoir::ESN&lt; T &gt;::getWback</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="556" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="556" bodyend="-1"/>
+        <referencedby refid="classaureservoir_1_1ESN_136e2868278aa27b9df6b7651ed5b867a" compoundref="esn_8h" startline="363" endline="363">aureservoir::ESN&lt; T &gt;::getWback</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="833" endline="841">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="876" endline="884">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" prot="protected" static="no" mutable="no">
         <type><ref refid="structaureservoir_1_1DEMatrix" kindref="compound">DEMatrix</ref></type>
@@ -2337,10 +2455,10 @@
 <para>output weight matrix (this will be trained) </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="533" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="533" bodyend="-1"/>
-        <referencedby refid="classaureservoir_1_1ESN_157d29599c228981c785925b499596595" compoundref="esn_8h" startline="338" endline="338">aureservoir::ESN&lt; T &gt;::getWout</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="560" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="560" bodyend="-1"/>
+        <referencedby refid="classaureservoir_1_1ESN_157d29599c228981c785925b499596595" compoundref="esn_8h" startline="365" endline="365">aureservoir::ESN&lt; T &gt;::getWout</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="844" endline="853">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="887" endline="896">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" prot="protected" static="no" mutable="no">
         <type><ref refid="structaureservoir_1_1DEVector" kindref="compound">DEVector</ref></type>
@@ -2353,12 +2471,12 @@
 <para>internal state vector holding the current value of each neuron in the reservoir </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="537" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="537" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="564" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="564" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1edd9902fbc9a74b4540b35e6aa9a6ea0" compoundref="esn_8h" startline="340" endline="340">aureservoir::ESN&lt; T &gt;::getX</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1edd9902fbc9a74b4540b35e6aa9a6ea0" compoundref="esn_8h" startline="367" endline="367">aureservoir::ESN&lt; T &gt;::getX</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="148" endline="152">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_15bee5e66fc658cad6dfed224a2816ad4" compoundref="esn_8hpp" startline="856" endline="862">aureservoir::ESN&lt; T &gt;::setX</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="161" endline="165">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_15bee5e66fc658cad6dfed224a2816ad4" compoundref="esn_8hpp" startline="899" endline="905">aureservoir::ESN&lt; T &gt;::setX</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_12958fdd9ccf6324fccea5625a1209e18" prot="protected" static="no" mutable="no">
         <type>void(*</type>
@@ -2372,8 +2490,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="544"/>
-        <referencedby refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="750" endline="778">aureservoir::ESN&lt; T &gt;::setReservoirAct</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="571"/>
+        <referencedby refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="793" endline="821">aureservoir::ESN&lt; T &gt;::setReservoirAct</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_131797669e65f0d039cda2435fef79a1d" prot="protected" static="no" mutable="no">
         <type>void(*</type>
@@ -2387,8 +2505,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="550"/>
-        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="781" endline="807">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="577"/>
+        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="824" endline="850">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_16d80a03ed3868b8284e8b5bdf69cbab6" prot="protected" static="no" mutable="no">
         <type>void(*</type>
@@ -2402,8 +2520,8 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="556"/>
-        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="781" endline="807">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="583"/>
+        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="824" endline="850">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -2416,19 +2534,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="560" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="560" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="587" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="587" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_141e3e08f736780e1afce7ba926c46f92" compoundref="esn_8h" startline="295" endline="295">aureservoir::ESN&lt; T &gt;::getSize</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" compoundref="esn_8hpp" startline="277" endline="293">aureservoir::ESN&lt; T &gt;::collectStates</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_141e3e08f736780e1afce7ba926c46f92" compoundref="esn_8h" startline="322" endline="322">aureservoir::ESN&lt; T &gt;::getSize</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_191d0fb143a7c8dbfb63bbaa1fccbda55" compoundref="esn_8hpp" startline="411" endline="428">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1a7f9011ad241e85620adee8d14cd207f" compoundref="esn_8hpp" startline="444" endline="466">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_185982669a674fda1518d3d7b8387badc" compoundref="esn_8hpp" startline="704" endline="711">aureservoir::ESN&lt; T &gt;::setSize</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11855dda7ab5db07b04d0b64a75d718c2" compoundref="esn_8hpp" startline="821" endline="830">aureservoir::ESN&lt; T &gt;::setW</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="833" endline="841">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="810" endline="818">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="844" endline="853">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_15bee5e66fc658cad6dfed224a2816ad4" compoundref="esn_8hpp" startline="856" endline="862">aureservoir::ESN&lt; T &gt;::setX</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_191d0fb143a7c8dbfb63bbaa1fccbda55" compoundref="esn_8hpp" startline="454" endline="471">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1a7f9011ad241e85620adee8d14cd207f" compoundref="esn_8hpp" startline="487" endline="509">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_185982669a674fda1518d3d7b8387badc" compoundref="esn_8hpp" startline="747" endline="754">aureservoir::ESN&lt; T &gt;::setSize</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11855dda7ab5db07b04d0b64a75d718c2" compoundref="esn_8hpp" startline="864" endline="873">aureservoir::ESN&lt; T &gt;::setW</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="876" endline="884">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="853" endline="861">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="887" endline="896">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_15bee5e66fc658cad6dfed224a2816ad4" compoundref="esn_8hpp" startline="899" endline="905">aureservoir::ESN&lt; T &gt;::setX</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" prot="protected" static="no" mutable="no">
         <type>int</type>
@@ -2441,16 +2560,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="562" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="562" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="589" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="589" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_138d67c10d14b742d37c31fb248c8d175" compoundref="esn_8h" startline="297" endline="297">aureservoir::ESN&lt; T &gt;::getInputs</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" compoundref="esn_8hpp" startline="277" endline="293">aureservoir::ESN&lt; T &gt;::collectStates</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_138d67c10d14b742d37c31fb248c8d175" compoundref="esn_8h" startline="324" endline="324">aureservoir::ESN&lt; T &gt;::getInputs</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d8c5c336ed685583d3468436e979d8a2" compoundref="esn_8hpp" startline="714" endline="721">aureservoir::ESN&lt; T &gt;::setInputs</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="810" endline="818">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="844" endline="853">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="319" endline="350">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="353" endline="377">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d8c5c336ed685583d3468436e979d8a2" compoundref="esn_8hpp" startline="757" endline="764">aureservoir::ESN&lt; T &gt;::setInputs</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_12e19669bb386bfd0cff1c711a47a6d04" compoundref="esn_8hpp" startline="853" endline="861">aureservoir::ESN&lt; T &gt;::setWin</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="887" endline="896">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="338" endline="369">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="372" endline="396">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e401e0ebee9169990dc2d177ce94dd64" compoundref="esn_8hpp" startline="255" endline="274">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
@@ -2465,18 +2585,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="564" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="564" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="591" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="591" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1cb5fb557989a39b2f29853e4e5e294a1" compoundref="esn_8h" startline="299" endline="299">aureservoir::ESN&lt; T &gt;::getOutputs</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" compoundref="esn_8hpp" startline="277" endline="293">aureservoir::ESN&lt; T &gt;::collectStates</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1cb5fb557989a39b2f29853e4e5e294a1" compoundref="esn_8h" startline="326" endline="326">aureservoir::ESN&lt; T &gt;::getOutputs</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="148" endline="152">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_188d42b6b03f3e5fdace793674896171e" compoundref="esn_8hpp" startline="865" endline="873">aureservoir::ESN&lt; T &gt;::setLastOutput</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11d5834b88eeda02d31500bcee464c743" compoundref="esn_8hpp" startline="724" endline="731">aureservoir::ESN&lt; T &gt;::setOutputs</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="833" endline="841">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="844" endline="853">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="319" endline="350">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="353" endline="377">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d83bd214d17d7c1b06f9d1f9e85f3dcf" compoundref="esn_8h" startline="161" endline="165">aureservoir::ESN&lt; T &gt;::resetState</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_188d42b6b03f3e5fdace793674896171e" compoundref="esn_8hpp" startline="908" endline="916">aureservoir::ESN&lt; T &gt;::setLastOutput</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11d5834b88eeda02d31500bcee464c743" compoundref="esn_8hpp" startline="767" endline="774">aureservoir::ESN&lt; T &gt;::setOutputs</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_11772aff81eecdd64b9259f2855d71dfc" compoundref="esn_8hpp" startline="876" endline="884">aureservoir::ESN&lt; T &gt;::setWback</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ece1f02a53da5658a000f8580aa630e4" compoundref="esn_8hpp" startline="887" endline="896">aureservoir::ESN&lt; T &gt;::setWout</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1370b95f753b368bea3856c6889213ed0" compoundref="esn_8hpp" startline="338" endline="369">aureservoir::ESN&lt; T &gt;::simulate</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1d87d004894222f0653062bdc71dc2c78" compoundref="esn_8hpp" startline="372" endline="396">aureservoir::ESN&lt; T &gt;::simulateStep</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1e401e0ebee9169990dc2d177ce94dd64" compoundref="esn_8hpp" startline="255" endline="274">aureservoir::ESN&lt; T &gt;::teacherForce</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
@@ -2491,12 +2612,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="567" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="567" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="594" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="594" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" compoundref="esn_8hpp" startline="26" endline="57">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ce91732de641dc4c102ee24da668bf01" compoundref="esn_8h" startline="301" endline="301">aureservoir::ESN&lt; T &gt;::getNoise</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ce91732de641dc4c102ee24da668bf01" compoundref="esn_8h" startline="328" endline="328">aureservoir::ESN&lt; T &gt;::getNoise</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1b2054d6478b52b33e6575b3783b5c05e" compoundref="esn_8hpp" startline="734" endline="741">aureservoir::ESN&lt; T &gt;::setNoise</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1b2054d6478b52b33e6575b3783b5c05e" compoundref="esn_8hpp" startline="777" endline="784">aureservoir::ESN&lt; T &gt;::setNoise</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" prot="protected" static="no" mutable="no">
         <type><ref refid="classaureservoir_1_1ESN_143b1421e1b5e29121dd186fa4e0a0d1c" kindref="member">ParameterMap</ref></type>
@@ -2509,12 +2630,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="571" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="571" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="598" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="598" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1ea7de7feaa7d81c2d27a17d048b13447" compoundref="esn_8h" startline="308" endline="308">aureservoir::ESN&lt; T &gt;::getInitParam</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1ea7de7feaa7d81c2d27a17d048b13447" compoundref="esn_8h" startline="335" endline="335">aureservoir::ESN&lt; T &gt;::getInitParam</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_10d84cb7a8e0d0e3f0bb8c7cf609bfc77" compoundref="esn_8hpp" startline="744" endline="747">aureservoir::ESN&lt; T &gt;::setInitParam</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_10d84cb7a8e0d0e3f0bb8c7cf609bfc77" compoundref="esn_8hpp" startline="787" endline="790">aureservoir::ESN&lt; T &gt;::setInitParam</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</referencedby>
       </memberdef>
       <memberdef kind="variable" id="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" prot="protected" static="no" mutable="no">
@@ -2528,22 +2649,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="585" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="585" bodyend="-1"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="612" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="612" bodyend="-1"/>
         <referencedby refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" compoundref="esn_8hpp" startline="113" endline="176">aureservoir::ESN&lt; T &gt;::adapt</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1e9bc7c3da6f9ab961c0505a81f117c46" compoundref="esn_8h" startline="311" endline="312">aureservoir::ESN&lt; T &gt;::getInitAlgorithm</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_175b75a2dc732f0a666e18f8ca2189767" compoundref="esn_8h" startline="324" endline="325">aureservoir::ESN&lt; T &gt;::getOutputAct</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_10572a08a81856629baafdff0f1871915" compoundref="esn_8h" startline="321" endline="322">aureservoir::ESN&lt; T &gt;::getReservoirAct</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_104eb6c2bfba313922734c58fbff8b4af" compoundref="esn_8h" startline="317" endline="318">aureservoir::ESN&lt; T &gt;::getSimAlgorithm</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19a4ccadd8ba92b87332e38882acfef40" compoundref="esn_8h" startline="314" endline="315">aureservoir::ESN&lt; T &gt;::getTrainAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1e9bc7c3da6f9ab961c0505a81f117c46" compoundref="esn_8h" startline="338" endline="339">aureservoir::ESN&lt; T &gt;::getInitAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_175b75a2dc732f0a666e18f8ca2189767" compoundref="esn_8h" startline="351" endline="352">aureservoir::ESN&lt; T &gt;::getOutputAct</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_10572a08a81856629baafdff0f1871915" compoundref="esn_8h" startline="348" endline="349">aureservoir::ESN&lt; T &gt;::getReservoirAct</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_104eb6c2bfba313922734c58fbff8b4af" compoundref="esn_8h" startline="344" endline="345">aureservoir::ESN&lt; T &gt;::getSimAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19a4ccadd8ba92b87332e38882acfef40" compoundref="esn_8h" startline="341" endline="342">aureservoir::ESN&lt; T &gt;::getTrainAlgorithm</referencedby>
         <referencedby refid="classaureservoir_1_1ESN_1d65ca98492b52c40c4f8d96ca572fd88" compoundref="esn_8hpp" startline="66" endline="102">aureservoir::ESN&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="401" endline="408">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_190413e9cb722f478b8771a0cdfd6a441" compoundref="esn_8hpp" startline="431" endline="441">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="599" endline="613">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="781" endline="807">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="750" endline="778">aureservoir::ESN&lt; T &gt;::setReservoirAct</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="651" endline="701">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</referencedby>
-        <referencedby refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="616" endline="648">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_178881e130ba2c0b588c9cf5c6c1b7bd4" compoundref="esn_8hpp" startline="444" endline="451">aureservoir::ESN&lt; T &gt;::setBPCutoff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_190413e9cb722f478b8771a0cdfd6a441" compoundref="esn_8hpp" startline="474" endline="484">aureservoir::ESN&lt; T &gt;::setIIRCoeff</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="642" endline="656">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="824" endline="850">aureservoir::ESN&lt; T &gt;::setOutputAct</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="793" endline="821">aureservoir::ESN&lt; T &gt;::setReservoirAct</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="694" endline="744">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="659" endline="691">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -2569,22 +2690,22 @@
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b98b3b22e40718b8703a4ed57c5cc21d80c" compoundref="init_8h" startline="48">aureservoir::IN_CONNECTIVITY</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b980b3995db2fb6ca472d1745fcbfdadfe7" compoundref="init_8h" startline="49">aureservoir::IN_SCALE</references>
         <references refid="namespaceaureservoir_15ffb41af926a3f5bf93374adc6b15b9802f10438caaa2d1b279162a7828b986c" compoundref="init_8h" startline="50">aureservoir::IN_SHIFT</references>
-        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="511">aureservoir::ESN&lt; T &gt;::init_</references>
+        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="538">aureservoir::ESN&lt; T &gt;::init_</references>
         <references refid="namespaceaureservoir_1fcd13e94b1f8f20257eab73b6a8498ce0403fe730010b776fc7384aafffbafc5" compoundref="init_8h" startline="35">aureservoir::INIT_STD</references>
-        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="567">aureservoir::ESN&lt; T &gt;::noise_</references>
+        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="594">aureservoir::ESN&lt; T &gt;::noise_</references>
         <references refid="namespaceaureservoir_18e52d630f4503b6f6231bfa3b622cad9" compoundref="denormal_8h" startline="63" endline="115">aureservoir::set_denormal_flags</references>
-        <references refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="599" endline="613">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_10d84cb7a8e0d0e3f0bb8c7cf609bfc77" compoundref="esn_8hpp" startline="744" endline="747">aureservoir::ESN&lt; T &gt;::setInitParam</references>
-        <references refid="classaureservoir_1_1ESN_1d8c5c336ed685583d3468436e979d8a2" compoundref="esn_8hpp" startline="714" endline="721">aureservoir::ESN&lt; T &gt;::setInputs</references>
-        <references refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="781" endline="807">aureservoir::ESN&lt; T &gt;::setOutputAct</references>
-        <references refid="classaureservoir_1_1ESN_11d5834b88eeda02d31500bcee464c743" compoundref="esn_8hpp" startline="724" endline="731">aureservoir::ESN&lt; T &gt;::setOutputs</references>
-        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="750" endline="778">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
-        <references refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="651" endline="701">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_185982669a674fda1518d3d7b8387badc" compoundref="esn_8hpp" startline="704" endline="711">aureservoir::ESN&lt; T &gt;::setSize</references>
-        <references refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="616" endline="648">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="642" endline="656">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_10d84cb7a8e0d0e3f0bb8c7cf609bfc77" compoundref="esn_8hpp" startline="787" endline="790">aureservoir::ESN&lt; T &gt;::setInitParam</references>
+        <references refid="classaureservoir_1_1ESN_1d8c5c336ed685583d3468436e979d8a2" compoundref="esn_8hpp" startline="757" endline="764">aureservoir::ESN&lt; T &gt;::setInputs</references>
+        <references refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="824" endline="850">aureservoir::ESN&lt; T &gt;::setOutputAct</references>
+        <references refid="classaureservoir_1_1ESN_11d5834b88eeda02d31500bcee464c743" compoundref="esn_8hpp" startline="767" endline="774">aureservoir::ESN&lt; T &gt;::setOutputs</references>
+        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="793" endline="821">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
+        <references refid="classaureservoir_1_1ESN_17f732773aed9c75093706cbeb3faa8fc" compoundref="esn_8hpp" startline="694" endline="744">aureservoir::ESN&lt; T &gt;::setSimAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_185982669a674fda1518d3d7b8387badc" compoundref="esn_8hpp" startline="747" endline="754">aureservoir::ESN&lt; T &gt;::setSize</references>
+        <references refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="659" endline="691">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a3c8795d9c803f1d48d917b0604e796b7" compoundref="simulate_8h" startline="39">aureservoir::SIM_STD</references>
-        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="514">aureservoir::ESN&lt; T &gt;::train_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbfd06a4f161263a72d56f6ecabb98fa54e" compoundref="train_8h" startline="36">aureservoir::TRAIN_PI</references>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_195ab498ad4f291a3399ff79466fdbfa3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -2621,32 +2742,32 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="82" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="66" bodyend="102"/>
-        <references refid="classaureservoir_1_1ESN_1e9bc7c3da6f9ab961c0505a81f117c46" compoundref="esn_8h" startline="311" endline="312">aureservoir::ESN&lt; T &gt;::getInitAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_175b75a2dc732f0a666e18f8ca2189767" compoundref="esn_8h" startline="324" endline="325">aureservoir::ESN&lt; T &gt;::getOutputAct</references>
-        <references refid="classaureservoir_1_1ESN_10572a08a81856629baafdff0f1871915" compoundref="esn_8h" startline="321" endline="322">aureservoir::ESN&lt; T &gt;::getReservoirAct</references>
-        <references refid="classaureservoir_1_1ESN_104eb6c2bfba313922734c58fbff8b4af" compoundref="esn_8h" startline="317" endline="318">aureservoir::ESN&lt; T &gt;::getSimAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_19a4ccadd8ba92b87332e38882acfef40" compoundref="esn_8h" startline="314" endline="315">aureservoir::ESN&lt; T &gt;::getTrainAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_1e9bc7c3da6f9ab961c0505a81f117c46" compoundref="esn_8h" startline="338" endline="339">aureservoir::ESN&lt; T &gt;::getInitAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_175b75a2dc732f0a666e18f8ca2189767" compoundref="esn_8h" startline="351" endline="352">aureservoir::ESN&lt; T &gt;::getOutputAct</references>
+        <references refid="classaureservoir_1_1ESN_10572a08a81856629baafdff0f1871915" compoundref="esn_8h" startline="348" endline="349">aureservoir::ESN&lt; T &gt;::getReservoirAct</references>
+        <references refid="classaureservoir_1_1ESN_104eb6c2bfba313922734c58fbff8b4af" compoundref="esn_8h" startline="344" endline="345">aureservoir::ESN&lt; T &gt;::getSimAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_19a4ccadd8ba92b87332e38882acfef40" compoundref="esn_8h" startline="341" endline="342">aureservoir::ESN&lt; T &gt;::getTrainAlgorithm</references>
         <references refid="classaureservoir_1_1ESN_1e2922b7050f6259db289e456661454d1" compoundref="esn_8h" startline="94" endline="96">aureservoir::ESN&lt; T &gt;::init</references>
-        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="511">aureservoir::ESN&lt; T &gt;::init_</references>
-        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="571">aureservoir::ESN&lt; T &gt;::init_params_</references>
-        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="562">aureservoir::ESN&lt; T &gt;::inputs_</references>
-        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="585">aureservoir::ESN&lt; T &gt;::net_info_</references>
-        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::neurons_</references>
-        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="567">aureservoir::ESN&lt; T &gt;::noise_</references>
-        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::outputs_</references>
-        <references refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="599" endline="613">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="781" endline="807">aureservoir::ESN&lt; T &gt;::setOutputAct</references>
-        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="750" endline="778">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
-        <references refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="616" endline="648">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
-        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="580">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
+        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="538">aureservoir::ESN&lt; T &gt;::init_</references>
+        <references refid="classaureservoir_1_1ESN_18f3b35b5ac2242e375319dbf78f03b73" compoundref="esn_8h" startline="598">aureservoir::ESN&lt; T &gt;::init_params_</references>
+        <references refid="classaureservoir_1_1ESN_19931f4f456c9d087a826555413f62fbc" compoundref="esn_8h" startline="589">aureservoir::ESN&lt; T &gt;::inputs_</references>
+        <references refid="classaureservoir_1_1ESN_17017520c849df21b75ea364f59bd89e7" compoundref="esn_8h" startline="612">aureservoir::ESN&lt; T &gt;::net_info_</references>
+        <references refid="classaureservoir_1_1ESN_1ebef31a6b898a2caa57d24a2230cacf2" compoundref="esn_8h" startline="587">aureservoir::ESN&lt; T &gt;::neurons_</references>
+        <references refid="classaureservoir_1_1ESN_125a89e7454101c39215a6798b8c4da09" compoundref="esn_8h" startline="594">aureservoir::ESN&lt; T &gt;::noise_</references>
+        <references refid="classaureservoir_1_1ESN_136c002d4ab73a440cc48008fdc62738e" compoundref="esn_8h" startline="591">aureservoir::ESN&lt; T &gt;::outputs_</references>
+        <references refid="classaureservoir_1_1ESN_1a7edd9a67a5339823597ce7c56cbfda8" compoundref="esn_8hpp" startline="642" endline="656">aureservoir::ESN&lt; T &gt;::setInitAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_1adbb70bea99473056b0ba8b74e42ecfa" compoundref="esn_8hpp" startline="824" endline="850">aureservoir::ESN&lt; T &gt;::setOutputAct</references>
+        <references refid="classaureservoir_1_1ESN_10e5b807f804e119ed569fc3d64774569" compoundref="esn_8hpp" startline="793" endline="821">aureservoir::ESN&lt; T &gt;::setReservoirAct</references>
+        <references refid="classaureservoir_1_1ESN_14156c9a79c6dcc6b748e6cb491088165" compoundref="esn_8hpp" startline="659" endline="691">aureservoir::ESN&lt; T &gt;::setTrainAlgorithm</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_119346eaf5d5fe49a8308415bf76efdeab6c82a22796b8e39b77b348212329f9b" compoundref="esn_8h" startline="607">aureservoir::ESN&lt; T &gt;::SIMULATE_ALG</references>
         <references refid="classaureservoir_1_1ESN_189da45e482e37b541dc7c9e9a294d9aa" compoundref="esn_8hpp" startline="179" endline="252">aureservoir::ESN&lt; T &gt;::train</references>
-        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="514">aureservoir::ESN&lt; T &gt;::train_</references>
-        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="525">aureservoir::ESN&lt; T &gt;::W_</references>
-        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="529">aureservoir::ESN&lt; T &gt;::Wback_</references>
-        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="522">aureservoir::ESN&lt; T &gt;::Win_</references>
-        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="533">aureservoir::ESN&lt; T &gt;::Wout_</references>
-        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="537">aureservoir::ESN&lt; T &gt;::x_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
+        <references refid="classaureservoir_1_1ESN_192a1182eebbe2f09256bf138ef778ce7" compoundref="esn_8h" startline="552">aureservoir::ESN&lt; T &gt;::W_</references>
+        <references refid="classaureservoir_1_1ESN_1852f35c397fda2253522ee6d96f60f6b" compoundref="esn_8h" startline="556">aureservoir::ESN&lt; T &gt;::Wback_</references>
+        <references refid="classaureservoir_1_1ESN_16f36c1193cfdc55a6c85e95c54c161c8" compoundref="esn_8h" startline="549">aureservoir::ESN&lt; T &gt;::Win_</references>
+        <references refid="classaureservoir_1_1ESN_1e1f9056f7fa3fcb1bfe9b63b4002eaad" compoundref="esn_8h" startline="560">aureservoir::ESN&lt; T &gt;::Wout_</references>
+        <references refid="classaureservoir_1_1ESN_17fff05a05547047e668b16a0754fed0d" compoundref="esn_8h" startline="564">aureservoir::ESN&lt; T &gt;::x_</references>
         <referencedby refid="classaureservoir_1_1ESN_195ab498ad4f291a3399ff79466fdbfa3" compoundref="esn_8hpp" startline="60" endline="63">aureservoir::ESN&lt; T &gt;::ESN</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1e5bf8ab49d24a8b46df4801c0b2af787" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -2661,9 +2782,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="85" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="105" bodyend="110"/>
-        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="511">aureservoir::ESN&lt; T &gt;::init_</references>
-        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="517">aureservoir::ESN&lt; T &gt;::sim_</references>
-        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="514">aureservoir::ESN&lt; T &gt;::train_</references>
+        <references refid="classaureservoir_1_1ESN_17304f6cad65acd8a365089b44922e7fb" compoundref="esn_8h" startline="538">aureservoir::ESN&lt; T &gt;::init_</references>
+        <references refid="classaureservoir_1_1ESN_1df7be365aa1246965cb0738631759e94" compoundref="esn_8h" startline="544">aureservoir::ESN&lt; T &gt;::sim_</references>
+        <references refid="classaureservoir_1_1ESN_1b8d992b2cdfe3e4615722b20e5a955c9" compoundref="esn_8h" startline="541">aureservoir::ESN&lt; T &gt;::train_</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -2683,12 +2804,12 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="588" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="967" bodyend="987"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="615" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1010" bodyend="1030"/>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce09c6f5805c0ee627c9469fcca1900bf4" compoundref="activations_8h" startline="35">aureservoir::ACT_LINEAR</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce90f145a551bf0955e1ab02eebf429234" compoundref="activations_8h" startline="38">aureservoir::ACT_SIGMOID</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce1c132ad6945e95f8324319128cd22210" compoundref="activations_8h" startline="36">aureservoir::ACT_TANH</references>
         <references refid="namespaceaureservoir_13e434e16dad75c96d11d9ec383a55bce560574625ce248cdb43b7fa05815ca3f" compoundref="activations_8h" startline="37">aureservoir::ACT_TANH2</references>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_11db6876e512c3f95d74a1a4551b7c556" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>string</type>
@@ -2706,9 +2827,9 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="590" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="990" bodyend="1000"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="617" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1033" bodyend="1043"/>
         <references refid="namespaceaureservoir_1fcd13e94b1f8f20257eab73b6a8498ce0403fe730010b776fc7384aafffbafc5" compoundref="init_8h" startline="35">aureservoir::INIT_STD</references>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1c787f77ca1d66b92597a3f40b73da5a5" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>string</type>
@@ -2726,7 +2847,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="592" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1003" bodyend="1031"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="619" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1046" bodyend="1074"/>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a2304986b6862a50a3a8e633080d36b03" compoundref="simulate_8h" startline="42">aureservoir::SIM_BP</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123ab47d5c9464ab2f7dcb81bfcd386b2369" compoundref="simulate_8h" startline="43">aureservoir::SIM_FILTER</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a342f6ab7bc5d63f3d828c99f3811aaad" compoundref="simulate_8h" startline="44">aureservoir::SIM_FILTER2</references>
@@ -2734,7 +2855,7 @@
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a38879faf2a4c65df30952d06c8c4bde6" compoundref="simulate_8h" startline="41">aureservoir::SIM_LI</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a37fb0f9ed7a59fdb80971a142a08ccd6" compoundref="simulate_8h" startline="40">aureservoir::SIM_SQUARE</references>
         <references refid="namespaceaureservoir_1abe3039fd500ced0b4928c64f10e123a3c8795d9c803f1d48d917b0604e796b7" compoundref="simulate_8h" startline="39">aureservoir::SIM_STD</references>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
       </memberdef>
       <memberdef kind="function" id="classaureservoir_1_1ESN_1dc760e3521c01ed98ec1d857026851cf" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>string</type>
@@ -2752,12 +2873,12 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="594" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1034" bodyend="1053"/>
+        <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="621" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.hpp" bodystart="1077" bodyend="1096"/>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbf943e2c08a10ad9e95586b1b80afd2a56" compoundref="train_8h" startline="39">aureservoir::TRAIN_DS_PI</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbf247075eb070cb4c346ebc08eab32db87" compoundref="train_8h" startline="37">aureservoir::TRAIN_LS</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbfd06a4f161263a72d56f6ecabb98fa54e" compoundref="train_8h" startline="36">aureservoir::TRAIN_PI</references>
         <references refid="namespaceaureservoir_170d36d9e2ce3444f3fd44862cf073dbf14b31443d66d8ebff0940409daa43db4" compoundref="train_8h" startline="38">aureservoir::TRAIN_RIDGEREG</references>
-        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="469" endline="509">aureservoir::ESN&lt; T &gt;::post</referencedby>
+        <referencedby refid="classaureservoir_1_1ESN_19153f98b1eddbb3917b1895b0221a9c0" compoundref="esn_8hpp" startline="512" endline="552">aureservoir::ESN&lt; T &gt;::post</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -2767,10 +2888,12 @@
 The template argument T can be float or double. Single Precision (float) saves quite some computation time.</para><para>The &quot;echo state&quot; approach looks at RNNs from a new angle. Large RNNs are interpreted as &quot;reservoirs&quot; of complex, excitable dynamics. Output units &quot;tap&quot; from this reservoir by linearly combining the desired output signal from the rich variety of excited reservoir signals. This idea leads to training algorithms where only the network-to-output connection weights have to be trained. This can be done with known, highly efficient linear regression algorithms. from <simplesect kind="see"><para><ulink url="http://www.faculty.iu-bremen.de/hjaeger/esn_research.html">http://www.faculty.iu-bremen.de/hjaeger/esn_research.html</ulink></para></simplesect>
 For more information and a complete documentation of this library see <simplesect kind="see"><para><ulink url="http://aureservoir.sourceforge.net">http://aureservoir.sourceforge.net</ulink> </para></simplesect>
 </para>    </detaileddescription>
-    <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="65" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="64" bodyend="615"/>
+    <location file="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" line="65" bodyfile="/home/holzi/versioniert/aureservoir/aureservoir/esn.h" bodystart="64" bodyend="642"/>
     <listofallmembers>
       <member refid="classaureservoir_1_1ESN_1c50f04511b90f729186719efecc95b86" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>adapt</name></member>
       <member refid="classaureservoir_1_1ESN_1d9ed5ad77d21639a04d2c7d431636e46" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>adapt</name></member>
+      <member refid="classaureservoir_1_1ESN_1ad16ff44f31d7ad65e8429322d1937bf" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>collectStates</name></member>
+      <member refid="classaureservoir_1_1ESN_1c818b940f2d00b423088aef011e6ace3" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>collectStates</name></member>
       <member refid="classaureservoir_1_1ESN_1e7d601b1063bd084621efb54f412d1fd" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>DEMatrix</name></member>
       <member refid="classaureservoir_1_1ESN_132c49db29475ad01c38bbc208e77a4b0" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>DEVector</name></member>
       <member refid="classaureservoir_1_1ESN_141d8d494888c52b767c847547513d29b" prot="public" virt="non-virtual"><scope>aureservoir::ESN</scope><name>ESN</name></member>

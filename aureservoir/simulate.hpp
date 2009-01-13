@@ -221,12 +221,15 @@ void SimLI<T>::simulate(const typename ESN<T>::DEMatrix &in,
   // First run with output from last simulation
 
   t_ = esn_->x_; // temp object needed for BLAS
-  esn_->x_ = (1. - esn_->init_params_[LEAKING_RATE])*t_ +
-             esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
+
   // add noise
-  Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
-  esn_->x_ += t_;
+  Rand<T>::uniform(esn_->x_, -1.*esn_->noise_, esn_->noise_);
+  // state update
+  esn_->x_ += esn_->Win_*in(_,1) + esn_->W_*t_ + esn_->Wback_*last_out_(_,1);
   esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+  // at leakage
+  esn_->x_ += (1. - esn_->init_params_[LEAKING_RATE]) * t_;
 
   // output = Wout * [x; in]
   last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,1);
@@ -238,16 +241,18 @@ void SimLI<T>::simulate(const typename ESN<T>::DEMatrix &in,
 
 
   // the rest
-
   for(int n=2; n<=steps; ++n)
   {
     t_ = esn_->x_; // temp object needed for BLAS
-    esn_->x_ = (1. - esn_->init_params_[LEAKING_RATE])*t_ +
-               esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
+
     // add noise
-    Rand<T>::uniform(t_, -1.*esn_->noise_, esn_->noise_);
-    esn_->x_ += t_;
+    Rand<T>::uniform(esn_->x_, -1.*esn_->noise_, esn_->noise_);
+    // state update
+    esn_->x_ += esn_->Win_*in(_,n) + esn_->W_*t_ + esn_->Wback_*out(_,n-1);
     esn_->reservoirAct_( esn_->x_.data(), esn_->x_.length() );
+
+    // at leakage
+    esn_->x_ += (1. - esn_->init_params_[LEAKING_RATE]) * t_;
 
     // output = Wout * [x; in]
     last_out_(_,1) = Wout1*esn_->x_ + Wout2*in(_,n);
