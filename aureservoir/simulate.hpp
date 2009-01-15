@@ -685,15 +685,15 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
   // delay states and inputs for all individual outputs
   for(int i=1; i<=esn_->outputs_; ++i)
   {
+    int offset = (i-1)*(esn_->neurons_+esn_->inputs_);
+    
     // delay x_ vector and store into t_
     for(int j=1; j<=esn_->neurons_; ++j)
-      t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
-                          esn_->x_(j) );
+      t_(j) =  dellines_[offset+j-1].tic( esn_->x_(j) );
 
     // store correct delayed input vector in intmp_
     for(int j=1; j<=esn_->inputs_; ++j)
-      intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
-                                +esn_->neurons_+j-1 ].tic( in(j,1) );
+      intmp_(j,1) = dellines_[offset+esn_->neurons_+j-1].tic( in(j,1) );
 
     // calc  Wout * [x; in] for current output with delayed values
     last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1);
@@ -727,15 +727,15 @@ void SimFilterDS<T>::simulate(const typename ESN<T>::DEMatrix &in,
     // delay states and inputs for all individual outputs
     for(int i=1; i<=esn_->outputs_; ++i)
     {
+      int offset = (i-1)*(esn_->neurons_+esn_->inputs_);
+      
       // delay x_ vector and store into t_
       for(int j=1; j<=esn_->neurons_; ++j)
-        t_(j) =  dellines_[(i-1)*(esn_->neurons_+esn_->inputs_)+j-1].tic(
-                            esn_->x_(j) );
+        t_(j) =  dellines_[offset+j-1].tic( esn_->x_(j) );
 
       // store correct delayed input vector in intmp_
       for(int j=1; j<=esn_->inputs_; ++j)
-        intmp_(j,1) = dellines_[ (i-1)*(esn_->neurons_+esn_->inputs_)
-                                  +esn_->neurons_+j-1 ].tic( in(j,n) );
+        intmp_(j,1) = dellines_[offset+esn_->neurons_+j-1 ].tic( in(j,n) );
 
       // calc  Wout * [x; in] for current output with delayed values
       last_out_(i,1) = Wout1(i,_)*t_ + Wout2(i,_)*intmp_(_,1);

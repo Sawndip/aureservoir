@@ -389,69 +389,77 @@ class DSESN(IIRESN):
 		steps = indata.shape[1]
 		size = self.getSize()
 		maxdelay = min(self.maxdelay+1,steps-washout)
-		insig = indata.copy()
+		inOrig = indata.copy()
 		
 		# teacher forcing
-		X = self._teacherForcing(insig,outdata)
+		Xorig = self._teacherForcing(inOrig,outdata)
 		#print "indata[0]",indata.shape,indata[0]
 		#print "X[0]",X.shape,X[0]
 		
-		self.delays = N.zeros(size+self.getInputs())
-		for n in range(size):
-			xcorr = abs( util.GCC(X[n],outdata[0], \
-			             self.gcctype, 0) )
-			self.delays[n] = xcorr[0:maxdelay].argmax()
-		for n in range(self.getInputs()):
-			xcorr = abs( util.GCC(insig[n],outdata[0], \
-			             self.gcctype, 0) )
-			self.delays[n+size] = xcorr[0:maxdelay].argmax()
-		del xcorr
+		# reserve memory for results
+		self.delays = N.zeros((self.getOutputs(), size+self.getInputs()))
+		if (self.squareupdate == 0):
+		    self.wout = N.zeros((self.getOutputs(), size+self.getInputs()))
+		else:
+		    self.wout = N.zeros((self.getOutputs(), 2*(size+self.getInputs())))
 		
-		# setup the "delay lines" for each neuron
+		# setup delay lines for each neuron/input to each output
 		self.dellines = []
 		
-		# now delay neuron signals as calculated:
-		# add zeros to the beginning and store the rest into the delaylines
-		for n in range(size):
-			d = int(self.delays[n])
+		# go through all the outputs
+		for outp in range(self.getOutputs()):
+		    
+		    # copy state vector and input signal
+		    X = Xorig.copy()
+		    insig = inOrig.copy()
+		
+		    for n in range(size):
+			xcorr = abs( util.GCC(X[n],outdata[outp], \
+			             self.gcctype, 0) )
+			self.delays[outp,n] = xcorr[0:maxdelay].argmax()
+		    for n in range(self.getInputs()):
+			xcorr = abs( util.GCC(insig[n],outdata[outp], \
+			             self.gcctype, 0) )
+			self.delays[outp,n+size] = xcorr[0:maxdelay].argmax()
+		    del xcorr
+		    
+		    # now delay neuron signals as calculated:
+		    # add zeros to the beginning and store the rest into the delaylines
+		    for n in range(size):
+			d = int(self.delays[outp,n])
 			rest = X[n,steps-d:steps].copy()
 			X[n,:] = N.r_[ N.zeros(d), X[n,0:steps-d] ]
 			self.dellines.append( DelLine(d,rest) )
-		for n in range(self.getInputs()):
-			d = int(self.delays[n+size])
+		    for n in range(self.getInputs()):
+			d = int(self.delays[outp,n+size])
 			rest = insig[n,steps-d:steps].copy()
 			insig[n,:] = N.r_[ N.zeros(d), insig[n,0:steps-d] ]
 			self.dellines.append( DelLine(d,rest) )
-		del rest
+		    del rest
 		
-		# some debugging
-		#print "delays:", self.delays
+		    # some debugging
+		    #print "delays:", self.delays
 		
-		# calc new washout beacuse of the delay
-		# (is this good ? - should be better given from outside)
-		#washout += int(self.delays.max())
-		#print "effective trainsize:",steps-washout
-		
-		if (self.squareupdate == 0):
+		    if (self.squareupdate == 0):
 			# restructure data
 			M = N.r_[X,insig]
 			M = M[:,washout:steps].T
-			T = outdata[:,washout:steps].T
+			T = outdata[outp,washout:steps].T
 			
 			# calc pseudo inverse: wout = pinv(M) * T
 			# or with least square (much faster):
 			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( M, T )
-			self.wout = wout[0:size+self.getInputs()].T	
-		else:
+			self.wout[outp,:] = wout[0:size+self.getInputs()].T
+		    else:
 			# restructure data
 			M = N.r_[X,insig,X**2,insig**2]
 			M = M[:,washout:steps].T
-			T = outdata[:,washout:steps].T
+			T = outdata[outp,washout:steps].T
 			
 			# calc pseudo inverse: wout = pinv(M) * T
 			# or with least square (much faster):
 			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( M, T )
-			self.wout = wout[0:2*(size+self.getInputs())].T
+			self.wout[outp,:] = wout[0:2*(size+self.getInputs())].T
 		
 		# set the readout to the radius
 		self.setWout(self.wout.copy())
@@ -460,12 +468,10 @@ class DSESN(IIRESN):
 	def trainDelaySumEM(self, indata, outdata, washout):
 		""" EM algorithm for delay+weight learning
 		"""
-		if( outdata.shape[0] > 1 ):
-			raise ValueError, "ATM only for 1 output !"
-		
 		steps = indata.shape[1]
 		size = self.getSize()
 		insig = indata.copy()
+		outputs = outdata.shape[0]
 		
 		# teacher forcing
 		X = self._teacherForcing(insig,outdata)
@@ -473,27 +479,42 @@ class DSESN(IIRESN):
 		# restructure data
 		M = N.r_[X,insig]
 		M = M.T
-		T = outdata[0,washout:steps].flatten()
+		T = outdata[:,washout:steps]
 		
-		self.wout,self.delays = self._delaylearning_em(T,M,washout, \
-		                                          self.emiterations)
-		
-		# shift reservoir signals with the right delay
-		K = N.zeros(( steps-washout, M.shape[1] ))
-		for n in range( M.shape[1] ):
-			K[:,n] = M[washout-self.delays[n]:steps-self.delays[n],n]
-		
+		# reserve memory for results
+		self.delays = N.zeros((self.getOutputs(), size+self.getInputs()))
 		if (self.squareupdate == 0):
-			# calc least square
-			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( K, T )
-			self.wout = wout[0:size+self.getInputs()].T
+		    self.wout = N.zeros((self.getOutputs(), size+self.getInputs()))
 		else:
-			# restructure data
-			M = N.c_[K,K**2]
+		    self.wout = N.zeros((self.getOutputs(), 2*(size+self.getInputs())))
+		
+		# setup delay lines for each neuron/input to each output
+		self.dellines = []
+		
+		for outp in range(outputs):
+		    Mtmp = M.copy()
+		    Ttmp = T[outp,:].copy() #.reshape(1,-1)
+		    
+		    # calc weights and delays
+		    aaa,self.delays[outp,:] = self._delaylearning_em(Ttmp, \
+		                              M,washout,self.emiterations)
+		
+		    # shift reservoir signals with the right delay
+		    K = N.zeros(( steps-washout, Mtmp.shape[1] ))
+		    for n in range( Mtmp.shape[1] ):
+			K[:,n] = Mtmp[washout-self.delays[outp,n]:steps-self.delays[outp,n],n]
+		
+		    if (self.squareupdate == 0):
 			# calc least square
-			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( M, T )
-			self.wout = wout[0:2*(size+self.getInputs())].T
-		self.wout.shape = 1,-1
+			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( K, Ttmp )
+			self.wout[outp,:] = wout[0:size+self.getInputs()].T
+		    else:
+			# restructure data
+			Mtmp = N.c_[K,K**2]
+			# calc least square
+			v,wout,s,rank,info = scipy.lib.lapack.clapack.dgelss( Mtmp, Ttmp )
+			self.wout[outp,:] = wout[0:2*(size+self.getInputs())].T
+		
 		self.setWout( self.wout.copy() )
 	
 	
@@ -522,23 +543,33 @@ class DSESN(IIRESN):
 			self.simulateStep(indata, outtmp)
 		else:
 			self._simulateStepDelay(indata, outtmp)
-		x = self.getX().copy()
 		
-		# get delayed value for each neuron and input
-		for i in range(neurons):
-			x[i] = self.dellines[i].tic(x[i])
-		for i in range(self.getInputs()):
-			indata[i] = self.dellines[neurons+i].tic(indata[i])
+		# get current state
+		xorig = self.getX().copy()
 		
-		if self.squareupdate==0:
-			state = N.r_[x,indata]
-		else:
-			state = N.r_[x,indata,x**2,indata**2]
-		outdata[:] = N.dot( self.wout, state ).copy()
+		# get delayed value for each neuron and input for each output
+		for outp in range(self.getOutputs()):
+		    x = xorig.copy()
+		    inp = indata.copy()
+		    
+		    offset = outp*( neurons+self.getInputs() )
+		    
+		    for i in range(neurons):
+			x[i] = self.dellines[offset+i].tic(x[i])
+		    for i in range(self.getInputs()):
+			inp[i] = self.dellines[offset+neurons+i].tic(inp[i])
+		
+		    if self.squareupdate==0:
+			state = N.r_[x,inp]
+		    else:
+			state = N.r_[x,inp,x**2,inp**2]
+		    res = N.dot( self.wout[outp,:], state )
+		    outdata[outp] = res
+		
 		self.setLastOutput(outdata)
 		self.lastout = outdata
-	
-	
+
+
 	def _teacherForcing(self, indata, outdata):
 		""" teacher forcing and collect internal states
 		"""
@@ -611,6 +642,7 @@ class DSESN(IIRESN):
 		w              estimated weights
 		d              estimated delays
 		"""
+		
 		# nr of steps
 		steps = M.shape[0]
 		# nr of components
@@ -683,7 +715,6 @@ class DSESN(IIRESN):
 				converged = 1
 			
 		# init delaylines with final delays
-		self.dellines = []
 		for n in range(L):
 			rest = M[steps-d[n]:steps,n].copy()
 			self.dellines.append( DelLine(d[n],rest) )

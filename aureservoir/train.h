@@ -254,6 +254,20 @@ class TrainDSPI : public TrainBase<T>
   virtual void train(const typename ESN<T>::DEMatrix &in,
                      const typename ESN<T>::DEMatrix &out,
                      int washout) throw(AUExcept);
+ protected:
+
+  /// simple delay learning algorithm
+  void delayLearningSimple(const typename ESN<T>::DEMatrix &in,
+                           const typename ESN<T>::DEMatrix &out,
+                           int washout, int steps, int maxdelay,  int filter,
+			   int emiters) throw(AUExcept);
+
+  /// EM-based delay learning algorithm
+  void delayLearningEM(const typename ESN<T>::DEMatrix &in,
+                       const typename ESN<T>::DEMatrix &out,
+                       int washout, int steps, int maxdelay,  int filter,
+		       int emiters) throw(AUExcept);
+
 };
 
 } // end of namespace aureservoir
