@@ -307,5 +307,30 @@ class test_train(NumpyTestCase):
 	assert_array_almost_equal(wout_target,woutB,2)
 
 
+    def testStateCollection(self, level=1):
+	""" test state collection """
+        
+	# init network
+	self.net.setSimAlgorithm(SIM_STD)
+	self.net.setTrainAlgorithm(TRAIN_PI)
+	self.net.setInitParam(FB_CONNECTIVITY, 0.)
+	self.net.init()
+	
+	# collect states
+	washout = 3
+	# test with zero input:
+        X1 = N.zeros((self.train_size-washout,self.size), dtype=self.dtype)
+	indata = N.random.rand(self.ins,self.train_size) * 2 - 1
+	outdata = N.zeros((self.outs,self.train_size))
+	self.net.collectStates( indata, X1, washout )
+	
+	# teacher forcing, collect states
+	tmp = self._teacherForcing(indata,outdata).T
+        X2 = tmp[3:,:]
+        
+        # test if states are the same
+	assert_array_almost_equal(X1,X2)
+
+
 if __name__ == "__main__":
     NumpyTest().run()
