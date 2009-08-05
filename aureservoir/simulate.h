@@ -46,6 +46,9 @@ enum SimAlgorithm
 };
 
 template <typename T> class ESN;
+template <typename T> class SimFilterDS;
+template <typename T> class SimSquare;
+template <typename T> class SimFilter2;
 
 /*!
  * \class SimBase
@@ -66,6 +69,11 @@ template <typename T> class ESN;
 template <typename T>
 class SimBase
 {
+  // friend definition (from Chris Kiefer for newer xcode/gcc)
+  friend class SimFilterDS<T>;
+  friend class SimSquare<T>;
+  friend class SimFilter2<T>;
+
  public:
 
   /// Constructor
@@ -300,6 +308,9 @@ class SimBP : public SimBase<T>
 template <typename T>
 class SimFilter : public SimBase<T>
 {
+  // friend definition (from Chris Kiefer for newer xcode/gcc)
+  friend class SimSquare<T>;
+
   using SimBase<T>::esn_;
   using SimBase<T>::last_out_;
   using SimBase<T>::t_;
